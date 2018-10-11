@@ -1,94 +1,103 @@
+<style type="text/css">
+
+.error_info{
+    color: #ef0909cf;
+    margin-top: 10px;
+    background: #f3f3f3;
+    padding: 10px;
+}
+
+.account_info{
+    color: #ef0909cf;
+    margin-top: 10px;
+    background: #f3f3f3;
+    padding: 10px;
+}
+</style>
+
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a
-          href="https://vuejs.org"
-          target="_blank"
-        >
-          Core Docs
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://forum.vuejs.org"
-          target="_blank"
-        >
-          Forum
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://chat.vuejs.org"
-          target="_blank"
-        >
-          Community Chat
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://twitter.com/vuejs"
-          target="_blank"
-        >
-          Twitter
-        </a>
-      </li>
-      <br>
-      <li>
-        <a
-          href="http://vuejs-templates.github.io/webpack/"
-          target="_blank"
-        >
-          Docs for This Template
-        </a>
-      </li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li>
-        <a
-          href="http://router.vuejs.org/"
-          target="_blank"
-        >
-          vue-router
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vuex.vuejs.org/"
-          target="_blank"
-        >
-          vuex
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vue-loader.vuejs.org/"
-          target="_blank"
-        >
-          vue-loader
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-        >
-          awesome-vue
-        </a>
-      </li>
-    </ul>
-  </div>
+   <div>
+        <template v-if="has_scatter">
+             <div>
+                <a href="javascript:;" @click="call_scatter" class="blue_ft">登录</a>
+                <a href="javascript:;" @click="transfer" class="blue_ft">转账</a>
+                <div  class="error_info">
+                    {{ scatter_error_info }}
+                </div>
+                <div  v-if="has_account_name" class="account_info">
+                    账户名称是：{{ account_name }}
+                </div>
+            </div>
+        </template>
+   </div>    
 </template>
 
 <script>
+import store from '../data/store.js'
+import {
+   get_scatter_identity,
+   get_available,
+   login,
+   transfer
+} from '../services/web_wallet_service.js'
+
+
 export default {
   name: 'HelloWorld',
   data () {
     return {
+      available: '',
+      scatter_error_info: '',
+      account_name:'',
       msg: 'Welcome to Your Vue.js App'
+    }
+  },
+  mounted() {
+    if(this.has_scatter){
+        this.call_scatter();
+    }
+  },
+  components: {
+  },
+  computed: {
+        has_account_name () {
+            if(!this.account_name ) return '';
+            return this.account_name;
+        },
+        has_scatter () {
+            return store.state.global_config.has_scatter;
+        }
+    },
+  methods: {
+    async get_available(is_circle) {
+            if(!this.page_index) return ;
+            if(this.is_on_load) return ;
+            this.is_on_load = true;
+            this.available = await get_available();
+            if(this.available.is_error){
+                this.scatter_error_info = this.available.msg.message;
+            }
+            if(!is_circle) return ;
+            setTimeout(async () => {
+                this.is_on_load = false;
+                await this.get_available(is_circle);
+            }, 3000);
+    },
+    async transfer () {
+      let res = await transfer();
+
+    },
+    async login() {
+      let res = await login();
+    },
+    async call_scatter () {
+            let res = await get_scatter_identity();
+            if(res.is_error){
+                this.scatter_error_info = res.msg.message;
+            }else{
+                this.account_name = res.data.account_name
+               // window.location.reload(1);    
+            }
     }
   }
 }
