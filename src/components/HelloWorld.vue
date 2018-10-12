@@ -21,6 +21,7 @@
              <div>
                 <a href="javascript:;" @click="call_scatter" class="blue_ft">登录</a>
                 <a href="javascript:;" @click="transfer" class="blue_ft">转账</a>
+                <a href="javascript:;" @click="recast" class="blue_ft">复投</a>
                 <div  class="error_info">
                     {{ scatter_error_info }}
                 </div>
@@ -36,9 +37,9 @@
 import store from '../data/store.js'
 import {
    get_scatter_identity,
-   get_available,
    login,
-   transfer
+   transfer,
+   recast
 } from '../services/web_wallet_service.js'
 
 
@@ -53,9 +54,7 @@ export default {
     }
   },
   mounted() {
-    if(this.has_scatter){
-        this.call_scatter();
-    }
+    
   },
   components: {
   },
@@ -87,11 +86,15 @@ export default {
       let res = await transfer();
 
     },
+    async recast() {
+      let res = await recast()
+    },
     async login() {
       let res = await login();
     },
     async call_scatter () {
             let res = await get_scatter_identity();
+            alert('测试')
             if(res.is_error){
                 this.scatter_error_info = res.msg.message;
             }else{

@@ -2,19 +2,16 @@ import Eos from 'eosjs'
 import {
     toAsset
 } from '../utils/utils.js'
+import {
+    test_network,main_network,endpoint
+} from '../config/config.js'
 import ScatterJS from 'scatterjs-core';
 import ScatterEOS from 'scatterjs-plugin-eosjs';
 
-const httpEndpoint = 'http://api-mainnet.starteos.io'
+const httpEndpoint = endpoint
 
 // 节点配置
-const network = {
-    blockchain:'eos',
-    protocol:'https',
-    host:'nodes.get-scatter.com',
-    port:443,
-    chainId:'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906'
-}
+const network = test_network
 
 const scatter_res = {
     'eos': null,
@@ -110,18 +107,82 @@ export const login = async ()=>{
     })  
 }
 
-export const transfer = async (to = 'bandon', amount = 1, memo = '', tokenSymbol = 'EOS') => {
-    let account = await ScatterJS.scatter.getIdentity({accounts:[network]}).then(result => {
-       return  result.accounts[0];
-      })
+export const transfer = async (toname = 'teamaccount',amount = 1, memo = '啦啦啦', tokenSymbol = 'EOS') => {
+    let call_res = await call_scatter();
+    if(call_res.is_error) return call_res;
+    let {_,account_name, permission} = call_res;
     let eos = ScatterJS.scatter.eos(network,Eos)
-    return await eos.transfer(account.name, 'giveeostoken', '0.0001 EOS', 'scatter 转账测试').then(result => {
+    return await eos.transfer(account_name, toname, toAsset(amount, tokenSymbol), memo).then(result => {
         return result
     })
 }
+/**
+ *  复投
+ *  @param toaccount 复投账户
+ *  @param quantity 复投金额
+ *  @param memo 推荐人账户
+ *  @param tokensymbol token的符号缩写
+ * 
+ */
+export const recast = async(toaccount='teamaccount',quantity = 1, memo ='referrer',tokenSymbol = 'EOS')=>{
+    let call_res = await call_scatter();
+    if(call_res.is_error) return call_res;
+    let {_,account_name, permission} = call_res;
+    let eos = ScatterJS.scatter.eos(network,Eos)
+    return await eos.transaction({
+        actions: [
+            {
+                account: account_name,
+                name: 'recast',
+                authorization: [{
+                    actor:account_name,
+                    permission: 'active'
+                }],
+                data: {
+                    account: 'playeraccount',  // 复投账户，写死的
+                    quantity: toAsset(quantity, tokenSymbol),
+                    memo: memo
+                }
+            }
+        ]
+    })
+}
+/**
+ *  提现
+ *  @param toaccount 提现账户
+ *  @param quantity 提现金额
+ * 
+ */
+export const withdraw = async (toaccount = 'playeraccount',quantity = 1, tokenSymbol = 'EOS') => {
+    let call_res = await call_scatter();
+    if(call_res.is_error) return call_res;
+    let {_,account_name, permission} = call_res;
+    let eos = ScatterJS.scatter.eos(network,Eos)
+    return await eos.transaction({
+        actions: [
+            {
+                account: account_name,
+                name: 'recast',
+                authorization: [{
+                    actor:account_name,
+                    permission: 'active'
+                }],
+                data: {
+                    account: 'playeraccount',  // 复投账户，写死的
+                    quantity: toAsset(quantity, tokenSymbol),
+                }
+            }
+        ]
+    })
+}
 
+/**
+ * 
+ * 获取玩家信息表
+ * 
+ */
 
-export const get_available = async () => {
+export const get_player_list = async () => {
     let call_res = await call_scatter(false);
     if(call_res.is_error) return call_res;
     let {eos, account_name, permission} = call_res;
@@ -132,7 +193,103 @@ export const get_available = async () => {
         };
     }
     return await Eos({ httpEndpoint })
-                .getTableRows({"scope":"eosio","code":"eosio","table":"accounts","table_key":account_name,"limit":10000,"json":true})
+                .getTableRows({"scope":"eosio","code":"eosio","table":"account","table_key":account_name,"limit":10000,"json":true})
+                .then(data => {
+                    return {
+                        is_error: false,
+                        data
+                    };
+                })
+                .catch(err => {
+                    return {
+                        is_error: true,
+                        msg: err
+                    };
+                });
+}
+
+/**
+ * 
+ * 获取地块信息表
+ * 
+ */
+
+export const get_land_info = async () => {
+    let call_res = await call_scatter(false);
+    if(call_res.is_error) return call_res;
+    let {eos, account_name, permission} = call_res;
+    if(!account_name){
+        return {
+            is_error,
+            msg: ''
+        };
+    }
+    return await Eos({ httpEndpoint })
+                .getTableRows({"scope":"eosio","code":"eosio","table":"account","table_key":account_name,"limit":10000,"json":true})
+                .then(data => {
+                    return {
+                        is_error: false,
+                        data
+                    };
+                })
+                .catch(err => {
+                    return {
+                        is_error: true,
+                        msg: err
+                    };
+                });
+}
+
+/**
+ * 
+ * 获取游戏信息表
+ * 
+ */
+
+export const get_touzhu_list = async () => {
+    let call_res = await call_scatter(false);
+    if(call_res.is_error) return call_res;
+    let {eos, account_name, permission} = call_res;
+    if(!account_name){
+        return {
+            is_error,
+            msg: ''
+        };
+    }
+    return await Eos({ httpEndpoint })
+                .getTableRows({"scope":"eosio","code":"eosio","table":"account","table_key":account_name,"limit":10000,"json":true})
+                .then(data => {
+                    return {
+                        is_error: false,
+                        data
+                    };
+                })
+                .catch(err => {
+                    return {
+                        is_error: true,
+                        msg: err
+                    };
+                });
+}
+
+/**
+ * 
+ * 获取投注信息表
+ * 
+ */
+
+export const get_touzhu_info = async () => {
+    let call_res = await call_scatter(false);
+    if(call_res.is_error) return call_res;
+    let {eos, account_name, permission} = call_res;
+    if(!account_name){
+        return {
+            is_error,
+            msg: ''
+        };
+    }
+    return await Eos({ httpEndpoint })
+                .getTableRows({"scope":"eosio","code":"eosio","table":"account","table_key":account_name,"limit":10000,"json":true})
                 .then(data => {
                     return {
                         is_error: false,
