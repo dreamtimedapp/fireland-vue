@@ -38,7 +38,7 @@
       <div class="item-title">更多好玩</div>
       <div class="more-list"><a href="/lottery" class="game-item">
         <div class="title">EOS乐透</div>
-        <div class="info"><span>基于EOS合约的乐透游戏</span></div>
+        <div class="info"><span>基于EOS合约的抽奖游戏</span></div>
       </a><a href="/undecided" class="game-item">
         <div class="title">互动吧</div>
         <div class="info"><span>投票话题领取分红</span></div>
@@ -51,25 +51,25 @@
     <div class="personal" v-if="isPersonalShow">
       <div class="user-info">
         <div class="avatar-box"><img src="../assets/logo.png"></div>
-        <div class="user-name"></div>
+        <div class="user-name">{{has_account}}</div>
       </div>
       <div class="eto-info">
-        <div class="balance-title">余额(EOT)</div>
-        <div class="balance-value">0.0000</div>
+        <div class="balance-title">余额</div>
+        <div class="balance-value">{{has_balance}}</div>
         <div class="match-box">
           <div class="box-item">
-            <div class="balance-title">累计分红(EOT)</div>
+            <div class="balance-title">拥有土地</div>
             <div class="item-value">0.0000</div>
           </div>
           <div class="box-item">
-            <div class="balance-title">本期回购(EOS)</div>
+            <div class="balance-title">累积利润</div>
             <div class="item-value">0.0000</div>
           </div>
         </div>
       </div>
       <div class="tool-box">
-        <button>EOT购买<i class="iconfont e-Path"></i></button>
-        <button>EOT回购<i class="iconfont e-Shape1"></i></button>
+        <button>购买<i class="iconfont e-Path"></i></button>
+        <button>提现<i class="iconfont e-Shape1"></i></button>
       </div>
     </div>
     <div class="bottom-nav">
@@ -89,16 +89,20 @@
   import store from '../data/store.js'
   import {
     get_scatter_identity,
-    get_available,
     login,
-    transfer
+    transfer,
+    recast,
+    getBalance
   } from '../services/web_wallet_service.js'
+import { exists } from 'fs';
 
 
   export default {
     name: 'Home',
     data: function() {
       return {
+        account_name:'',
+        eos_balance:0,
         tab: 'game'
       }
     },
@@ -116,12 +120,22 @@
       isPersonalShow: function() {
         return (this.tab === 'personal');
       },
-      has_account_name: function() {
-        if (!this.account_name) return '';
-        return this.account_name;
-      },
       has_scatter: function() {
         return store.state.global_config.has_scatter;
+      },
+      has_account: function() {
+        if (this.account_name) {
+          return this.account_name
+        } else {
+          return this.getAccountName()
+        }
+      },
+      has_balance:function() {
+        if (this.eos_balance) {
+          return this.eos_balance
+        } else {
+          return this.getBalance()
+        }
       }
     },
     methods: {
@@ -129,6 +143,24 @@
         if (tab !== this.tab) {
           this.tab = tab;
         }
+      },
+      async getAccountName () {
+          let res = await get_scatter_identity();
+          if(res.is_error){
+            alert (res.msg.message)
+            this.account_name = res.msg.message;
+          }else{
+            this.account_name = res.data.account_name  
+          }
+          return res.data.account_name
+      },
+      async getBalance() {
+         let res = await getBalance();
+         if (res) {
+            this.eos_balance = res[0]
+         } else {
+            this.eos_balance = 0
+         }
       }
     }
   }
@@ -206,6 +238,10 @@
   .user-info {
     display: flex;
     align-items: center;
+  }
+  .user-name {
+    font-size: 56px;
+    margin-left: 12px;
   }
   .avatar-box {
     width: 80px;

@@ -107,6 +107,23 @@ export const login = async ()=>{
     })  
 }
 
+/**
+ * 
+ * 获取EOS余额
+ * 
+*/
+export const getBalance = async ()=> {
+    let call_res = await call_scatter();
+    if(call_res.is_error) return call_res;
+    let {_,account_name, permission} = call_res;
+    let eos = ScatterJS.scatter.eos(network,Eos)
+    return await eos.getCurrencyBalance({ code: "eosio.token", account: account_name, symbol: "EOS" }).then(result => {
+        alert(result)
+        debugger
+        return result
+    })
+}
+
 export const transfer = async (toname = 'teamaccount',amount = 1, memo = '啦啦啦', tokenSymbol = 'EOS') => {
     let call_res = await call_scatter();
     if(call_res.is_error) return call_res;
