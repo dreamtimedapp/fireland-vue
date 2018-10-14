@@ -43,7 +43,7 @@
 
     <div class="game-center" v-if="isPersonalShow">
       <div class="user-info">
-        <div class="avatar-box"><img src="../assets/logo.png"></div>
+        <div class="avatar-box"><img src="../assets/head.png"></div>
         <div class="user-name">{{has_account}}</div>
       </div>
       <div class="eto-info">
@@ -62,16 +62,30 @@
       </div>
       
       <el-card class="box-card tool-box">
-            我的邀请
+         <div class="settings-box">
+            <span>我的邀请</span>
+            <i class="el-icon-arrow-right"> </i>  
+        </div> 
       </el-card> 
-       <el-card class="box-card tool-box">
-            我的下单
+       <el-card class="box-card">
+         <div class="settings-box">
+            <span>我的投注记录</span>
+             <i class="el-icon-arrow-right"> </i>  
+        </div> 
       </el-card> 
-      <el-card class="box-card tool-box">
-            最新公告
+      <el-card class="box-card ">
+        <div class="settings-box">
+            <span>最新公告</span>
+             <i class="el-icon-arrow-right"> </i>  
+        </div>
       </el-card>  
-      <el-card class="box-card tool-box">
-            关于我们
+      <el-card class="box-card ">
+        
+        <div class="settings-box">
+            <span>关于我们</span>
+             <i class="el-icon-arrow-right"> </i>  
+        </div>
+        
       </el-card>  
     </div>
     <div class="bottom-nav">
@@ -293,6 +307,7 @@ import { exists } from 'fs';
   .user-info {
     display: flex;
     align-items: center;
+    padding-top:10px;
   }
   .user-name {
     font-size: 56px;
@@ -345,6 +360,11 @@ import { exists } from 'fs';
     color: #fff;
     font-size: 36px;
   }
+  .settings-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
   .tool-box {
     display: flex;
@@ -353,6 +373,8 @@ import { exists } from 'fs';
     background-color: #fff;
     box-shadow: 0 6px 8px 0 rgba(0,0,0,.05);
     border-radius: 5px;
+    align-items: center;
+    justify-content: flex-start;
   }
   .tool-box button {
     position: relative;
