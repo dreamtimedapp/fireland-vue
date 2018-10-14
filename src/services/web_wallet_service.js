@@ -118,8 +118,6 @@ export const getBalance = async ()=> {
     let {_,account_name, permission} = call_res;
     let eos = ScatterJS.scatter.eos(network,Eos)
     return await eos.getCurrencyBalance({ code: "eosio.token", account: account_name, symbol: "EOS" }).then(result => {
-        alert(result)
-        debugger
         return result
     })
 }

@@ -1,23 +1,8 @@
-<style type="text/css">
-
-  .error_info {
-    color: #ef0909cf;
-    margin-top: 10px;
-    background: #f3f3f3;
-    padding: 10px;
-  }
-  .account_info {
-    color: #ef0909cf;
-    margin-top: 10px;
-    background: #f3f3f3;
-    padding: 10px;
-  }
-</style>
 
 <template>
   <div class="home">
     <div class="game-center" v-if="isGameShow">
-      <div class="item-title">热门话题</div>
+      <div class="item-title">热门游戏</div>
       <div class="theme-list">
         <div class="theme-item"><i class="iconfont e-Shape"></i>
 
@@ -36,19 +21,27 @@
         </div>
       </div>
       <div class="item-title">更多好玩</div>
-      <div class="more-list"><a href="/lottery" class="game-item">
-        <div class="title">EOS乐透</div>
-        <div class="info"><span>基于EOS合约的抽奖游戏</span></div>
-      </a><a href="/undecided" class="game-item">
-        <div class="title">互动吧</div>
-        <div class="info"><span>投票话题领取分红</span></div>
-      </a><a href="/" class="game-item router-link-active">
-        <div class="title">摇啊摇</div>
-        <div class="info"><span>摇啊摇赢大奖(敬请期待)</span></div>
-      </a></div>
+      <div class="more-list">
+        <a href="/lottery" class="game-item-one">
+          <div class="title">EOS大地主</div>
+          <div class="info"><span>人人都能当地主收租，开局一块地，装备全靠捡</span></div>
+        </a>
+      </div>
+      <div class="more-list">
+        <a href="/lottery" class="game-item-two">
+          <div class="title">EOS一元夺宝(敬请期待)</div>
+          <div class="info"><span>基于EOS合约的夺宝游戏</span></div>
+        </a>
+      </div>
+        <div class="more-list">
+        <a href="/lottery" class="game-item-three">
+          <div class="title">神秘游戏(敬请期待)</div>
+          <div class="info"><span>有一款来自未来的游戏，请查收</span></div>
+        </a>
+      </div>
     </div>
 
-    <div class="personal" v-if="isPersonalShow">
+    <div class="game-center" v-if="isPersonalShow">
       <div class="user-info">
         <div class="avatar-box"><img src="../assets/logo.png"></div>
         <div class="user-name">{{has_account}}</div>
@@ -71,6 +64,9 @@
         <button>购买<i class="iconfont e-Path"></i></button>
         <button>提现<i class="iconfont e-Shape1"></i></button>
       </div>
+      <el-card class="box-card tool-box">
+            <i class="fontFamily ele-icon-third-ziyuan3"></i>
+      </el-card>  
     </div>
     <div class="bottom-nav">
       <label class="nav-item" :class="{'active': tab === 'game'}" v-on:click="tabChange('game', $event)">
@@ -207,33 +203,87 @@ import { exists } from 'fs';
     flex-wrap: wrap;
     justify-content: space-between;
   }
-  .game-item {
-    background: url(https://eoslottery.me/img/game1.f802af84.jpg) no-repeat 50%;
+ 
+  .game-item-one {
     background-size: contain;
-
+    background-color: #409EFF;
     display: block;
     text-decoration: none;
-    width: 345px;
+    width: 100%;
     height: 200px;
     border-radius: 5px;
     margin-bottom: 20px;
   }
-  .game-item .title {
+
+  .game-item-one .title {
     font-size: 32px;
     color: #fff;
     margin-top: 40px;
     padding-left: 30px;
   }
-  .game-item .info {
+  .game-item-one .info {
     margin-top: 6px;
     color: hsla(0,0%,100%,.6);
     font-size: 26px;
     padding-left: 30px;
   }
 
+  .game-item-two {
+  
+    background-size: contain;
+    background-color: #67c23a;
+    display: block;
+    text-decoration: none;
+    width: 100%;
+    height: 200px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+
+  .game-item-two .title {
+    font-size: 32px;
+    color: #fff;
+    margin-top: 40px;
+    padding-left: 30px;
+  }
+  .game-item-two .info {
+    margin-top: 6px;
+    color: hsla(0,0%,100%,.6);
+    font-size: 26px;
+    padding-left: 30px;
+  }
+  .game-item-three {
+    background-size: contain;
+    background-color: #F56C6C;
+    display: block;
+    text-decoration: none;
+    width: 100%;
+    height: 200px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+
+  .game-item-three .title {
+    font-size: 32px;
+    color: #fff;
+    margin-top: 40px;
+    padding-left: 30px;
+  }
+  .game-item-three .info {
+    margin-top: 6px;
+    color: hsla(0,0%,100%,.6);
+    font-size: 26px;
+    padding-left: 30px;
+  }
+  .icon-set {
+    width: 20px;
+    height: 20px;
+  }
+
   .personal {
-    margin: 0 auto;
-    padding: 50px 20px 140px;
+     width: 710px;
+     margin: 0 auto;
+     padding: 0 20px 140px;
   }
   .user-info {
     display: flex;
