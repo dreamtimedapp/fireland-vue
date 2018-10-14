@@ -60,12 +60,18 @@
           </div>
         </div>
       </div>
-      <div class="tool-box">
-        <button>购买<i class="iconfont e-Path"></i></button>
-        <button>提现<i class="iconfont e-Shape1"></i></button>
-      </div>
+      
       <el-card class="box-card tool-box">
-            <i class="fontFamily ele-icon-third-ziyuan3"></i>
+            我的邀请
+      </el-card> 
+       <el-card class="box-card tool-box">
+            我的下单
+      </el-card> 
+      <el-card class="box-card tool-box">
+            最新公告
+      </el-card>  
+      <el-card class="box-card tool-box">
+            关于我们
       </el-card>  
     </div>
     <div class="bottom-nav">
@@ -92,7 +98,6 @@
   } from '../services/web_wallet_service.js'
 import { exists } from 'fs';
 
-
   export default {
     name: 'Home',
     data: function() {
@@ -104,7 +109,7 @@ import { exists } from 'fs';
     },
     mounted: function() {
       if (this.has_scatter) {
-        this.call_scatter();
+        this.getAccountName();
       }
     },
     components: {
