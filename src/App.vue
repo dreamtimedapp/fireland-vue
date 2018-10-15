@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <Home />
-    <HelloWorld/>
   </div>
 </template>
 
