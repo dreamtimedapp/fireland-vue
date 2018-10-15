@@ -13,6 +13,7 @@
     "bignumber.js": "^7.2.1",
     "clipboard": "^2.0.1",
     "element-ui": "^2.4.8",
+    "muse-ui": "^3.0.1",
     "scatterjs-core": "^2.3.2",
     "scatterjs-plugin-eosjs": "^1.3.3",
     "vue": "^2.5.2",
