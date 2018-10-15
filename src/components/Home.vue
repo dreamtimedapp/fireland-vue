@@ -63,7 +63,7 @@
       <el-dialog
           title="邀请好友获得奖励"
           :visible.sync="invitedialogVisible"
-          width="30%"
+          width="80%"
           :before-close="handleClose">
           <span>{{get_inviteUrl}}</span>
           <span slot="footer" class="dialog-footer">
@@ -71,7 +71,7 @@
           <el-button type="primary" class="btn" data-clipboard-text="Just because you can doesn't mean you should — clipboard.js" @click="invitedialogVisible = false">复制</el-button>
           </span>
       </el-dialog>
-      <el-card class="box-card tool-box"  @click="test">
+      <el-card class="box-card tool-box" @click="test">
          <div class="settings-box" @click="invitedialogVisible = true">
             <span>我的邀请</span>
             <span>邀请好友享受投注的10%的奖励</span>
@@ -158,6 +158,9 @@ import Clipboard from 'clipboard';
       }
     },
     methods: {
+      test: function() {
+        
+      },
       tabChange: function(tab) {
         if (tab !== this.tab) {
           this.tab = tab;
