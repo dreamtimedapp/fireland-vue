@@ -60,10 +60,21 @@
           </div>
         </div>
       </div>
-      
-      <el-card class="box-card tool-box">
-         <div class="settings-box">
+      <el-dialog
+          title="邀请好友获得奖励"
+          :visible.sync="invitedialogVisible"
+          width="30%"
+          :before-close="handleClose">
+          <span>{{get_inviteUrl}}</span>
+          <span slot="footer" class="dialog-footer">
+          <el-button @click="invitedialogVisible = false">取消</el-button>
+          <el-button type="primary" class="btn" data-clipboard-text="Just because you can doesn't mean you should — clipboard.js" @click="invitedialogVisible = false">复制</el-button>
+          </span>
+      </el-dialog>
+      <el-card class="box-card tool-box"  @click="test">
+         <div class="settings-box" @click="invitedialogVisible = true">
             <span>我的邀请</span>
+            <span>邀请好友享受投注的10%的奖励</span>
             <i class="el-icon-arrow-right"> </i>  
         </div> 
       </el-card> 
@@ -73,20 +84,6 @@
              <i class="el-icon-arrow-right"> </i>  
         </div> 
       </el-card> 
-      <el-card class="box-card ">
-        <div class="settings-box">
-            <span>最新公告</span>
-             <i class="el-icon-arrow-right"> </i>  
-        </div>
-      </el-card>  
-      <el-card class="box-card ">
-        
-        <div class="settings-box">
-            <span>关于我们</span>
-             <i class="el-icon-arrow-right"> </i>  
-        </div>
-        
-      </el-card>  
     </div>
     <div class="bottom-nav">
       <label class="nav-item" :class="{'active': tab === 'game'}" v-on:click="tabChange('game', $event)">
@@ -103,6 +100,7 @@
 
 <script>
   import store from '../data/store.js'
+  import {getQueryString} from '../utils/utils.js'
   import {
     get_scatter_identity,
     login,
@@ -111,6 +109,7 @@
     getBalance
   } from '../services/web_wallet_service.js'
 import { exists } from 'fs';
+import Clipboard from 'clipboard';
 
   export default {
     name: 'Home',
@@ -118,7 +117,9 @@ import { exists } from 'fs';
       return {
         account_name:'',
         eos_balance:0,
-        tab: 'game'
+        tab: 'game',
+        invitedialogVisible:false,
+        inviteUrl:'http://127.0.0.1?ref=',
       }
     },
     mounted: function() {
@@ -151,6 +152,9 @@ import { exists } from 'fs';
         } else {
           return this.getBalance()
         }
+      },
+      get_inviteUrl:function() {
+        return this.inviteUrl + getQueryString('ref')
       }
     },
     methods: {
@@ -162,8 +166,7 @@ import { exists } from 'fs';
       async getAccountName () {
           let res = await get_scatter_identity();
           if(res.is_error){
-            alert (res.msg.message)
-            this.account_name = res.msg.message;
+            this.account_name = '';
           }else{
             this.account_name = res.data.account_name  
           }
@@ -176,7 +179,15 @@ import { exists } from 'fs';
          } else {
             this.eos_balance = 0
          }
-      }
+      },
+      handleClose(done) {
+         const clipboard = new Clipboard('.btn',{
+          text: function(trigger) {
+              return 'text';
+           }
+          });
+      },
+     
     }
   }
 </script>
@@ -362,6 +373,7 @@ import { exists } from 'fs';
   }
   .settings-box {
     display: flex;
+    width: 650px;
     align-items: center;
     justify-content: space-between;
   }
