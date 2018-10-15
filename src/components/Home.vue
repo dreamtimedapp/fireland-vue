@@ -1,23 +1,8 @@
-<style type="text/css">
-
-  .error_info {
-    color: #ef0909cf;
-    margin-top: 10px;
-    background: #f3f3f3;
-    padding: 10px;
-  }
-  .account_info {
-    color: #ef0909cf;
-    margin-top: 10px;
-    background: #f3f3f3;
-    padding: 10px;
-  }
-</style>
 
 <template>
   <div class="home">
     <div class="game-center" v-if="isGameShow">
-      <div class="item-title">热门话题</div>
+      <div class="item-title">热门游戏</div>
       <div class="theme-list">
         <div class="theme-item"><i class="iconfont e-Shape"></i>
 
@@ -36,41 +21,69 @@
         </div>
       </div>
       <div class="item-title">更多好玩</div>
-      <div class="more-list"><a href="/lottery" class="game-item">
-        <div class="title">EOS乐透</div>
-        <div class="info"><span>基于EOS合约的乐透游戏</span></div>
-      </a><a href="/undecided" class="game-item">
-        <div class="title">互动吧</div>
-        <div class="info"><span>投票话题领取分红</span></div>
-      </a><a href="/" class="game-item router-link-active">
-        <div class="title">摇啊摇</div>
-        <div class="info"><span>摇啊摇赢大奖(敬请期待)</span></div>
-      </a></div>
+      <div class="more-list">
+        <a href="/lottery" class="game-item-one">
+          <div class="title">EOS大地主</div>
+          <div class="info"><span>人人都能当地主收租，开局一块地，装备全靠捡</span></div>
+        </a>
+      </div>
+      <div class="more-list">
+        <a href="/lottery" class="game-item-two">
+          <div class="title">EOS一元夺宝(敬请期待)</div>
+          <div class="info"><span>基于EOS合约的夺宝游戏</span></div>
+        </a>
+      </div>
+        <div class="more-list">
+        <a href="/lottery" class="game-item-three">
+          <div class="title">神秘游戏(敬请期待)</div>
+          <div class="info"><span>有一款来自未来的游戏，请查收</span></div>
+        </a>
+      </div>
     </div>
 
-    <div class="personal" v-if="isPersonalShow">
+    <div class="game-center" v-if="isPersonalShow">
       <div class="user-info">
-        <div class="avatar-box"><img src="../assets/logo.png"></div>
-        <div class="user-name"></div>
+        <div class="avatar-box"><img src="../assets/head.png"></div>
+        <div class="user-name">{{has_account}}</div>
       </div>
       <div class="eto-info">
-        <div class="balance-title">余额(EOT)</div>
-        <div class="balance-value">0.0000</div>
+        <div class="balance-title">余额</div>
+        <div class="balance-value">{{has_balance}}</div>
         <div class="match-box">
           <div class="box-item">
-            <div class="balance-title">累计分红(EOT)</div>
+            <div class="balance-title">拥有土地</div>
             <div class="item-value">0.0000</div>
           </div>
           <div class="box-item">
-            <div class="balance-title">本期回购(EOS)</div>
+            <div class="balance-title">累积利润</div>
             <div class="item-value">0.0000</div>
           </div>
         </div>
       </div>
-      <div class="tool-box">
-        <button>EOT购买<i class="iconfont e-Path"></i></button>
-        <button>EOT回购<i class="iconfont e-Shape1"></i></button>
-      </div>
+      <el-dialog
+          title="邀请好友获得奖励"
+          :visible.sync="invitedialogVisible"
+          width="30%"
+          :before-close="handleClose">
+          <span>{{get_inviteUrl}}</span>
+          <span slot="footer" class="dialog-footer">
+          <el-button @click="invitedialogVisible = false">取消</el-button>
+          <el-button type="primary" class="btn" data-clipboard-text="Just because you can doesn't mean you should — clipboard.js" @click="invitedialogVisible = false">复制</el-button>
+          </span>
+      </el-dialog>
+      <el-card class="box-card tool-box"  @click="test">
+         <div class="settings-box" @click="invitedialogVisible = true">
+            <span>我的邀请</span>
+            <span>邀请好友享受投注的10%的奖励</span>
+            <i class="el-icon-arrow-right"> </i>  
+        </div> 
+      </el-card> 
+       <el-card class="box-card">
+         <div class="settings-box">
+            <span>我的投注记录</span>
+             <i class="el-icon-arrow-right"> </i>  
+        </div> 
+      </el-card> 
     </div>
     <div class="bottom-nav">
       <label class="nav-item" :class="{'active': tab === 'game'}" v-on:click="tabChange('game', $event)">
@@ -87,24 +100,31 @@
 
 <script>
   import store from '../data/store.js'
+  import {getQueryString} from '../utils/utils.js'
   import {
     get_scatter_identity,
-    get_available,
     login,
-    transfer
+    transfer,
+    recast,
+    getBalance
   } from '../services/web_wallet_service.js'
-
+import { exists } from 'fs';
+import Clipboard from 'clipboard';
 
   export default {
     name: 'Home',
     data: function() {
       return {
-        tab: 'game'
+        account_name:'',
+        eos_balance:0,
+        tab: 'game',
+        invitedialogVisible:false,
+        inviteUrl:'http://127.0.0.1?ref=',
       }
     },
     mounted: function() {
       if (this.has_scatter) {
-        this.call_scatter();
+        this.getAccountName();
       }
     },
     components: {
@@ -116,12 +136,25 @@
       isPersonalShow: function() {
         return (this.tab === 'personal');
       },
-      has_account_name: function() {
-        if (!this.account_name) return '';
-        return this.account_name;
-      },
       has_scatter: function() {
         return store.state.global_config.has_scatter;
+      },
+      has_account: function() {
+        if (this.account_name) {
+          return this.account_name
+        } else {
+          return this.getAccountName()
+        }
+      },
+      has_balance:function() {
+        if (this.eos_balance) {
+          return this.eos_balance
+        } else {
+          return this.getBalance()
+        }
+      },
+      get_inviteUrl:function() {
+        return this.inviteUrl + getQueryString('ref')
       }
     },
     methods: {
@@ -129,7 +162,32 @@
         if (tab !== this.tab) {
           this.tab = tab;
         }
-      }
+      },
+      async getAccountName () {
+          let res = await get_scatter_identity();
+          if(res.is_error){
+            this.account_name = '';
+          }else{
+            this.account_name = res.data.account_name  
+          }
+          return res.data.account_name
+      },
+      async getBalance() {
+         let res = await getBalance();
+         if (res) {
+            this.eos_balance = res[0]
+         } else {
+            this.eos_balance = 0
+         }
+      },
+      handleClose(done) {
+         const clipboard = new Clipboard('.btn',{
+          text: function(trigger) {
+              return 'text';
+           }
+          });
+      },
+     
     }
   }
 </script>
@@ -175,37 +233,96 @@
     flex-wrap: wrap;
     justify-content: space-between;
   }
-  .game-item {
-    background: url(https://eoslottery.me/img/game1.f802af84.jpg) no-repeat 50%;
+ 
+  .game-item-one {
     background-size: contain;
-
+    background-color: #409EFF;
     display: block;
     text-decoration: none;
-    width: 345px;
+    width: 100%;
     height: 200px;
     border-radius: 5px;
     margin-bottom: 20px;
   }
-  .game-item .title {
+
+  .game-item-one .title {
     font-size: 32px;
     color: #fff;
     margin-top: 40px;
     padding-left: 30px;
   }
-  .game-item .info {
+  .game-item-one .info {
     margin-top: 6px;
     color: hsla(0,0%,100%,.6);
     font-size: 26px;
     padding-left: 30px;
   }
 
+  .game-item-two {
+  
+    background-size: contain;
+    background-color: #67c23a;
+    display: block;
+    text-decoration: none;
+    width: 100%;
+    height: 200px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+
+  .game-item-two .title {
+    font-size: 32px;
+    color: #fff;
+    margin-top: 40px;
+    padding-left: 30px;
+  }
+  .game-item-two .info {
+    margin-top: 6px;
+    color: hsla(0,0%,100%,.6);
+    font-size: 26px;
+    padding-left: 30px;
+  }
+  .game-item-three {
+    background-size: contain;
+    background-color: #F56C6C;
+    display: block;
+    text-decoration: none;
+    width: 100%;
+    height: 200px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+
+  .game-item-three .title {
+    font-size: 32px;
+    color: #fff;
+    margin-top: 40px;
+    padding-left: 30px;
+  }
+  .game-item-three .info {
+    margin-top: 6px;
+    color: hsla(0,0%,100%,.6);
+    font-size: 26px;
+    padding-left: 30px;
+  }
+  .icon-set {
+    width: 20px;
+    height: 20px;
+  }
+
   .personal {
-    margin: 0 auto;
-    padding: 50px 20px 140px;
+     width: 710px;
+     margin: 0 auto;
+     padding: 0 20px 140px;
   }
   .user-info {
     display: flex;
     align-items: center;
+    padding-top:10px;
+  }
+  .user-name {
+    font-size: 56px;
+    margin-left: 12px;
   }
   .avatar-box {
     width: 80px;
@@ -254,6 +371,12 @@
     color: #fff;
     font-size: 36px;
   }
+  .settings-box {
+    display: flex;
+    width: 650px;
+    align-items: center;
+    justify-content: space-between;
+  }
 
   .tool-box {
     display: flex;
@@ -262,6 +385,8 @@
     background-color: #fff;
     box-shadow: 0 6px 8px 0 rgba(0,0,0,.05);
     border-radius: 5px;
+    align-items: center;
+    justify-content: flex-start;
   }
   .tool-box button {
     position: relative;
