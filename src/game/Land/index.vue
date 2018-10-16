@@ -1,14 +1,15 @@
 <template>
-<div>
+<div class="container">
   <Header date="2019"></Header>
+  <GameInfo/>
   <Land/>
 </div>
 </template>
 
 <script>
-
 import Header from './components/header.vue';
-import Land from './components/land';
+import Land from './components/land.vue';
+import GameInfo from './components/gameinfo.vue'
 import store from '../../store'
 import {
     get_scatter_identity,
@@ -22,7 +23,8 @@ export default {
   name: 'landGame',
   components: {
     Header,
-    Land
+    Land,
+    GameInfo
   },
   props: {},
   data: function() {
@@ -51,5 +53,8 @@ export default {
 </script>
 
 <style>
+.container {
+
+}
 
 </style>

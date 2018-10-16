@@ -1,22 +1,18 @@
 <template>
-       <div class="header">  
-           <i class="el-icon-arrow-left back"> </i>
-           <span>Eos大地主</span>
-           <span>{{$store.state.LandStore.account_name}} </span>
-       </div>
+    <div class="header">  
+        <i class="el-icon-arrow-left back"> </i>
+        <span>Eos大地主</span>
+        <span>{{$store.state.LandStore.account_name}} </span>
+    </div>
 </template>
 <script>
 export default {
     ready() {
-        window.setInterval(() => {
-            this.now = Math.trunc((new Date()).getTime() / 1000);
-        },1000);
     },
    
     data() {
-        return {
-            now: Math.trunc((new Date()).getTime() / 1000)
-        }
+      return {
+      }
     },
     computed: {
     },
@@ -31,7 +27,7 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: #F56C6C;
+    background-color: #409EFF;
     height: 96px;
     padding-left: 20px;
     padding-right: 20px;

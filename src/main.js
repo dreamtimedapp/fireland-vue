@@ -6,12 +6,13 @@ import VueI18n from 'vue-i18n'
 import App from './App'
 import Land from './game/Land/index'
 import store from './store'
-
+import VueCountdown from '@xkeshi/vue-countdown';
 
 Vue.config.productionTip = false
 Vue.use(VueRouter)
 Vue.use(VueI18n)
 Vue.use(ElementUI)
+Vue.component(VueCountdown.name, VueCountdown);
 
 const routes = [
   { path: '/game/land', component: Land },
