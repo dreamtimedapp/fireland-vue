@@ -4,7 +4,8 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import VueI18n from 'vue-i18n'
 import App from './App'
-import Land from './firegame/Land/index'
+import Land from './game/Land/index'
+import store from './store'
 
 
 Vue.config.productionTip = false
@@ -23,7 +24,8 @@ const router = new VueRouter({
 
 /* eslint-disable no-new */
 new Vue({
-  router
+  router,
+  store
   // el: '#app',
   // render: h => h(App)
 }).$mount('#app');

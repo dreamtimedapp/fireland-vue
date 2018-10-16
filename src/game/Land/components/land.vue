@@ -22,9 +22,9 @@ const STATUS_ENUM = {
   }
 };
 const mock = [];
-for (let i=0; i < 15; i++) {
+for (let i=0; i < 11; i++) {
   const row = [];
-  for (let j=0; j < 15; j++) {
+  for (let j=0; j < 11; j++) {
     const col = {
       id: i*10 + j
     };

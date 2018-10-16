@@ -79,9 +79,9 @@
         </div> 
       </el-card> 
        <el-card class="box-card">
-         <div class="settings-box">
+         <div class="settings-box">  
             <span>我的投注记录</span>
-             <i class="el-icon-arrow-right"> </i>  
+            <i class="el-icon-arrow-right"> </i>  
         </div> 
       </el-card> 
     </div>
