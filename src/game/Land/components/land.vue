@@ -1,10 +1,12 @@
 <template>
   <div id="land">
-    <div class="list" ref="list" :style="{height: listHeight}">
+    <el-scrollbar style="height:100%;width:750px">
+      <div class="list" ref="list" :style="{height: listHeight}">
       <div class="row" v-for="(row, index) in list" :key="index">
         <div class="col" v-for="col in row" :key="col.id" :style="col.style"></div>
       </div>
-    </div>
+     </div>
+    </el-scrollbar>
   </div>
 </template>
 
@@ -85,6 +87,8 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
     background-color: #f7f8fa;
+    justify-content: center;
+    display: flex;
   }
 
   .list {

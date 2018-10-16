@@ -6,7 +6,6 @@
         </template>
 </countdown></div>
         <span class="total_balance"> 总计下注：1000 EOS</span>
-        <span class="personal">我拥有土地0块 </span>
     </div>
 </template>
 <script>
@@ -15,7 +14,7 @@ export default {
     ready() {
     },
     components: {
-       
+      
     },
     data() {
       return {
@@ -34,7 +33,7 @@ export default {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 600px;
+    height: 300px;
   }
   .total_balance {
     color: #000;
