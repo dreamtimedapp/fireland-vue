@@ -1,5 +1,5 @@
 <template>
-    <div class="info">  
+    <div class="game-info">  
         <div><countdown :time="2 * 24 * 60 * 60 * 1000">
         <template slot-scope="props">
           <span class="total_balance">{{ props.days }} : {{ props.hours }} : {{ props.minutes }} : {{ props.seconds }}</span>
@@ -28,7 +28,7 @@ export default {
 }
 </script>
 <style>
-  .info {
+  .game-info {
     display: flex;
     justify-content: center;
     align-items: center;

@@ -1,6 +1,8 @@
 <template>
     <div class="header">  
-        <i class="el-icon-arrow-left back"> </i>
+        <router-link to="/" class="game-item-one">
+            <i class="el-icon-arrow-left back"> </i>
+        </router-link>
         <span>Eos大地主</span>
         <span>{{$store.state.LandStore.account_name}} </span>
     </div>
