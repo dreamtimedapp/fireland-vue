@@ -203,12 +203,12 @@ export const get_player_list = async () => {
     let {eos, account_name, permission} = call_res;
     if(!account_name){
         return {
-            is_error,
+            is_error :'true',
             msg: ''
         };
     }
     return await Eos({ httpEndpoint })
-                .getTableRows({"scope":"eosio","code":"eosio","table":"account","table_key":account_name,"limit":10000,"json":true})
+                .getTableRows({"scope":"fireland1234","code":"fireland1234","table":"account","limit":10000,"json":true})
                 .then(data => {
                     return {
                         is_error: false,
@@ -240,7 +240,7 @@ export const get_land_info = async () => {
         };
     }
     return await Eos({ httpEndpoint })
-                .getTableRows({"scope":"eosio","code":"eosio","table":"account","table_key":account_name,"limit":10000,"json":true})
+                .getTableRows({"scope":account_name,"code":"fireland1234","table":"land","limit":10000,"json":true})
                 .then(data => {
                     return {
                         is_error: false,

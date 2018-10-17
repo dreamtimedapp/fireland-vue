@@ -5,6 +5,7 @@
   <Betting/>
   <Land/>
   <Rule/>
+  <BettingTable/>
 </div>
 </template>
 
@@ -14,14 +15,18 @@ import Land from './components/land.vue';
 import GameInfo from './components/gameinfo.vue'
 import Betting from './components/betting';
 import Rule from './components/rule'
+import BettingTable from './components/tableinfo'
 import store from '../../store'
 import {
     get_scatter_identity,
     login,
     transfer,
     recast,
-    getBalance
+    getBalance,
+    get_player_list,
+    get_land_info
 } from '../../services/web_wallet_service.js'
+import { setInterval } from 'timers';
 
 export default {
   name: 'landGame',
@@ -30,7 +35,8 @@ export default {
     Land,
     GameInfo,
     Betting,
-    Rule
+    Rule,
+    BettingTable
   },
   props: {},
   data: function() {
@@ -38,6 +44,7 @@ export default {
     }
   },
   mounted: function() {
+    setInterval(this.getLandInfo,1000)
     this.getAccountName();
   },
   computed: {
@@ -53,7 +60,22 @@ export default {
         }else{
           store.commit('getAccount',res.data.account_name) 
         }
+    },
+    async getEosBalance() {
+        let res = await getBalance();
+        if (res) {
+          store.commit('setEosBalance',res[0])
+        } else {
+          store.commit('setEosBalance',0)
+        }
+    },
+    async getPlayerList(){
+       let res = await get_player_list()
+    },
+    async getLandInfo() {
+      let res = await get_land_info()
     }
+
   }
 }
 </script>

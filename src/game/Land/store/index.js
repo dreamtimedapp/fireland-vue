@@ -11,7 +11,7 @@ export default {
         getAccount(state,name) {
            state.account_name = name
         },
-        getEosBalance(state,balance) {
+        setEosBalance(state,balance) {
            state.balance = balance
         },
         getPersonalLand(state,land) {
