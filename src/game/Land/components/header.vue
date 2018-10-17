@@ -1,10 +1,10 @@
 <template>
     <div class="header">  
-        <router-link to="/" class="game-item-one">
-            <i class="el-icon-arrow-left back"> </i>
+        <router-link to="/" class="back">
+            <i class="el-icon-arrow-left"> </i>
         </router-link>
-        <span>Eos大地主</span>
-        <span>{{$store.state.LandStore.account_name}} </span>
+        <span class="header-title">Eos大地主</span>
+        <span class="header-profile">{{$store.state.LandStore.account_name}}</span>
     </div>
 </template>
 <script>
@@ -25,23 +25,29 @@ export default {
 </script>
 <style>
 .header {
-     width: 100%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     background-color: #409EFF;
     height: 96px;
-    padding-left: 20px;
-    padding-right: 20px;
 }
 .header span {
     color: white;
     font-size: 30px;
 }
-.back {
+.header-title {
+    flex: 1;
+    text-align: center;
+}
+.header .back {
     color: white;
     font-size: 30px;
+    margin-left: 20px;
+}
+.header .header-profile {
+    margin-right: 20px;
 }
 .block {
     display: flex;
