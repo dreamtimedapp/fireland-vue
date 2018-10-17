@@ -55,6 +55,8 @@ export default {
    
     data() {
       return {
+          amount: 10,
+          memo: 20
       }
     },
     computed: {
