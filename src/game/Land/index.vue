@@ -43,6 +43,7 @@ export default {
   props: {},
   data: function() {
     return {
+      account_name: ''
     }
   },
   mounted: function() {
@@ -58,8 +59,10 @@ export default {
     async getAccountName () {
         let res = await get_scatter_identity();
         if(res.is_error){
+          this.account_name = ''
           store.commit('getAccount','') 
         }else{
+          this.account_name = account_name
           store.commit('getAccount',res.data.account_name) 
         }
     },
@@ -78,14 +81,24 @@ export default {
         return;
       }
       rows.forEach(element => {
-        alert(JSON.stringify(element))
+          if (element['palyer'] == account_name) {
+
+          }
       });
     },
+    //获取地块信息表
     async getLandInfo() {
       let res = await get_land_info()
      
+    },
+    // 获取游戏信息表,第几场游戏，游戏的开场时间
+    async getGameListInfo() {
+      let res = await get_gamelist_info()
+     
+    },
+    async get_touzhu_info() {
+      let res = await get_touzhu_info()
     }
-
   }
 }
 </script>
