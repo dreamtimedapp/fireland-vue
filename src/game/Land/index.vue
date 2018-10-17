@@ -24,7 +24,9 @@ import {
     recast,
     getBalance,
     get_player_list,
-    get_land_info
+    get_land_info,
+    get_touzhu_info,
+    get_gameInfo_list
 } from '../../services/web_wallet_service.js'
 import { setInterval } from 'timers';
 
@@ -44,7 +46,7 @@ export default {
     }
   },
   mounted: function() {
-    setInterval(this.getLandInfo,1000)
+    setInterval(this.getPlayerList,1000)
     this.getAccountName();
   },
   computed: {
@@ -70,10 +72,18 @@ export default {
         }
     },
     async getPlayerList(){
-       let res = await get_player_list()
+      let res = await get_player_list()
+      rows = res['rows']
+      if (!rows) {
+        return;
+      }
+      rows.forEach(element => {
+        alert(JSON.stringify(element))
+      });
     },
     async getLandInfo() {
       let res = await get_land_info()
+     
     }
 
   }

@@ -3,12 +3,14 @@ import {
     toAsset
 } from '../utils/utils.js'
 import {
-    test_network,main_network,endpoint
+    test_network,main_network,endpoint,eos_config,CONTRACT_NAME
 } from '../config/config.js'
 import ScatterJS from 'scatterjs-core';
 import ScatterEOS from 'scatterjs-plugin-eosjs';
 
 const httpEndpoint = endpoint
+
+
 
 // 节点配置
 const network = test_network
@@ -207,8 +209,8 @@ export const get_player_list = async () => {
             msg: ''
         };
     }
-    return await Eos({ httpEndpoint })
-                .getTableRows({"scope":"fireland1234","code":"fireland1234","table":"account","limit":10000,"json":true})
+    return await Eos(eos_config)
+                .getTableRows({"scope":CONTRACT_NAME,"code":CONTRACT_NAME,"table":"account","limit":10000,"json":true})
                 .then(data => {
                     return {
                         is_error: false,
@@ -239,8 +241,8 @@ export const get_land_info = async () => {
             msg: ''
         };
     }
-    return await Eos({ httpEndpoint })
-                .getTableRows({"scope":account_name,"code":"fireland1234","table":"land","limit":10000,"json":true})
+    return await Eos(eos_config)
+                .getTableRows({"scope":CONTRACT_NAME,"code":CONTRACT_NAME,"table":"land","limit":10000,"json":true})
                 .then(data => {
                     return {
                         is_error: false,
@@ -261,7 +263,7 @@ export const get_land_info = async () => {
  * 
  */
 
-export const get_touzhu_list = async () => {
+export const get_gameInfo_list = async () => {
     let call_res = await call_scatter(false);
     if(call_res.is_error) return call_res;
     let {eos, account_name, permission} = call_res;
@@ -271,8 +273,8 @@ export const get_touzhu_list = async () => {
             msg: ''
         };
     }
-    return await Eos({ httpEndpoint })
-                .getTableRows({"scope":"eosio","code":"eosio","table":"account","table_key":account_name,"limit":10000,"json":true})
+    return await Eos(eos_config)
+                .getTableRows({"scope":CONTRACT_NAME,"code":CONTRACT_NAME,"table":"counter","limit":10000,"json":true})
                 .then(data => {
                     return {
                         is_error: false,
@@ -303,8 +305,8 @@ export const get_touzhu_info = async () => {
             msg: ''
         };
     }
-    return await Eos({ httpEndpoint })
-                .getTableRows({"scope":"eosio","code":"eosio","table":"account","table_key":account_name,"limit":10000,"json":true})
+    return await Eos(eos_config)
+                .getTableRows({"scope":CONTRACT_NAME,"code":CONTRACT_NAME,"table":gamelog,"limit":10000,"json":true})
                 .then(data => {
                     return {
                         is_error: false,
