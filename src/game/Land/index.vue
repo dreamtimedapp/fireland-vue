@@ -1,9 +1,10 @@
 <template>
-<div class="container">
+<div class="main-container">
   <Header date="2019"></Header>
   <GameInfo/>
   <Betting/>
   <Land/>
+  <Rule/>
 </div>
 </template>
 
@@ -11,7 +12,8 @@
 import Header from './components/header.vue';
 import Land from './components/land.vue';
 import GameInfo from './components/gameinfo.vue'
-import Betting from './components/betting'
+import Betting from './components/betting';
+import Rule from './components/rule'
 import store from '../../store'
 import {
     get_scatter_identity,
@@ -27,7 +29,8 @@ export default {
     Header,
     Land,
     GameInfo,
-    Betting
+    Betting,
+    Rule
   },
   props: {},
   data: function() {
@@ -56,8 +59,11 @@ export default {
 </script>
 
 <style>
-.container {
-
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 </style>
