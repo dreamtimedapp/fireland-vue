@@ -1,6 +1,6 @@
 <template>
     <div class="rulecontainer">  
-        <span>游戏规则</span>
+        <span class="rule-title">游戏规则</span>
         <vue-markdown>{{rule}}</vue-markdown>
     </div>
 </template>
@@ -42,7 +42,12 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
+    justify-content: center;
+    margin-top: 40px;
     font-size: 30px;
+}
+.rule-title {
+    font-size: 45px;
+    
 }
 </style>

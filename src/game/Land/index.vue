@@ -1,5 +1,5 @@
 <template>
-<div class="container">
+<div class="main-container">
   <Header date="2019"></Header>
   <GameInfo/>
   <Betting/>
@@ -59,8 +59,11 @@ export default {
 </script>
 
 <style>
-.container {
-
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 </style>
