@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import ElementUI from 'element-ui'
+
 import 'element-ui/lib/theme-chalk/index.css'
 import VueI18n from 'vue-i18n'
 import App from './App'
@@ -8,6 +8,7 @@ import Land from './game/Land/index'
 import store from './store'
 import VueCountdown from '@xkeshi/vue-countdown';
 import VueMarkdown from 'vue-markdown';
+import ElementUI from 'element-ui'
 
 Vue.config.productionTip = false
 Vue.use(VueRouter)

@@ -26,15 +26,15 @@
         <div class="box-input-info">
            <div class="account-balance">
                <span>EOS余额：</span>
-               <span> 0  </span>
+               <span> {{$store.state.LandStore.eos_balance}}  </span>
            </div>
            <div class="account-balance">
                <span>我的土地：</span>
-               <span> 0  </span>
+               <span>  {{$store.state.LandStore.personal_land}}  </span>
            </div>
            <div class="account-withdraw">
                <span>游戏账户余额：</span>
-               <span> 0  </span>
+               <span> {{$store.state.LandStore.game_balance}}  </span>
                <el-button type="primary" size="mini" class="withdraw-btn">提现</el-button>
            </div>
            <div class="account-invite">
@@ -56,7 +56,7 @@ export default {
     data() {
       return {
           amount: 10,
-          memo: 20
+          memo: 20,
       }
     },
     computed: {
