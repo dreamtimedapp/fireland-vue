@@ -12,7 +12,7 @@
 <script>
 import Header from './components/header.vue';
 import Land from './components/land.vue';
-import GameInfo from './components/gameinfo.vue'
+import CountDown from './components/countdown'
 import Betting from './components/betting';
 import Rule from './components/rule'
 import BettingTable from './components/tableinfo'
@@ -26,7 +26,7 @@ import {
     get_player_list,
     get_land_info,
     get_touzhu_info,
-    get_gameInfo_list
+    get_gameInfo_list,
 } from '../../services/web_wallet_service.js'
 import { setInterval } from 'timers';
 
@@ -35,7 +35,7 @@ export default {
   components: {
     Header,
     Land,
-    GameInfo,
+    CountDown,
     Betting,
     Rule,
     BettingTable
@@ -52,6 +52,8 @@ export default {
      setInterval(this.getEosBalance,2000)
      setInterval(this.getLandInfo,2000)
      setInterval(this.getAccountName,2000);
+     setInterval(this.getGameListInfo,2000)
+     setInterval(this.getTouzhuInfo,2000)
   },
   computed: {
     has_scatter: function() {
@@ -84,6 +86,7 @@ export default {
           store.commit('setEosBalance',0)
         }
     },
+    //获取玩家的信息
     async getPlayerList(){
       let res = await get_player_list()
       if (res.is_error) {
@@ -109,10 +112,10 @@ export default {
     },
     // 获取游戏信息表,第几场游戏，游戏的开场时间
     async getGameListInfo() {
-      let res = await get_gamelist_info()
-       
+      let res = await get_gameInfo_list()
+      debugger
     },
-    async get_touzhu_info() {
+    async getTouzhuInfo() {
       let res = await get_touzhu_info()
     }
   }

@@ -306,7 +306,7 @@ export const get_touzhu_info = async () => {
         };
     }
     return await Eos(eos_config)
-                .getTableRows({"scope":CONTRACT_NAME,"code":CONTRACT_NAME,"table":gamelog,"limit":10000,"json":true})
+                .getTableRows({"scope":CONTRACT_NAME,"code":CONTRACT_NAME,"table":"gamelog","limit":10000,"json":true})
                 .then(data => {
                     return {
                         is_error: false,
