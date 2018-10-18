@@ -22,22 +22,22 @@
       </div>
       <div class="item-title">更多好玩</div>
       <div class="more-list">
-        <a href="/lottery" class="game-item-one">
+        <router-link to="game/land" class="game-item-one">
           <div class="title">EOS大地主</div>
           <div class="info"><span>人人都能当地主收租，开局一块地，装备全靠捡</span></div>
-        </a>
+        </router-link>
       </div>
       <div class="more-list">
-        <a href="/lottery" class="game-item-two">
+        <router-link to="lottery" class="game-item-two">
           <div class="title">EOS一元夺宝(敬请期待)</div>
           <div class="info"><span>基于EOS合约的夺宝游戏</span></div>
-        </a>
+        </router-link>
       </div>
         <div class="more-list">
-        <a href="/lottery" class="game-item-three">
-          <div class="title">神秘游戏(敬请期待)</div>
-          <div class="info"><span>有一款来自未来的游戏，请查收</span></div>
-        </a>
+          <router-link to="lottery" class="game-item-three">
+            <div class="title">神秘游戏(敬请期待)</div>
+            <div class="info"><span>有一款来自未来的游戏，请查收</span></div>
+          </router-link>
       </div>
     </div>
 
@@ -421,6 +421,7 @@ import Clipboard from 'clipboard';
     height: 100px;
     background-color: #fff;
     border-top: 2px solid #ebebeb;
+    z-index: 999;
   }
   .bottom-nav .nav-item {
     font-weight: bold;

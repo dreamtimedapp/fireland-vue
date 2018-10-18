@@ -1,8 +1,10 @@
 <template>
     <div class="header">  
-        <i class="el-icon-arrow-left back"> </i>
-        <span>Eos大地主</span>
-        <span>{{$store.state.LandStore.account_name}} </span>
+        <router-link to="/" class="back">
+            <i class="el-icon-arrow-left"> </i>
+        </router-link>
+        <span class="header-title">Eos大地主</span>
+        <span class="header-profile">{{$store.state.LandStore.account_name}}</span>
     </div>
 </template>
 <script>
@@ -30,16 +32,22 @@ export default {
     align-items: center;
     background-color: #409EFF;
     height: 96px;
-    padding-left: 20px;
-    padding-right: 20px;
 }
 .header span {
     color: white;
     font-size: 30px;
 }
-.back {
+.header-title {
+    flex: 1;
+    text-align: center;
+}
+.header .back {
     color: white;
     font-size: 30px;
+    margin-left: 20px;
+}
+.header .header-profile {
+    margin-right: 20px;
 }
 .block {
     display: flex;

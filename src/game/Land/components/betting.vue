@@ -1,5 +1,5 @@
 <template>
-    <div class="cointainer">  
+    <div class="betting-cointainer">  
       <el-card class="box-card-betting item">
         <div slot="header" class="clearfix">
           <span class="title">购买土地</span>
@@ -55,6 +55,8 @@ export default {
    
     data() {
       return {
+          amount: 10,
+          memo: 20
       }
     },
     computed: {
@@ -65,9 +67,10 @@ export default {
 }
 </script>
 <style>
-.cointainer {
+.betting-cointainer {
+    width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     flex-direction: row;
 }
@@ -108,13 +111,15 @@ export default {
 }
 
 .box-card-betting {
-    width: 374px;
-    height: 400px;
+    width: 370px;
+    height: 500px;
 }
 .box-card-info {
-    width: 374px;
-    margin-left: 20px;
-    height: 400px;
+    width: 370px;
+    height: 500px;
+}
+.betting-cointainer .el-card {
+    box-shadow: none;
 }
 .box-input-betting {
     display: flex;
@@ -169,5 +174,7 @@ export default {
     padding-left: 20px;
     padding-right: 10px;
 }
-
+.el-input-group__append, .el-input-group__prepend {
+    padding: 0 10px;
+}
 </style>
