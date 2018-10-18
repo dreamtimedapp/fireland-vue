@@ -93,12 +93,7 @@ export default {
       if (!rows) {
         return;
       }
-      rows.forEach(element => {
-          if (element.palyer == this.account_name) {
-            debugger
-             store.commit('setGameBalance',element.balance)
-          }
-      });
+      store.commit('getGameBalance',rows)
     },
     //获取地块信息表
     async getLandInfo() {

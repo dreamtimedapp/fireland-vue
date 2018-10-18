@@ -25,8 +25,13 @@ export default {
                 }
             });
         },
-        setGameBalance(state,game_balance) {
-            state.game_balance = game_balance
+        //获取游戏内账户信息
+        getGameBalance(state,accountlist) {
+            accountlist.forEach(element => {
+                if (element.player == state.account_name) {
+                    state.game_balance = element.balance
+                }
+            });
         }
     }
 }
