@@ -12,6 +12,7 @@
   "dependencies": {
     "@xkeshi/vue-countdown": "^1.0.1",
     "bignumber.js": "^7.2.1",
+    "bootstrap-vue": "^2.0.0-rc.11",
     "clipboard": "^2.0.1",
     "element-ui": "^2.4.8",
     "muse-ui": "^3.0.1",
