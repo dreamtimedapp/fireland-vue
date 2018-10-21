@@ -20,18 +20,19 @@
 
 <script>
 import landImg1 from '../../../assets/land/land-1.png';
+import landImg1_m from '../../../assets/land/land-1-m.png';
 import landImg2 from '../../../assets/land/land-2.png';
 
 const STATUS_ENUM = {
   nature: {
     color: '#ccc',
     bg: landImg1,
-    pic: landImg1
+    bg_m: landImg1_m
   },
   rare: {
     color: '#000',
     bg: landImg1,
-    pic: landImg1
+    bg_m: landImg1_m
   }
 };
 const outerList = [];
@@ -53,7 +54,6 @@ for (let i=0; i < 9; i++) {
 //    }
 
     col.type = 'nature';
-    col.pic = STATUS_ENUM[col.type].pic;
     col.style = {
       backgroundImage: 'url(' + STATUS_ENUM[col.type].bg + ')',
       opacity: 0.5
@@ -80,7 +80,6 @@ for (let i=0; i < 8; i++) {
 //    }
 
     col.type = 'nature';
-    col.pic = STATUS_ENUM[col.type].pic;
     col.style = {
       backgroundImage: 'url(' + STATUS_ENUM[col.type].bg + ')',
       opacity: 0.5
@@ -132,6 +131,11 @@ export default {
             col.type = 'nature';
           } else if (colData.type === 1) {
             col.type = 'rare';
+          }
+
+          /* 需要读自己的name */
+          if (colData.owner === '我自己') {
+            col.style.backgroundImage = 'url(' + STATUS_ENUM[col.type].bg_m + ')';
           }
         } else {
           col.hasOwner = false;
