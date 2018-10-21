@@ -63,8 +63,8 @@
                  </el-table-column>
               </el-table>
           </div>
-          <div class="footer">
-           <p class="footer-title">
+          <div class="land-footer">
+           <p class="land-footer-title">
                 友情合作伙伴
                 <br/> <br/>
                 <a href="https://www.mytokenpocket.vip/" target="_blank"><img src="https://img.alicdn.com/tfs/TB1AoDWjxjaK1RjSZKzXXXVwXXa-300-55.png" width="150"></a>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -172,7 +172,7 @@ h4 {
 .text-center {
     text-align: center;
 }
-.footer {
+.land-footer {
     margin-top:30px;
     padding-top: 30px; 
     display: flex;
@@ -184,10 +184,10 @@ h4 {
     color: #fff;
 }
 
-.footer p {
+.land-footer p {
     margin-bottom: 20px;
 }
-.footer-title {
+.land-footer-title {
    font-size: 34px;
 }
 .touzhu-table {
