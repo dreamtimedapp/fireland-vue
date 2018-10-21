@@ -1,51 +1,44 @@
 <template>
     <div class="betting-cointainer">  
-      <el-card class="box-card-betting item">
-        <div slot="header" class="clearfix">
-          <span class="title">购买土地</span>
-        </div>
-        <div class="box-input-betting">
-           <el-input placeholder="1" v-model="amount">
-              <template slot="prepend">投注</template>
-              <template slot="append">EOS</template>
-           </el-input>
-           <el-input class="memo-input" placeholder="买地皮赢大奖" v-model="memo">
-              <template slot="prepend">宣言</template>
-           </el-input>
-           <div>
-            <span class="text ">本次下注最少需要0.5eos，每次下注扣除5%手续费</span>
-           </div>
-            <el-button type="danger" class="betting-btn">下注</el-button>
-        </div>
-      </el-card>  
-      <el-card class="box-card-info item" :body-style="{padding: 0}">
-        <div slot="header" class="clearfix">
-          <span class="title">我的账户</span>
-        </div>
-        <div>
-        <div class="box-input-info">
-           <div class="account-balance">
-               <span>EOS余额：</span>
-               <span> {{$store.state.LandStore.eos_balance}}  </span>
-           </div>
-           <div class="account-balance">
-               <span>我的土地：</span>
-               <span>  {{$store.state.LandStore.personal_land}}  </span>
-           </div>
-           <div class="account-withdraw">
-               <span>游戏账户余额：</span>
-               <span> {{$store.state.LandStore.game_balance}}  </span>
-               <el-button type="primary" size="mini" class="withdraw-btn">提现</el-button>
-           </div>
-           <div class="account-invite">
-               <span>我的邀请链接：</span>
-                <el-button style="float: right; padding: 3px 0" type="text">复制</el-button>
-           </div>
-           <span class="invite-text ">邀请将永久享受好友投注的2%的分红</span>
-        </div>  
-          
-        </div>
-      </el-card>  
+     <div class="you-bet-container">
+        <el-row :gutter="20">
+           <el-col :span="12">
+               <div class="grid-content-betting">
+                   <div>
+                    <el-input placeholder="请输入" v-model="input4">
+                       <template slot="append">eos</template>
+                    </el-input>
+                    <el-input class="input-memo" placeholder="我的土地我做主！" v-model="input4">
+                       <template slot="append">宣言</template>
+                    </el-input>
+                    <el-button class="betting-btn" type="danger">下注</el-button>
+                   </div>
+                </div>
+           </el-col>
+           <el-col :span="12">
+              <div class="box-input-info">
+                <div class="account-balance">
+                    <span>EOS余额：</span>
+                    <span> {{$store.state.LandStore.eos_balance}}  </span>
+                </div>
+                <div class="account-balance">
+                    <span>我的土地：</span>
+                    <span>  {{$store.state.LandStore.personal_land}}  </span>
+                </div>
+                <div class="account-withdraw">
+                    <span>游戏内：</span>
+                    <span> {{$store.state.LandStore.game_balance}}  </span>
+                    <el-button type="primary" size="mini" class="withdraw-btn">提现</el-button>
+                </div>
+                <div class="account-invite">
+                    <span>邀请链接：</span>
+                    <el-button style="float: right; padding: 3px 0" type="text">复制</el-button>
+                </div>
+                <span class="invite-text ">邀请将永久享受好友投注的2%的分红</span>
+              </div>  
+            </el-col>
+       </el-row>
+     </div>     
     </div>
 </template>
 <script>
@@ -88,7 +81,6 @@ export default {
     font-size: 14px;
 }
 .invite-text  {
-    padding-left: 20px;
     color: coral;
     margin-top: -15px;
 }
@@ -131,6 +123,8 @@ export default {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    color: #fff;
+    font-size: 12px;
 }
 .account-balance{
     display: flex;
@@ -138,43 +132,69 @@ export default {
     align-items: center;
     height: 70px;
     flex-direction: row;
-    font-size: 20px;
     border-top: 0px;
     border-left: 0px;
     border-right: 0px;
     border-bottom: 2px;
     border-color: #ebeef5;
     border-style: solid;
-    padding-left: 20px;
-    padding-right: 25px;
+    padding-right: 10px;
 }
+
 .account-withdraw{
      display: flex;
     justify-content: space-between;
     align-items: center;
     height: 70px;
     flex-direction: row;
-    font-size: 20px;
     border-top: 0px;
     border-left: 0px;
     border-right: 0px;
     border-bottom: 2px;
     border-color: #ebeef5;
     border-style: solid;
-    padding-left: 20px;
-    padding-right: 5px;
+    padding-right: 10px;
+   
 }
 .account-invite{
-     display: flex;
+    display: flex;
     justify-content: space-between;
     align-items: center;
     height: 70px;
     flex-direction: row;
-    font-size: 20px;
-    padding-left: 20px;
     padding-right: 10px;
 }
 .el-input-group__append, .el-input-group__prepend {
     padding: 0 10px;
+}
+.you-bet-container {
+    background-color: #1f2833;
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding: 35px 15px 30px 15px;
+    border-radius: 8px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin-left: 40px;
+    margin-right: 40px;
+ }
+
+.grid-content-betting {
+    padding-left: 10px;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+}
+.input-memo {
+    margin-top: 25px;
+}
+
+.betting-btn {
+   margin-top: 40px;
+   width: 100%;
+
 }
 </style>
