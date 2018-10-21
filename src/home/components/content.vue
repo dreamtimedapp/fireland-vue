@@ -171,14 +171,13 @@ import {
 } from '../../services/web_wallet_service.js'
 import store from '../../store'
 const rule = 
-            "1. 游戏板块为20×20的地图，每一格代表一块地皮，每块地皮初始定价0.5eos，其中有2块为黑地皮没定价（作用下面解析）；\n" +
-                "2. 玩家自定金额下注买地，系统随机一块地皮进行购买判断；\n" +
-                "3. LEM 采用 Bancor 算法，价格 = EOS 储备量 / (YOU 发行量 × 20%)，认购增加 EOS 储备及 YOU 流通量，买入价格上涨，卖出价格下跌。\n" +
-                "4. 情况2、地皮为玩家自身地皮，玩家扣除20%地皮标价手续费升级该地皮（地皮标价翻倍）；\n" +
-                "5. 所有买入 YOU 的 EOS 金额，会先扣除 15% 手续费作为平台维护资金，用来支持团队研发、资源消耗、游戏推广（包括 5.25% 的好友邀请奖励）。我们会利用这部分费用研发后续的游戏，并会将不低于 50% 的盈利分给所有 YOU 的持有者。 \n" +
-                "6. 为了在早期保护所有持有 YOU 的玩家权益，卖出 YOU 会收取 30% 手续费，此部分手续费会作为分红全部返还给 YOU 持有者（不包含锁定部分）。\n" +
-                "7. 当 YOU 发行量超过 2200 万后（共售出 1100 万 YOU，大概需要 10 万 EOS），买入和卖出手续费只收取 0.5%，此时 YOU 价格为 0.023 EOS。\n" +
-                "8. 所有资产公开透明，任意第三方 EOS 区块浏览器可查，规则人人平等。"
+            "1. 发行量1000万，对标资金蓄池；\n" +
+                "2. token价格由资金蓄池金额和释放量决定：token价格＝资金蓄池eos额÷token总释放量；\n" +
+                "3. 初始发行价0.001eos一个，团队存入1000eos，保留100万token量且锁仓。\n" +
+                "4. token设有最大释放量，最大释放量随着游戏的进程而增大；且增发的token发放给游戏玩家(具体请参考游戏规则)；\n" +
+                "5. token可以自由与资金蓄池进行买卖,买入没手续费，不得超过最大可对换量(最大可兑换量＝最大释放量-流通量) \n" +
+                "6. 卖出收取10%手续费，手续费将存入token增值池.token增值池资金，每天24点存入资金蓄池，且不增发token。存入资金蓄池后，token价格按第2点重新计算价格。\n" +
+                "7. token增值池资金来源：卖出手续费及游戏分红(具体请参考游戏规则)。资金蓄池资金，以后将会开发相关理财功能，例如cpu bank、借贷等。所获取的利润将发放到增值池，提升币价。"
 export default {
     ready() {
     },
@@ -277,21 +276,20 @@ export default {
 }
 .len-introduce {
    display: flex;
-   margin-top:50px;
    width: 100%;
-   min-height:600px;
-   justify-content: center;
-   color:hsla(0, 0%, 100%,.6);
-   background-position:cennter 10%;
    background-color: #2b3137;
-   background-size: cover;
    flex-direction: column;
-   margin-bottom: 25px;
+   justify-content: center;
+   align-items: center;
+   padding-left: 80px;
+   padding-right: 80px;
+   color: #fff;
+   margin-top: 50px;
 }
 .len-title {
     font-size: 28px;
     color: #fff;
-    margin-top: 10px;
+    margin-top: 30px;
     text-align: center;
 }
 .len-info {
@@ -300,38 +298,7 @@ export default {
     font-size:20px;
     margin-top:20px;
 }
-.len-partner {
-   display: flex;
-   margin-top:50px;
-   width: 100%;
-   min-height:600px;
-   justify-content: center;
-   color:hsla(0, 0%, 100%,.6);
-   background-position:cennter 10%;
-   background-color: #2b3137;
-   background-size: cover;
-   flex-direction: column;
-   margin-bottom: 25px;
-}
-.len-partner-title {
-    color:#000;
-    text-align: center;
-    border-bottom: 2px solid rgb(153,153,153);
-    font-size:35px;
-    width: 200px;
-    margin-top: 10px;
-}
 
-.img-thumbnail {
-    padding: .25rem;
-    background-color:#fff;
-    border-radius: 0.25rem;
-    max-width: 100%;
-    height: auto;
-    vertical-align: middle;
-    border:0; 
-    width: 400px;
-}
 .footer {
     margin-top:30px;
     padding-top: 30px; 
@@ -389,6 +356,34 @@ export default {
 .len-security p {
     margin-bottom: 30px;
 }
+
+.len-introduce-title {
+    color:#fff;
+    text-align: center;
+    border-bottom: 2px solid rgb(153,153,153);
+    font-size:35px;
+    width: 400px;
+    margin-top: 10px;
+}
+
+.len-introduce h3 {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 1.4em;
+    margin-bottom: 30px;
+    color: #fff;
+    margin-top: 50px;
+    text-align: center;
+ }
+
+ .len-introduce h4 {
+    color: #fff;
+    font-size: 24px;
+ }
+ .len-introduce p {
+     margin-bottom: 30px;
+ }
 .text-center {
     text-align: center;
 }
