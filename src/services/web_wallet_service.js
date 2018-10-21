@@ -118,10 +118,17 @@ export const getBalance = async ()=> {
     let call_res = await call_scatter();
     if(call_res.is_error) return call_res;
     let {_,account_name, permission} = call_res;
-    let eos = ScatterJS.scatter.eos(network,Eos)
-    return await eos.getCurrencyBalance({ code: "eosio.token", account: account_name, symbol: "EOS" }).then(result => {
-        return result
-    })
+    return await Eos(eos_config).getCurrencyBalance({ code: "eosio.token", account: account_name, symbol: "EOS" }).then(result => {
+        return {
+            is_error:false,
+            result
+        }
+    }).catch(err => {
+        return {
+            is_error: true,
+            msg: err
+        };
+    });
 }
 
 export const transfer = async (toname = 'teamaccount',amount = 1, memo = '啦啦啦', tokenSymbol = 'EOS') => {
@@ -130,8 +137,16 @@ export const transfer = async (toname = 'teamaccount',amount = 1, memo = '啦啦
     let {_,account_name, permission} = call_res;
     let eos = ScatterJS.scatter.eos(network,Eos)
     return await eos.transfer(account_name, toname, toAsset(amount, tokenSymbol), memo).then(result => {
-        return result
-    })
+        return {
+            is_error:false,
+            result
+        }
+    }).catch(err => {
+        return {
+            is_error: true,
+            msg: err
+        };
+    });
 }
 /**
  *  复投
@@ -162,7 +177,17 @@ export const recast = async(toaccount='teamaccount',quantity = 1, memo ='referre
                 }
             }
         ]
-    })
+    }).then(result => {
+        return {
+            is_error:false,
+            result
+        }
+    }).catch(err => {
+        return {
+            is_error: true,
+            msg: err
+        };
+    });
 }
 /**
  *  提现
@@ -190,7 +215,17 @@ export const withdraw = async (toaccount = 'playeraccount',quantity = 1, tokenSy
                 }
             }
         ]
-    })
+    }).then(result => {
+        return {
+            is_error:false,
+            result
+        }
+    }).catch(err => {
+        return {
+            is_error: true,
+            msg: err
+        };
+    });
 }
 
 /**
@@ -237,7 +272,7 @@ export const get_land_info = async () => {
     let {eos, account_name, permission} = call_res;
     if(!account_name){
         return {
-            is_error,
+            is_error:true,
             msg: ''
         };
     }
@@ -269,7 +304,7 @@ export const get_gameInfo_list = async () => {
     let {eos, account_name, permission} = call_res;
     if(!account_name){
         return {
-            is_error,
+            is_error:true,
             msg: ''
         };
     }
@@ -301,7 +336,7 @@ export const get_touzhu_info = async () => {
     let {eos, account_name, permission} = call_res;
     if(!account_name){
         return {
-            is_error,
+            is_error:true,
             msg: ''
         };
     }

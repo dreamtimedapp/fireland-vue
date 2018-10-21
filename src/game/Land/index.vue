@@ -27,7 +27,7 @@ import {
     get_touzhu_info,
     get_gameInfo_list,
 } from '../../services/web_wallet_service.js'
-import { setInterval } from 'timers';
+import { setInterval, setTimeout } from 'timers';
 
 export default {
   name: 'landGame',
@@ -45,12 +45,13 @@ export default {
     }
   },
   mounted: function() {
-     setInterval(this.getPlayerList,2000)
-     setInterval(this.getEosBalance,2000)
-     setInterval(this.getLandInfo,2000)
-     setInterval(this.getAccountName,2000);
+     //setInterval(this.getPlayerList,2000)
+     //setInterval(this.getAccountName,2000);
      setInterval(this.getGameListInfo,2000)
      setInterval(this.getTouzhuInfo,2000)
+     setTimeout(this.getAccountName,100);
+     setTimeout(this.getEosBalance,200)
+     setTimeout(this.getLandInfo,200)
   },
   computed: {
     has_scatter: function() {
@@ -63,10 +64,7 @@ export default {
           return;
         }
         let res = await get_scatter_identity();
-        if(res.is_error){
-          this.account_name = ''
-          store.commit('getAccount','') 
-        }else{
+        if(res){
           this.account_name = res.data.account_name
           store.commit('getAccount',res.data.account_name) 
         }
@@ -76,9 +74,9 @@ export default {
           return
         }
         let res = await getBalance();
-        if (res) {
-          this.eos_balance = res[0]
-          store.commit('setEosBalance',res[0])
+        if (!res.is_error) {
+          this.eos_balance = res.result[0]
+          store.commit('setEosBalance',res.result[0])
         } else {
           store.commit('setEosBalance',0)
         }

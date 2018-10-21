@@ -2,7 +2,7 @@ import { stat } from "fs";
 
 export default {
     state:{
-        account_name:'',
+        account_name:'uuu',
         eos_balance:0,
         game_balance:0,
         landlist:[],

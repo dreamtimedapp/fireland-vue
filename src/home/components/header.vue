@@ -1,7 +1,10 @@
 <template>
    <div class="box">
     <div class="header-container"> 
-      <b-img class="logo" src="https://img.alicdn.com/tfs/TB1HrKSjXzqK1RjSZFvXXcB7VXa-2000-2000.png" /> 
+       <div>
+        <b-img class="logo" src="https://img.alicdn.com/tfs/TB1HrKSjXzqK1RjSZFvXXcB7VXa-2000-2000.png" /> 
+        <span class="logo-title">柠檬游戏</span> 
+      </div>
       <div class="header-left">
       <div class="header-nav hidden-xs-only hidden-sm-only ">
           <b-link class="text">柠檬通证(len)</b-link>
@@ -30,7 +33,7 @@
                 </el-col>
                 <el-col :xs="24" :md="12">
                     <div class="features-game-center">
-                      <div class="card bg-dark text-white">
+                      <router-link to="game/land" class="card bg-dark text-white">
                           <img class="card-img" src="https://youbao.io/static/media/sail2.4a6f0ad2.png" style="min-height: 100px;">
                           <div class="card-img-overlay">
                               <h5 class="card-title">
@@ -42,8 +45,9 @@
                                   </span>
                               </p>
                             </div>
-                        </div>
-                      <div class="card bg-dark text-white">
+                        </router-link>
+                        
+                      <router-link to="game/land" class="card bg-dark text-white">
                           <img class="card-img" src="https://youbao.io/static/media/sail2.4a6f0ad2.png" style="min-height: 100px;">
                           <div class="card-img-overlay">
                               <h5 class="card-title">
@@ -53,7 +57,7 @@
                                       </span>
                                     </p>
                            </div>
-                        </div>
+                      </router-link>
                    </div>   
                 </el-col>    
             </el-row>    
@@ -115,6 +119,13 @@ export default {
     min-width: 700px;
     justify-content: center;
     flex-direction: column;
+}
+
+.logo-title {
+    color: #333;
+    font-size: 27px;
+    margin-left: -40px;
+
 }
 .header-container {
     width: 100%;

@@ -11,7 +11,7 @@
           <b-link class="land-header-text">柠檬游戏</b-link>
       </div>
       <el-button v-if="!getAccount" v-on:click="login" class="login-button" type="primary" >登录(EOS)账户</el-button>
-      <div v-if="getAccount" class="login-account-name" type="primary" >{{$store.state.HomeStore.account_name}}</div>
+      <div v-if="getAccount" class="login-account-name" type="primary" >{{$store.state.LandStore.account_name}}</div>
       </div>
     </div> 
    
@@ -51,14 +51,15 @@ export default {
     },
     computed: {
         getAccount() {
-           return store.state.HomeStore.account_name
+           return store.state.LandStore.account_name
         },
     },
     methods: {
       login: async function(event) {
         let res = await login();
+        debugger
         if (res) {
-          store.commit('setAccount',res.name)
+          store.commit('getAccount',res.name)
         }
        },
     }
@@ -81,7 +82,6 @@ export default {
     background: #12161b;
     min-width: 750px;
     justify-content: space-between;
-   
 } 
 
 

@@ -225,7 +225,7 @@ export default {
      width: 100px;
      height: 100px;
      display: flex;
-     background-color:#fff; 
+     background-color:#f7f8fa; 
  }
  .token-subtext {
      display: flex;

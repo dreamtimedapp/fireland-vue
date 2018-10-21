@@ -5,13 +5,13 @@
            <el-col :span="12">
                <div class="grid-content-betting">
                    <div>
-                    <el-input placeholder="请输入" v-model="input4">
+                    <el-input placeholder="请输入" v-model="amount">
                        <template slot="append">eos</template>
                     </el-input>
-                    <el-input class="input-memo" placeholder="我的土地我做主！" v-model="input4">
+                    <el-input class="input-memo" placeholder="我的土地我做主！" v-model="memo">
                        <template slot="append">宣言</template>
                     </el-input>
-                    <el-button class="betting-btn" type="danger">下注</el-button>
+                    <el-button class="betting-btn"  v-on:click="playBetting" type="danger">下注</el-button>
                    </div>
                 </div>
            </el-col>
@@ -28,7 +28,7 @@
                 <div class="account-withdraw">
                     <span>游戏内：</span>
                     <span> {{$store.state.LandStore.game_balance}}  </span>
-                    <el-button type="primary" size="mini" class="withdraw-btn">提现</el-button>
+                    <el-button type="primary" v-on:click="withdraw" size="mini" class="withdraw-btn">提现</el-button>
                 </div>
                 <div class="account-invite">
                     <span>邀请链接：</span>
@@ -42,20 +42,53 @@
   </div>  
 </template>
 <script>
+import {
+    get_scatter_identity,
+    login,
+    transfer,
+    recast,
+    getBalance,
+    get_player_list,
+    get_land_info,
+    get_touzhu_info,
+    get_gameInfo_list,
+withdraw,
+} from '../../../services/web_wallet_service.js'
+import store from '../../../store'
 export default {
     ready() {
     },
    
     data() {
       return {
-          amount: 10,
-          memo: 20,
+          amount: 0.1,
+          memo: '我的土地我做主！',
       }
     },
     computed: {
+        getAccount() {
+           return store.state.HomeStore.account_name
+        },
     },
     methods: {
-
+       async playBetting() {
+          let res = await transfer('teamaccount',this.amount, this.memo);
+          debugger
+          if (res.is_error) {
+            alert(JSON.stringify(res.msg))
+          } else {
+            alert('下注成功！')
+          }
+       },
+       async withdraw() {
+          let res = await withdraw(o);
+          debugger
+          if (res.is_error) {
+            alert(JSON.stringify(res.msg))
+          } else {
+            alert('体现成功！')
+          }
+       }
     }
 }
 </script>
