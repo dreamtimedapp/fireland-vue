@@ -1,4 +1,5 @@
 <template>
+
 <div class="main-container">
   <Header date="2019"></Header>
   <Betting/>
@@ -6,6 +7,7 @@
   <Rule/>
   <!--<BettingTable/>-->
 </div>
+
 </template>
 
 <script>
@@ -117,11 +119,9 @@ export default {
 </script>
 
 <style>
-.main-container {
-  display: flex;
-  background: #12161b;
-  flex-direction: column;
-
-}
-
+  .main-container {
+    width: 100%;
+    min-height: 100vh;
+    background: #12161b; 
+  }
 </style>
