@@ -1,17 +1,17 @@
 <template>
-   <div class="box">
-    <div class="header-container"> 
+   <div class="land-box">
+    <div class="land-header-container"> 
       <div>  
-      <b-img class="logo" src="https://img.alicdn.com/tfs/TB12p3CjAvoK1RjSZPfXXXPKFXa-2000-2000.png" /> 
-      <span class="logo-title">EOS大地主</span> 
+      <b-img class="land-logo" src="https://img.alicdn.com/tfs/TB12p3CjAvoK1RjSZPfXXXPKFXa-2000-2000.png" /> 
+      <span class="land-logo-title">EOS大地主</span> 
       </div>
-      <div class="header-left">
-      <div class="header-nav hidden-xs-only hidden-sm-only ">
-          <b-link class="land-header-text">玩法规则</b-link>
-          <b-link class="land-header-text">柠檬游戏</b-link>
+      <div class="land-header-left">
+      <div class="land-header-nav hidden-xs-only hidden-sm-only ">
+          <b-link to="/home"  class="land-header-text">玩法规则</b-link>
+          <router-link to="/home" class="land-header-text">柠檬游戏</router-link>
       </div>
-      <el-button v-if="!getAccount" v-on:click="login" class="login-button" type="primary" >登录(EOS)账户</el-button>
-      <div v-if="getAccount" class="login-account-name" type="primary" >{{$store.state.LandStore.account_name}}</div>
+      <el-button v-if="!getAccount" v-on:click="login" class="land-login-button" type="primary" >登录(EOS)账户</el-button>
+      <div v-if="getAccount" class="land-login-account-name" type="primary" >{{$store.state.LandStore.account_name}}</div>
       </div>
     </div> 
    
@@ -66,14 +66,14 @@ export default {
 }
 </script>
 <style>
-.box {
+.land-box {
     width: 100%;
     display: flex;
     min-width: 700px;
     justify-content: center;
     flex-direction: column;
 }
-.header-container {
+.land-header-container {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -85,29 +85,25 @@ export default {
 } 
 
 
-.logo-title {
+.land-logo-title {
     color: #fff;
     font-size: 27px;
     margin-left: -40px;
 
 }
-.header-left {
+.land-header-left {
     float: right;
     display: flex;
     align-items: center;
     flex-direction: row;
 }
-.header-nav {
+.land-header-nav {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
-.banner {
-    width: 100%;
-    height: 200px;
-    background-color: #fff;
-}
-.logo {
+
+.land-logo {
     width: 200px;
     height: 200px;
     margin-left: 30px;
@@ -118,44 +114,19 @@ export default {
     color: #fff; 
     margin-left: 45px;
 }
-.login-button {
+.land-login-button {
     margin-left: 60px;
     margin-right: 60px;
 }
-.login-account-name {
+.land-login-account-name {
     margin-left: 60px;
     margin-right: 60px;
     font-size: 34px;
     color: #fff;
 }
-.banner-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+
 .bg-dark {
     background: #fff;
 }
-
-.features-text {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    padding-left: 50px;
-    padding-top: 50px;
-    padding-right: 50px;
-}
-.features-info {
-    margin-top: 20px;
-}
-.features-img {
-    width: 100%;
-}
-.features-title{
-  color: #ffffff;
-  font-size: 34px;
-  margin-top: 10px;
-}
-
 
 </style>

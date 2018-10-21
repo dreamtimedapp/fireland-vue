@@ -2,7 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import 'element-ui/lib/theme-chalk/index.css'
 import VueI18n from 'vue-i18n'
-import App from './App'
 import Home from './home'
 import Land from './game/Land/index'
 import store from './store'
@@ -25,7 +24,7 @@ Vue.use(BootstrapVue);
 const routes = [
   { path: '/game/land', component: Land },
   { path:'/home',component:Home},
-  { path: '', component: App }
+  { path: '', component: Home }
 ]
 
 const router = new VueRouter({

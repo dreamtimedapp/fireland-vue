@@ -1,9 +1,9 @@
 <template>
-    <div class="len-security">
-           <span class="len-security-title">游戏规则</span>
-           <div class="adt_grids">
+    <div class="land-len-security">
+           <span class="land-len-security-title">游戏规则</span>
+           <div class="land-adt_grids">
         
-                <h3 class="security-title text-center">EOS大地主游戏玩法</h3>
+                <h3 class="land-security-title text-center">EOS大地主游戏玩法</h3>
                 <h4>一、玩法介绍 </h4>
                 <p>
                     游戏板块为20×20的地图，每一格代表一块地皮，每块地皮初始定价0.5eos，其中有2块为黑地皮没定价（作用下面解析）；
@@ -39,7 +39,7 @@
                 <p>
                    持有地皮数量最多的玩家，获得jackpot及累计奖池的所有奖金；
                 </p>
-                <h3 class="security-title ">
+                <h3 class="land-security-title ">
                     EOS大地主智能合约
                 </h3>    
                
@@ -128,7 +128,7 @@ export default {
 }
 </script>
 <style>
-.len-security {
+.land-len-security {
    display: flex;
    width: 100%;
    flex-direction: column;
@@ -138,7 +138,7 @@ export default {
    padding-right: 80px;
    margin-top:30px;
 }
-.len-security-title {
+.land-len-security-title {
     color:#fff;
     text-align: center;
     border-bottom: 2px solid rgb(153,153,153);
@@ -146,10 +146,10 @@ export default {
     width: 200px;
     margin-top: 10px;
 }
-.adt-grids {
+.land-adt-grids {
     margin-top: 50px;
 }
-h3{
+.land-len-security h3{
     text-transform: uppercase;
     font-weight: 700;
     font-size: 38px;
@@ -159,12 +159,12 @@ h3{
     margin-top: 50px;
     text-align: center;
 }
-h4 {
+.land-len-security h4 {
     color: #fff;
     font-size: 32px;
 }
 
-.len-security p {
+.land-len-security p {
     margin-bottom: 30px;
     color: #fff;
     font-size: 28px;

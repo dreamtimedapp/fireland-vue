@@ -1,5 +1,5 @@
 <template>
-   <div class="you-token-container">
+   <div class="home-you-token-container">
        <div class="token-name">
            <span>柠檬通证 len</span>
        </div>    
@@ -204,13 +204,14 @@ export default {
 }
 </script>
 <style>
- .you-token-container {
+ .home-you-token-container {
      padding: 50px 0;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background-color: #f7f8fa;
  }
  .token-name {
      margin-bottom: 60px;
