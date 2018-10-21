@@ -12,6 +12,7 @@ import VueMarkdown from 'vue-markdown';
 import ElementUI from 'element-ui'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'element-ui/lib/theme-chalk/display.css';
 
 Vue.config.productionTip = false
 Vue.use(VueRouter)

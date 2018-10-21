@@ -2,16 +2,41 @@
    <div class="box">
     <div class="header-container"> 
       <b-img class="logo" src="https://img.alicdn.com/tfs/TB1HrKSjXzqK1RjSZFvXXcB7VXa-2000-2000.png" /> 
-      <div class="header-nav">
-            <b-link class="text">柠檬通证(len)</b-link>
-            <b-link class="text">开源代码</b-link>
-            <b-link class="text">团队介绍</b-link>
-            <el-button class="login-button" type="primary" >登录(EOS)账户</el-button>
+      <div class="header-left">
+      <div class="header-nav hidden-xs-only hidden-sm-only ">
+          <b-link class="text">柠檬通证(len)</b-link>
+          <b-link class="text">开源代码</b-link>
+          <b-link class="text">团队介绍</b-link>
+      </div>
+      <b-link class="text">中文/English</b-link>
+      <el-button class="login-button" type="primary" >登录(EOS)账户</el-button>
       </div>
     </div>
     <div class="text-center bg-dark">
-        <div class="banner-container">
+        <div >
             <el-row>
+                <el-col :xs="24" :md="12"> 
+                   <div class="features-text">
+                     <img class="features-img" src="http://www.eosbao.io/images/chart.png"/>
+                     <h5 class="features-title">奖励分配</h5>
+                     <p><strong>资金储备:</strong><span>每key销售的50%进入资金储备用Bancor对KEY定价</span></p>
+                     <p><strong>推荐奖励:</strong><span>每KEY销售的5%贡献给2个上级推广人</span></p>
+                     <p><strong>权重奖励:</strong><span>每KEY销售的5%贡献给2个上级推广人</span></p>
+                     <p><strong>研发消耗:</strong><span>每KEY销售的5%贡献给2个上级推广人</span></p>
+                     <p><strong>分红奖池:</strong><span>每KEY销售的20%进入分红奖池，每30分钟按持KEY比例分红</span></p>
+                   </div>    
+                </el-col>
+                <el-col :xs="24" :md="12">
+                    <div class="features-text">
+                     <img class="features-img" src="http://www.eosbao.io/images/chart.png"/>
+                     <h5 class="features-title">奖励分配</h5>
+                     <p><strong>资金储备:</strong><span>每key销售的50%进入资金储备用Bancor对KEY定价</span></p>
+                     <p><strong>推荐奖励:</strong><span>每KEY销售的5%贡献给2个上级推广人</span></p>
+                     <p><strong>权重奖励:</strong><span>每KEY销售的5%贡献给2个上级推广人</span></p>
+                     <p><strong>研发消耗:</strong><span>每KEY销售的5%贡献给2个上级推广人</span></p>
+                     <p><strong>分红奖池:</strong><span>每KEY销售的20%进入分红奖池，每30分钟按持KEY比例分红</span></p>
+                   </div>   
+                </el-col>    
             </el-row>    
         </div>
     </div>    
@@ -47,6 +72,7 @@ export default {
 .box {
     width: 100%;
     display: flex;
+    min-width: 700px;
     justify-content: center;
     flex-direction: column;
 }
@@ -57,14 +83,20 @@ export default {
     align-items: center;
     height: 150px;
     background: #ffffff;
-    justify-content: space-between;
     min-width: 750px;
+    justify-content: space-between;
+   
+}
+.header-left {
+    float: right;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
 }
 .header-nav {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-left: 100px;
 }
 .banner {
     width: 100%;
@@ -95,13 +127,30 @@ export default {
 .bg-dark {
     background: #343a40
 }
-.text-center {
-    text-align: center;
+
+.features-text {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    
 }
-.banner-container {
-   color: #333;
-   padding:40px 20px 20px;
-   text-align: left
+.features-img {
+    width: 100%;
+}
+.features-title{
+  color: #ffffff;
+  font-size: 34px;
+  margin-top: 10px;
+}
+.features-text p{
+    color:#00bcd4;
+    line-height: 1.9em;
+    margin: 1em 0;
+    font-size:1em;
+    text-align: left
+}
+.features-text p strong {
+    color: #f4b04f;
 }
 
 </style>

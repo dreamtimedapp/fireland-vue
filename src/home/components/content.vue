@@ -4,8 +4,8 @@
            <span>柠檬通证 len</span>
        </div>    
        <div>
-          <el-row :gutter="2">
-              <el-col :xs="20" :md="12"> 
+          <el-row >
+              <el-col :xs="24" :md="11"> 
                 <div class="buy-token">
                     <el-input placeholder="请输入内容" v-model="input3">
                         <template slot="prepend">LEN</template>
@@ -13,9 +13,13 @@
                     </el-input>
                     <span class="token-subtext">可买入len通证数量：</span>
                     <el-button class="token-button" type="primary" >买入</el-button>
-                </div>       
+                </div> 
+              </el-col>
+              <el-col :xs="0" :sm="2" :md="2"> 
+                <div class="divider-content">
+                </div> 
               </el-col>  
-              <el-col :xs="20" :md="12">   
+              <el-col :xs="24"   :md="11">   
                 <div class="sell-token">
                     <el-input placeholder="请输入内容" v-model="input3">
                         <template slot="prepend">LEN</template>
@@ -26,8 +30,8 @@
                 </div>     
               </el-col>     
           </el-row> 
-           <el-row :gutter="2">
-              <el-col :xs="20" :md="12"> 
+           <el-row >
+              <el-col :xs="24" :md="11"> 
                 <div class="len-info-table">
                     <el-card class="box-card">
                        <div slot="header" class="clearfix">
@@ -57,7 +61,12 @@
                     </el-card>
                 </div>       
               </el-col>  
-              <el-col :xs="20" :md="12">   
+              <el-col :xs="2" :sm="2" :md="2" :lg="2">
+                 <div class="divider-content">
+                     
+                 </div>
+              </el-col>  
+              <el-col :xs="24" :md="11">   
                 <div class="you-info-table">
                      <el-card class="box-card">
                        <div slot="header" class="clearfix">
@@ -94,6 +103,26 @@
                 <vue-markdown>{{rule}}</vue-markdown>
            </div>
        </div>    
+       <div class="len-partner">
+           <span class="len-partner-title">合作伙伴</span>
+           <div class="partner-info">
+               <el-row>
+                   <el-col :xs="24" :md="12">
+                      <a target="_blank">
+                        <img class="img-thumbnail" src="https://img.alicdn.com/tfs/TB1Q0stjhnaK1RjSZFtXXbC2VXa-538-179.jpg"/>
+                      </a>    
+                   </el-col>
+                   <el-col :xs="24" :md="12">
+                       <a target="_blank">
+                          <img class="img-thumbnail" src="https://img.alicdn.com/tfs/TB1Q0stjhnaK1RjSZFtXXbC2VXa-538-179.jpg"/>
+                       </a>    
+                   </el-col>        
+               </el-row>    
+           </div>    
+       </div>   
+       <div class="footer">
+           <span>2018@ 柠檬游戏团队</span>
+       </div>  
    </div>
 </template>
 <script>
@@ -124,16 +153,22 @@ export default {
 <style>
  .you-token-container {
      padding: 50px 0;
-     width: 100%;
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     flex-direction: column;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
  }
  .token-name {
      margin-bottom: 60px;
      color: #000;
      font-size: 40px;
+ }
+ .divider-content {
+     width: 100px;
+     height: 100px;
+     display: flex;
+     background-color:#fff; 
  }
  .token-subtext {
      display: flex;
@@ -187,6 +222,7 @@ export default {
    background-color: #2b3137;
    background-size: cover;
    flex-direction: column;
+   margin-bottom: 25px;
 }
 .len-title {
     font-size: 28px;
@@ -199,6 +235,45 @@ export default {
     margin-right: 40px;
     font-size:20px;
     margin-top:20px;
+}
+.len-partner {
+    width: 100%;
+    height: 300px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 30px;
+    align-items: center
+}
+.len-partner-title {
+    color:#000;
+    text-align: center;
+    border-bottom: 2px solid rgb(153,153,153);
+    font-size:28px;
+    width: 200px;
+    margin-top: 35px;
+}
+
+.img-thumbnail {
+    padding: .25rem;
+    background-color:#fff;
+    border-radius: 0.25rem;
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+    border:0; 
+    width: 400px;
+}
+.footer {
+    margin-top:50px; 
+    display: flex;
+    width: 100%;
+    height: 200px;
+    justify-content: center;
+    align-items: center;
+    background-color: #2b3137;
+    color: #fff;
 }
 
 </style>
