@@ -3,7 +3,7 @@
        <div class="token-name">
            <span>柠檬通证 len</span>
        </div>    
-       <div>
+       <div class="buy-box">
           <el-row >
               <el-col :xs="24" :md="11"> 
                 <div class="buy-token">
@@ -103,25 +103,56 @@
                 <vue-markdown>{{rule}}</vue-markdown>
            </div>
        </div>    
-       <div class="len-partner">
-           <span class="len-partner-title">合作伙伴</span>
-           <div class="partner-info">
-               <el-row>
-                   <el-col :xs="24" :md="12">
-                      <a target="_blank">
-                        <img class="img-thumbnail" src="https://img.alicdn.com/tfs/TB1Q0stjhnaK1RjSZFtXXbC2VXa-538-179.jpg"/>
-                      </a>    
-                   </el-col>
-                   <el-col :xs="24" :md="12">
-                       <a target="_blank">
-                          <img class="img-thumbnail" src="https://img.alicdn.com/tfs/TB1Q0stjhnaK1RjSZFtXXbC2VXa-538-179.jpg"/>
-                       </a>    
-                   </el-col>        
-               </el-row>    
+       <div class="len-security">
+           <span class="len-security-title">验证安全</span>
+           <div class="adt_grids">
+        
+                <h3 class="security-title text-center">如何保证EOS智能合约资金安全？</h3>
+                <h4>方法一：多重签名智能合约 </h4>
+                <p>
+                    EOS权限体系通过权重（Weight）和阈值（Threshold）来限制合约账户，可以实现多个人共同管理一个账户资金，假设智能合约账户有5个人的公钥，每个公钥的权重为1，权限的总阈值为3，这就表示必须要这5个人中至少3个人签名，才可以转移资金和修改合约代码。
+                </p>  
+                <h4>方法二：移交智能合约权限</h4>
+                <p>
+                    这种方式也比较安全，我们可以修改合约权限为eosio.prods账户，直接将智能合约权限移交给官方21个节点来控制，未来如果需要转移资金或修改合约，则需要申请节点仲裁。
+                </p>   
+                <h4>
+                    方法三: 设置合约漏洞公钥
+                </h4>    
+                <p>
+                    这种方式是最接近区块链定义的，我们可以将智能合约权限修改为黑洞公钥，官方在超级节点竞选时临时用过的这个公钥：EOS1111111111111111111111111111111114T1Anm，它的公钥是0值加检验数据生成的，任何人都不知道它的私钥，未来合约也不可能再被转移资金或修改。
+                </p>
+                <h3 class="security-title ">
+                    柠檬智能合约
+                </h3>    
+                <p>
+                    经过研发团队讨论之后，我们决定采用最后一种方式（黑洞公钥），因为这种是最接近区块链原始定义的方式：公正公平、无法撰改，待柠檬项目稳定运行之后，我们就采取合约黑洞公钥方式。
+                </p>    
+                <p>
+                  合约账号：<a href="" target="_blank">eosioshadows</a>
+                </p>    
+                <p>
+                  合约地址： <a href="https://eospark.com/MainNet/contract/eosioshadows" target="_blank">https://eospark.com/...eosioshadows</a>
+                </p> 
+                <p>
+                  开源代码： <a href="https://eospark.com/MainNet/contract/eosioshadows" target="_blank">https://eospark.com/...eosioshadows</a>
+                </p>   
+           
            </div>    
        </div>   
+    
        <div class="footer">
-           <span>2018@ 柠檬游戏团队</span>
+           <p>
+                友情合作伙伴
+                <br>
+                <a href="https://www.mytokenpocket.vip/" target="_blank"><img src="https://img.alicdn.com/tfs/TB1AoDWjxjaK1RjSZKzXXXVwXXa-300-55.png" width="150"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="https://meet.one" target="_blank"><img src="https://img.alicdn.com/tfs/TB1LYfxjr2pK1RjSZFsXXaNlXXa-200-55.png" width="150"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="https://more.top" target="_blank"><img src="https://img.alicdn.com/tfs/TB1UEYCjAvoK1RjSZFwXXciCFXa-200-55.png" width="150"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="http://www.mathwallet.org" target="_blank"><img src="https://img.alicdn.com/tfs/TB1E4PBjrrpK1RjSZTEXXcWAVXa-150-46.png" width="150"></a>
+            </p>
+            <p>请加入我们的官方电报群沟通交流</p>
+            <p><img src="https://img.alicdn.com/tfs/TB1kWjCjCrqK1RjSZK9XXXyypXa-434-434.jpg" width="100"></p>
+            <p>2018@柠檬游戏团队</p>
        </div>  
    </div>
 </template>
@@ -163,6 +194,10 @@ export default {
      margin-bottom: 60px;
      color: #000;
      font-size: 40px;
+ }
+ .buy-box {
+     margin-left: 20px;
+     margin-right: 20px;
  }
  .divider-content {
      width: 100px;
@@ -211,6 +246,12 @@ export default {
 .box-card {
     margin-top: 30px;
 }
+.partner-info {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 50px;
+}
 .len-introduce {
    display: flex;
    margin-top:50px;
@@ -237,22 +278,25 @@ export default {
     margin-top:20px;
 }
 .len-partner {
-    width: 100%;
-    height: 300px;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    margin-top: 30px;
-    align-items: center
+   display: flex;
+   margin-top:50px;
+   width: 100%;
+   min-height:600px;
+   justify-content: center;
+   color:hsla(0, 0%, 100%,.6);
+   background-position:cennter 10%;
+   background-color: #2b3137;
+   background-size: cover;
+   flex-direction: column;
+   margin-bottom: 25px;
 }
 .len-partner-title {
     color:#000;
     text-align: center;
     border-bottom: 2px solid rgb(153,153,153);
-    font-size:28px;
+    font-size:35px;
     width: 200px;
-    margin-top: 35px;
+    margin-top: 10px;
 }
 
 .img-thumbnail {
@@ -266,14 +310,64 @@ export default {
     width: 400px;
 }
 .footer {
-    margin-top:50px; 
+    margin-top:30px;
+    padding-top: 30px; 
     display: flex;
     width: 100%;
-    height: 200px;
     justify-content: center;
     align-items: center;
-    background-color: #2b3137;
+    text-align: center;
+    flex-direction: column;
+    padding-bottom: 20px;
+    background-color: #212322;
     color: #fff;
+}
+
+.footer p {
+    margin-bottom: 20px;
+}
+
+.len-security {
+   display: flex;
+   width: 100%;
+   background-color: #ffffff;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   padding-left: 80px;
+   padding-right: 80px;
+}
+.len-security-title {
+    color:#000;
+    text-align: center;
+    border-bottom: 2px solid rgb(153,153,153);
+    font-size:35px;
+    width: 200px;
+    margin-top: 10px;
+}
+.adt-grids {
+    margin-top: 50px;
+}
+h3{
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 1.4em;
+    margin-bottom: 30px;
+    color: #444;
+    margin-top: 50px;
+    text-align: center;
+}
+h4 {
+    color: #222;
+    font-size: 24px;
+}
+
+.len-security p {
+    margin-bottom: 30px;
+}
+.text-center {
+    text-align: center;
 }
 
 </style>

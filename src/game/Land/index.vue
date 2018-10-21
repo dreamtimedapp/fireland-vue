@@ -113,7 +113,6 @@ export default {
     // 获取游戏信息表,第几场游戏，游戏的开场时间
     async getGameListInfo() {
       let res = await get_gameInfo_list()
-      debugger
     },
     async getTouzhuInfo() {
       let res = await get_touzhu_info()

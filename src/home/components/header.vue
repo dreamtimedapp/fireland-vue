@@ -7,8 +7,8 @@
           <b-link class="text">柠檬通证(len)</b-link>
           <b-link class="text">开源代码</b-link>
           <b-link class="text">团队介绍</b-link>
+           <b-link class="text">验证安全</b-link>
       </div>
-      <b-link class="text">中文/English</b-link>
       <el-button class="login-button" type="primary" >登录(EOS)账户</el-button>
       </div>
     </div>
@@ -27,14 +27,21 @@
                    </div>    
                 </el-col>
                 <el-col :xs="24" :md="12">
-                    <div class="features-text">
-                     <img class="features-img" src="http://www.eosbao.io/images/chart.png"/>
-                     <h5 class="features-title">奖励分配</h5>
-                     <p><strong>资金储备:</strong><span>每key销售的50%进入资金储备用Bancor对KEY定价</span></p>
-                     <p><strong>推荐奖励:</strong><span>每KEY销售的5%贡献给2个上级推广人</span></p>
-                     <p><strong>权重奖励:</strong><span>每KEY销售的5%贡献给2个上级推广人</span></p>
-                     <p><strong>研发消耗:</strong><span>每KEY销售的5%贡献给2个上级推广人</span></p>
-                     <p><strong>分红奖池:</strong><span>每KEY销售的20%进入分红奖池，每30分钟按持KEY比例分红</span></p>
+                    <div class="features-game-center">
+                      <div class="card bg-dark text-white">
+                          <img class="card-img" src="https://youbao.io/static/media/sail2.4a6f0ad2.png" style="min-height: 100px;">
+                          <div class="card-img-overlay">
+                              <h5 class="card-title">
+                                <span class="qll4MVPb7tVWufSoh90Yb">大宇宙时代</span>
+                              </h5>
+                              <p class="card-text">
+                                  <span class="qll4MVPb7tVWufSoh90Yb">
+                                      每轮赚 10% + 最后大奖 + 邀请奖励
+                                  </span>
+                              </p>
+                            </div>
+                        </div>
+                      <div class="card bg-dark text-white"><img class="card-img" src="https://youbao.io/static/media/sail2.4a6f0ad2.png" style="min-height: 100px;"><div class="card-img-overlay"><h5 class="card-title"><span class="qll4MVPb7tVWufSoh90Yb">大宇宙时代</span></h5><p class="card-text"><span class="qll4MVPb7tVWufSoh90Yb">每轮赚 10% + 最后大奖 + 邀请奖励</span></p></div></div>
                    </div>   
                 </el-col>    
             </el-row>    
@@ -114,6 +121,7 @@ export default {
     font-size:30px;
     color: #000; 
     margin-left: 45px;
+  
 }
 .login-button {
     margin-left: 60px;
@@ -125,13 +133,14 @@ export default {
     align-items: center;
 }
 .bg-dark {
-    background: #343a40
+    background: #fff;
 }
 
 .features-text {
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
+    padding: 50px;
     
 }
 .features-img {
@@ -153,4 +162,59 @@ export default {
     color: #f4b04f;
 }
 
+.card {
+    height:100%;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    padding-left:60px; 
+    padding-right:60px; 
+    color: #fff;
+    background-color: #343a40;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    min-width: 0;
+    background-clip:border-box;
+    border: 0px solid rgba(0,0,0,.125); 
+    border-radius:.25rem;
+}
+.card-img {
+   width: 100%;
+   border-radius: calc(.2rem -1px)
+}
+.card-img img {
+    vertical-align: middle;
+    border-style: none;
+}
+.card-img-overlay {
+    position: absolute;
+    top:0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 20px;
+}
+.card-title {
+    font-size: 40px;
+    line-height: 1.2;
+    padding-left: 56px;
+    padding-top: 40px;
+}
+.card-title  span{
+    background: rgba(0, 0, 0, 0.5);
+    padding: 1px;
+    line-height: 100%;
+  
+}
+.card-text {
+    margin-bottom: 0;
+     padding-left: 56px;
+}
+.card-text span{
+     background: rgba(0, 0, 0, 0.5);
+    padding: 1px;
+    line-height: 100%;
+    
+}
 </style>
