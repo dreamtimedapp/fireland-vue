@@ -3,7 +3,7 @@
   <Header date="2019"></Header>
   <Betting/>
   <Land/>
-  <!--<Rule/>-->
+  <Rule/>
   <!--<BettingTable/>-->
 </div>
 </template>
@@ -121,8 +121,7 @@ export default {
   display: flex;
   background: #12161b;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+
 }
 
 </style>

@@ -1,7 +1,7 @@
 <template>
-    <div class="betting-cointainer">  
-     <div class="you-bet-container">
-        <el-row :gutter="20">
+  <div class="betting-container">
+  <div class="you-bet-container">
+        <el-row :gutter="24">
            <el-col :span="12">
                <div class="grid-content-betting">
                    <div>
@@ -38,8 +38,8 @@
               </div>  
             </el-col>
        </el-row>
-     </div>     
-    </div>
+     </div>   
+  </div>  
 </template>
 <script>
 export default {
@@ -64,8 +64,8 @@ export default {
     width: 100%;
     display: flex;
     justify-content: space-around;
-    align-items: center;
     flex-direction: row;
+    margin-top: 50px;
 }
 .memo-input {
     margin-top: 10px;
@@ -170,23 +170,21 @@ export default {
 .you-bet-container {
     background-color: #1f2833;
     margin-top: 0;
-    margin-bottom: 20px;
-    padding: 35px 15px 30px 15px;
+    margin-bottom: 50px;
+    padding: 30px 15px 30px 15px;
     border-radius: 8px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    margin-left: 40px;
-    margin-right: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
+
  }
 
 .grid-content-betting {
     padding-left: 10px;
     margin-top: 30px;
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
-
 }
 .input-memo {
     margin-top: 25px;
