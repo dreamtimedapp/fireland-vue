@@ -1,17 +1,17 @@
 <template>
   <div id="land">
-    <div class="list outer-rect" ref="outerList" :style="{height: outerListHeight}">
-      <div class="row" v-for="(row, index) in outerList" :key="index">
-        <div class="col bg-wrap pic-wrap" v-for="col in row" :key="col.id" :style="col.style">
-          <!--<img :src="col.pic" :style="{opacity: col.status === 'nature' ? 1 : 0.5 }" />-->
+    <div class="land-list outer-rect" ref="outerList" :style="{height: outerListHeight}">
+      <div class="land-row" v-for="(row, index) in outerList" :key="index">
+        <div class="land-col bg-wrap pic-wrap" v-for="col in row" :key="col.id" :style="col.style">
+          {{col.price}}
         </div>
       </div>
     </div>
 
-    <div class="list inner-rect" ref="innerList" >
-      <div class="row" v-for="(row, index) in innerList" :key="index">
-        <div class="col bg-wrap pic-wrap" v-for="col in row" :key="col.id" :style="col.style">
-          <!--<img :src="col.pic" :style="{opacity: col.status === 'nature' ? 1 : 0.5 }" />-->
+    <div class="land-list inner-rect" ref="innerList" >
+      <div class="land-row" v-for="(row, index) in innerList" :key="index">
+        <div class="land-col bg-wrap pic-wrap" v-for="col in row" :key="col.id" :style="col.style">
+          {{col.price}}
         </div>
       </div>
     </div>
@@ -25,11 +25,6 @@ import landImg2 from '../../../assets/land/land-2.png';
 const STATUS_ENUM = {
   nature: {
     color: '#ccc',
-    bg: landImg1,
-    pic: landImg1
-  },
-  private: {
-    color: '#f00',
     bg: landImg1,
     pic: landImg1
   },
@@ -50,17 +45,18 @@ for (let i=0; i < 9; i++) {
     };
 //    const k =  1 + parseInt(Math.random(6)*3);
 //    if (k === 1) {
-//      col.status = 'nature';
+//      col.type = 'nature';
 //    } else if (k === 2) {
-//      col.status = 'private';
+//      col.type = 'private';
 //    } else {
-//      col.status = 'rare';
+//      col.type = 'rare';
 //    }
 
-    col.status = 'nature';
-    col.pic = STATUS_ENUM[col.status].pic;
+    col.type = 'nature';
+    col.pic = STATUS_ENUM[col.type].pic;
     col.style = {
-      backgroundImage: 'url(' + STATUS_ENUM[col.status].bg + ')'
+      backgroundImage: 'url(' + STATUS_ENUM[col.type].bg + ')',
+      opacity: 0.5
     };
     
     row.push(col);
@@ -76,28 +72,36 @@ for (let i=0; i < 8; i++) {
     };
 //    const k =  1 + parseInt(Math.random(6)*3);
 //    if (k === 1) {
-//      col.status = 'nature';
+//      col.type = 'nature';
 //    } else if (k === 2) {
-//      col.status = 'private';
+//      col.type = 'private';
 //    } else {
-//      col.status = 'rare';
+//      col.type = 'rare';
 //    }
 
-    col.status = 'nature';
-    col.pic = STATUS_ENUM[col.status].pic;
+    col.type = 'nature';
+    col.pic = STATUS_ENUM[col.type].pic;
     col.style = {
-      backgroundImage: 'url(' + STATUS_ENUM[col.status].bg + ')'
+      backgroundImage: 'url(' + STATUS_ENUM[col.type].bg + ')',
+      opacity: 0.5
     };
 
     row.push(col);
   }
   innerList.push(row);
 }
-console.log(outerList.map((o) => {
-  return o.map((item) => {
-    return item.id
-  })
-}));
+//console.log(outerList.map((o) => {
+//  return o.map((item) => {
+//    return item.id
+//  })
+//}));
+//
+//console.log(innerList.map((o) => {
+//  return o.map((item) => {
+//    return item.id
+//  })
+//}));
+
 export default {
   name: 'Land',
   components: {
@@ -117,12 +121,29 @@ export default {
     }
   },
   methods: {
-
+    initLand: function(row, data) {
+      row.map(function(col) {
+        const colData = data[col.id];
+        if (colData) {
+          col.hasOwner = true;
+          col.style.opacity = 1;
+          col.price = (colData.price/100).toFixed(1);
+          if (colData.type === 0) {
+            col.type = 'nature';
+          } else if (colData.type === 1) {
+            col.type = 'rare';
+          }
+        } else {
+          col.hasOwner = false;
+          col.style.opacity = 0.5;
+        }
+      });
+    }
   },
   mounted: function() {
     const outerListWidth = this.$refs.outerList.clientWidth;
 //    const outerListHeight = (outerListWidth/330*196);
-    const outerListHeight = outerListWidth;
+    const outerListHeight = outerListWidth / 670 * 375;
     this.outerListHeight = outerListHeight + 'px';
 
 //    const innerListWidth = outerListWidth * 8/9;
@@ -132,6 +153,7 @@ export default {
 //    this.innerListTop = outerListHeight / 18 + 'px';
 //    this.innerListLeft = outerListWidth / 18 + 'px';
 
+    var _this = this;
     setTimeout(function() {
       const res = {
         "rows": [
@@ -152,6 +174,20 @@ export default {
         ],
         "more": false
       };
+
+      const data = {};
+      res.rows && res.rows.map(function(item){
+        data[item.landID] = item;
+      });
+
+      _this.outerList.map(function(row) {
+        _this.initLand(row, data);
+      });
+
+      _this.innerList.map(function(row) {
+        _this.initLand(row, data);
+      });
+
     }, 200);
   }
 }
@@ -179,11 +215,12 @@ export default {
     /*display: flex;*/
   }
 
-  #land .list {
+  #land .land-list {
     display: flex;
     flex-direction: column;
+    max-width: 100%;
   }
-  #land .list.inner-rect {
+  #land .land-list.inner-rect {
     position: absolute;
     /*display: none;*/
     top: 5.555%;
@@ -192,29 +229,32 @@ export default {
     right: 5.555%;
   }
 
-  #land .row {
+  #land .land-row {
     display: flex;
     flex-direction: row;
     flex: 1;
   }
-  #land .col {
+  #land .land-col {
     position: relative;
     flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-  #land .row .col:first-child {
+  #land .land-row .land-col:first-child {
     border-left: none;
   }
-  #land .row:first-child .col {
+  #land .land-row:first-child .land-col {
     border-top: none;
   }
-  #land .col:last-child {
+  #land .land-col:last-child {
     /*border-right: solid 2px #3385ff;*/
   }
-  #land .row:last-child .col {
+  #land .land-row:last-child .land-col {
     /*border-bottom: solid 2px #3385ff;*/
   }
 
-  #land .list.inner-rect .col {
+  #land .land-list.inner-rect .land-col {
 
   }
   #land .bg-wrap {
