@@ -157,7 +157,7 @@
        </div>  
    </div>
 </template>
-<script>
+<script >
 import {
     get_scatter_identity,
     login,
@@ -203,7 +203,7 @@ export default {
     }
 }
 </script>
-<style>
+<style >
  .home-you-token-container {
      padding: 50px 0;
     width: 100%;
@@ -371,7 +371,7 @@ export default {
 .adt-grids {
     margin-top: 50px;
 }
-h3{
+.len-security h3{
     text-transform: uppercase;
     font-weight: 700;
     font-size: 30px;
@@ -381,7 +381,7 @@ h3{
     margin-top: 50px;
     text-align: center;
 }
-h4 {
+.len-security h4 {
     color: #222;
     font-size: 24px;
 }

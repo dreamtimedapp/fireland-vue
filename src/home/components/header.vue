@@ -112,7 +112,7 @@ export default {
     }
 }
 </script>
-<style>
+<style scoped>
 .box {
     width: 100%;
     display: flex;
@@ -218,8 +218,8 @@ export default {
     height:100%;
     margin-top: 50px;
     margin-bottom: 30px;
-    padding-left:60px; 
-    padding-right:60px; 
+    margin-left:60px; 
+    margin-right:60px; 
     color: #fff;
     background-color: #343a40;
     position: relative;
