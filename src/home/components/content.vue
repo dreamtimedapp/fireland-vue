@@ -70,7 +70,8 @@
                 <div class="you-info-table">
                      <el-card class="box-card">
                        <div slot="header" class="clearfix">
-                           <el-button style="float: left; padding: 3px 0" type="text">请登录</el-button>
+                           <el-button  v-if="!getAccount"  v-on:click="login" style="float: left; padding: 3px 0" type="text">请登录</el-button>
+                            <div v-if="getAccount" style="float: left; padding: 3px 0" type="text" >{{$store.state.HomeStore.account_name}}</div>
                         </div>
                         <div class="table-item-info">
                             <span>EOS数量：</span>
@@ -157,6 +158,18 @@
    </div>
 </template>
 <script>
+import {
+    get_scatter_identity,
+    login,
+    transfer,
+    recast,
+    getBalance,
+    get_player_list,
+    get_land_info,
+    get_touzhu_info,
+    get_gameInfo_list,
+} from '../../services/web_wallet_service.js'
+import store from '../../store'
 const rule = 
             "1. 游戏板块为20×20的地图，每一格代表一块地皮，每块地皮初始定价0.5eos，其中有2块为黑地皮没定价（作用下面解析）；\n" +
                 "2. 玩家自定金额下注买地，系统随机一块地皮进行购买判断；\n" +
@@ -171,13 +184,22 @@ export default {
     },
     data() {
       return {
-          rule:rule
+        rule: rule,
+        eos_balance:''
       }
     },
     computed: {
+        getAccount() {
+           return store.state.HomeStore.account_name
+        },
     },
     methods: {
-
+      login: async function(event) {
+        let res = await login();
+        if (res) {
+          store.commit('setAccount',res.name)
+        }
+       },
     }
 }
 </script>

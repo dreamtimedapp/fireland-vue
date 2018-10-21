@@ -4,8 +4,14 @@ export default {
     state:{
         account_name:''
     },
+    getters: {
+        getAccount(state) {
+            return state.account_name;
+        }
+    },
     mutations:{
-        login(state,name) {
+        setAccount(state,name) {
+            debugger
            state.account_name = name
         }
     }

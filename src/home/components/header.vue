@@ -9,7 +9,8 @@
           <b-link class="text">团队介绍</b-link>
            <b-link class="text">验证安全</b-link>
       </div>
-      <el-button class="login-button" type="primary" >登录(EOS)账户</el-button>
+      <el-button v-if="!getAccount" v-on:click="login" class="login-button" type="primary" >登录(EOS)账户</el-button>
+      <div v-if="getAccount" class="login-account-name" type="primary" >{{$store.state.HomeStore.account_name}}</div>
       </div>
     </div>
     <div class="text-center bg-dark">
@@ -17,13 +18,14 @@
             <el-row>
                 <el-col :xs="24" :md="12"> 
                    <div class="features-text">
-                     <img class="features-img" src="http://www.eosbao.io/images/chart.png"/>
-                     <h5 class="features-title">奖励分配</h5>
-                     <p><strong>资金储备:</strong><span>每key销售的50%进入资金储备用Bancor对KEY定价</span></p>
-                     <p><strong>推荐奖励:</strong><span>每KEY销售的5%贡献给2个上级推广人</span></p>
-                     <p><strong>权重奖励:</strong><span>每KEY销售的5%贡献给2个上级推广人</span></p>
-                     <p><strong>研发消耗:</strong><span>每KEY销售的5%贡献给2个上级推广人</span></p>
-                     <p><strong>分红奖池:</strong><span>每KEY销售的20%进入分红奖池，每30分钟按持KEY比例分红</span></p>
+                    <img class="features-img" src="http://www.eosbao.io/images/chart.png"/>
+                    <div class="features-info">
+                     <p><strong>资金储备：</strong><span>每key销售的50%进入资金储备用Bancor对KEY定价</span></p>
+                     <p><strong>推荐奖励：</strong><span>每KEY销售的5%贡献给2个上级推广人</span></p>
+                     <p><strong>权重奖励：</strong><span>每KEY销售的5%贡献给2个上级推广人</span></p>
+                     <p><strong>研发消耗：</strong><span>每KEY销售的5%贡献给2个上级推广人</span></p>
+                     <p><strong>分红奖池：</strong><span>每KEY销售的20%进入分红奖池，每30分钟按持KEY比例分红</span></p>
+                    </div>
                    </div>    
                 </el-col>
                 <el-col :xs="24" :md="12">
@@ -32,16 +34,26 @@
                           <img class="card-img" src="https://youbao.io/static/media/sail2.4a6f0ad2.png" style="min-height: 100px;">
                           <div class="card-img-overlay">
                               <h5 class="card-title">
-                                <span class="qll4MVPb7tVWufSoh90Yb">大宇宙时代</span>
+                                <span class="qll4MVPb7tVWufSoh90Yb">大农场时代</span>
                               </h5>
                               <p class="card-text">
                                   <span class="qll4MVPb7tVWufSoh90Yb">
-                                      每轮赚 10% + 最后大奖 + 邀请奖励
+                                      游戏即挖矿 + 持币分红 + 邀请奖励
                                   </span>
                               </p>
                             </div>
                         </div>
-                      <div class="card bg-dark text-white"><img class="card-img" src="https://youbao.io/static/media/sail2.4a6f0ad2.png" style="min-height: 100px;"><div class="card-img-overlay"><h5 class="card-title"><span class="qll4MVPb7tVWufSoh90Yb">大宇宙时代</span></h5><p class="card-text"><span class="qll4MVPb7tVWufSoh90Yb">每轮赚 10% + 最后大奖 + 邀请奖励</span></p></div></div>
+                      <div class="card bg-dark text-white">
+                          <img class="card-img" src="https://youbao.io/static/media/sail2.4a6f0ad2.png" style="min-height: 100px;">
+                          <div class="card-img-overlay">
+                              <h5 class="card-title">
+                                  <span class="qll4MVPb7tVWufSoh90Yb">大航海时代</span></h5>
+                                  <p class="card-text">
+                                      <span class="qll4MVPb7tVWufSoh90Yb">每轮赚 10% + 最后大奖 + 邀请奖励
+                                      </span>
+                                    </p>
+                           </div>
+                        </div>
                    </div>   
                 </el-col>    
             </el-row>    
@@ -50,6 +62,18 @@
     </div>
 </template>
 <script>
+import {
+    get_scatter_identity,
+    login,
+    transfer,
+    recast,
+    getBalance,
+    get_player_list,
+    get_land_info,
+    get_touzhu_info,
+    get_gameInfo_list,
+} from '../../services/web_wallet_service.js'
+import store from '../../store'
 const rule = 
             "1. 游戏板块为20×20的地图，每一格代表一块地皮，每块地皮初始定价0.5eos，其中有2块为黑地皮没定价（作用下面解析）；\n" +
                 "2. 玩家自定金额下注买地，系统随机一块地皮进行购买判断；\n" +
@@ -65,13 +89,22 @@ export default {
    
     data() {
       return {
-        rule: rule
+        rule: rule,
+        eos_balance:''
       }
     },
     computed: {
+        getAccount() {
+           return store.state.HomeStore.account_name
+        },
     },
     methods: {
-
+      login: async function(event) {
+        let res = await login();
+        if (res) {
+          store.commit('setAccount',res.name)
+        }
+       },
     }
 }
 </script>
@@ -127,6 +160,11 @@ export default {
     margin-left: 60px;
     margin-right: 60px;
 }
+.login-account-name {
+    margin-left: 60px;
+    margin-right: 60px;
+    font-size: 34px;
+}
 .banner-item {
     display: flex;
     justify-content: center;
@@ -140,8 +178,12 @@ export default {
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
-    padding: 50px;
-    
+    padding-left: 50px;
+    padding-top: 50px;
+    padding-right: 50px;
+}
+.features-info {
+    margin-top: 20px;
 }
 .features-img {
     width: 100%;
@@ -153,9 +195,8 @@ export default {
 }
 .features-text p{
     color:#00bcd4;
-    line-height: 1.9em;
-    margin: 1em 0;
-    font-size:1em;
+    margin: 5px 0;
+    font-size:18px;
     text-align: left
 }
 .features-text p strong {
@@ -198,7 +239,7 @@ export default {
 .card-title {
     font-size: 40px;
     line-height: 1.2;
-    padding-left: 56px;
+    padding-left: 70px;
     padding-top: 40px;
 }
 .card-title  span{
@@ -209,10 +250,10 @@ export default {
 }
 .card-text {
     margin-bottom: 0;
-     padding-left: 56px;
+    padding-left: 70px;
 }
 .card-text span{
-     background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.5);
     padding: 1px;
     line-height: 100%;
     
