@@ -1,7 +1,6 @@
 <template>
 <div class="main-container">
   <Header date="2019"></Header>
-  <GameInfo/>
   <Betting/>
   <Land/>
   <Rule/>
