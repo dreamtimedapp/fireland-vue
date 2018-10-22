@@ -143,9 +143,9 @@
        </div>   
     
        <div class="footer">
-           <p>
+           <p class="home-foot-title">
                 友情合作伙伴
-                <br>
+                <br/><br/>
                 <a href="https://www.mytokenpocket.vip/" target="_blank"><img src="https://img.alicdn.com/tfs/TB1AoDWjxjaK1RjSZKzXXXVwXXa-300-55.png" width="150"></a>&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="https://meet.one" target="_blank"><img src="https://img.alicdn.com/tfs/TB1LYfxjr2pK1RjSZFsXXaNlXXa-200-55.png" width="150"></a>&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="https://more.top" target="_blank"><img src="https://img.alicdn.com/tfs/TB1UEYCjAvoK1RjSZFwXXciCFXa-200-55.png" width="150"></a>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -293,14 +293,13 @@ export default {
     text-align: center;
 }
 .len-info {
-    margin-left: 40px;
-    margin-right: 40px;
-    font-size:20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size:25px;
     margin-top:20px;
 }
 
 .footer {
-    margin-top:30px;
     padding-top: 30px; 
     display: flex;
     width: 100%;
@@ -331,9 +330,9 @@ export default {
     color:#000;
     text-align: center;
     border-bottom: 2px solid rgb(153,153,153);
-    font-size:35px;
+    font-size:38px;
     width: 200px;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 .adt-grids {
     margin-top: 50px;
@@ -341,7 +340,7 @@ export default {
 .len-security h3{
     text-transform: uppercase;
     font-weight: 700;
-    font-size: 30px;
+    font-size: 35px;
     line-height: 1.4em;
     margin-bottom: 30px;
     color: #444;
@@ -350,11 +349,12 @@ export default {
 }
 .len-security h4 {
     color: #222;
-    font-size: 24px;
+    font-size: 38px;
 }
 
 .len-security p {
     margin-bottom: 30px;
+    font-size: 28px;
 }
 
 .len-introduce-title {
@@ -375,6 +375,9 @@ export default {
     color: #fff;
     margin-top: 50px;
     text-align: center;
+ }
+ .home-foot-title {
+     font-size: 40px;
  }
 
  .len-introduce h4 {

@@ -121,12 +121,7 @@ export default {
     flex-direction: column;
 }
 
-.logo-title {
-    color: #333;
-    font-size: 27px;
-    margin-left: -40px;
 
-}
 .header-container {
     width: 100%;
     display: flex;
@@ -157,7 +152,13 @@ export default {
 .logo {
     width: 200px;
     height: 200px;
-    margin-left: 80px;
+    margin-left: 20px;
+}
+.logo-title {
+    color: #333;
+    font-size: 27px;
+    margin-left: -50px;
+
 }
 .text {
     text-align: center;
