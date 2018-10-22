@@ -7,7 +7,7 @@
           <el-row >
               <el-col :xs="24" :md="11"> 
                 <div class="buy-token">
-                    <el-input placeholder="请输入内容" v-model="input3">
+                    <el-input placeholder="请输入内容" v-model="buyAmount">
                         <template slot="prepend">LEN</template>
                         <template slot="append">EOS</template>
                     </el-input>
@@ -21,7 +21,7 @@
               </el-col>  
               <el-col :xs="24"   :md="11">   
                 <div class="sell-token">
-                    <el-input placeholder="请输入内容" v-model="input3">
+                    <el-input placeholder="请输入内容" v-model="sellAmount">
                         <template slot="prepend">LEN</template>
                         <template slot="append">LEN</template>
                     </el-input>
@@ -62,8 +62,7 @@
                 </div>       
               </el-col>  
               <el-col :xs="2" :sm="2" :md="2" :lg="2">
-                 <div class="divider-content">
-                     
+                 <div class="divider-content"> 
                  </div>
               </el-col>  
               <el-col :xs="24" :md="11">   
@@ -71,7 +70,7 @@
                      <el-card class="box-card">
                        <div slot="header" class="clearfix">
                            <el-button  v-if="!getAccount"  v-on:click="login" style="float: left; padding: 3px 0" type="text">请登录</el-button>
-                            <div v-if="getAccount" style="float: left; padding: 3px 0" type="text" >{{$store.state.HomeStore.account_name}}</div>
+                            <div v-if="getAccount" style="float: left; padding: 3px 0" type="text" >{{$store.state.HomeStore.home_account_name}}</div>
                         </div>
                         <div class="table-item-info">
                             <span>EOS数量：</span>
@@ -184,19 +183,21 @@ export default {
     data() {
       return {
         rule: rule,
-        eos_balance:''
+        eos_balance:'',
+        buyAmount:'',
+        sellAmount:''
       }
     },
     computed: {
         getAccount() {
-           return store.state.HomeStore.account_name
+           return store.state.HomeStore.home_account_name
         },
     },
     methods: {
       login: async function(event) {
         let res = await login();
         if (res) {
-          store.commit('setAccount',res.name)
+          store.commit('setHomeAccount',res.name)
         }
        },
     }
@@ -279,10 +280,8 @@ export default {
    width: 100%;
    background-color: #2b3137;
    flex-direction: column;
-   justify-content: center;
-   align-items: center;
-   padding-left: 80px;
-   padding-right: 80px;
+   padding-left: 40px;
+   padding-right: 40px;
    color: #fff;
    margin-top: 50px;
 }
@@ -293,8 +292,7 @@ export default {
     text-align: center;
 }
 .len-info {
-    margin-left: 10px;
-    margin-right: 10px;
+
     font-size:25px;
     margin-top:20px;
 }
@@ -349,7 +347,7 @@ export default {
 }
 .len-security h4 {
     color: #222;
-    font-size: 38px;
+    font-size: 35px;
 }
 
 .len-security p {

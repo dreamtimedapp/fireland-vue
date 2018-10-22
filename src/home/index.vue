@@ -36,6 +36,8 @@ export default {
     }
   },
   mounted: function() {
+   
+    setTimeout(this.getHomeAccountName,500);
   },
   computed: {
     has_scatter: function() {
@@ -43,17 +45,11 @@ export default {
     }
   },
   methods: {
-    async getAccountName () {
-        if (this.account_name) {
-          return;
-        }
+    async getHomeAccountName () {
         let res = await get_scatter_identity();
-        if(res.is_error){
-          this.account_name = ''
-          store.commit('getAccount','') 
-        }else{
+        if(!res.is_error){
           this.account_name = res.data.account_name
-          store.commit('getAccount',res.data.account_name) 
+          store.commit('setHomeAccount',res.data.account_name) 
         }
     },
     async getEosBalance() {

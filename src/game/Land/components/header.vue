@@ -57,7 +57,6 @@ export default {
     methods: {
       login: async function(event) {
         let res = await login();
-        debugger
         if (res) {
           store.commit('getAccount',res.name)
         }

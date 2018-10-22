@@ -49,7 +49,7 @@ export default {
      //setInterval(this.getAccountName,2000);
      setInterval(this.getGameListInfo,2000)
      setInterval(this.getTouzhuInfo,2000)
-     setTimeout(this.getAccountName,100);
+      setTimeout(this.getAccountName,100);
      setTimeout(this.getEosBalance,200)
      setTimeout(this.getLandInfo,200)
   },

@@ -73,7 +73,6 @@ export default {
     methods: {
        async playBetting() {
           let res = await transfer('teamaccount',this.amount, this.memo);
-          debugger
           if (res.is_error) {
             alert(JSON.stringify(res.msg))
           } else {
@@ -82,11 +81,10 @@ export default {
        },
        async withdraw() {
           let res = await withdraw(o);
-          debugger
           if (res.is_error) {
             alert(JSON.stringify(res.msg))
           } else {
-            alert('体现成功！')
+            alert('提现成功！')
           }
        }
     }

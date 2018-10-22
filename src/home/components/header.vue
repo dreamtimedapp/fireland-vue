@@ -13,7 +13,7 @@
            <b-link class="text">验证安全</b-link>
       </div>
       <el-button v-if="!getAccount" v-on:click="login" class="login-button" type="primary" >登录(EOS)账户</el-button>
-      <div v-if="getAccount" class="login-account-name" type="primary" >{{$store.state.HomeStore.account_name}}</div>
+      <div v-if="getAccount" class="login-account-name" type="primary" >{{$store.state.HomeStore.home_account_name}}</div>
       </div>
     </div>
     <div class="text-center bg-dark">
@@ -99,14 +99,14 @@ export default {
     },
     computed: {
         getAccount() {
-           return store.state.HomeStore.account_name
+           return store.state.HomeStore.home_account_name
         },
     },
     methods: {
       login: async function(event) {
         let res = await login();
         if (res) {
-          store.commit('setAccount',res.name)
+          store.commit('setHomeAccount',res.name)
         }
        },
     }
