@@ -1,11 +1,12 @@
 <template>
-  <div class="land-betting-container">
-  <div class="land-you-bet-container">
+    <div class="land-betting-container">
+   
+   <div class="land-you-bet-container">
         <el-row :gutter="24">
            <el-col :span="12">
                <div class="land-grid-content-betting">
                    <div>
-                    <el-input placeholder="请输入" v-model="amount">
+                    <el-input :placeholder="getAmountHolder"  v-model="amount">
                        <template slot="append">eos</template>
                     </el-input>
                     <el-button class="land-betting-btn"  v-on:click="playrecast" type="info">复投</el-button>
@@ -62,20 +63,33 @@ export default {
    
     data() {
       return {
-          amount: 1,
+          amount: '',
           memo: '',
+          amountHolder:'当前最低投注：' + store.state.LandStore.minPrice + ' EOS'
       }
     },
     computed: {
         getAccount() {
            return store.state.HomeStore.account_name
         },
-        getLandNum() {
-
-        }
+        getAmountHolder () { 
+         return '当前最低投注：' + store.state.LandStore.minPrice + ' EOS'
+       },
+    },
+    mounted: function() {
+       
     },
     methods: {
+      
        async playBetting() {
+          if (store.state.LandStore.gameState != 1) {
+              alert('游戏还未开始，请不要投注')
+              return;
+          } 
+          if (this.amount < store.state.LandStore.minPrice ) {
+            alert('投注金额不得低于' + store.state.LandStore.minPrice + 'EOS')
+            return;
+          } 
           let res = await transfer(CONTRACT_NAME,this.amount, this.getRefInviteUrl());
           if (res.is_error) {
             alert(JSON.stringify(res.msg))
@@ -84,6 +98,14 @@ export default {
           }
        },
        async playrecast() {
+          if (store.state.LandStore.gameState != 1) {
+              alert('游戏还未开始，请不要投注')
+              return;
+          } 
+          if (this.amount < store.state.LandStore.minPrice ) {
+              alert('投注金额不得低于' + store.state.LandStore.minPrice + 'EOS')
+              return;
+          } 
           let res = await recast(CONTRACT_NAME,this.amount,this.getRefInviteUrl());
           if (res.is_error) {
             alert(JSON.stringify(res.msg))
@@ -199,11 +221,8 @@ export default {
     margin-bottom: 50px;
     padding: 30px 15px 30px 15px;
     border-radius: 8px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
     margin-left: 20px;
     margin-right: 20px;
-
  }
 
 .land-grid-content-betting {

@@ -52,14 +52,16 @@
            </div>  
           <div class="touzhu-table">
                <h3 class="security-title ">
-                    当前投注榜
+                    投注风云榜
                 </h3>    
-              <el-table   :data="tableData" >
-                  <el-table-column  prop="play" label="玩家">
+              <el-table   :data="getTableRows" >
+                  <el-table-column  prop="logtime" label="时间">
                   </el-table-column>
-                  <el-table-column   prop="balance" label="金额" >
+                  <el-table-column  prop="player" label="玩家">
                   </el-table-column>
-                  <el-table-column prop="memo" label="宣言" >
+                  <el-table-column   prop="amount" label="金额" >
+                  </el-table-column>
+                  <el-table-column prop="landID" label="获取的土地编号" >
                  </el-table-column>
               </el-table>
           </div>
@@ -79,6 +81,7 @@
        </div>   
 </template>
 <script>
+import store from '../../../store'
 const rule = "## 游戏介绍\n" +
                 "### 玩法\n" +
                 "* 游戏板块为20×20的地图，每一格代表一块地皮，每块地皮初始定价0.5eos，其中有2块为黑地皮没定价（作用下面解析）；\n" +
@@ -100,27 +103,13 @@ export default {
     data() {
       return {
         rule: rule,
-        border:false,
-        tableData: [{
-            play: '2016-05-02',
-            balance: '王小虎',
-            memo: '上海市普陀区金沙江路 1518 弄'
-          }, {
-            play: '2016-05-04',
-            balance: '王小虎',
-            memo: '上海市普陀区金沙江路 1517 弄'
-          }, {
-            play: '2016-05-01',
-            balance: '王小虎',
-            memo: '上海市普陀区金沙江路 1519 弄'
-          }, {
-            play: '2016-05-03',
-            balance: '王小虎',
-            memo: '上海市普陀区金沙江路 1516 弄'
-          }]
+        border:false
       }
     },
     computed: {
+        getTableRows() {
+            return store.state.LandStore.touzhuRows
+        }
     },
     methods: {
 
