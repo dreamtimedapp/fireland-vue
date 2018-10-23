@@ -5,7 +5,7 @@ export default {
         account_name:'',
         eos_balance:0,
         game_balance:0,
-        current_landlist:[],
+        current_landlist:[],  // 当前的土地数量
         personal_land:[],
         roundNum: 0,
         landNum:0
