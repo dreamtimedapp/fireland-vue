@@ -93,7 +93,7 @@ export default {
       }
       let landlist = await get_land_info()
       let counterlist = await get_gameInfo_list()
-      debugger
+//      debugger
       if (landlist.is_error || counterlist.is_error) {
         return;
       }
@@ -101,7 +101,7 @@ export default {
       let landrows = landlist.data.rows
       let countrows = counterlist.data.rows;
 
-      debugger
+//      debugger
       store.commit('getLandInfo',{
         "land":landrows,
         "count":countrows

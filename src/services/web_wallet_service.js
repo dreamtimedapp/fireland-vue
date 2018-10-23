@@ -36,7 +36,7 @@ export const get_scatter_identity = async () => {
         scatter_res.account_name = result.accounts[0]
         return  result.accounts[0];
     }).catch(err=>{
-        debugger
+        //debugger
         alert(err)
     });
     scatter_res.account_name = account.name;
@@ -61,10 +61,10 @@ export const login = async ()=>{
 export const getBalance = async ()=> {
     if (!scatter_res.account_name) {
         let res = await get_scatter_identity().data;
-        debugger
+        //debugger
     }
     let account_name = scatter_res.account_name;
-    debugger
+    //debugger
     return await Eos(eos_config).getCurrencyBalance({ code: "eosio.token", account: account_name, symbol: "EOS" }).then(result => {
         return {
             is_error:false,

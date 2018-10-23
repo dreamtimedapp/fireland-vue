@@ -30,11 +30,11 @@ export default {
                 if (element.roundNum != state.roundNum){
                     return;
                 }
-                debugger
+                //debugger
                 if (element.owner == state.account_name) {
                    state.personal_land.push(element)
                 }
-                debugger
+                //debugger
                 state.current_landlist.push(element)
             });
             state.landNum = state.personal_land.length;

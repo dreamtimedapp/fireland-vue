@@ -1,7 +1,7 @@
 <template>
   <div id="land">
     <div class="land-list outer-rect" ref="outerList" :style="{height: outerListHeight}">
-      <div class="land-row" v-for="(row, index) in outerList" :key="index">
+      <div class="land-row" v-for="(row, index) in outerList" :key="index" :style="{zIndex: (index*2 + 1)}">
         <div class="land-col bg-wrap pic-wrap" v-for="col in row" :key="col.id" :style="col.style">
           {{col.price}}
         </div>
@@ -9,7 +9,7 @@
     </div>
 
     <div class="land-list inner-rect" ref="innerList" >
-      <div class="land-row" v-for="(row, index) in innerList" :key="index">
+      <div class="land-row" v-for="(row, index) in innerList" :key="index" :style="{zIndex: (index*2 + 2)}">
         <div class="land-col bg-wrap pic-wrap" v-for="col in row" :key="col.id" :style="col.style">
           {{col.price}}
         </div>
@@ -54,17 +54,10 @@ const innerList = [];
 for (let i=0; i < 9; i++) {
   const row = [];
   for (let j=1; j < 10; j++) {
+    const id = i*9 + j;
     const col = {
-      id: i*9 + j
+      id: id
     };
-//    const k =  1 + parseInt(Math.random(6)*3);
-//    if (k === 1) {
-//      col.type = 'nature';
-//    } else if (k === 2) {
-//      col.type = 'private';
-//    } else {
-//      col.type = 'rare';
-//    }
 
     col.type = 'nature';
     col.style = {
@@ -80,17 +73,10 @@ for (let i=0; i < 9; i++) {
 for (let i=0; i < 8; i++) {
   const row = [];
   for (let j=1; j < 9; j++) {
+    const id = (i*8 + j) + 81;
     const col = {
-      id: (i*8 + j) + 81
+      id: id
     };
-//    const k =  1 + parseInt(Math.random(6)*3);
-//    if (k === 1) {
-//      col.type = 'nature';
-//    } else if (k === 2) {
-//      col.type = 'private';
-//    } else {
-//      col.type = 'rare';
-//    }
 
     col.type = 'nature';
     col.style = {
@@ -178,7 +164,7 @@ export default {
         "rows": store.state.LandStore.current_landlist,
         "more": false
       };
-      debugger
+//      debugger
 
       const data = {};
       res.rows && res.rows.map(function(item){
@@ -224,6 +210,7 @@ export default {
     display: flex;
     flex-direction: column;
     max-width: 100%;
+    z-index: unset;
   }
   #land .land-list.inner-rect {
     position: absolute;
@@ -238,13 +225,14 @@ export default {
     display: flex;
     flex-direction: row;
     flex: 1;
+    z-index: 1;
   }
   #land .land-col {
     position: relative;
     flex: 1;
     display: flex;
     justify-content: center;
-    align-items: center;
+    margin: -10px;
   }
   #land .land-row .land-col:first-child {
     border-left: none;
