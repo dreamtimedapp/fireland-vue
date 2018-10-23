@@ -12,6 +12,7 @@ import ElementUI from 'element-ui'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'element-ui/lib/theme-chalk/display.css';
+import ScatterJS from 'scatterjs-core';
 
 Vue.config.productionTip = false
 Vue.use(VueRouter)
@@ -20,6 +21,7 @@ Vue.use(ElementUI)
 Vue.component(VueCountdown.name, VueCountdown);
 Vue.component('vue-markdown', VueMarkdown);
 Vue.use(BootstrapVue);
+
 
 const routes = [
   { path: '/game/land', component: Land },

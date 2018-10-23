@@ -23,11 +23,11 @@
                    <div class="features-text">
                     <img class="features-img" src="http://www.eosbao.io/images/chart.png"/>
                     <div class="features-info">
-                     <p><strong>资金储备：</strong><span>每key销售的50%进入资金储备用Bancor对KEY定价</span></p>
-                     <p><strong>推荐奖励：</strong><span>每KEY销售的5%贡献给2个上级推广人</span></p>
-                     <p><strong>权重奖励：</strong><span>每KEY销售的5%贡献给2个上级推广人</span></p>
-                     <p><strong>研发消耗：</strong><span>每KEY销售的5%贡献给2个上级推广人</span></p>
-                     <p><strong>分红奖池：</strong><span>每KEY销售的20%进入分红奖池，每30分钟按持KEY比例分红</span></p>
+                     <p><strong>资金储备：</strong><span>每次投注的10%用于资金池，其中5%用于提高币价，5%用于增发token</span></p>
+                     <p><strong>推荐奖励：</strong><span>每轮投注的1.2%永久贡献给1个上级推广人</span></p>
+                     <p><strong>研发消耗：</strong><span>每轮投注的3.2%用于研发消耗</span></p>
+                     <p><strong>长期激励：</strong><span>柠檬token鼓励长期持有，随着不断挖矿和持续的新游戏，token长期具有升值空间</span></p>
+                     <p><strong>分红奖池：</strong><span>token销售的10%进入分红奖池，每自然日按持柠檬token比例分红</span></p>
                     </div>
                    </div>    
                 </el-col>
@@ -51,9 +51,9 @@
                           <img class="card-img" src="https://youbao.io/static/media/sail2.4a6f0ad2.png" style="min-height: 100px;">
                           <div class="card-img-overlay">
                               <h5 class="card-title">
-                                  <span class="qll4MVPb7tVWufSoh90Yb">大航海时代</span></h5>
+                                  <span class="qll4MVPb7tVWufSoh90Yb">幸运大转盘</span></h5>
                                   <p class="card-text">
-                                      <span class="qll4MVPb7tVWufSoh90Yb">每轮赚 10% + 最后大奖 + 邀请奖励
+                                      <span class="qll4MVPb7tVWufSoh90Yb">投注即挖矿，持有即分红，挖矿所得随时可卖出
                                       </span>
                                     </p>
                            </div>

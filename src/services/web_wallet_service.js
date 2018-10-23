@@ -11,15 +11,11 @@ import ScatterEOS from 'scatterjs-plugin-eosjs';
 const httpEndpoint = endpoint
 
 
-
 // 节点配置
 const network = test_network
 
 const scatter_res = {
-    'eos': null,
     'account_name': null,
-    'permission': null,
-    'has_reject': false,
     'is_running': false
 }
 
@@ -32,76 +28,24 @@ export const get_scatter_identity = async () => {
         });
     }
     scatter_res.is_running = true;
-    const scatter = window.scatter;
-    if(!scatter){
-        scatter_res.is_running = false;
-        return {
-            is_error: false,
-            data: {
-                eos: null,
-                account_name: null,
-                permission: null
-            },
-            msg: 'no scatter'
-        };
-    }
-    let identity = await scatter.getIdentity({accounts:[network]}).catch(err => err);
-    if(identity.isError){
-        scatter_res.has_reject = true;
-        scatter_res.error = identity;
-        scatter_res.is_running = false;
-        return {
-            is_error: true,
-            msg: identity
-        }
-    }
-    const account = identity.accounts.find(function(acc){
-         return acc.blockchain === 'eos';
+    let scatter = ScatterJS.scatter;
+    let connect =await scatter.connect('lemo').then(connected => {
+        return connected;
     });
-    let options = {
-     authorization: account.name+'@'+account.authority,
-     broadcast: true,
-     sign: true
-    }    
-    let eos = scatter.eos(network, Eos,  options, "https");
-    scatter_res.is_running = false;
+    let account = await  ScatterJS.scatter.getIdentity({accounts:[network]}).then(result => {
+        scatter_res.account_name = result.accounts[0]
+        return  result.accounts[0];
+    }).catch(err=>{
+        debugger
+        alert(err)
+    });
+    scatter_res.account_name = account.name;
     return {
-        is_error: false,
-        data: {eos, account_name: account.name, permission: account.authority}
-    };
+        is_error:false,
+        data:account.name
+    }
 }
 
-const call_scatter = async (call_direct = true) => {
-    let {eos, account_name, permission} = scatter_res;
-    if(!call_direct && scatter_res.has_reject){
-        return {
-            is_error: true,
-            msg: scatter_res.error
-        }
-    }
-    let is_error = false;
-    let error_msg = '';
-    if(!eos){
-        let identity_res = await get_scatter_identity();
-        is_error = identity_res.is_error;
-        error_msg = identity_res.msg;
-        if(!is_error){
-            eos = identity_res.data.eos;
-            account_name = identity_res.data.account_name;
-            permission = identity_res.data.permission;
-            scatter_res.eos = identity_res.data.eos;
-            scatter_res.account_name = identity_res.data.account_name;
-            scatter_res.permission = identity_res.data.permission;
-        }
-    }
-    if(is_error){
-        return {
-            is_error,
-            msg: error_msg
-        };
-    }
-    return {eos, account_name, permission}
-}
 
 export const login = async ()=>{
     return await ScatterJS.scatter.getIdentity({accounts:[network]}).then(result => {
@@ -115,9 +59,12 @@ export const login = async ()=>{
  * 
 */
 export const getBalance = async ()=> {
-    let call_res = await call_scatter();
-    if(call_res.is_error) return call_res;
-    let {_,account_name, permission} = call_res;
+    if (!scatter_res.account_name) {
+        let res = await get_scatter_identity().data;
+        debugger
+    }
+    let account_name = scatter_res.account_name;
+    debugger
     return await Eos(eos_config).getCurrencyBalance({ code: "eosio.token", account: account_name, symbol: "EOS" }).then(result => {
         return {
             is_error:false,
@@ -131,10 +78,11 @@ export const getBalance = async ()=> {
     });
 }
 
-export const transfer = async (toname = 'teamaccount',amount = 1, memo = '啦啦啦', tokenSymbol = 'EOS') => {
-    let call_res = await call_scatter();
-    if(call_res.is_error) return call_res;
-    let {_,account_name, permission} = call_res;
+export const transfer = async (toname = 'fireland1111',amount = 1, memo = '我的土地我做主', tokenSymbol = 'EOS') => {
+    if (!scatter_res.account_name) {
+        scatter_res.account_name = await get_scatter_identity().data;
+    }
+    let account_name = scatter_res.account_name;
     let eos = ScatterJS.scatter.eos(network,Eos)
     return await eos.transfer(account_name, toname, toAsset(amount, tokenSymbol), memo).then(result => {
         return {
@@ -156,22 +104,23 @@ export const transfer = async (toname = 'teamaccount',amount = 1, memo = '啦啦
  *  @param tokensymbol token的符号缩写
  * 
  */
-export const recast = async(toaccount='teamaccount',quantity = 1, memo ='referrer',tokenSymbol = 'EOS')=>{
-    let call_res = await call_scatter();
-    if(call_res.is_error) return call_res;
-    let {_,account_name, permission} = call_res;
+export const recast = async(toaccount='fireland1111',quantity = 1, memo ='referrer',tokenSymbol = 'EOS')=>{
+    if (!scatter_res.account_name) {
+        scatter_res.account_name = await get_scatter_identity().data;
+    }
+    let account_name = scatter_res.account_name;
     let eos = ScatterJS.scatter.eos(network,Eos)
     return await eos.transaction({
         actions: [
             {
-                account: account_name,
+                account: toaccount, //合约账户
                 name: 'recast',
                 authorization: [{
                     actor:account_name,
                     permission: 'active'
                 }],
                 data: {
-                    account: 'playeraccount',  // 复投账户，写死的
+                    account: account_name,  // 用户自己的账户
                     quantity: toAsset(quantity, tokenSymbol),
                     memo: memo
                 }
@@ -196,21 +145,22 @@ export const recast = async(toaccount='teamaccount',quantity = 1, memo ='referre
  * 
  */
 export const withdraw = async (toaccount = 'playeraccount',quantity = 1, tokenSymbol = 'EOS') => {
-    let call_res = await call_scatter();
-    if(call_res.is_error) return call_res;
-    let {_,account_name, permission} = call_res;
+    if (!scatter_res.account_name) {
+        scatter_res.account_name = await get_scatter_identity().data;
+    }
+    let account_name = scatter_res.account_name;
     let eos = ScatterJS.scatter.eos(network,Eos)
     return await eos.transaction({
         actions: [
             {
-                account: account_name,
+                account: toaccount, //合约账户
                 name: 'recast',
                 authorization: [{
                     actor:account_name,
                     permission: 'active'
                 }],
                 data: {
-                    account: 'playeraccount',  // 复投账户，写死的
+                    account: account_name,  // 复投账户，写死的
                     quantity: toAsset(quantity, tokenSymbol),
                 }
             }
@@ -235,9 +185,10 @@ export const withdraw = async (toaccount = 'playeraccount',quantity = 1, tokenSy
  */
 
 export const get_player_list = async () => {
-    let call_res = await call_scatter(false);
-    if(call_res.is_error) return call_res;
-    let {eos, account_name, permission} = call_res;
+    if (!scatter_res.account_name) {
+        scatter_res.account_name = await get_scatter_identity().data;
+    }
+    let account_name = scatter_res.account_name;
     if(!account_name){
         return {
             is_error :'true',
@@ -267,9 +218,10 @@ export const get_player_list = async () => {
  */
 
 export const get_land_info = async () => {
-    let call_res = await call_scatter(false);
-    if(call_res.is_error) return call_res;
-    let {eos, account_name, permission} = call_res;
+    if (!scatter_res.account_name) {
+        scatter_res.account_name = await get_scatter_identity().data;
+    }
+    let account_name = scatter_res.account_name;
     if(!account_name){
         return {
             is_error:true,
@@ -299,9 +251,10 @@ export const get_land_info = async () => {
  */
 
 export const get_gameInfo_list = async () => {
-    let call_res = await call_scatter(false);
-    if(call_res.is_error) return call_res;
-    let {eos, account_name, permission} = call_res;
+    if (!scatter_res.account_name) {
+        scatter_res.account_name = await get_scatter_identity().data;
+    }
+    let account_name = scatter_res.account_name;
     if(!account_name){
         return {
             is_error:true,
@@ -331,9 +284,10 @@ export const get_gameInfo_list = async () => {
  */
 
 export const get_touzhu_info = async () => {
-    let call_res = await call_scatter(false);
-    if(call_res.is_error) return call_res;
-    let {eos, account_name, permission} = call_res;
+    if (!scatter_res.account_name) {
+        scatter_res.account_name = await get_scatter_identity().data;
+    }
+    let account_name = scatter_res.account_name;
     if(!account_name){
         return {
             is_error:true,

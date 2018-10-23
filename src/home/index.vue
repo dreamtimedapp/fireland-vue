@@ -48,18 +48,13 @@ export default {
     async getHomeAccountName () {
         let res = await get_scatter_identity();
         if(!res.is_error){
-          this.account_name = res.data.account_name
-          store.commit('setHomeAccount',res.data.account_name) 
+          this.account_name = res.data
+          store.commit('setHomeAccount',res.data) 
         }
-    },
-    async getEosBalance() {
-        if (this.eos_balance) {
-          return
-        }
-        let res = await getBalance();
-        if (res) {
-          this.eos_balance = res[0]
-          store.commit('setEosBalance',res[0])
+        let balance_res = await getBalance();
+        if (balance_res) {
+          this.eos_balance = balance_res.result[0]
+          store.commit('setEosBalance',balance_res.result[0])
         } else {
           store.commit('setEosBalance',0)
         }
@@ -74,6 +69,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  
 }
 
 </style>

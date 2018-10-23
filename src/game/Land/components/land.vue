@@ -22,7 +22,20 @@
 import landImg1 from '../../../assets/land/land-1.png';
 import landImg1_m from '../../../assets/land/land-1-m.png';
 import landImg2 from '../../../assets/land/land-2.png';
-
+import landback from '../../../assets/land/land-back.png'
+import store from '../../../store'
+import {
+    get_scatter_identity,
+    login,
+    transfer,
+    recast,
+    getBalance,
+    get_player_list,
+    get_land_info,
+    get_touzhu_info,
+    get_gameInfo_list,
+} from '../../../services/web_wallet_service.js'
+import { setInterval } from 'timers';
 const STATUS_ENUM = {
   nature: {
     color: '#ccc',
@@ -116,7 +129,9 @@ export default {
 //      innerListLeft: 0,
 //      list: outerList,
       outerList: outerList,
-      innerList: innerList
+      innerList: innerList,
+      personal:[],
+      landList:[]
     }
   },
   methods: {
@@ -126,7 +141,7 @@ export default {
         if (colData) {
           col.hasOwner = true;
           col.style.opacity = 1;
-          col.price = (colData.price/100).toFixed(1);
+          col.price = (colData.price/10000).toFixed(0);
           if (colData.type === 0) {
             col.type = 'nature';
           } else if (colData.type === 1) {
@@ -134,7 +149,7 @@ export default {
           }
 
           /* 需要读自己的name */
-          if (colData.owner === '我自己') {
+          if (colData.owner === store.state.LandStore.account_name) {
             col.style.backgroundImage = 'url(' + STATUS_ENUM[col.type].bg_m + ')';
           }
         } else {
@@ -158,26 +173,12 @@ export default {
 //    this.innerListLeft = outerListWidth / 18 + 'px';
 
     var _this = this;
-    setTimeout(function() {
+    setInterval(function() {
       const res = {
-        "rows": [
-          {
-            "landID": 41,
-            "owner": "firelandc112",
-            "price": 10000,
-            "type": 0,
-            "roundNum": 1
-          },
-          {
-            "landID": 85,
-            "owner": "teamaccount",
-            "price": 5000,
-            "type": 1,
-            "roundNum": 0
-          }
-        ],
+        "rows": store.state.LandStore.current_landlist,
         "more": false
       };
+      debugger
 
       const data = {};
       res.rows && res.rows.map(function(item){
@@ -213,7 +214,8 @@ export default {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
-    background-color: #12161b;;
+
+   
     /*justify-content: center;*/
     /*display: flex;*/
   }

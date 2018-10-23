@@ -8,9 +8,8 @@
                     <el-input placeholder="请输入" v-model="amount">
                        <template slot="append">eos</template>
                     </el-input>
-                    <el-input class="land-input-memo" placeholder="我的土地我做主！" v-model="memo">
-                       <template slot="append">宣言</template>
-                    </el-input>
+                    <el-button class="land-betting-btn"  v-on:click="playrecast" type="info">复投</el-button>
+                    <span></span>
                     <el-button class="land-betting-btn"  v-on:click="playBetting" type="danger">下注</el-button>
                    </div>
                 </div>
@@ -23,7 +22,7 @@
                 </div>
                 <div class="land-account-balance">
                     <span>我的土地：</span>
-                    <span>  {{$store.state.LandStore.personal_land}}  </span>
+                    <span>  {{$store.state.LandStore.landNum}}  </span>
                 </div>
                 <div class="land-account-withdraw">
                     <span>游戏内：</span>
@@ -54,6 +53,8 @@ import {
     get_gameInfo_list,
 withdraw,
 } from '../../../services/web_wallet_service.js'
+import {CONTRACT_NAME} from '../../../config/config.js'
+import {getQueryString} from '../../../utils/utils.js'
 import store from '../../../store'
 export default {
     ready() {
@@ -61,18 +62,29 @@ export default {
    
     data() {
       return {
-          amount: 0.1,
-          memo: '我的土地我做主！',
+          amount: 1,
+          memo: '',
       }
     },
     computed: {
         getAccount() {
            return store.state.HomeStore.account_name
         },
+        getLandNum() {
+
+        }
     },
     methods: {
        async playBetting() {
-          let res = await transfer('teamaccount',this.amount, this.memo);
+          let res = await transfer(CONTRACT_NAME,this.amount, this.getRefInviteUrl());
+          if (res.is_error) {
+            alert(JSON.stringify(res.msg))
+          } else {
+            alert('下注成功！')
+          }
+       },
+       async playrecast() {
+          let res = await recast(CONTRACT_NAME,this.amount,this.getRefInviteUrl());
           if (res.is_error) {
             alert(JSON.stringify(res.msg))
           } else {
@@ -80,12 +92,22 @@ export default {
           }
        },
        async withdraw() {
-          let res = await withdraw(o);
+          let res = await withdraw(CONTRACT_NAME,this.amount,this.getRefInviteUrl());
           if (res.is_error) {
             alert(JSON.stringify(res.msg))
           } else {
             alert('提现成功！')
           }
+       },
+       getRefInviteUrl() {
+           let defaultUrl = "http://www.lemonfun.io/#/game/land?ref=";
+           let url = defaultUrl
+           if (getQueryString("ref") == null) {
+               url = defaultUrl+ "teameaccount"
+           } else {
+               url = defaultUrl + getQueryString('ref')
+           }
+           return "teameaccount";
        }
     }
 }

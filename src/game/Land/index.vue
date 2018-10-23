@@ -47,11 +47,11 @@ export default {
   mounted: function() {
      //setInterval(this.getPlayerList,2000)
      //setInterval(this.getAccountName,2000);
-     setInterval(this.getGameListInfo,2000)
-     setInterval(this.getTouzhuInfo,2000)
-      setTimeout(this.getAccountName,100);
-     setTimeout(this.getEosBalance,200)
-     setTimeout(this.getLandInfo,200)
+     //setInterval(this.getGameListInfo,2000)
+       setInterval(this.getLandInfo,1000);
+     //setInterval(this.getTouzhuInfo,3000);
+     setTimeout(this.getAccountName,100);
+    // setTimeout(this.getLandInfo,200)
   },
   computed: {
     has_scatter: function() {
@@ -65,21 +65,14 @@ export default {
         }
         let res = await get_scatter_identity();
         if(res){
-          this.account_name = res.data.account_name
-          store.commit('getAccount',res.data.account_name) 
+          this.account_name = res.data
+          store.commit('getAccount',res.data) 
         }
-    },
-    async getEosBalance() {
-        if (this.eos_balance) {
-          return
-        }
-        let res = await getBalance();
-        if (!res.is_error) {
-          this.eos_balance = res.result[0]
-          store.commit('setEosBalance',res.result[0])
-        } else {
-          store.commit('setEosBalance',0)
-        }
+        let balance_res = await getBalance();
+        if (balance_res) {
+          this.eos_balance = balance_res.result[0]
+          store.commit('setEosBalance',balance_res.result[0])
+        } 
     },
     //获取玩家的信息
     async getPlayerList(){
@@ -95,20 +88,26 @@ export default {
     },
     //获取地块信息表
     async getLandInfo() {
-      let res = await get_land_info()
-      if (res.is_error) {
+      if (!this.account_name) {
+        return
+      }
+      let landlist = await get_land_info()
+      let counterlist = await get_gameInfo_list()
+      debugger
+      if (landlist.is_error || counterlist.is_error) {
         return;
       }
-      let rows = res.data.rows
-      if (!rows) {
-        return;
-      }
-      store.commit('getLandInfo',rows)
+
+      let landrows = landlist.data.rows
+      let countrows = counterlist.data.rows;
+
+      debugger
+      store.commit('getLandInfo',{
+        "land":landrows,
+        "count":countrows
+      })
     },
-    // 获取游戏信息表,第几场游戏，游戏的开场时间
-    async getGameListInfo() {
-      let res = await get_gameInfo_list()
-    },
+   
     async getTouzhuInfo() {
       let res = await get_touzhu_info()
     }
