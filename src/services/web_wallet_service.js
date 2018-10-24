@@ -185,16 +185,7 @@ export const withdraw = async (toaccount = 'playeraccount',quantity = 1, tokenSy
  */
 
 export const get_player_list = async () => {
-    if (!scatter_res.account_name) {
-        scatter_res.account_name = await get_scatter_identity().data;
-    }
-    let account_name = scatter_res.account_name;
-    if(!account_name){
-        return {
-            is_error :'true',
-            msg: ''
-        };
-    }
+
     return await Eos(eos_config)
                 .getTableRows({"scope":CONTRACT_NAME,"code":CONTRACT_NAME,"table":"account","limit":10000,"json":true})
                 .then(data => {
@@ -218,16 +209,7 @@ export const get_player_list = async () => {
  */
 
 export const get_land_info = async () => {
-    if (!scatter_res.account_name) {
-        scatter_res.account_name = await get_scatter_identity().data;
-    }
-    let account_name = scatter_res.account_name;
-    if(!account_name){
-        return {
-            is_error:true,
-            msg: ''
-        };
-    }
+ 
     return await Eos(eos_config)
                 .getTableRows({"scope":CONTRACT_NAME,"code":CONTRACT_NAME,"table":"land","limit":10000,"json":true})
                 .then(data => {
@@ -251,16 +233,7 @@ export const get_land_info = async () => {
  */
 
 export const get_gameInfo_list = async () => {
-    if (!scatter_res.account_name) {
-        scatter_res.account_name = await get_scatter_identity().data;
-    }
-    let account_name = scatter_res.account_name;
-    if(!account_name){
-        return {
-            is_error:true,
-            msg: ''
-        };
-    }
+ 
     return await Eos(eos_config)
                 .getTableRows({"scope":CONTRACT_NAME,"code":CONTRACT_NAME,"table":"counter","limit":10000,"json":true})
                 .then(data => {
@@ -284,16 +257,7 @@ export const get_gameInfo_list = async () => {
  */
 
 export const get_touzhu_info = async () => {
-    if (!scatter_res.account_name) {
-        scatter_res.account_name = await get_scatter_identity().data;
-    }
-    let account_name = scatter_res.account_name;
-    if(!account_name){
-        return {
-            is_error:true,
-            msg: ''
-        };
-    }
+    
     return await Eos(eos_config)
                 .getTableRows({"scope":CONTRACT_NAME,"code":CONTRACT_NAME,"table":"gamelog","limit":10000,"json":true})
                 .then(data => {
@@ -309,4 +273,54 @@ export const get_touzhu_info = async () => {
                     };
                 });
 }
+
+/**
+ * 
+ * 获取Token信息
+ * 
+ */
+
+export const getLenTokenInfo = async () => {
+    return await Eos(eos_config)
+                .getTableRows({"scope":"LEN","code":"LEN","table":"roots","limit":10000,"json":true})
+                .then(data => {
+                    return {
+                        is_error: false,
+                        data
+                    };
+                })
+                .catch(err => {
+                    return {
+                        is_error: true,
+                        msg: err
+                    };
+                });
+}
+
+/**
+ * 
+ * 获取EOS余额
+ * 
+*/
+export const getLenBalance = async ()=> {
+    if (!scatter_res.account_name) {
+        let res = await get_scatter_identity().data;
+        //debugger
+    }
+    let account_name = scatter_res.account_name;
+    //debugger
+    return await Eos(eos_config).getCurrencyBalance({ code: "eosio.token", account: account_name, symbol: "LEN" }).then(result => {
+        return {
+            is_error:false,
+            result
+        }
+    }).catch(err => {
+        return {
+            is_error: true,
+            msg: err
+        };
+    });
+}
+
+
 

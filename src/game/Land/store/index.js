@@ -38,7 +38,7 @@ export default {
                  * 游戏正在进行中，倒计时
                  * 
                 */
-                state.gameCount = parseInt(new Date().getTime() - new Date(endTime))
+                state.gameCount = parseInt(new Date(endTime) - new Date().getTime())
                 state.gameState = 1;
                 debugger
             } else if (currentTime < beginTime && currentTime < endTime){
@@ -56,8 +56,8 @@ export default {
                  * 游戏已结束，正在结算中
                  * 
                 */
+                state.gameCount = 0
                 state.gameState = 2;
-                state.gameCount = 0;
                 debugger
             }
         },

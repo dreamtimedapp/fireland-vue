@@ -19,6 +19,7 @@
         <div >
             <el-row>
                 <el-col :xs="24" :md="12"> 
+                 <a href="#" v-scroll-to="'#element'" class="text">
                    <div class="features-text">
                     <img class="features-img" src="http://www.eosbao.io/images/chart.png"/>
                     <div class="features-info">
@@ -28,7 +29,8 @@
                      <p><strong>长期激励：</strong><span>柠檬token鼓励长期持有，随着不断挖矿和持续的新游戏，token长期具有升值空间</span></p>
                      <p><strong>分红奖池：</strong><span>token销售的10%进入分红奖池，每自然日按持柠檬token比例分红</span></p>
                     </div>
-                   </div>    
+                   </div> 
+                  </a>   
                 </el-col>
                 <el-col :xs="24" :md="12">
                     <div class="features-game-center">
