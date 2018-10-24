@@ -280,9 +280,9 @@ export const get_touzhu_info = async () => {
  * 
  */
 
-export const getLenTokenInfo = async () => {
+export const get_len_token_info = async () => {
     return await Eos(eos_config)
-                .getTableRows({"scope":"LEN","code":"LEN","table":"roots","limit":10000,"json":true})
+                .getTableRows({"scope":"LEN","code":"lemoniotoken","table":"stat","limit":10000,"json":true})
                 .then(data => {
                     return {
                         is_error: false,
@@ -305,10 +305,8 @@ export const getLenTokenInfo = async () => {
 export const getLenBalance = async ()=> {
     if (!scatter_res.account_name) {
         let res = await get_scatter_identity().data;
-        //debugger
     }
     let account_name = scatter_res.account_name;
-    //debugger
     return await Eos(eos_config).getCurrencyBalance({ code: "eosio.token", account: account_name, symbol: "LEN" }).then(result => {
         return {
             is_error:false,

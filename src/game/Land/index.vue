@@ -80,7 +80,6 @@ export default {
   },
   mounted: function() {
       setTimeout(this.initGame,100);
-      
   },
   computed: {
     has_scatter: function() {
@@ -107,10 +106,8 @@ export default {
           this.account_name = res.data
           store.commit('getAccount',res.data) 
         }
-        debugger
         let gameInfo = await this.getGameTime();
 
-        debugger
         let state = store.state.LandStore.gameState;
         if (state == 0) {
           this.gameStateInfo = "距离游戏开始还有："
@@ -127,7 +124,7 @@ export default {
         } 
         this.loadingGame = false;
         setInterval(this.getLandInfo,1000);
-        setInterval(this.getTouzhuInfo,2000)
+        setInterval(this.getTouzhuInfo,3000)
     },
     //获取游戏开始时间或结束时间
     async getGameTime() {
@@ -135,7 +132,7 @@ export default {
           return;
         }
         let counterlist = await get_gameInfo_list()
-        if (counterlist) {
+        if (!counterlist.is_error) {
           store.commit('getGameInfo',counterlist.data.rows[0])
         } 
     },

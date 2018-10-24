@@ -81,8 +81,7 @@ export default {
          return '最低投注:' + store.state.LandStore.minPrice + ' EOS'
        },
     },
-    mounted: function() {
-       
+    mounted: function() { 
     },
     methods: {
        copy() {

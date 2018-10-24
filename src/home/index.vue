@@ -19,8 +19,10 @@ import {
     get_land_info,
     get_touzhu_info,
     get_gameInfo_list,
+    getLenTokenInfo,
+get_len_token_info
 } from '../services/web_wallet_service.js'
-import { setInterval } from 'timers';
+import { setInterval, setTimeout } from 'timers';
 
 export default {
   name: 'landGame',
@@ -36,8 +38,8 @@ export default {
     }
   },
   mounted: function() {
-   
     setTimeout(this.getHomeAccountName,500);
+    setInterval(this.getLenTokenInfo,1000);
   },
   computed: {
     has_scatter: function() {
@@ -58,6 +60,13 @@ export default {
         } else {
           store.commit('setEosBalance',0)
         }
+    },
+    async getLenTokenInfo () {
+      let res = await get_len_token_info();
+      if(!res.is_error){
+          this.account_name = res.data
+          store.commit('setLenDetail',res.data) 
+      }
     }
   }
 }

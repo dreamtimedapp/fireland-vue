@@ -40,23 +40,23 @@
                         </div>
                         <div class="table-item-info">
                             <span>LEN价格：</span>
-                            <span>0.01 EOS/LEN</span>
+                            <span>{{$store.state.HomeStore.price}}</span>
                         </div>    
                         <div class="table-item-info">
-                            <span>LEN发行量：</span>
-                            <span>0.01 EOS/LEN</span>
+                            <span>LEN最大供应量：</span>
+                            <span>{{$store.state.HomeStore.max_supply}}</span>
                         </div>
                         <div class="table-item-info">
-                            <span>LEN流通量：</span>
-                            <span>0.01 EOS/LEN</span>
+                            <span>LEN当前流通量：</span>
+                            <span>{{$store.state.HomeStore.supply}}</span>
                         </div> 
                         <div class="table-item-info">
-                            <span>持有人分红池：</span>
-                            <span>0.01 EOS/LEN</span>
+                            <span>Len资金蓄池：</span>
+                            <span>{{$store.state.HomeStore.cash_pool}}</span>
                         </div>  
                         <div class="table-item-info-bottom">
                             <span>总分红池：</span>
-                            <span>0.01 EOS/LEN</span>
+                            <span>{{$store.state.HomeStore.add_pool}}</span>
                         </div>       
                     </el-card>
                 </div>       
@@ -74,7 +74,7 @@
                         </div>
                         <div class="table-item-info">
                             <span>EOS数量：</span>
-                            <span>0.01 EOS/LEN</span>
+                            <span>{{$store.state.HomeStore.eos_balance}}</span>
                         </div>    
                         <div class="table-item-info">
                             <span>LEN数量：</span>
