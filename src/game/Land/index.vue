@@ -1,23 +1,39 @@
 <template>
-
 <div class="main-container">
   <Header date="2019"></Header>
-    <div class="land-game-countdown">
-    <div>
-    <span>{{gameStateInfo}}</span>
-    <countdown :time="getCountTime">
-     <template slot-scope="props">
-         {{ props.days }} 天 {{ props.hours }} 小时 {{ props.minutes }} 分 {{ props.seconds }} 秒
-     </template>
-    </countdown>
-    </div>
-  </div>
-  <div class="land-game-currentInfo">
-    <span>当前全场最高土地价格: {{$store.state.LandStore.maxPrice}}  EOS</span>
-    <span>当前全场最低土低价格: {{$store.state.LandStore.minPrice}}  EOS</span>
-  </div>  
-  <Betting/>
-  <Land/>
+  <el-row :gutter="10"  v-loading="loadingGame" class="land-info-row"
+    element-loading-text="拼命加载中"
+    element-loading-spinner="el-icon-loading"
+    element-loading-background="rgba(0, 0, 0, 0.8)">
+      <el-col :xs="24" :sm="8"  :md="8">   
+          <div class="land-game-countdown">
+           <span>{{gameStateInfo}}</span>
+           <countdown :time="getCountTime">
+              <template slot-scope="props">
+                 {{ props.days }} 天 {{ props.hours }} 小时 {{ props.minutes }} 分 {{ props.seconds }} 秒
+              </template>
+           </countdown>
+          </div> 
+      </el-col>     
+      <el-col :xs="24" :sm="8"  :md="8">  
+        <div class="land-game-currentInfo ">
+          <span>当前最高土地价格: {{$store.state.LandStore.maxPrice}}  EOS</span>
+          <span>最低土地价格: {{$store.state.LandStore.minPrice}}  EOS</span>
+         </div>  
+      </el-col>
+      <el-col :xs="24" :sm="8"  :md="8">   
+            <div class="land-game-pool">
+            <span>当前奖池金额: {{$store.state.LandStore.poolBalace}}  EOS</span>
+            <br/>
+            <span> {{getBlackLand}}</span>
+            </div>   
+      </el-col>
+  </el-row>    
+  <Betting />
+  <Land  v-loading="loadingGame"
+    element-loading-text="拼命加载中"
+    element-loading-spinner="el-icon-loading"
+    element-loading-background="rgba(0, 0, 0, 0.8)"/>
   <Rule/>
   <!--<BettingTable/>-->
 </div>
@@ -40,6 +56,7 @@ import {
     get_land_info,
     get_touzhu_info,
     get_gameInfo_list,
+    
 } from '../../services/web_wallet_service.js'
 import { setInterval, setTimeout } from 'timers';
 import { stat } from 'fs';
@@ -57,7 +74,8 @@ export default {
     return {
       account_name: '',
       eos_balance:'',
-      gameStateInfo:''
+      gameStateInfo:'',
+      loadingGame: true
     }
   },
   mounted: function() {
@@ -72,6 +90,13 @@ export default {
     getCountTime:function() {
       return  store.state.LandStore.gameCount
     },
+    getBlackLand:function() {
+      if (!store.state.LandStore.blackLand) {
+        return '当前黑地皮未被占有'
+      } else {
+        return '当前黑地皮所有者：' + store.state.LandStore.blackLand
+      }
+    }
   },
   methods: {
     async getAccountName () {
@@ -97,6 +122,7 @@ export default {
           this.eos_balance = balance_res.result[0]
           store.commit('setEosBalance',balance_res.result[0])
         } 
+        this.loadingGame = false;
     },
     //获取游戏开始时间或结束时间
     async getGameTime() {
@@ -159,8 +185,11 @@ export default {
     min-height: 100vh;
     background: #12161b; 
   }
+  .land-info-row {
+    padding-top: 40px;
+  }
   .land-game-countdown {
-    background-color: #1f2833;
+    background-color: #F56C6C;
     margin-top: 0;
     margin-bottom: 50px;
     padding: 30px 15px 30px 15px;
@@ -171,7 +200,7 @@ export default {
     font-size: 30px;
   }
   .land-game-currentInfo {
-     background-color: #1f2833;
+    background-color: #E6A23C;
     margin-top: 0;
     margin-bottom: 50px;
     padding: 30px 15px 30px 15px;
@@ -181,4 +210,15 @@ export default {
     color: #fff;
     font-size: 30px;
   }
+  .land-game-pool {
+     background-color: #67C23A;
+    margin-top: 0;
+    margin-bottom: 50px;
+    padding: 30px 15px 30px 15px;
+    border-radius: 8px;
+    margin-left: 20px;
+    margin-right: 20px;
+    color: #fff;
+    font-size: 30px;
+  } 
 </style>

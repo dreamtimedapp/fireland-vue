@@ -97,13 +97,13 @@
               </el-col>     
           </el-row>     
        </div>    
-       <div class="len-introduce">
+       <div id="element" class="len-introduce">
            <span class="len-title">lemon社区通证(len)介绍</span>
            <div class="len-info"> 
                 <vue-markdown>{{rule}}</vue-markdown>
            </div>
        </div>    
-       <div class="len-security">
+       <div class="len-security" id="security">
            <span class="len-security-title">验证安全</span>
            <div class="adt_grids">
         
@@ -171,8 +171,8 @@ import {
 import store from '../../store'
 const rule = 
             "1. 发行量1000万，对标资金蓄池；\n" +
-                "2. token价格由资金蓄池金额和释放量决定：token价格＝资金蓄池eos额÷token总释放量；\n" +
-                "3. 初始发行价0.001eos一个，团队存入1000eos，保留100万token量且锁仓。\n" +
+                "2. token价格由资金蓄池金额和释放量决定：token价格＝资金蓄池eos额÷token总释放量；token的价格将随资金池增大线性增长\n" +
+                "3. 初始发行价0.001eos一个，团队存入1000eos，保留100万token量且锁仓三年，意味着token价格最低不低于0.001Eos。\n" +
                 "4. token设有最大释放量，最大释放量随着游戏的进程而增大；且增发的token发放给游戏玩家(具体请参考游戏规则)；\n" +
                 "5. token可以自由与资金蓄池进行买卖,买入没手续费，不得超过最大可对换量(最大可兑换量＝最大释放量-流通量) \n" +
                 "6. 卖出收取10%手续费，手续费将存入token增值池.token增值池资金，每天24点存入资金蓄池，且不增发token。存入资金蓄池后，token价格按第2点重新计算价格。\n" +

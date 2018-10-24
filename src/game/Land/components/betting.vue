@@ -1,7 +1,9 @@
 <template>
-    <div class="land-betting-container">
-   
    <div class="land-you-bet-container">
+        <div class="betting-title-jump-area">
+            <a hre="#" class="betting-rule-jump" v-scroll-to="'#rule'" ><span>规则详情</span></a>
+            <a hre="#" v-scroll-to="'#touzhu-table'" >投注总榜</a>
+        </div>
         <el-row :gutter="24">
            <el-col :span="12">
                <div class="land-grid-content-betting">
@@ -28,18 +30,21 @@
                 <div class="land-account-withdraw">
                     <span>游戏内：</span>
                     <span> {{$store.state.LandStore.game_balance}}  </span>
-                    <el-button type="primary" v-on:click="withdraw" size="mini" class="land-withdraw-btn">提现</el-button>
+                    <el-button  type="primary" v-on:click="withdraw" size="mini" class="land-withdraw-btn">提现</el-button>
                 </div>
                 <div class="land-account-invite">
                     <span>邀请链接：</span>
-                    <el-button style="float: right; padding: 3px 0" type="text">复制</el-button>
+                    <el-button @click="copy" onstyle="float: right; padding: 3px 0" type="text">复制</el-button>
                 </div>
                 <span class="land-invite-text ">邀请将永久享受好友投注的2%的分红</span>
               </div>  
             </el-col>
        </el-row>
-     </div>   
-  </div>  
+        <div class="betting-wakuang">
+                   <span >玩游戏即挖矿，将获得投注额%5的lenmon代币</span>
+                   <el-button @click="getToken" type="text">查看详情</el-button>
+                   </div>
+     </div>    
 </template>
 <script>
 import {
@@ -65,22 +70,42 @@ export default {
       return {
           amount: '',
           memo: '',
-          amountHolder:'当前最低投注：' + store.state.LandStore.minPrice + ' EOS'
+          amountHolder:'最低投注:' + store.state.LandStore.minPrice + ' EOS'
       }
     },
     computed: {
         getAccount() {
-           return store.state.HomeStore.account_name
+           return store.state.LandStore.account_name
         },
         getAmountHolder () { 
-         return '当前最低投注：' + store.state.LandStore.minPrice + ' EOS'
+         return '最低投注:' + store.state.LandStore.minPrice + ' EOS'
        },
     },
     mounted: function() {
        
     },
     methods: {
-      
+       copy() {
+          this.$alert(this.getPersonalInviteUrl(), '我的邀请链接', {
+          confirmButtonText: '确定',
+          callback: action => {
+            /*this.$message({
+              type: 'info',
+              message: `action: ${ action }`
+            });*/
+          }
+        });
+       },
+       getToken() {
+          this.$alert('每次投注的10%用于资金池，其中5%用于提高币价，5%用于增发token送给投资者,持有len币将获得分红', 'Lemon Token(LEN)', {
+          confirmButtonText: '确定',
+          callback: action => {
+            /*this.$message({
+              type: 'info',
+              message: `action: ${ action }`
+            });*/
+          }});
+       },
        async playBetting() {
           if (store.state.LandStore.gameState != 1) {
               alert('游戏还未开始，请不要投注')
@@ -130,24 +155,35 @@ export default {
                url = defaultUrl + getQueryString('ref')
            }
            return "teameaccount";
+       },
+       getPersonalInviteUrl() {
+           return "http://www.lemonfun.io/#/game/land?ref=" + store.state.LandStore.account_name;
        }
     }
 }
 </script>
 <style>
-.land-betting-cointainer {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    flex-direction: row;
-    margin-top: 50px;
+.betting-wakuang {
+    color: #fff;
+
+    padding-left: 20px;
 }
+
+.betting-title-jump-area {
+    padding-left:20px;
+    color:#409EFF
+}
+.betting-rule-jump {
+    color:#000;
+    margin-right: 20px;
+}
+
 .land-memo-input {
     margin-top: 10px;
 }
 
 .land-betting-btn {
-   margin-top: 30px;
+   margin-top: 20px;
    width: 200px;
    justify-content: center;
 }

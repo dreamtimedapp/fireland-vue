@@ -6,8 +6,8 @@
       <span class="land-logo-title">EOS大地主</span> 
       </div>
       <div class="land-header-left">
-      <div class="land-header-nav hidden-xs-only hidden-sm-only ">
-          <b-link to="/home"  class="land-header-text">玩法规则</b-link>
+      <div class="land-header-nav hidden-xs-only">
+           <a href="#" v-scroll-to="'#rule'" class="land-header-text">玩法规则</a>
           <router-link to="/home" class="land-header-text">柠檬游戏</router-link>
       </div>
       <el-button v-if="!getAccount" v-on:click="login" class="land-login-button" type="primary" >登录(EOS)账户</el-button>

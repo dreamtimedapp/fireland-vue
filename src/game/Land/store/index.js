@@ -12,8 +12,10 @@ export default {
         landNum:0,
         maxPrice:0,
         minPrice:0,
+        poolBalace:0,
         gameInfo:{},
         gameCount:0,
+        blackLand:'',
         gameState: 0  // 0代表未开始，1代表进行中，2代表已结束
     },
     mutations:{
@@ -66,14 +68,21 @@ export default {
             state.maxPrice  = data.count[0].landMaxPrice / 10000;
             state.minPrice = data.count[0].landMinPrice / 10000;
      
+            state.poolBalace = data.count[0].potBalance / 10000;
+            debugger
             landrows.forEach((element,i) => {
+                debugger
                 if (element.roundNum != state.roundNum){
                     return;
+                }
+                if (element.type == 1) {
+                    state.blackLand = element.owner;
                 }
                 //debugger
                 if (element.owner == state.account_name) {
                    state.personal_land.push(element)
                 }
+                
                 //debugger
                 state.current_landlist.push(element)
             });
@@ -89,7 +98,6 @@ export default {
         },
         getTouzhuRows(state,data) {
             let rows = [];
-            debugger
             data.forEach((element,i) => {
                 element.amount = element.amount / 10000 + ' EOS'
                 element.logtime = new Date(parseInt(element.logtime) * 1000).toLocaleString().replace(/:\d{1,2}$/,' '); 

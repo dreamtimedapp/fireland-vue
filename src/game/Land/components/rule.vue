@@ -1,12 +1,12 @@
 <template>
-    <div class="land-len-security">
+    <div class="land-len-security" id="rule">
            <span class="land-len-security-title">游戏规则</span>
            <div class="land-adt_grids">
         
                 <h3 class="land-security-title text-center">EOS大地主游戏玩法</h3>
                 <h4>一、玩法介绍 </h4>
                 <p>
-                    游戏板块为20×20的地图，每一格代表一块地皮，每块地皮初始定价0.5eos，其中有2块为黑地皮没定价（作用下面解析）；
+                    游戏板块为145格大小的地图，每一格代表一块地皮，每块地皮初始定价0.5eos，其中有2块为黑地皮没定价（作用下面解析）；
                 </p>  
                 <p>
                     玩家自定金额下注买地，系统随机一块地皮进行购买判断；
@@ -50,7 +50,7 @@
                   合约地址： <a href="https://eospark.com/MainNet/contract/eosioshadows" target="_blank">https://eospark.com/...eosioshadows</a>
                 </p> 
            </div>  
-          <div class="touzhu-table">
+          <div class="touzhu-table" id="touzhu-table">
                <h3 class="security-title ">
                     投注风云榜
                 </h3>    
