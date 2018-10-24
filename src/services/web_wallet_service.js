@@ -302,7 +302,33 @@ export const get_len_token_info = async () => {
  * 获取EOS余额
  * 
 */
-export const getLenBalance = async ()=> {
+export const get_len_balance_bytable = async ()=> {
+    if (!scatter_res.account_name) {
+        let res = await get_scatter_identity().data;
+    }
+    let account_name = scatter_res.account_name;
+    return await Eos(eos_config)
+    .getTableRows({"scope":account_name,"code":"lemoniotoken","table":"accounts","limit":10000,"json":true})
+    .then(data => {
+        return {
+            is_error: false,
+            data
+        };
+    })
+    .catch(err => {
+        return {
+            is_error: true,
+            msg: err
+        };
+    });
+}
+
+/**
+ * 
+ * 获取EOS余额
+ * 
+*/
+export const get_len_balance = async ()=> {
     if (!scatter_res.account_name) {
         let res = await get_scatter_identity().data;
     }
@@ -320,5 +346,45 @@ export const getLenBalance = async ()=> {
     });
 }
 
+
+/**
+ *  卖出通证
+ *  @param toaccount 提现账户
+ *  @param quantity 提现金额
+ * 
+ */
+export const sell_len = async (toaccount = 'playeraccount',quantity = 1, tokenSymbol = 'LEN') => {
+    if (!scatter_res.account_name) {
+        scatter_res.account_name = await get_scatter_identity().data;
+    }
+    let account_name = scatter_res.account_name;
+    let eos = ScatterJS.scatter.eos(network,Eos)
+    return await eos.transaction({
+        actions: [
+            {
+                account: "lemoniotoken", //合约账户
+                name: 'sell',
+                authorization: [{
+                    actor:account_name,
+                    permission: 'active'
+                }],
+                data: {
+                    account: account_name,  // 用户账户
+                    quantity: toAsset(quantity, tokenSymbol),
+                }
+            }
+        ]
+    }).then(result => {
+        return {
+            is_error:false,
+            result
+        }
+    }).catch(err => {
+        return {
+            is_error: true,
+            msg: err
+        };
+    });
+}
 
 

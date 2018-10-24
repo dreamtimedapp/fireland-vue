@@ -26,7 +26,7 @@
                         <template slot="append">LEN</template>
                     </el-input>
                     <span class="token-subtext" >可卖出len通证数量：</span>
-                     <el-button class="token-button" type="danger" >卖出</el-button>
+                     <el-button class="token-button"   v-on:click="sellLen" type="danger" >卖出</el-button>
                 </div>     
               </el-col>     
           </el-row> 
@@ -78,7 +78,7 @@
                         </div>    
                         <div class="table-item-info">
                             <span>LEN数量：</span>
-                            <span>0.01 EOS/LEN</span>
+                            <span>{{$store.state.HomeStore.len_balance}}</span>
                         </div>
                         <div class="table-item-info">
                             <span>总分成：</span>
@@ -167,6 +167,7 @@ import {
     get_land_info,
     get_touzhu_info,
     get_gameInfo_list,
+    sell_len
 } from '../../services/web_wallet_service.js'
 import store from '../../store'
 const rule = 
@@ -200,6 +201,15 @@ export default {
           store.commit('setHomeAccount',res.name)
         }
        },
+       async sellLen(event) {
+          let res = await sell_len()
+          if (!res.is_error) {
+              alert('兑换成功')
+          } else {
+              alert(JSON.stringify(res.msg))
+              store.commit('sellLenAction','')
+          }
+       }
     }
 }
 </script>
