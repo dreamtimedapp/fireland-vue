@@ -79,9 +79,8 @@ export default {
     }
   },
   mounted: function() {
-      setTimeout(this.getAccountName,100);
-      setInterval(this.getLandInfo,1000);
-      setInterval(this.getTouzhuInfo,200)
+      setTimeout(this.initGame,100);
+      
   },
   computed: {
     has_scatter: function() {
@@ -99,7 +98,7 @@ export default {
     }
   },
   methods: {
-    async getAccountName () {
+    async initGame () {
         if (this.account_name) {
           return;
         }
@@ -108,7 +107,10 @@ export default {
           this.account_name = res.data
           store.commit('getAccount',res.data) 
         }
+        debugger
         let gameInfo = await this.getGameTime();
+
+        debugger
         let state = store.state.LandStore.gameState;
         if (state == 0) {
           this.gameStateInfo = "距离游戏开始还有："
@@ -117,12 +119,15 @@ export default {
          } else if (state == 2) {
            this.gameStateInfo  = "游戏暂未开始，请稍后"
         }
+
         let balance_res = await getBalance();
         if (balance_res) {
           this.eos_balance = balance_res.result[0]
           store.commit('setEosBalance',balance_res.result[0])
         } 
         this.loadingGame = false;
+        setInterval(this.getLandInfo,1000);
+        setInterval(this.getTouzhuInfo,2000)
     },
     //获取游戏开始时间或结束时间
     async getGameTime() {

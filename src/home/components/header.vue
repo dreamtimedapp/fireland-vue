@@ -33,7 +33,7 @@
                 <el-col :xs="24" :md="12">
                     <div class="features-game-center">
                       <router-link to="game/land" class="card bg-dark text-white">
-                          <img class="card-img" src="https://youbao.io/static/media/sail2.4a6f0ad2.png" style="min-height: 100px;">
+                          <img class="card-img" src="https://gw.alicdn.com/tfs/TB15HQskgDqK1RjSZSyXXaxEVXa-3840-2160.jpg" style="min-height: 100px;">
                           <div class="card-img-overlay">
                               <h5 class="card-title">
                                 <span class="qll4MVPb7tVWufSoh90Yb">大农场时代</span>
@@ -46,15 +46,17 @@
                             </div>
                         </router-link>
                         
-                      <router-link to="game/land" class="card bg-dark text-white">
-                          <img class="card-img" src="https://youbao.io/static/media/sail2.4a6f0ad2.png" style="min-height: 100px;">
+                      <router-link to="/" class="card bg-dark text-white">
+                          <img class="card-img" src="https://gw.alicdn.com/tfs/TB1MY.CkmzqK1RjSZFHXXb3CpXa-760-366.jpg" style="min-height: 100px;">
                           <div class="card-img-overlay">
+                               <!--
                               <h5 class="card-title">
-                                  <span class="qll4MVPb7tVWufSoh90Yb">幸运大转盘</span></h5>
+                                 
+                                  <span class="qll4MVPb7tVWufSoh90Yb">即将开始</span></h5>
                                   <p class="card-text">
-                                      <span class="qll4MVPb7tVWufSoh90Yb">投注即挖矿，持有即分红，挖矿所得随时可卖出
+                                      <span class="qll4MVPb7tVWufSoh90Yb">游戏即挖矿，持有即分红，挖矿所得随时可卖出
                                       </span>
-                                    </p>
+                                    </p> -->
                            </div>
                       </router-link>
                    </div>   
@@ -254,7 +256,7 @@ export default {
     padding-top: 40px;
 }
 .card-title  span{
-    background: rgba(0, 0, 0, 0.5);
+   
     padding: 1px;
     line-height: 100%;
   
@@ -264,7 +266,7 @@ export default {
     padding-left: 70px;
 }
 .card-text span{
-    background: rgba(0, 0, 0, 0.5);
+  
     padding: 1px;
     line-height: 100%;
     

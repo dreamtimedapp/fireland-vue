@@ -31,6 +31,7 @@ export default {
             let currentTime = Date.parse(new Date());
             let beginTime = parseInt(state.gameInfo.beginTime) * 1000
             let endTime = parseInt(state.gameInfo.endTime) * 1000
+            debugger
             if (currentTime > beginTime && currentTime < endTime) {
                  /**
                  * 
@@ -39,14 +40,16 @@ export default {
                 */
                 state.gameCount = parseInt(new Date().getTime() - new Date(endTime))
                 state.gameState = 1;
+                debugger
             } else if (currentTime < beginTime && currentTime < endTime){
                 /**
                  * 
                  * 游戏未开始，倒计时
                  * 
                 */
-                state.gameCount = parseInt(new Date().getTime() - new Date(beginTime))
+                state.gameCount = parseInt( new Date(beginTime) - new Date().getTime())
                 state.gameState = 0;
+                debugger
             } else if (currentTime > endTime) {
                 /**
                  * 
@@ -55,6 +58,7 @@ export default {
                 */
                 state.gameState = 2;
                 state.gameCount = 0;
+                debugger
             }
         },
         
