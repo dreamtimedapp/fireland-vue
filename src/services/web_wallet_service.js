@@ -353,7 +353,7 @@ export const get_len_balance = async ()=> {
  *  @param quantity 提现金额
  * 
  */
-export const sell_len = async (toaccount = 'playeraccount',quantity = 1, tokenSymbol = 'LEN') => {
+export const sell_len = async (quantity = 1, tokenSymbol = 'LEN') => {
     if (!scatter_res.account_name) {
         scatter_res.account_name = await get_scatter_identity().data;
     }

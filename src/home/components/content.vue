@@ -4,7 +4,7 @@
            <span>柠檬通证 len</span>
        </div>    
        <div class="buy-box">
-          <el-row >
+          <el-row class="content-center"><!--
               <el-col :xs="24" :md="11"> 
                 <div class="buy-token">
                     <el-input placeholder="请输入内容" v-model="buyAmount">
@@ -18,26 +18,30 @@
               <el-col :xs="0" :sm="2" :md="2"> 
                 <div class="divider-content">
                 </div> 
-              </el-col>  
-              <el-col :xs="24"   :md="11">   
+              </el-col>  -->
+              <el-col :xs="22"  :sm="20" :md="16">   
                 <div class="sell-token">
                     <el-input placeholder="请输入内容" v-model="sellAmount">
                         <template slot="prepend">LEN</template>
                         <template slot="append">LEN</template>
                     </el-input>
-                    <span class="token-subtext" >可卖出len通证数量：</span>
+                    <span class="token-subtext" >当前len价格：{{$store.state.HomeStore.price}}，卖出可获得EOS数量：{{getCalculatePrice}}</span>
                      <el-button class="token-button"   v-on:click="sellLen" type="danger" >卖出</el-button>
                 </div>     
               </el-col>     
           </el-row> 
-           <el-row >
-              <el-col :xs="24" :md="11"> 
+           <el-row class="content-center">
+              <el-col :xs="22" :sm="20" :md="16"> 
                 <div class="len-info-table">
                     <el-card class="box-card">
                        <div slot="header" class="clearfix">
                            <span>柠檬数据统计</span>
                            <el-button style="float: right; padding: 3px 0" type="text">合约账户</el-button>
                         </div>
+                        <div class="table-item-info">
+                            <span>EOS数量：</span>
+                            <span>{{$store.state.HomeStore.eos_balance}}</span>
+                        </div>    
                         <div class="table-item-info">
                             <span>LEN价格：</span>
                             <span>{{$store.state.HomeStore.price}}</span>
@@ -51,6 +55,10 @@
                             <span>{{$store.state.HomeStore.supply}}</span>
                         </div> 
                         <div class="table-item-info">
+                            <span>我的LEN数量：</span>
+                            <span>{{$store.state.HomeStore.len_balance}}</span>
+                        </div>
+                        <div class="table-item-info">
                             <span>Len资金蓄池：</span>
                             <span>{{$store.state.HomeStore.cash_pool}}</span>
                         </div>  
@@ -60,11 +68,11 @@
                         </div>       
                     </el-card>
                 </div>       
-              </el-col>  
+              </el-col>   <!--
               <el-col :xs="2" :sm="2" :md="2" :lg="2">
                  <div class="divider-content"> 
                  </div>
-              </el-col>  
+              </el-col> 
               <el-col :xs="24" :md="11">   
                 <div class="you-info-table">
                      <el-card class="box-card">
@@ -94,7 +102,7 @@
                         </div>         
                     </el-card>
                 </div>     
-              </el-col>     
+              </el-col>    --> 
           </el-row>     
        </div>    
        <div id="element" class="len-introduce">
@@ -186,13 +194,25 @@ export default {
         rule: rule,
         eos_balance:'',
         buyAmount:'',
-        sellAmount:''
+        sellAmount:'',
+        calculatePrice:'',
       }
     },
     computed: {
         getAccount() {
            return store.state.HomeStore.home_account_name
         },
+        getCalculatePrice() {
+          let len_price = store.state.HomeStore.price + ""
+          let amount = this.sellAmount;
+          debugger
+          if (amount == "") {
+              amount = 0
+          }
+          
+          let calculatePrice = parseFloat(len_price.replace(' EOS','')) * parseFloat(amount) * 0.9
+          return calculatePrice.toFixed(4) + ' EOS'
+        }
     },
     methods: {
       login: async function(event) {
@@ -202,7 +222,18 @@ export default {
         }
        },
        async sellLen(event) {
-          let res = await sell_len()
+          if (this.sellAmount == "") {
+              alert("请输入卖出数量")
+              return;
+          }
+          let  len_amount = store.state.HomeStore.len_balance + ""
+          len_amount = len_amount.replace(' LEN')
+          len_amount = len_amount.replace(' EOS')
+          if (parseInt(this.sellAmount) > len_amount) {
+             alert('LEN 数量不足卖出')
+             return;
+          }
+          let res = await sell_len(parseInt(sellAmount),'LEN')
           if (!res.is_error) {
               alert('兑换成功')
           } else {
@@ -229,8 +260,17 @@ export default {
      font-size: 40px;
  }
  .buy-box {
-     margin-left: 20px;
-     margin-right: 20px;
+     padding-left: 20px;
+     padding-right: 20px;
+     width: 100%;
+     justify-content: center;
+     align-items: center;
+ }
+ .content-center {
+     width: 100%;
+     justify-content: center;
+     align-items: center;
+     display: flex;
  }
  .divider-content {
      width: 100px;
@@ -300,6 +340,9 @@ export default {
     color: #fff;
     margin-top: 30px;
     text-align: center;
+}
+.len-info-table {
+    width: 100%;;
 }
 .len-info {
 
@@ -382,6 +425,7 @@ export default {
     margin-bottom: 30px;
     color: #fff;
     margin-top: 50px;
+    font-size: 28px;
     text-align: center;
  }
  .home-foot-title {

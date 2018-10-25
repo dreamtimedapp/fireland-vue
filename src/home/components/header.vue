@@ -38,11 +38,11 @@
                           <img class="card-img" src="https://gw.alicdn.com/tfs/TB15HQskgDqK1RjSZSyXXaxEVXa-3840-2160.jpg" style="min-height: 100px;">
                           <div class="card-img-overlay">
                               <h5 class="card-title">
-                                <span class="qll4MVPb7tVWufSoh90Yb">大农场时代</span>
+                                <span class="qll4MVPb7tVWufSoh90Yb">EOS大地主</span>
                               </h5>
                               <p class="card-text">
-                                  <span class="qll4MVPb7tVWufSoh90Yb">
-                                      游戏即挖矿 + 持币分红 + 邀请奖励
+                                  <span class="">
+                                      游戏即挖矿 + 持币增值 + 邀请奖励
                                   </span>
                               </p>
                             </div>
@@ -266,6 +266,7 @@ export default {
 .card-text {
     margin-bottom: 0;
     padding-left: 70px;
+    font-size: 30px;
 }
 .card-text span{
   

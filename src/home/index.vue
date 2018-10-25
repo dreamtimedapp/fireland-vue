@@ -72,7 +72,7 @@ export default {
       let len = await get_len_balance_bytable()
       if (!res.is_error) {
           this.account_name = len.data
-          store.commit('setLenBalance',res.data) 
+          store.commit('setLenBalance',len.data) 
       }
     }
   }
