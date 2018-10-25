@@ -28,7 +28,7 @@ export const get_scatter_identity = async () => {
          return connected;
         });
     }
-    debugger
+    // debugger
     let account = await  ScatterJS.scatter.getIdentity({accounts:[network]}).then(result => {
         scatter_res.account_name = result.accounts[0]
         return  result.accounts[0];
@@ -36,7 +36,7 @@ export const get_scatter_identity = async () => {
         //debugger
         alert(err)
     });
-    debugger
+    // debugger
     scatter_res.account_name = account.name;
     return {
         is_error:false,

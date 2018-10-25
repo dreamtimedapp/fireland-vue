@@ -21,8 +21,7 @@
 <script>
 import landImg1 from '../../../assets/land/land-1.png';
 import landImg1_m from '../../../assets/land/land-1-m.png';
-import landImg2 from '../../../assets/land/land-2.png';
-import landback from '../../../assets/land/land-back.png'
+import landImg1_b from '../../../assets/land/land-1-b.png';
 import store from '../../../store'
 import {
     get_scatter_identity,
@@ -44,7 +43,7 @@ const STATUS_ENUM = {
   },
   rare: {
     color: '#000',
-    bg: landImg1,
+    bg: landImg1_b,
     bg_m: landImg1_m
   }
 };
