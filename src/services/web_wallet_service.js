@@ -27,11 +27,14 @@ export const get_scatter_identity = async () => {
             }, 1000);
         });
     }
-    scatter_res.is_running = true;
     let scatter = ScatterJS.scatter;
-    let connect =await scatter.connect('lemo').then(connected => {
-        return connected;
-    });
+    if (scatter_res.is_running == false) {
+       let connect =await scatter.connect('lemo').then(connected => {
+        scatter_res.is_running = true;
+         return connected;
+        });
+    }
+    debugger
     let account = await  ScatterJS.scatter.getIdentity({accounts:[network]}).then(result => {
         scatter_res.account_name = result.accounts[0]
         return  result.accounts[0];
@@ -39,17 +42,18 @@ export const get_scatter_identity = async () => {
         //debugger
         alert(err)
     });
+    debugger
     scatter_res.account_name = account.name;
     return {
         is_error:false,
-        data:account.name
+        data:account
     }
 }
 
 
 export const login = async ()=>{
-    return await ScatterJS.scatter.getIdentity({accounts:[network]}).then(result => {
-        return  result.accounts[0];
+    return await get_scatter_identity({accounts:[network]}).then(result => {
+        return  result.data;
     })  
 }
 

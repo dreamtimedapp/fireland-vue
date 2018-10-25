@@ -223,7 +223,7 @@ export default {
        },
        async sellLen(event) {
           if (this.sellAmount == "") {
-              alert("请输入卖出数量")
+              alert("您的len数量为：" + store.state.HomeStore.len_balance +"，不足卖出")
               return;
           }
           let  len_amount = store.state.HomeStore.len_balance + ""

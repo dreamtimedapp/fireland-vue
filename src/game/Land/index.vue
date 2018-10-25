@@ -79,7 +79,9 @@ export default {
     }
   },
   mounted: function() {
-      setTimeout(this.initGame,100);
+      //(this.initGame,100);
+      this.getGameTime()
+      setTimeout(this.initGame,500);
   },
   computed: {
     has_scatter: function() {
@@ -97,17 +99,17 @@ export default {
     }
   },
   methods: {
+    async login() {
+        let res = await login();
+        if (res) {
+          this.account_name = res.name
+          store.commit('getAccount',res.name)
+        }
+    },
     async initGame () {
-        if (this.account_name) {
-          return;
-        }
-        let res = await get_scatter_identity();
-        if(res){
-          this.account_name = res.data
-          store.commit('getAccount',res.data) 
-        }
-        let gameInfo = await this.getGameTime();
-
+        if (!this.account_name) {
+          await this.login();
+        } 
         let state = store.state.LandStore.gameState;
         if (state == 0) {
           this.gameStateInfo = "距离游戏开始还有："
@@ -116,7 +118,6 @@ export default {
          } else if (state == 2) {
            this.gameStateInfo  = "游戏暂未开始，请稍后"
         }
-
         let balance_res = await getBalance();
         if (balance_res) {
           this.eos_balance = balance_res.result[0]
@@ -128,12 +129,9 @@ export default {
     },
     //获取游戏开始时间或结束时间
     async getGameTime() {
-        if (!this.account_name) {
-          return;
-        }
         let counterlist = await get_gameInfo_list()
         if (!counterlist.is_error) {
-          store.commit('getGameInfo',counterlist.data.rows[0])
+            store.commit('getGameInfo',counterlist.data.rows[0])
         } 
     },
     //获取玩家的信息

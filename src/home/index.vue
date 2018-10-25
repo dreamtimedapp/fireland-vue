@@ -52,7 +52,7 @@ export default {
         let res = await get_scatter_identity();
         if(!res.is_error){
           this.account_name = res.data
-          store.commit('setHomeAccount',res.data) 
+          store.commit('setHomeAccount',res.data.name) 
         }
         let balance_res = await getBalance();
         if (balance_res) {
