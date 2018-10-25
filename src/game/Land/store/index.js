@@ -31,7 +31,7 @@ export default {
             let currentTime = Date.parse(new Date());
             let beginTime = parseInt(state.gameInfo.beginTime) * 1000
             let endTime = parseInt(state.gameInfo.endTime) * 1000
-            debugger
+
             if (currentTime > beginTime && currentTime < endTime) {
                  /**
                  * 
@@ -40,7 +40,7 @@ export default {
                 */
                 state.gameCount = parseInt(new Date(endTime) - new Date().getTime())
                 state.gameState = 1;
-                debugger
+       
             } else if (currentTime < beginTime && currentTime < endTime){
                 /**
                  * 
@@ -49,7 +49,7 @@ export default {
                 */
                 state.gameCount = parseInt( new Date(beginTime) - new Date().getTime())
                 state.gameState = 0;
-                debugger
+       
             } else if (currentTime > endTime) {
                 /**
                  * 
@@ -58,7 +58,7 @@ export default {
                 */
                 state.gameCount = 0
                 state.gameState = 2;
-                debugger
+     
             }
         },
         
@@ -73,9 +73,9 @@ export default {
             state.minPrice = data.count[0].landMinPrice / 10000;
      
             state.poolBalace = data.count[0].potBalance / 10000;
-            debugger
+
             landrows.forEach((element,i) => {
-                debugger
+     
                 if (element.roundNum != state.roundNum){
                     return;
                 }

@@ -50,7 +50,7 @@ export default {
             let res = await get_len_token_info();
             if(!res.is_error){
                 this.account_name = res.data
-                setLenDetail(state,res.data) 
+                this.setLenDetail(state,res.data) 
             }
             let len = await get_len_balance_bytable()
             if (!res.is_error) {

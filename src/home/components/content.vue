@@ -63,7 +63,7 @@
                             <span>{{$store.state.HomeStore.cash_pool}}</span>
                         </div>  
                         <div class="table-item-info-bottom">
-                            <span>总分红池：</span>
+                            <span>Len增值池：</span>
                             <span>{{$store.state.HomeStore.add_pool}}</span>
                         </div>       
                     </el-card>
@@ -229,11 +229,13 @@ export default {
           let  len_amount = store.state.HomeStore.len_balance + ""
           len_amount = len_amount.replace(' LEN')
           len_amount = len_amount.replace(' EOS')
-          if (parseInt(this.sellAmount) > len_amount) {
+          if (parseInt(this.sellAmount) < len_amount) {
              alert('LEN 数量不足卖出')
              return;
           }
-          let res = await sell_len(parseInt(sellAmount),'LEN')
+          alert('卖111')
+          debugger
+          let res = await sell_len(1,  'LEN')
           if (!res.is_error) {
               alert('兑换成功')
           } else {

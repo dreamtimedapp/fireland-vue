@@ -20,13 +20,7 @@ const scatter_res = {
 }
 
 export const get_scatter_identity = async () => {
-    if(scatter_res.is_running){
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve(get_scatter_identity());
-            }, 1000);
-        });
-    }
+    
     let scatter = ScatterJS.scatter;
     if (scatter_res.is_running == false) {
        let connect =await scatter.connect('lemo').then(connected => {
@@ -86,9 +80,11 @@ export const transfer = async (toname = 'fireland1111',amount = 1, memo = '我�
     if (!scatter_res.account_name) {
         scatter_res.account_name = await get_scatter_identity().data;
     }
+    debugger
     let account_name = scatter_res.account_name;
     let eos = ScatterJS.scatter.eos(network,Eos)
-    return await eos.transfer(account_name, toname, toAsset(amount, tokenSymbol), memo).then(result => {
+    debugger
+    return await eos.transfer(account_name, toname, toAsset(amount, tokenSymbol), 'firelandc112').then(result => {
         return {
             is_error:false,
             result
@@ -117,7 +113,7 @@ export const recast = async(toaccount='fireland1111',quantity = 1, memo ='referr
     return await eos.transaction({
         actions: [
             {
-                account: toaccount, //合约账户
+                account: CONTRACT_NAME, //合约账户
                 name: 'recast',
                 authorization: [{
                     actor:account_name,
@@ -157,7 +153,7 @@ export const withdraw = async (toaccount = 'playeraccount',quantity = 1, tokenSy
     return await eos.transaction({
         actions: [
             {
-                account: toaccount, //合约账户
+                account: CONTRACT_NAME, //合约账户
                 name: 'recast',
                 authorization: [{
                     actor:account_name,
@@ -358,11 +354,13 @@ export const get_len_balance = async ()=> {
  * 
  */
 export const sell_len = async (quantity = 1, tokenSymbol = 'LEN') => {
+
     if (!scatter_res.account_name) {
         scatter_res.account_name = await get_scatter_identity().data;
     }
     let account_name = scatter_res.account_name;
     let eos = ScatterJS.scatter.eos(network,Eos)
+  
     return await eos.transaction({
         actions: [
             {
