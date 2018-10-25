@@ -233,13 +233,11 @@ export default {
              alert('LEN 数量不足卖出')
              return;
           }
-          alert('卖111')
           debugger
-          let res = await sell_len(1,  'LEN')
+          let res = await sell_len(parseInt(this.sellAmount),  'LEN')
           if (!res.is_error) {
               alert('兑换成功')
           } else {
-              alert(JSON.stringify(res.msg))
               store.commit('sellLenAction','')
           }
        }
