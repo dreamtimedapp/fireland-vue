@@ -205,7 +205,7 @@ export default {
         getCalculatePrice() {
           let len_price = store.state.HomeStore.price + ""
           let amount = this.sellAmount;
-          debugger
+          // debugger
           if (amount == "") {
               amount = 0
           }
