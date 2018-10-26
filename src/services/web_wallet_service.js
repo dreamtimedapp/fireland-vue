@@ -16,11 +16,16 @@ const network = test_network
 
 const scatter_res = {
     'account_name': null,
-    'is_running': false
+    'is_running': false,
+    "scatter_ok":true
 }
 
 export const get_scatter_identity = async () => {
-    
+    debugger
+    if (!scatter_res.scatter_ok) {
+        return
+    } 
+    debugger
     let scatter = ScatterJS.scatter;
     if (scatter_res.is_running == false) {
        let connect =await scatter.connect('lemo').then(connected => {
@@ -33,8 +38,8 @@ export const get_scatter_identity = async () => {
         scatter_res.account_name = result.accounts[0]
         return  result.accounts[0];
     }).catch(err=>{
-        //debugger
-        alert(err)
+        alert('请解锁scatter')
+       scatter_res.scatter_ok = false;
     });
     // debugger
     scatter_res.account_name = account.name;
@@ -46,6 +51,7 @@ export const get_scatter_identity = async () => {
 
 
 export const login = async ()=>{
+    scatter_res.scatter_ok = true;
     return await get_scatter_identity({accounts:[network]}).then(result => {
         return  result.data;
     })  
