@@ -29,7 +29,7 @@
                 </div>
                 <div class="land-account-withdraw">
                     <span>游戏内：</span>
-                    <span> {{$store.state.LandStore.game_balance}}  </span>
+                    <span> {{$store.state.LandStore.game_balance}} EOS  </span>
                     <el-button  type="primary" v-on:click="withdraw" size="mini" class="land-withdraw-btn">提现</el-button>
                 </div>
                 <div class="land-account-invite">
@@ -118,6 +118,7 @@ export default {
           if (res.is_error) {
             alert(JSON.stringify(res.msg))
           } else {
+            store.commit('setMyInfo','')  
             alert('下注成功！')
           }
        },
@@ -134,14 +135,24 @@ export default {
           if (res.is_error) {
             alert(JSON.stringify(res.msg))
           } else {
+            store.commit('setMyInfo','')  
             alert('下注成功！')
           }
        },
        async withdraw() {
-          let res = await withdraw(CONTRACT_NAME,this.amount,this.getRefInviteUrl());
+          if (store.state.LandStore.game_balance == '') {
+              alert('当前没有余额不能提现')
+              return
+          } 
+          if (parseFloat(store.state.LandStore.game_balance).toFixed(4) < 0) {
+              alert('当前没有余额不能提现')
+              return
+          }
+          let res = await withdraw(CONTRACT_NAME,parseFloat(store.state.LandStore.game_balance).toFixed(4),'EOS');
           if (res.is_error) {
             alert(JSON.stringify(res.msg))
           } else {
+            store.commit('setMyInfo','')
             alert('提现成功！')
           }
        },

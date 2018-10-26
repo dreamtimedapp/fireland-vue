@@ -1,4 +1,17 @@
 import { stat } from "fs";
+import {
+    get_scatter_identity,
+    login,
+    transfer,
+    recast,
+    getBalance,
+    get_player_list,
+    get_land_info,
+    get_touzhu_info,
+    get_gameInfo_list,
+    get_len_token_info
+} from '../../../services/web_wallet_service.js'
+
 
 export default {
     state:{
@@ -93,7 +106,7 @@ export default {
         getGameBalance(state,accountlist) {
             accountlist.forEach(element => {
                 if (element.player == state.account_name) {
-                    state.game_balance = element.balance
+                    state.game_balance = element.balance / 10000 
                 }
             });
         },
@@ -105,6 +118,22 @@ export default {
                 rows.push(element)
             });
            state.touzhuRows = rows
-        } 
+        },
+        async setMyInfo(state,data) {
+            let balance_res = await getBalance();
+            if (balance_res) {
+              this.eos_balance = balance_res.result[0]
+              state.eos_balance = balance_res.result[0]
+            } 
+            let res = await get_player_list()
+            if (res.is_error) {
+                return;
+            }
+            let playerlist = res.data.rows
+            if (!playerlist) {
+                return;
+            }
+            getGameBalance(state,playerlist)
+        }
     }
 }

@@ -154,7 +154,7 @@ export const withdraw = async (toaccount = 'playeraccount',quantity = 1, tokenSy
         actions: [
             {
                 account: CONTRACT_NAME, //合约账户
-                name: 'recast',
+                name: 'withdraw',
                 authorization: [{
                     actor:account_name,
                     permission: 'active'
@@ -166,11 +166,13 @@ export const withdraw = async (toaccount = 'playeraccount',quantity = 1, tokenSy
             }
         ]
     }).then(result => {
+        debugger
         return {
             is_error:false,
             result
         }
     }).catch(err => {
+        debugger
         return {
             is_error: true,
             msg: err

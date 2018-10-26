@@ -125,7 +125,7 @@ export default {
         } 
         this.loadingGame = false;
         setInterval(this.getLandInfo,1000);
-        setInterval(this.getTouzhuInfo,3000)
+        setInterval(this.getTouzhuInfo,3000);
     },
     //获取游戏开始时间或结束时间
     async getGameTime() {
