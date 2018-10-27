@@ -1,11 +1,7 @@
 <template>
 <div class="main-container">
   <Header></Header>
-   <el-carousel indicator-position="outside">
-    <el-carousel-item v-for="item in 4" :key="item">
-      <h3>{{ item }}</h3>
-    </el-carousel-item>
-  </el-carousel>
+  <Banner> </Banner>
   <Content></Content>
 </div>
 </template>
@@ -13,6 +9,7 @@
 <script>
 import Header from './components/header.vue';
 import Content from './components/content'
+import Banner from './components/banner'
 import store from '../store'
 import {
     get_scatter_identity,
@@ -34,7 +31,8 @@ export default {
   name: 'landGame',
   components: {
     Header,
-    Content
+    Content,
+    Banner
   },
   props: {},
   data: function() {

@@ -290,7 +290,7 @@ export const get_touzhu_info = async () => {
 
 export const get_len_token_info = async () => {
     return await Eos(eos_config)
-                .getTableRows({"scope":"LEN","code":"lemoniotoken","table":"stat","limit":10000,"json":true})
+                .getTableRows({"scope":"LEN","code":"lemontoken11","table":"stat","limit":10000,"json":true})
                 .then(data => {
                     return {
                         is_error: false,
@@ -316,7 +316,7 @@ export const get_len_balance_bytable = async ()=> {
     }
     let account_name = scatter_res.account_name;
     return await Eos(eos_config)
-    .getTableRows({"scope":account_name,"code":"lemoniotoken","table":"accounts","limit":10000,"json":true})
+    .getTableRows({"scope":account_name,"code":"lemontoken11","table":"accounts","limit":10000,"json":true})
     .then(data => {
         return {
             is_error: false,
@@ -372,7 +372,7 @@ export const sell_len = async (quantity = 1, tokenSymbol = 'LEN') => {
     return await eos.transaction({
         actions: [
             {
-                account: "lemoniotoken", //合约账户
+                account: "lemoniotoken11", //合约账户
                 name: 'sell',
                 authorization: [{
                     actor:account_name,

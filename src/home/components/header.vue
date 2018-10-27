@@ -15,57 +15,6 @@
       <div v-if="getAccount" class="login-account-name" type="primary" >{{$store.state.HomeStore.home_account_name}}</div>
       </div>
     </div>
-    <div class="text-center bg-dark">
-        <div >
-            <el-row>
-                <el-col :xs="24" :md="12"> 
-                 <a href="#" v-scroll-to="'#element'" class="text">
-                   <div class="features-text">
-                    <img class="features-img" src="http://www.eosbao.io/images/chart.png"/>
-                    <div class="features-info">
-                     <p><strong>资金储备：</strong><span>每次投注的10%用于资金池，其中5%用于提高币价，5%用于增发token</span></p>
-                     <p><strong>推荐奖励：</strong><span>每轮投注的1.2%永久贡献给1个上级推广人</span></p>
-                     <p><strong>研发消耗：</strong><span>每轮投注的3.2%用于研发消耗</span></p>
-                     <p><strong>长期激励：</strong><span>柠檬token鼓励长期持有，随着不断挖矿和持续的新游戏，token长期具有升值空间</span></p>
-                     <p><strong>分红奖池：</strong><span>token销售的10%进入分红奖池，每自然日按持柠檬token比例分红</span></p>
-                    </div>
-                   </div> 
-                  </a>   
-                </el-col>
-                <el-col :xs="24" :md="12">
-                    <div class="features-game-center">
-                      <router-link to="game/land" class="card bg-dark text-white">
-                          <img class="card-img" src="https://gw.alicdn.com/tfs/TB15HQskgDqK1RjSZSyXXaxEVXa-3840-2160.jpg" style="min-height: 100px;">
-                          <div class="card-img-overlay">
-                              <h5 class="card-title">
-                                <span class="qll4MVPb7tVWufSoh90Yb">EOS大地主</span>
-                              </h5>
-                              <p class="card-text">
-                                  <span class="">
-                                      游戏即挖矿 + 持币增值 + 邀请奖励
-                                  </span>
-                              </p>
-                            </div>
-                        </router-link>
-                        
-                      <router-link to="/" class="card bg-dark text-white">
-                          <img class="card-img" src="https://gw.alicdn.com/tfs/TB1MY.CkmzqK1RjSZFHXXb3CpXa-760-366.jpg" style="min-height: 100px;">
-                          <div class="card-img-overlay">
-                               <!--
-                              <h5 class="card-title">
-                                 
-                                  <span class="qll4MVPb7tVWufSoh90Yb">即将开始</span></h5>
-                                  <p class="card-text">
-                                      <span class="qll4MVPb7tVWufSoh90Yb">游戏即挖矿，持有即分红，挖矿所得随时可卖出
-                                      </span>
-                                    </p> -->
-                           </div>
-                      </router-link>
-                   </div>   
-                </el-col>    
-            </el-row>    
-        </div>
-    </div>    
     </div>
 </template>
 <script>
@@ -115,6 +64,7 @@ export default {
     }
 }
 </script>
+
 <style scoped>
 .box {
     width: 100%;
@@ -122,6 +72,14 @@ export default {
     min-width: 700px;
     justify-content: center;
     flex-direction: column;
+}
+.carousel {
+    height: 700px;
+}
+.banner-what-item  {
+  min-height: 700px;
+
+ 
 }
 
 
@@ -191,18 +149,18 @@ export default {
 
 .features-text {
     display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
     padding-left: 50px;
     padding-top: 50px;
     padding-right: 50px;
+    text-align: center;
 }
 .features-info {
     margin-top: 20px;
 }
-.features-img {
-    width: 100%;
-}
+
 .features-title{
   color: #ffffff;
   font-size: 34px;
@@ -219,9 +177,9 @@ export default {
 }
 
 .card {
-    height:100%;
+    height: 500px;
     margin-top: 50px;
-    margin-bottom: 30px;
+    padding-bottom: 30px;
     margin-left:60px; 
     margin-right:60px; 
     color: #fff;
@@ -237,7 +195,10 @@ export default {
 }
 .card-img {
    width: 100%;
-   border-radius: calc(.2rem -1px)
+   height: 100%;
+   border-radius: calc(.2rem -1px);
+    vertical-align: middle;
+    border-style: none;
 }
 .card-img img {
     vertical-align: middle;
@@ -258,10 +219,8 @@ export default {
     padding-top: 40px;
 }
 .card-title  span{
-   
     padding: 1px;
     line-height: 100%;
-  
 }
 .card-text {
     margin-bottom: 0;
@@ -269,9 +228,7 @@ export default {
     font-size: 30px;
 }
 .card-text span{
-  
     padding: 1px;
     line-height: 100%;
-    
 }
 </style>
