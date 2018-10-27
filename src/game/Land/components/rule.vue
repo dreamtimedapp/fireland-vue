@@ -6,48 +6,63 @@
                 <h3 class="land-security-title text-center">EOS大地主游戏玩法</h3>
                 <h4>一、玩法介绍 </h4>
                 <p>
-                    游戏板块为145格大小的地图，每一格代表一块地皮，每块地皮初始定价0.5eos，其中有2块为黑地皮没定价（作用下面解析）；
+                    游戏板块为145格大小的地图，每一格代表一块地皮，每块地皮初始定价 1eos，其中有2块为黑地皮（作用下面解析）；
                 </p>  
                 <p>
-                    玩家自定金额下注买地，系统随机一块地皮进行购买判断；
+                    玩家自定金额下注买地，系统随机一块地皮进行购买判断；投注的金额大于实际买入金额，转入游戏内余额，可随时提现
                 </p>   
                 <p>
-                    每轮游戏初定3天
+                    每轮游戏初定2天,投注不增加结束时长
                 </p>     
-                <h4>二、购买判断</h4>
                 <p>
-                   情况1：地皮为黑地皮，获取jackpot奖池奖励；
+                    最低投标金额为全场地皮最低标价
+                </p>    
+                <h4>二、中标情况</h4>
+                <p>
+                   升级成功：投标地皮为买家自身地皮，若投注金额大于等于地皮标价，则免费升级地皮，地皮标价翻倍；
                 </p> 
                 <p>
-                    情况2：地皮为玩家自身地皮，玩家扣除20%地皮标价手续费升级该地皮（地皮标价翻倍）；
+                  升级失败：投标地皮为买家自身地皮，若投注金额小于地皮标价，升级地皮失败，但不扣除任何费用；
                 </p> 
                 <p> 
-                   情况3：玩家下注金额大于等于地皮标价，玩家按照地皮标价买入该地皮，地皮标价翻倍，买入金额扣除25%手续费后归原地皮拥有者所有； 
+                  买入成功：买家投标金额大于等于地皮标价，买家买入该地皮成功，扣除买家地皮标价有效费用（剩余金额进入买家余额），地皮标价翻倍，地皮拥有者变更为买家； 
                 </p>  
                 <p>
-                    情况4：玩家下注金额小于地皮标价，地皮买入失败，且扣除玩家下注金额30%作过路费，过路费扣除50%手续费后归地皮持有者所有。
+                  买入失败：买家投标金额小于地皮标价，买家买入地皮失败，扣除买家相对于中标地皮标价金额的50%有效费用（不足则全扣），地皮拥有者不变。
                 </p>          
                 <h4>
-                    三、黑地皮作用 
+                    三、有效费用分配
                 </h4>    
                 <p>
-                    获取jackpot奖池一半奖金。
+                   65%——原地皮持有者（买入成功，原地皮持有者获利30%出场；买入失败，原地皮拥有者获取该利润）；
                 </p>
+                <p>
+                   18%——累计奖池； 
+                </p>
+                <p>
+                  9%——计入token池，一半增发token赠送给玩家，另外一半增值币价(详情参考token发行规则)。   
+                </p>    
+                <p>
+                  6%——官方游戏开发运营费用。  
+                </p>     
+                <p>
+                  2%——邀请人永久奖励   
+                </p>       
                 <h4>
                     四、游戏结束
                 </h4>    
                 <p>
-                   持有地皮数量最多的玩家，获得jackpot及累计奖池的所有奖金；
+                   结束时，最终持有2块黑地皮的玩家均分累计奖池金额；
                 </p>
                 <h3 class="land-security-title ">
                     EOS大地主智能合约
                 </h3>    
                
                 <p>
-                  合约账号：<a href="" target="_blank">eosioshadows</a>
+                  合约账号：<a href="" target="_blank">firelandgame</a>
                 </p>    
                 <p>
-                  合约地址： <a href="https://eospark.com/MainNet/contract/eosioshadows" target="_blank">https://eospark.com/...eosioshadows</a>
+                  合约地址： <a href="https://eospark.com/MainNet/contract/firelandgame" target="_blank">https://eospark.com/...firelandgame</a>
                 </p> 
            </div>  
           <div class="touzhu-table" id="touzhu-table">
@@ -55,13 +70,13 @@
                     投注风云榜
                 </h3>    
               <el-table   :data="getTableRows" >
-                  <el-table-column  prop="logtime" label="时间">
+                  <el-table-column prop="logtime" label="时间">
                   </el-table-column>
-                  <el-table-column  prop="player" label="玩家">
+                  <el-table-column prop="player" label="玩家">
                   </el-table-column>
-                  <el-table-column   prop="amount" label="金额" >
+                  <el-table-column prop="amount" label="金额" >
                   </el-table-column>
-                  <el-table-column prop="landID" label="获取的土地编号" >
+                  <el-table-column prop="type" label="投注情况" >
                  </el-table-column>
               </el-table>
           </div>

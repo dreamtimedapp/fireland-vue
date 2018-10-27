@@ -115,6 +115,15 @@ export default {
             data.forEach((element,i) => {
                 element.amount = element.amount / 10000 + ' EOS'
                 element.logtime = new Date(parseInt(element.logtime) * 1000).toLocaleString().replace(/:\d{1,2}$/,' '); 
+                if (parseInt(element.type) == 1) {
+                    element.type = '升级土地' + element.landID + "成功" 
+                } else if (parseInt(element.type) == 2) {
+                    element.type = '升级土地' + element.landID + "失败" 
+                } else if (parseInt(element.type) == 3) {
+                    element.type = '买入土地' + element.landID + "成功" 
+                } else if (parseInt(element.type) == 4) {
+                    element.type = '买入土地' + element.landID + "失败" 
+                }
                 rows.push(element)
             });
            state.touzhuRows = rows

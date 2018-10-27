@@ -3,16 +3,15 @@ import {
     toAsset
 } from '../utils/utils.js'
 import {
-    test_network,main_network,endpoint,eos_config,CONTRACT_NAME
+    main_network,eos_config,CONTRACT_NAME
 } from '../config/config.js'
 import ScatterJS from 'scatterjs-core';
 import ScatterEOS from 'scatterjs-plugin-eosjs';
 
-const httpEndpoint = endpoint
 
 
 // 节点配置
-const network = test_network
+const network = main_network
 
 const scatter_res = {
     'account_name': null,
@@ -21,11 +20,11 @@ const scatter_res = {
 }
 
 export const get_scatter_identity = async () => {
-    debugger
+
     if (!scatter_res.scatter_ok) {
         return
     } 
-    debugger
+
     let scatter = ScatterJS.scatter;
     if (scatter_res.is_running == false) {
        let connect =await scatter.connect('lemo').then(connected => {
@@ -34,11 +33,11 @@ export const get_scatter_identity = async () => {
         });
     }
     // debugger
-    let account = await  ScatterJS.scatter.getIdentity({accounts:[network]}).then(result => {
+    let account = await ScatterJS.scatter.getIdentity({accounts:[network]}).then(result => {
         scatter_res.account_name = result.accounts[0]
         return  result.accounts[0];
     }).catch(err=>{
-        alert('请解锁scatter')
+        alert(JSON.stringify(err))
        scatter_res.scatter_ok = false;
     });
     // debugger
@@ -86,11 +85,11 @@ export const transfer = async (toname = 'fireland1111',amount = 1, memo = '我�
     if (!scatter_res.account_name) {
         scatter_res.account_name = await get_scatter_identity().data;
     }
-    debugger
+    
     let account_name = scatter_res.account_name;
     let eos = ScatterJS.scatter.eos(network,Eos)
-    debugger
-    return await eos.transfer(account_name, toname, toAsset(amount, tokenSymbol), 'firelandc112').then(result => {
+
+    return await eos.transfer(account_name, toname, toAsset(amount, tokenSymbol), 'firelandgame').then(result => {
         return {
             is_error:false,
             result
@@ -172,13 +171,13 @@ export const withdraw = async (toaccount = 'playeraccount',quantity = 1, tokenSy
             }
         ]
     }).then(result => {
-        debugger
+  
         return {
             is_error:false,
             result
         }
     }).catch(err => {
-        debugger
+ 
         return {
             is_error: true,
             msg: err
@@ -290,7 +289,7 @@ export const get_touzhu_info = async () => {
 
 export const get_len_token_info = async () => {
     return await Eos(eos_config)
-                .getTableRows({"scope":"LEN","code":"lemontoken11","table":"stat","limit":10000,"json":true})
+                .getTableRows({"scope":"LEN","code":"lemoniotoken","table":"stat","limit":10000,"json":true})
                 .then(data => {
                     return {
                         is_error: false,
@@ -316,7 +315,7 @@ export const get_len_balance_bytable = async ()=> {
     }
     let account_name = scatter_res.account_name;
     return await Eos(eos_config)
-    .getTableRows({"scope":account_name,"code":"lemontoken11","table":"accounts","limit":10000,"json":true})
+    .getTableRows({"scope":account_name,"code":"lemoniotoken","table":"accounts","limit":10000,"json":true})
     .then(data => {
         return {
             is_error: false,
@@ -368,11 +367,12 @@ export const sell_len = async (quantity = 1, tokenSymbol = 'LEN') => {
     }
     let account_name = scatter_res.account_name;
     let eos = ScatterJS.scatter.eos(network,Eos)
+
   
     return await eos.transaction({
         actions: [
             {
-                account: "lemoniotoken11", //合约账户
+                account: "lemoniotoken", //合约账户
                 name: 'sell',
                 authorization: [{
                     actor:account_name,
@@ -385,11 +385,13 @@ export const sell_len = async (quantity = 1, tokenSymbol = 'LEN') => {
             }
         ]
     }).then(result => {
+      
         return {
             is_error:false,
             result
         }
     }).catch(err => {
+
         return {
             is_error: true,
             msg: err

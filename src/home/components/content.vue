@@ -19,7 +19,7 @@
                 <div class="divider-content">
                 </div> 
               </el-col>  -->
-              <el-col :xs="22"  :sm="20" :md="16">   
+              <el-col :xs="22"  :sm="18" :md="12">   
                 <div class="sell-token">
                     <el-input placeholder="请输入内容" v-model="sellAmount">
                         <template slot="prepend">LEN</template>
@@ -31,7 +31,7 @@
               </el-col>     
           </el-row> 
            <el-row class="content-center">
-              <el-col :xs="22" :sm="20" :md="16"> 
+              <el-col :xs="22" :sm="18" :md="12"> 
                 <div class="len-info-table">
                     <el-card class="box-card">
                        <div slot="header" class="clearfix">
@@ -61,11 +61,7 @@
                         <div class="table-item-info">
                             <span>Len资金蓄池：</span>
                             <span>{{$store.state.HomeStore.cash_pool}}</span>
-                        </div>  
-                        <div class="table-item-info-bottom">
-                            <span>Len增值池：</span>
-                            <span>{{$store.state.HomeStore.add_pool}}</span>
-                        </div>       
+                        </div>        
                     </el-card>
                 </div>       
               </el-col>   <!--
@@ -107,9 +103,13 @@
        </div>    
        <div id="element" class="len-introduce">
            <span class="len-title">lemon社区通证(len)介绍</span>
-           <div class="len-info"> 
-                <vue-markdown>{{rule}}</vue-markdown>
-           </div>
+           <el-row>
+              <el-col :span="24">
+                <div class="len-info"> 
+                   <vue-markdown>{{rule}}</vue-markdown>
+                </div>
+              </el-col>
+           </el-row>
        </div>    
        <div class="len-security" id="security">
            <span class="len-security-title">验证安全</span>
@@ -137,13 +137,13 @@
                     经过研发团队讨论之后，我们决定采用最后一种方式（黑洞公钥），因为这种是最接近区块链原始定义的方式：公正公平、无法撰改，待柠檬项目稳定运行之后，我们就采取合约黑洞公钥方式。
                 </p>    
                 <p>
-                  合约账号：<a href="" target="_blank">eosioshadows</a>
+                  合约账号：<a href="" target="_blank">lemoniotoken</a>
                 </p>    
                 <p>
-                  合约地址： <a href="https://eospark.com/MainNet/contract/eosioshadows" target="_blank">https://eospark.com/...eosioshadows</a>
+                  合约地址： <a href="https://eospark.com/MainNet/contract/lemoniotoken" target="_blank">https://eospark.com/...lemoniotoken</a>
                 </p> 
                 <p>
-                  开源代码： <a href="https://eospark.com/MainNet/contract/eosioshadows" target="_blank">https://eospark.com/...eosioshadows</a>
+                  开源代码： <a href="https://eospark.com/MainNet/contract/lemoniotoken" target="_blank">https://eospark.com/...lemoniotoken</a>
                 </p>   
            
            </div>    
@@ -180,12 +180,11 @@ import {
 import store from '../../store'
 const rule = 
             "1. 发行量1000万，对标资金蓄池；\n" +
-                "2. token价格由资金蓄池金额和释放量决定：token价格＝资金蓄池eos额÷token总释放量；token的价格将随资金池增大线性增长\n" +
-                "3. 初始发行价0.001eos一个，团队存入1000eos，保留100万token量且锁仓三年，意味着token价格最低不低于0.001Eos。\n" +
-                "4. token设有最大释放量，最大释放量随着游戏的进程而增大；且增发的token发放给游戏玩家(具体请参考游戏规则)；\n" +
-                "5. token可以自由与资金蓄池进行买卖,买入没手续费，不得超过最大可对换量(最大可兑换量＝最大释放量-流通量) \n" +
-                "6. 卖出收取10%手续费，手续费将存入token增值池.token增值池资金，每天24点存入资金蓄池，且不增发token。存入资金蓄池后，token价格按第2点重新计算价格。\n" +
-                "7. token增值池资金来源：卖出手续费及游戏分红(具体请参考游戏规则)。资金蓄池资金，以后将会开发相关理财功能，例如cpu bank、借贷等。所获取的利润将发放到增值池，提升币价。"
+                "2. token价格由资金蓄池金额和释放量决定：token价格＝资金蓄池eos额÷token总释放量；token的价格将随资金池增大线性增长。卖出token，则供应量减少，意味着卖出token价格将增长，从而保障长期持有这的利益。\n" +
+                "3. 初始发行价0.001eos一个，团队存入1000eos，意味着token价格最低不低于0.001Eos。\n" +
+                "4. LEN获取增发只能来源于游戏，增发的token归游戏玩家所有(具体请参考游戏规则)；\n" +
+                "5. LEN卖出收取10%手续费，手续费将即时存入资金蓄池（不增发LEN），增值币价。（后期将根据情况进行限时减免手续活动）\n" +
+                "6. LEN将会在LEMON旗下的后续开发游戏流通使用，增加LEN实际价值。"
 export default {
     ready() {
     },
@@ -223,22 +222,23 @@ export default {
        },
        async sellLen(event) {
           if (this.sellAmount == "") {
-              alert("您的len数量为：" + store.state.HomeStore.len_balance +"，不足卖出")
+              alert("请输入卖出数量")
               return;
           }
           let  len_amount = store.state.HomeStore.len_balance + ""
           len_amount = len_amount.replace(' LEN')
           len_amount = len_amount.replace(' EOS')
-          if (parseInt(this.sellAmount) < len_amount) {
+          if (parseInt(this.sellAmount) > len_amount) {
              alert('LEN 数量不足卖出')
              return;
           }
           debugger
           let res = await sell_len(parseInt(this.sellAmount),  'LEN')
           if (!res.is_error) {
+              store.commit('sellLenAction',res.name)
               alert('兑换成功')
           } else {
-              store.commit('sellLenAction','')
+              alert('兑换失败')
           }
        }
     }

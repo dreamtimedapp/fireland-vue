@@ -27,6 +27,7 @@ import {
 } from '../services/web_wallet_service.js'
 import { setInterval, setTimeout } from 'timers';
 
+
 export default {
   name: 'landGame',
   components: {
@@ -43,7 +44,9 @@ export default {
   },
   mounted: function() {
     setTimeout(this.getHomeAccountName,500);
-    setInterval(this.getLenTokenInfo,1000);
+    setTimeout(this.initGame,700);
+    setTimeout(this.getLenTokenInfo,500);
+    setInterval(this.getLandInfo,2000);
   },
   computed: {
     has_scatter: function() {
@@ -65,30 +68,64 @@ export default {
           store.commit('setEosBalance',0)
         }
     },
+    //获取地块信息表
+    async getLandInfo() {
+      if (!this.account_name) {
+        return
+      }
+      let landlist = await get_land_info()
+      let counterlist = await get_gameInfo_list()
+      if (landlist.is_error || counterlist.is_error) {
+        return;
+      }
+      let landrows = landlist.data.rows
+      let countrows = counterlist.data.rows;
+      store.commit('getLandInfo',{
+        "land":landrows,
+        "count":countrows
+      })
+    },
     async getLenTokenInfo () {
       let res = await get_len_token_info();
       if(!res.is_error){
           this.account_name = res.data
           store.commit('setLenDetail',res.data) 
       }
-
       let len = await get_len_balance_bytable()
       if (!res.is_error) {
           this.account_name = len.data
           store.commit('setLenBalance',len.data) 
       }
-    }
+    },
+    async initGame () {
+        let counterlist = await get_gameInfo_list()
+        if (!counterlist.is_error) {
+            store.commit('getGameInfo',counterlist.data.rows[0])
+        } 
+        let state = store.state.LandStore.gameState;
+        if (state == 0) {
+           this.gameStateInfo = "距离游戏开始还有："
+         } else if (state == 1) {
+           this.gameStateInfo = "游戏正在进行，距离结束还有："
+         } else if (state == 2) {
+           this.gameStateInfo  = "游戏暂未开始，请稍后"
+        }
+        let balance_res = await getBalance();
+        if (balance_res) {
+          this.eos_balance = balance_res.result[0]
+          store.commit('setEosBalance',balance_res.result[0])
+        } 
+    },
   }
 }
 </script>
 
-<style>
+<style scoped>
 .main-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  
 }
 
 </style>

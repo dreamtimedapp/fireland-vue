@@ -1,5 +1,7 @@
 <template>
-   <div class="land-you-bet-container">
+   <el-row>
+       <el-col :span="24">
+      <div class="land-you-bet-container">
         <div class="betting-title-jump-area">
             <a hre="#" class="betting-rule-jump" v-scroll-to="'#rule'" ><span>规则详情</span></a>
             <a hre="#" v-scroll-to="'#touzhu-table'" >投注总榜</a>
@@ -41,10 +43,12 @@
             </el-col>
        </el-row>
         <div class="betting-wakuang">
-                   <span >玩游戏即挖矿，将获得投注额%5的lenmon代币</span>
+                   <span>每次有效投注额，将获得投注额%5的LEN代币</span>
                    <el-button @click="getToken" type="text">查看详情</el-button>
                    </div>
-     </div>    
+     </div> 
+     </el-col>
+    </el-row>   
 </template>
 <script>
 import {
@@ -96,7 +100,7 @@ export default {
         });
        },
        getToken() {
-          this.$alert('每次投注的10%用于资金池，其中5%用于提高币价，5%用于增发token送给投资者,持有len币将获得分红', 'Lemon Token(LEN)', {
+          this.$alert('每次有效投注的10%用于资金池，其中5%用于提高币价，5%用于增发token送给投资者', 'Lemon Token(LEN)', {
           confirmButtonText: '确定',
           callback: action => {
             /*this.$message({
@@ -219,6 +223,7 @@ export default {
     flex-direction: column;
     color: #fff;
     font-size: 12px;
+    padding-right: 20px;
 }
 .land-account-balance{
     display: flex;
@@ -266,7 +271,7 @@ export default {
     margin-top: 0;
     margin-bottom: 50px;
     padding: 30px 15px 30px 15px;
-    border-radius: 8px;
+    border-radius: 20px;
     margin-left: 20px;
     margin-right: 20px;
  }

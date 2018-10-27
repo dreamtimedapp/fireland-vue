@@ -1,12 +1,12 @@
 <template>
 <div class="main-container">
   <Header date="2019"></Header>
-  <el-row :gutter="10"  v-loading="loadingGame" class="land-info-row"
+  <el-row   class="land-info-row" 
     element-loading-text="拼命加载中"
     element-loading-spinner="el-icon-loading"
     element-loading-background="rgba(0, 0, 0, 0.8)">
-      <el-col :xs="24" :sm="8"  :md="8">   
-          <div class="land-game-countdown">
+      <el-col :xs="24" :sm="24"  :md="8" style="height:100%;backgroundcolor:#000">   
+          <div  class="land-game-countdown" style="height:100%">
            <span>{{gameStateInfo}}</span>
            <countdown :time="getCountTime">
               <template slot-scope="props">
@@ -15,14 +15,14 @@
            </countdown>
           </div> 
       </el-col>     
-      <el-col :xs="24" :sm="8"  :md="8">  
-        <div class="land-game-currentInfo ">
-          <span>当前最高土地价格: {{$store.state.LandStore.maxPrice}}  EOS</span>
+      <el-col :xs="24" :sm="24"  :md="8"  >  
+        <div  class="land-game-currentInfo ">
+          <span>当前最高土地价格: {{$store.state.LandStore.maxPrice}}  EOS</span><br>
           <span>最低土地价格: {{$store.state.LandStore.minPrice}}  EOS</span>
          </div>  
       </el-col>
-      <el-col :xs="24" :sm="8"  :md="8">   
-            <div class="land-game-pool">
+      <el-col :xs="24" :sm="24"  :md="8"  >   
+            <div  class="land-game-pool" >
             <span>当前奖池金额: {{$store.state.LandStore.poolBalace}}  EOS</span>
             <br/>
             <span> {{getBlackLand}}</span>
@@ -30,7 +30,7 @@
       </el-col>
   </el-row>    
   <Betting />
-  <Land  v-loading="loadingGame"
+  <Land 
     element-loading-text="拼命加载中"
     element-loading-spinner="el-icon-loading"
     element-loading-background="rgba(0, 0, 0, 0.8)"/>
@@ -80,8 +80,13 @@ export default {
   },
   mounted: function() {
       //(this.initGame,100);
-      this.getGameTime()
+      if (!this.account_name) {
+        this.login();
+      } 
       setTimeout(this.initGame,500);
+      setTimeout(this.getPlayerList,500);
+      setInterval(this.getLandInfo,1000);  
+      setInterval(this.getTouzhuInfo,1000);   
   },
   computed: {
     has_scatter: function() {
@@ -92,9 +97,9 @@ export default {
     },
     getBlackLand:function() {
       if (!store.state.LandStore.blackLand) {
-        return '当前黑地皮未被占有'
+        return '黑地皮未被占有'
       } else {
-        return '当前黑地皮所有者：' + store.state.LandStore.blackLand
+        return '黑地皮所有者：' + store.state.LandStore.blackLand
       }
     }
   },
@@ -107,9 +112,8 @@ export default {
         }
     },
     async initGame () {
-        if (!this.account_name) {
-          await this.login();
-        } 
+       
+        await this.getGameTime();
         let state = store.state.LandStore.gameState;
         if (state == 0) {
           this.gameStateInfo = "距离游戏开始还有："
@@ -118,14 +122,12 @@ export default {
          } else if (state == 2) {
            this.gameStateInfo  = "游戏暂未开始，请稍后"
         }
+        this.loadingGame = false;
         let balance_res = await getBalance();
         if (balance_res) {
           this.eos_balance = balance_res.result[0]
           store.commit('setEosBalance',balance_res.result[0])
         } 
-        this.loadingGame = false;
-        setInterval(this.getLandInfo,1000);
-        setInterval(this.getTouzhuInfo,3000);
     },
     //获取游戏开始时间或结束时间
     async getGameTime() {
@@ -187,6 +189,9 @@ export default {
   }
   .land-info-row {
     padding-top: 40px;
+    overflow:hidden;
+    align-items: center;
+   
   }
   .land-game-countdown {
     background-color: #F56C6C;
@@ -198,6 +203,7 @@ export default {
     margin-right: 20px;
     color: #FFF;
     font-size: 30px;
+    height: 100%;
   }
   .land-game-currentInfo {
     background-color: #E6A23C;
@@ -209,6 +215,7 @@ export default {
     margin-right: 20px;
     color: #fff;
     font-size: 30px;
+      height: 100%;
   }
   .land-game-pool {
      background-color: #67C23A;
@@ -220,5 +227,6 @@ export default {
     margin-right: 20px;
     color: #fff;
     font-size: 30px;
+      height: 100%;
   } 
 </style>
