@@ -3,7 +3,7 @@
        <el-row>
             <el-col :xs="24" :sm="12" :md="12" :lg="12">
                    <router-link to="game/land" class="card bg-dark text-white hidden-sm-only">
-                    <img class="card-img" src="https://gw.alicdn.com/tfs/TB15HQskgDqK1RjSZSyXXaxEVXa-3840-2160.jpg" style="min-height: 100px;">
+                    <img class="card-img" src="https://gw.alicdn.com/tfs/TB12sQ3lhnaK1RjSZFBXXcW7VXa-1378-1378.jpg" style="min-height: 100px;">
                     <div class="card-img-overlay">
                         <h5 class="card-title">
                           <span class="qll4MVPb7tVWufSoh90Yb">EOS大地主</span>
@@ -171,7 +171,7 @@ export default {
   align-items: center;
   border-radius: 50%;
   background-color: #409EFF;
-  color: #ffffff;
+  color: #fff;
   font-size: 30px;
 }
 .home-mining span {
@@ -250,16 +250,17 @@ export default {
     padding-left: 40px;
     padding-top: 20px;
     margin-bottom: 0px;
+    color: #fff;
    
 }
 
 .card-subtitle {
   padding: 1px;
   line-height: 100%;
-  font-size: 30px;
+  font-size: 20px;
   padding-left: 40px;
-  margin-top: 10px;
-  padding-top: 30px;
+  margin-top: 20px;
+  color: #fff;
 }
 
 .card-title  span{
@@ -281,9 +282,8 @@ export default {
 
 .card-game-pool {
     padding-left: 40px;
-    font-size: 30px;
-     margin-top: 10px;
-    padding-top: 40px;
+    font-size: 20px;
+
 }
 
 

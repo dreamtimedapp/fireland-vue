@@ -1,9 +1,10 @@
 <template>
 <div class="main-container">
+  <Fab/>
   <Header></Header>
   <Banner> </Banner>
   <Content></Content>
-  <vue-fab bg-color="#409EFF"> </vue-fab>
+    
 </div>
 </template>
 
@@ -11,6 +12,7 @@
 import Header from './components/header.vue';
 import Content from './components/content'
 import Banner from './components/banner'
+import Fab from '../fab';
 import store from '../store'
 import {
     get_scatter_identity,
@@ -28,19 +30,57 @@ import {
 } from '../services/web_wallet_service.js'
 import { setInterval, setTimeout } from 'timers';
 
-
 export default {
   name: 'landGame',
   components: {
     Header,
     Content,
-    Banner
+    Banner,
+    Fab
   },
   props: {},
   data: function() {
     return {
       account_name: '',
-      eos_balance:''
+      eos_balance:'',
+                positionTypes: [
+                    'fixed',
+                    'absolute'
+                ],
+                tooltipEvents: [
+                    'hover',
+                ],
+                actions:[
+                  {
+                    name: 'jumpHome',
+                    icon: 'home', 
+                    tooltip: '主页', 
+                    color:'#000',
+                  },
+                  {
+                    name: 'refresh',
+                    icon: 'refresh', 
+                    tooltip: '刷新', 
+                    color:'#E6A23C',
+                  },
+                  {
+                    name: 'share',
+                    icon: 'share', 
+                    tooltip: '分享', 
+                    color:'#F56C6C',
+                  },
+                  {
+                    name: 'sign',
+                    icon: 'add_alert', 
+                    tooltip: '签到',
+                    color:'#67C23A'
+                  }
+                ],
+                iconSizes:'medium',
+                position: 'bottom-right',
+                tooltipEvent: 'hover',
+                mainIcon: 'add',
+                enableRotation: true
     }
   },
   mounted: function() {
@@ -52,9 +92,15 @@ export default {
   computed: {
     has_scatter: function() {
       return store.state.global_config.has_scatter;
+    },
+    fixedTooltip() {
+      return this.tooltipEvent === 'fixed';
     }
   },
   methods: {
+    alert(){
+      alert('You have clicked me :)');
+    },
     async getHomeAccountName () {
         let res = await get_scatter_identity();
         if(!res.is_error){
