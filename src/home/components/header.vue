@@ -7,9 +7,7 @@
       </div>
       <div class="header-left">
       <div class="header-nav hidden-sm-only hidden-xs-only">
-          <a href="#" v-scroll-to="'#element'" class="text">柠檬通证(len)</a>
-          <b-link class="text">开源代码</b-link>
-          <a href="#" class="text" v-scroll-to="'#security'" >验证安全</a>
+          <a href="#" v-scroll-to="'#element'" class="text">柠檬通证(LEN)</a>
       </div>
       <el-button v-if="!getAccount" v-on:click="login" class="login-button" type="primary" >登录(EOS)账户</el-button>
       <div v-if="getAccount" class="login-account-name" type="primary" >{{$store.state.HomeStore.home_account_name}}</div>

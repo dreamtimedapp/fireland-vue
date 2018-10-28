@@ -3,6 +3,7 @@
   <Header></Header>
   <Banner> </Banner>
   <Content></Content>
+  <vue-fab bg-color="#409EFF"> </vue-fab>
 </div>
 </template>
 

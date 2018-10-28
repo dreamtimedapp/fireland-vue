@@ -13,7 +13,8 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'element-ui/lib/theme-chalk/display.css';
 import ScatterJS from 'scatterjs-core';
-import  VueScrollTo from 'vue-scrollto'
+import  VueScrollTo from 'vue-scrollto';
+import fab from 'vue-fab';
 
 Vue.config.productionTip = false
 Vue.use(VueRouter)
@@ -21,6 +22,7 @@ Vue.use(VueI18n)
 Vue.use(ElementUI)
 Vue.component(VueCountdown.name, VueCountdown);
 Vue.component('vue-markdown', VueMarkdown);
+Vue.component('vue-fab',fab);
 Vue.use(BootstrapVue);
 Vue.use(VueScrollTo);
 

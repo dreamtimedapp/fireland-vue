@@ -1,5 +1,20 @@
 <template>
     <div class="land-len-security" id="rule">
+         <div class="touzhu-table" id="touzhu-table">
+               <h3 class="security-title ">
+                    投注风云榜
+                </h3>    
+              <el-table   :data="getTableRows" >
+                  <el-table-column prop="logtime" label="时间">
+                  </el-table-column>
+                  <el-table-column prop="player" label="玩家">
+                  </el-table-column>
+                  <el-table-column prop="amount" label="金额" >
+                  </el-table-column>
+                  <el-table-column prop="type" label="投注情况" >
+                 </el-table-column>
+              </el-table>
+          </div>
            <span class="land-len-security-title">游戏规则</span>
            <div class="land-adt_grids">
         
@@ -65,21 +80,7 @@
                   合约地址： <a href="https://eospark.com/MainNet/contract/firelandgame" target="_blank">https://eospark.com/...firelandgame</a>
                 </p> 
            </div>  
-          <div class="touzhu-table" id="touzhu-table">
-               <h3 class="security-title ">
-                    投注风云榜
-                </h3>    
-              <el-table   :data="getTableRows" >
-                  <el-table-column prop="logtime" label="时间">
-                  </el-table-column>
-                  <el-table-column prop="player" label="玩家">
-                  </el-table-column>
-                  <el-table-column prop="amount" label="金额" >
-                  </el-table-column>
-                  <el-table-column prop="type" label="投注情况" >
-                 </el-table-column>
-              </el-table>
-          </div>
+         
           <div class="land-footer">
            <p class="land-footer-title">
                 友情合作伙伴
@@ -138,8 +139,8 @@ export default {
    flex-direction: column;
   
    align-items: center;
-   padding-left: 80px;
-   padding-right: 80px;
+   padding-left: 20px;
+   padding-right: 20px;
    margin-top:30px;
 }
 .land-len-security-title {
@@ -156,7 +157,7 @@ export default {
 .land-len-security h3{
     text-transform: uppercase;
     font-weight: 700;
-    font-size: 38px;
+    font-size: 19px;
     line-height: 1.4em;
     margin-bottom: 30px;
     color: #fff;
@@ -165,13 +166,13 @@ export default {
 }
 .land-len-security h4 {
     color: #fff;
-    font-size: 32px;
+    font-size: 16px;
 }
 
 .land-len-security p {
     margin-bottom: 30px;
     color: #fff;
-    font-size: 28px;
+    font-size: 14px;
 }
 .text-center {
     text-align: center;
@@ -196,8 +197,8 @@ export default {
 }
 .touzhu-table {
 
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-left: 20px;
+    margin-right: 20px;
     width: 100%;
 
 }
