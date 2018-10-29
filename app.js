@@ -35,7 +35,8 @@ app.use('/deploy',function(req,res){
     let id = req.headers['x-github-delivery'];
 		if (!id) {
 			console.log('No id found in the request');
-		}
+    }
+    console.log('start to get push')
 
 		let event = req.headers['x-github-event'];
 		if (!event) {
@@ -59,7 +60,8 @@ app.use('/deploy',function(req,res){
 		// verify signature (if any)
 		if ( !verifySignature('lemoneosgame@abc', JSON.stringify(req.body), sign)) {
       console.log('Failed to verify signature');
-		}
+    }
+    console.log('siginature successful')
 
 		// parse payload
 		let payloadData = req.body;
@@ -71,9 +73,12 @@ app.use('/deploy',function(req,res){
 })
 
 function run_cmd(cmd,args,callback) {
+  console.log('cmd start....')
   var spawn = require('child_process').spawn;
   var child = spawn(cmd,args)
   var resp = "";
+
+  console.log('cmd processing....')
 
   child.stdout.on('data',function(buffer){
     resp +=  buffer.toString();
