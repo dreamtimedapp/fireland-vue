@@ -13,6 +13,44 @@ const fs = require('fs');
 // 引入处理路径的模块
 const path = require('path');
 
+//引入github hooker
+var GithubWebHook = require('express-github-webhook')
+var webhookHandler = GithubWebHook({path:'/deploy',secret:'lemoneosgame@abc'})
+
+
+app.use(webhookHandler); // use our middleware
+
+webhookHandler.on('*', function (event, repo, data) {
+});
+
+webhookHandler.on('event', function (repo, data) {
+  console.log("event on somthing" + "repo:" + repo + "data:" + data)
+  run_cmd('sh',['./deploy.sh'],function(text){
+    console.log(text)
+  })
+});
+
+webhookHandler.on('reponame', function (event, data) {
+  console.log("reponame on somthing" + "event:" + event + "data:" + data)
+});
+
+webhookHandler.on('error', function (err, req, res) {
+});
+
+function run_cmd(cmd,args,callback) {
+  var spawn = require('child_process').spawn;
+  var child = spawn(cmd,args)
+  var resp = "";
+
+  child.stdout.on('data',function(buffer){
+    resp +=  buffer.toString();
+  })
+  child.stdout.on('end',function(){
+    callback(resp)
+  });
+}
+
+
 // 访问静态资源文件 这里是访问所有dist目录下的静态资源文件
 app.use(express.static(path.resolve(__dirname, './dist')))
 // 因为是单页应用 所有请求都走/dist/index.html
@@ -43,8 +81,5 @@ app.use('/api',signs)
 
 app.use('/api',gamelog)
 
-
-
-app.listen(3000, () => {
-  console.log('TEST')
+app.listen(3000, (req,res) => {
 })
