@@ -71,7 +71,7 @@ export default {
             {
                 name: 'sign',
                 icon: 'add_alert', 
-                tooltip: '签到送柠檬通证，不扣ram，即时到账',
+                tooltip: '签到送柠檬通证，即时到账',
                 color:'#67C23A'
             }
         ],
