@@ -36,17 +36,28 @@
                 </div>
                 <div class="land-account-invite">
                     <span>邀请链接：</span>
-                    <el-button @click="copy" onstyle="float: right; padding: 3px 0" type="text">复制</el-button>
+                    <el-button  @click="dialogVisible = true" onstyle="float: right; padding: 3px 0" type="text">复制</el-button>
                 </div>
                 <span class="land-invite-text ">邀请将永久享受好友投注的2%的分红</span>
               </div>  
             </el-col>
        </el-row>
+       <el-dialog
+           title="邀请好友享受分红"
+           :visible.sync="dialogVisible"
+           width="80%"
+           :before-close="handleClose">
+           <span>{{getInviteMessage}}</span>
+           <span slot="footer" class="dialog-footer">
+              <el-button @click="dialogVisible = false">取 消</el-button>
+              <el-button type="primary" @click="doCopy">复 制</el-button>
+           </span>
+        </el-dialog>
         <div class="betting-wakuang">
-                   <span>每次有效投注额，将获得投注额%5的LEN代币</span>
-                   <el-button @click="getToken" type="text">查看详情</el-button>
-                   </div>
-     </div> 
+            <span>每次有效投注额，将获得投注额%4.5的LEN代币</span>
+            <el-button @click="getToken" type="text">查看详情</el-button>
+        </div>
+      </div> 
      </el-col>
     </el-row>   
 </template>
@@ -74,6 +85,8 @@ export default {
       return {
           amount: '',
           memo: '',
+          dialogVisible:false,
+          dialogDetail: false,
           amountHolder:'最低投注:' + store.state.LandStore.minPrice + ' EOS'
       }
     },
@@ -84,34 +97,20 @@ export default {
         getAmountHolder () { 
          return '最低投注:' + store.state.LandStore.minPrice + ' EOS'
        },
+       getInviteMessage() {
+         return 'EOS 国土无双，我的土地我称雄，邀请好友享受永久分红，专属邀请链接：' + this.getPersonalInviteUrl() 
+      }
     },
     mounted: function() { 
     },
     methods: {
-       copy() {
-          this.$alert(this.getPersonalInviteUrl(), '我的邀请链接', {
-          confirmButtonText: '确定',
-          callback: action => {
-            /*this.$message({
-              type: 'info',
-              message: `action: ${ action }`
-            });*/
-          }
-        });
-       },
+       
        getToken() {
-          this.$alert('每次有效投注的10%用于资金池，其中5%用于提高币价，5%用于增发token送给投资者', 'Lemon Token(LEN)', {
-          confirmButtonText: '确定',
-          callback: action => {
-            /*this.$message({
-              type: 'info',
-              message: `action: ${ action }`
-            });*/
-          }});
+          alert('每次有效投注的9%用于资金池，其中4.5%用于提高币价，4.5%用于增发token送给投资者')
        },
        async playBetting() {
           if (store.state.LandStore.gameState != 1) {
-              alert('游戏还未开始，请不要投注')
+               alert('游戏还未开始，不可投注')
               return;
           } 
           if (this.amount < store.state.LandStore.minPrice ) {
@@ -128,12 +127,12 @@ export default {
        },
        async playrecast() {
           if (store.state.LandStore.gameState != 1) {
-              alert('游戏还未开始，请不要投注')
+              alert('游戏还未开始，不可复投')
               return;
           } 
           if (this.amount < store.state.LandStore.minPrice ) {
-              alert('投注金额不得低于' + store.state.LandStore.minPrice + 'EOS')
-              return;
+             alert('投注金额不得低于' + store.state.LandStore.minPrice + 'EOS')
+             return;
           } 
           let res = await recast(CONTRACT_NAME,this.amount,this.getRefInviteUrl());
           if (res.is_error) {
@@ -164,15 +163,25 @@ export default {
            let defaultUrl = "http://www.lemonfun.io/#/game/land?ref=";
            let url = defaultUrl
            if (getQueryString("ref") == null) {
-               url = defaultUrl+ "teameaccount"
+               url = defaultUrl+ "lemoneosgame"
            } else {
                url = defaultUrl + getQueryString('ref')
            }
-           return "teameaccount";
+           return "lemoneosgame";
        },
        getPersonalInviteUrl() {
            return "http://www.lemonfun.io/#/game/land?ref=" + store.state.LandStore.account_name;
-       }
+       },
+      doCopy() {
+        let inviteMessage = 'EOS 国土无双，我的土地我称雄，邀请好友享受永久分红，我的邀请链接：' + this.getPersonalInviteUrl()
+        this.$copyText(inviteMessage).then(function (e) {
+          console.log(e)
+        }, function (e) {
+          alert('Can not copy')
+          console.log(e)
+        })
+        this.dialogVisible = false
+    },
     }
 }
 </script>

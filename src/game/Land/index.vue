@@ -46,7 +46,7 @@ import Header from './components/header.vue';
 import Land from './components/land.vue';
 import Betting from './components/betting';
 import Rule from './components/rule'
-import Fab from '../../fab';
+import Fab from '../../common/fab';
 import store from '../../store'
 import {
     get_scatter_identity,
@@ -127,7 +127,8 @@ export default {
         }
         this.loadingGame = false;
         let balance_res = await getBalance();
-        if (balance_res) {
+        if (balance_res && balance_res.result && balance_res.result.length > 0) {
+          
           this.eos_balance = balance_res.result[0]
           store.commit('setEosBalance',balance_res.result[0])
         } 

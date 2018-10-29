@@ -12,7 +12,7 @@
 import Header from './components/header.vue';
 import Content from './components/content'
 import Banner from './components/banner'
-import Fab from '../fab';
+import Fab from '../common/fab';
 import store from '../store'
 import {
     get_scatter_identity,

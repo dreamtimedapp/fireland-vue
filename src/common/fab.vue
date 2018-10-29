@@ -5,28 +5,25 @@
   :visible.sync="dialogVisible"
   width="80%"
   :before-close="handleClose">
-  <span>邀请好友永久享受2%分红</span>
+  <span>{{this.getInviteMessage}}</span>
   <span slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">取 消</el-button>
     <el-button type="primary" @click="doCopy">复 制</el-button>
   </span>
-</el-dialog>
-   
-   <vue-fab
+  </el-dialog>
+  <vue-fab
     :position="position"
-                :icon-size="iconSizes"
-                :position-type="positionType"
-                bg-color="#409EFF"
-                :main-icon="mainIcon"
-                :actions="actions"
-                @jumpHome="jumpHome"
-                @refresh ="refresh"
-                @sign = "sign"
-                @share = "share"
-                :fixed-tooltip="fixedTooltip"
-                :enable-rotation="enableRotation">
-   
-    
+    :icon-size="iconSizes"
+    :position-type="positionType"
+    bg-color="#409EFF"
+    :main-icon="mainIcon"
+    :actions="actions"
+    @jumpHome="jumpHome"
+    @refresh ="refresh"
+    @sign = "sign"
+    @share = "share"
+    :fixed-tooltip="fixedTooltip"
+    :enable-rotation="enableRotation">
   </vue-fab> 
   </div>
 </template>
@@ -35,7 +32,8 @@
 import {get_sign_all,
         sign_onday
 
-} from './services/get_data_service.js'
+} from '../services/get_data_service.js'
+import store from '../store'
 export default {
   name: 'fab',
   props: {},
@@ -82,10 +80,10 @@ export default {
         tooltipEvent: 'hover',
         mainIcon: 'add',
         enableRotation: true,
-        message:'邀请好友享受永久分红'
     }
   },
   mounted: function() {
+   
   },
   computed: {
     has_scatter: function() {
@@ -93,6 +91,9 @@ export default {
     },
     fixedTooltip() {
       return this.tooltipEvent === 'fixed';
+    },
+    getInviteMessage() {
+      return 'EOS 国土无双，我的土地我称雄，邀请好友享受永久分红，专属邀请链接：' + this.getPersonalInviteUrl() 
     }
   },
   methods: {
@@ -103,14 +104,17 @@ export default {
       location.reload()
     },
     doCopy() {
-      
-        this.$copyText(this.message).then(function (e) {
+        let inviteMessage = 'EOS 国土无双，我的土地我称雄，邀请好友享受永久分红，我的邀请链接：' + this.getPersonalInviteUrl()
+        this.$copyText(inviteMessage).then(function (e) {
           console.log(e)
         }, function (e) {
           alert('Can not copy')
           console.log(e)
         })
         this.dialogVisible = false
+    },
+    getPersonalInviteUrl() {
+        return "http://www.lemonfun.io/#/game/land?ref=" + store.state.LandStore.account_name;
     },
     async sign () {
      let res =  await sign_onday()
@@ -131,7 +135,3 @@ export default {
 }
 </script>
 
-<style scoped>
-
-
-</style>

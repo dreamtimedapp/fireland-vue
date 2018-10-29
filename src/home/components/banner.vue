@@ -6,7 +6,7 @@
                     <img class="card-img" src="https://gw.alicdn.com/tfs/TB12sQ3lhnaK1RjSZFBXXcW7VXa-1378-1378.jpg" style="min-height: 100px;">
                     <div class="card-img-overlay">
                         <h5 class="card-title">
-                          <span class="qll4MVPb7tVWufSoh90Yb">EOS大地主</span>
+                          <span class="qll4MVPb7tVWufSoh90Yb">EOS 国土无双</span>
                         </h5>
                         <p class="card-subtitle">
                           <span>

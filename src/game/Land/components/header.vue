@@ -3,7 +3,7 @@
     <div class="land-header-container"> 
       <div>  
       <b-img class="land-logo" src="https://img.alicdn.com/tfs/TB12p3CjAvoK1RjSZPfXXXPKFXa-2000-2000.png" /> 
-      <span class="land-logo-title">EOS大地主</span> 
+      <span class="land-logo-title">EOS 国土无双</span> 
       </div>
       <div class="land-header-left">
       <div class="land-header-nav hidden-xs-only">
