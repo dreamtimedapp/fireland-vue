@@ -70,7 +70,7 @@
                    结束时，最终持有2块黑地皮的玩家均分累计奖池金额；
                 </p>
                 <h3 class="land-security-title ">
-                    EOS大地主智能合约
+                    EOS 国土无双智能合约
                 </h3>    
                
                 <p>

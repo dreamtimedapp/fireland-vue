@@ -36,7 +36,7 @@
     element-loading-background="rgba(0, 0, 0, 0.8)"/>
   <Rule/>
   <!--<BettingTable/>-->
-  <Fab/>
+  <Fab v-bind:account="account_name"/>
 </div>
 
 </template>
@@ -113,6 +113,12 @@ export default {
           this.account_name = res.name
           store.commit('getAccount',res.name)
         }
+        let balance_res = await getBalance();
+        if (balance_res && balance_res.result && balance_res.result.length > 0) {
+          
+          this.eos_balance = balance_res.result[0]
+          store.commit('setEosBalance',balance_res.result[0])
+        } 
     },
     async initGame () {
        
@@ -126,12 +132,7 @@ export default {
            this.gameStateInfo  = "游戏暂未开始，请稍后"
         }
         this.loadingGame = false;
-        let balance_res = await getBalance();
-        if (balance_res && balance_res.result && balance_res.result.length > 0) {
           
-          this.eos_balance = balance_res.result[0]
-          store.commit('setEosBalance',balance_res.result[0])
-        } 
     },
     //获取游戏开始时间或结束时间
     async getGameTime() {

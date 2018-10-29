@@ -74,6 +74,7 @@ import {
     get_gameInfo_list,
 withdraw,
 } from '../../../services/web_wallet_service.js'
+import { add_gamelog,get_game_log} from '../../../services/get_data_service.js';
 import {CONTRACT_NAME} from '../../../config/config.js'
 import {getQueryString} from '../../../utils/utils.js'
 import store from '../../../store'
@@ -122,6 +123,7 @@ export default {
             alert(JSON.stringify(res.msg))
           } else {
             store.commit('setMyInfo','')  
+            add_gamelog(store.state.LandStore.account_name,'',this.amount,'',0)
             alert('下注成功！')
           }
        },
@@ -139,6 +141,7 @@ export default {
             alert(JSON.stringify(res.msg))
           } else {
             store.commit('setMyInfo','')  
+            add_gamelog(store.state.LandStore.account_name,'',this.amount,'',1)
             alert('下注成功！')
           }
        },
@@ -162,7 +165,7 @@ export default {
        getRefInviteUrl() {
            let defaultUrl = "http://www.lemonfun.io/#/game/land?ref=";
            let url = defaultUrl
-           if (getQueryString("ref") == null) {
+           if (!getQueryString("ref")) {
                url = defaultUrl+ "lemoneosgame"
            } else {
                url = defaultUrl + getQueryString('ref')

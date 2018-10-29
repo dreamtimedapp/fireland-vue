@@ -17,7 +17,7 @@ router.get('/gamelog',(req,res)=>{
 //根据用户名查询投注记录
 router.get('/gamelog/:player',(req,res)=>{
     console.log(req.params.account)
-    Signs.find({account:req.params.account})
+    GameLog.find({account:req.params.account})
     .sort({created_at : -1})
     .then(signs => {
         res.json(signs)
@@ -30,7 +30,8 @@ router.get('/gamelog/:player',(req,res)=>{
 //添加签到情况
 router.post('/gamelog', (req, res) => {
     //使用Movie model上的create方法储存数据
-    Signs.create(req.body, (err, gamelog) => {
+    console.log(req.body)
+    GameLog.create(req.body, (err, gamelog) => {
       if (err) {
         res.json(err)
       } else {

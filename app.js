@@ -5,7 +5,7 @@ const app = express()
 
 const index = require('./router/index')
 const signs = require('./router/sign')
-
+const gamelog = require('./router/gamelog')
 const bodyParser = require('body-parser')
 
 app.use(bodyParser.urlencoded({
@@ -26,6 +26,9 @@ app.use(function (req, res, next) {
 
 app.use('/',index)
 app.use('/api',signs)
+
+app.use('/api',gamelog)
+
 
 
 app.listen(3000, () => {

@@ -1,7 +1,7 @@
 <template>
 <div> 
   <el-dialog
-  title="分享"
+  title="邀请好友获奖励"
   :visible.sync="dialogVisible"
   width="80%"
   :before-close="handleClose">
@@ -34,12 +34,12 @@ import {get_sign_all,
 
 } from '../services/get_data_service.js'
 import store from '../store'
+import { EOS_Inviter } from '../config/config.js'
 export default {
   name: 'fab',
-  props: {},
+  props: ['account'],
   data: function() {
     return {
-      account_name: '',
       eos_balance:'',
       dialogVisible: false,
       positionTypes: [
@@ -65,13 +65,13 @@ export default {
             {
                 name: 'share',
                 icon: 'share', 
-                tooltip: '分享', 
+                tooltip: '邀请好友享受永久分红', 
                 color:'#F56C6C',
             },
             {
                 name: 'sign',
                 icon: 'add_alert', 
-                tooltip: '每日签到领lemon币',
+                tooltip: '签到送柠檬通证，不扣ram，即时到账',
                 color:'#67C23A'
             }
         ],
@@ -94,6 +94,9 @@ export default {
     },
     getInviteMessage() {
       return 'EOS 国土无双，我的土地我称雄，邀请好友享受永久分红，专属邀请链接：' + this.getPersonalInviteUrl() 
+    },
+    getAccout() {
+      return this.account
     }
   },
   methods: {
@@ -114,11 +117,14 @@ export default {
         this.dialogVisible = false
     },
     getPersonalInviteUrl() {
-        return "http://www.lemonfun.io/#/game/land?ref=" + store.state.LandStore.account_name;
+        return "http://www.lemonfun.io/#/game/land?ref=" + this.account;
     },
     async sign () {
-     let res =  await sign_onday()
-    
+      let res =  await sign_onday(this.account)
+      if (!res) {
+        alert('送币')
+         EOS_Inviter(this.account)
+      } 
     },
     share () {
        this.dialogVisible = true;

@@ -9,7 +9,8 @@ const GameLogSchema = mongoose.Schema(
         landID : {type:String},
         amount : {type:String},
         integral_num : {type:Number},
-        logtime: {type:Date,default: Date.now}
+        logtime: {type:Date,default: Date.now},
+        recast : {type:Number}
     }
 )
 

@@ -23,8 +23,8 @@ export const get_sign_from_account = async (account)=> {
     })
 }
 
-export const sign_onday = async ()=> {
-    let account = store.state.HomeStore.home_account_name;
+export const sign_onday = async (account_name)=> {
+    let account = account_name;
     if (!account) {
         alert('请使用scatter登录后再进行签到')
         return;
@@ -45,36 +45,44 @@ export const sign_onday = async ()=> {
        // 使用团队账户进行智能合约转账
     }
     let data = qs.stringify({
-        'account': store.state.HomeStore.home_account_name
+        'account': account
     })
     if (!account) {
         alert('请登录后再进行签到')
     }
-    axios.post('/api/signs',data,{headers: { 'Content-Type': 'application/x-www-form-urlencoded' }})
-    .then(function (response) {
+    return await axios.post('/api/signs',data,{headers: { 'Content-Type': 'application/x-www-form-urlencoded' }})
+    .then(response => {
        alert("签到成功")
+       return true
     })
     .catch(function (error) {
+        return false
     });
 }
 
 
 // 更新gamelog表
 
-export const add_gamelog = async (player,landID,amount,type)=> {
+export const add_gamelog = async (player,landID,amount,type,recast)=> {
+    debugger
     let data = qs.stringify({
-        'player': store.state.HomeStore.account,
+        'player': player,
         'landID' : landID,
         "amount" : amount,
-        "type" : type
+        "type" : type,
+        "recast" : recast
     })
+
     axios.post('/api/gamelog',data,{headers: { 'Content-Type': 'application/x-www-form-urlencoded' }})
     .then(function (response) {
-       alert("更新投注情况成功")
+       //alert("更新投注情况成功")
     })
     .catch(function (error) {
+       // alert(error)
     });
 }
+
+
 
 /**
  *  查询用户用户投注情况

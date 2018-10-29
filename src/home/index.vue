@@ -1,6 +1,6 @@
 <template>
 <div class="main-container">
-  <Fab/>
+  <Fab v-bind:account="account_name"/>
   <Header></Header>
   <Banner> </Banner>
   <Content></Content>
@@ -98,17 +98,15 @@ export default {
     }
   },
   methods: {
-    alert(){
-      alert('You have clicked me :)');
-    },
+   
     async getHomeAccountName () {
         let res = await get_scatter_identity();
         if(!res.is_error){
-          this.account_name = res.data
+          this.account_name = res.data.name
           store.commit('setHomeAccount',res.data.name) 
         }
         let balance_res = await getBalance();
-        if (balance_res) {
+        if (balance_res && balance_res.result && balance_res.result.length > 0) {
           this.eos_balance = balance_res.result[0]
           store.commit('setEosBalance',balance_res.result[0])
         } else {
@@ -135,12 +133,10 @@ export default {
     async getLenTokenInfo () {
       let res = await get_len_token_info();
       if(!res.is_error){
-          this.account_name = res.data
           store.commit('setLenDetail',res.data) 
       }
       let len = await get_len_balance_bytable()
       if (!res.is_error) {
-          this.account_name = len.data
           store.commit('setLenBalance',len.data) 
       }
     },
@@ -157,11 +153,6 @@ export default {
          } else if (state == 2) {
            this.gameStateInfo  = "游戏暂未开始，请稍后"
         }
-        let balance_res = await getBalance();
-        if (balance_res) {
-          this.eos_balance = balance_res.result[0]
-          store.commit('setEosBalance',balance_res.result[0])
-        } 
     },
   }
 }
