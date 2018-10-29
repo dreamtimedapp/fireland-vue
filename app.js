@@ -88,6 +88,7 @@ function run_cmd(cmd,args,callback) {
   });
 }
 
+
 // 访问静态资源文件 这里是访问所有dist目录下的静态资源文件
 app.use(express.static(path.resolve(__dirname, './dist')))
 // 因为是单页应用 所有请求都走/dist/index.html
