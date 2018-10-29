@@ -26,7 +26,10 @@ export const get_sign_from_account = async (account)=> {
 export const sign_onday = async (account_name)=> {
     let account = account_name;
     if (!account) {
-        alert('请使用scatter登录后再进行签到')
+        account = store.state.HomeStore.home_account_name
+    }
+    if (!account) {
+         alert('请使用scatter登录后再进行签到')
          return;
     }
     let accountResult = await get_sign_from_account(account);
