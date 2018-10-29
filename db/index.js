@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb://150.109.104.119:27017/database?authMechanism=MONGODB-CR&authSource=admin')
+mongoose.connect('mongodb://127.0.0.1:27017/database?authMechanism=MONGODB-CR&authSource=admin')
 
 /**
   * 连接成功
