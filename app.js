@@ -23,6 +23,7 @@ app.use(webhookHandler); // use our middleware
 webhookHandler.on('*', function (event, repo, data) {
 });
 
+
 webhookHandler.on('event', function (repo, data) {
   console.log("event on somthing" + "repo:" + repo + "data:" + data)
   run_cmd('sh',['./deploy.sh'],function(text){
