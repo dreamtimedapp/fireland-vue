@@ -15,7 +15,7 @@ git pull origin develop
 
 npm install $PROJECT_PATH 
 
-npm run build $PROJECT_PATH
+npm run build $BUILD_PATH
 
 # 删除旧构建文件
 rm -r ${NGINX_DEPLOY_PATH}*
