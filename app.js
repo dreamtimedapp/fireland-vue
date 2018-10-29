@@ -29,7 +29,7 @@ function signData(secret, data) {
 function verifySignature(secret, data, signature) {
 	return bufferEq(new Buffer(signature), new Buffer(signData(secret, data)));
 }
-
+app.use(bodyParser.json()); 
 
 app.use('/deploy',function(req,res){
     let id = req.headers['x-github-delivery'];
@@ -66,7 +66,7 @@ app.use('/deploy',function(req,res){
     }
     console.log('siginature successful')
 
-    
+
 		// parse payload
 		let payloadData = req.body;
 		const repo = payloadData.repository && payloadData.repository.name;
