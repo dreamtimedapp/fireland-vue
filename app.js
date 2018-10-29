@@ -21,6 +21,7 @@ var webhookHandler = GithubWebHook({path:'/deploy',secret:'lemoneosgame@abc'})
 app.use(webhookHandler); // use our middleware
 
 webhookHandler.on('*', function (event, repo, data) {
+  console.log(event)
 });
 
 
