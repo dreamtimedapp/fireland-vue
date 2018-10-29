@@ -22,6 +22,5 @@ rm -r ${NGINX_DEPLOY_PATH}*
 
 cp -R ${BUILD_PATH}* $NGINX_DEPLOY_PATH
 
-pm2 restart app.js 
 
 
