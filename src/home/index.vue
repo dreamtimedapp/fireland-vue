@@ -84,6 +84,7 @@ export default {
     }
   },
   mounted: function() {
+    alert('push 就生效了hahahaa')
     setTimeout(this.getHomeAccountName,100);
     setTimeout(this.initGame,700);
     setTimeout(this.getLenTokenInfo,500);
