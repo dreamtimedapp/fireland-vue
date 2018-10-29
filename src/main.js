@@ -15,7 +15,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'element-ui/lib/theme-chalk/display.css';
 import ScatterJS from 'scatterjs-core';
 import VueScrollTo from 'vue-scrollto';
-import fab from 'vue-fab';
+import fab from './FAB.vue';
 import Share from 'vue-social-share'
 import axios from 'axios';
 import VueClipboard from 'vue-clipboard2'
