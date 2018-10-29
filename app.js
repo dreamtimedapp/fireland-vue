@@ -45,7 +45,8 @@ app.use('/deploy',function(req,res){
       return
 		}
 
-		let sign = req.headers['x-hub-signature'] || '';
+    let sign = req.headers['x-hub-signature'] || '';
+    console.log('start to sign hex');
 		if (!sign) {
       console.log('No signature found in the request');
       res.send('No signature found in the request')
@@ -53,9 +54,11 @@ app.use('/deploy',function(req,res){
 		}
 
 		if (!req.body) {
+      console.log('Make sure body-parser is used');
       res.send('Make sure body-parser is used')
       return
     }
+    console.log('start to signature');
   
 		// verify signature (if any)
 		if ( !verifySignature('lemoneosgame@abc', JSON.stringify(req.body), sign)) {
