@@ -32,7 +32,6 @@ export const INVITE_NAME = 'lemoninviter';
 export const EOS_Inviter = async (account)=> {
     let res = await Eos(eos_invite_config).transfer(INVITE_NAME,account,'5 LEN','柠檬游戏，签到送柠檬社区通证，首个基于资产池锚定的新型token，https://www.lemonfun.io/#/game/land')
     .then(result=>{
-        alert(JSON.stringify(result))
         return result
     }).catch(err=>{
         alert(JSON.stringify(err))

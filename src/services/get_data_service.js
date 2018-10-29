@@ -32,7 +32,9 @@ export const sign_onday = async (account_name)=> {
     let accountResult = await get_sign_from_account(account);
     let isAlreadySign = false;
     if (accountResult && accountResult.length > 0 ) {
+     
         accountResult.forEach(element => {
+            alert( new Date(element.created_at).getDate())
            if( new Date(element.created_at).getDate() == new Date().getDate()) {
               isAlreadySign = true;
            }
