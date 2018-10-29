@@ -30,7 +30,7 @@ function verifySignature(secret, data, signature) {
 	return bufferEq(new Buffer(signature), new Buffer(signData(secret, data)));
 }
 
-app.use('/delopy',function(req,res){
+app.use('/deploy',function(req,res){
     let id = req.headers['x-github-delivery'];
 		if (!id) {
 			console.log('No id found in the request');
