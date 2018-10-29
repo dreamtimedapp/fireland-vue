@@ -103,7 +103,7 @@ export default {
            state.eos_balance = balance
         },
         setLenBalance(state,data) {
-            if (data.rows.length == 0) {
+            if (!data || !data.rows || data.rows.length == 0) {
                 state.len_balance = 0;
                 return
             }
@@ -112,7 +112,7 @@ export default {
         },
         setLenDetail(state,data) {
             let len = data.rows[0]
-            state.supply = len.supply
+            state.supply = Math.abs(parseFloat(len.supply.replace(' LEN')).toFixed(4) -  990000) + ' LEN'
             state.max_supply = len.max_supply
             state.price = len.price 
             state.cash_pool = len.cash_pool 

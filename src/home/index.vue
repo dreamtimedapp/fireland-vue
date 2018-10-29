@@ -84,10 +84,10 @@ export default {
     }
   },
   mounted: function() {
-    setTimeout(this.getHomeAccountName,500);
+    setTimeout(this.getHomeAccountName,100);
     setTimeout(this.initGame,700);
     setTimeout(this.getLenTokenInfo,500);
-    setInterval(this.getLandInfo,2000);
+    //setInterval(this.getLandInfo,2000);
   },
   computed: {
     has_scatter: function() {
@@ -106,6 +106,7 @@ export default {
           store.commit('setHomeAccount',res.data.name) 
         }
         let balance_res = await getBalance();
+    
         if (balance_res && balance_res.result && balance_res.result.length > 0) {
           this.eos_balance = balance_res.result[0]
           store.commit('setEosBalance',balance_res.result[0])

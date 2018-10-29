@@ -121,8 +121,7 @@ export default {
     },
     async sign () {
       let res =  await sign_onday(this.account)
-      if (!res) {
-        alert('送币')
+      if (res) {
          EOS_Inviter(this.account)
       } 
     },
