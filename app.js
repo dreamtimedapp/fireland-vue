@@ -1,5 +1,7 @@
 const express = require('express')
 const mongoose = require('./db/index')
+const crypto = require('crypto');
+const bufferEq = require('buffer-equal-constant-time');
 
 const app = express()
 
@@ -15,29 +17,57 @@ const path = require('path');
 
 //引入github hooker
 var GithubWebHook = require('express-github-webhook')
-var webhookHandler = GithubWebHook({path:'/deploy',secret:'lemoneosgame@abc'})
+var webhookHandler = GithubWebHook({path:'/delopy',secret:'lemoneosgame@abc'})
 
+/**
+ * Helper functions
+ */
+function signData(secret, data) {
+	return 'sha1=' + crypto.createHmac('sha1', secret).update(data).digest('hex');
+}
 
-app.use(webhookHandler); // use our middleware
+function verifySignature(secret, data, signature) {
+	return bufferEq(new Buffer(signature), new Buffer(signData(secret, data)));
+}
 
-webhookHandler.on('*', function (event, repo, data) {
-  console.log(event)
-});
+app.use('/delopy',function(req,res){
+    let id = req.headers['x-github-delivery'];
+		if (!id) {
+			console.log('No id found in the request');
+		}
 
+		let event = req.headers['x-github-event'];
+		if (!event) {
+      console.log('No event found in the request');
+      res.send('No event found in the request')
+      return
+		}
 
-webhookHandler.on('event', function (repo, data) {
-  console.log("event on somthing" + "repo:" + repo + "data:" + data)
-  run_cmd('sh',['./deploy.sh'],function(text){
-    console.log(text)
-  })
-});
+		let sign = req.headers['x-hub-signature'] || '';
+		if (!sign) {
+      console.log('No signature found in the request');
+      res.send('No signature found in the request')
+      return
+		}
 
-webhookHandler.on('reponame', function (event, data) {
-  console.log("reponame on somthing" + "event:" + event + "data:" + data)
-});
+		if (!req.body) {
+      res.send('Make sure body-parser is used')
+      return
+    }
+  
+		// verify signature (if any)
+		if ( !verifySignature('lemoneosgame@abc', JSON.stringify(req.body), sign)) {
+      console.log('Failed to verify signature');
+		}
 
-webhookHandler.on('error', function (err, req, res) {
-});
+		// parse payload
+		let payloadData = req.body;
+		const repo = payloadData.repository && payloadData.repository.name;
+    run_cmd('sh',['./deploy.sh'],function(text){
+      console.log(text)
+      res.send(text)
+    })
+})
 
 function run_cmd(cmd,args,callback) {
   var spawn = require('child_process').spawn;
@@ -51,7 +81,6 @@ function run_cmd(cmd,args,callback) {
     callback(resp)
   });
 }
-
 
 // 访问静态资源文件 这里是访问所有dist目录下的静态资源文件
 app.use(express.static(path.resolve(__dirname, './dist')))

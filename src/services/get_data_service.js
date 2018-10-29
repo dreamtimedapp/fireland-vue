@@ -25,10 +25,9 @@ export const get_sign_from_account = async (account)=> {
 
 export const sign_onday = async (account_name)=> {
     let account = account_name;
-    alert('签到')
     if (!account) {
         alert('请使用scatter登录后再进行签到')
-        return;
+         return;
     }
     let accountResult = await get_sign_from_account(account);
     let isAlreadySign = false;
