@@ -1,10 +1,10 @@
 <template>
-    <div class="home-banner-carousel-item">
+    <div v-on:click="greet"  class="home-banner-carousel-item">
        <el-row>
             <el-col :xs="24" :sm="12" :md="12" :lg="12">
-                   <router-link to="game/land" class="card bg-dark text-white hidden-sm-only">
-                    <img class="card-img" src="https://gw.alicdn.com/tfs/TB12sQ3lhnaK1RjSZFBXXcW7VXa-1378-1378.jpg" style="min-height: 100px;">
-                    <div class="card-img-overlay">
+                   <router-link to="/" class="card bg-dark text-white hidden-sm-only">
+                    <img  class="card-img" src="https://gw.alicdn.com/tfs/TB12sQ3lhnaK1RjSZFBXXcW7VXa-1378-1378.jpg" style="min-height: 100px;">
+                    <div class="card-img-overlay"  >
                         <h5 class="card-title">
                           <span class="qll4MVPb7tVWufSoh90Yb">EOS 国土无双</span>
                         </h5>
@@ -14,14 +14,14 @@
                           </span>
                         </p>
                         <div  class="card-subtitle">
-                         <span>{{gameStateInfo}}</span>
+                         <span>{{gameStateInfo}}</span><!--
                             <countdown :time="getCountTime">
                             <template slot-scope="props">
                             {{ props.days }} 天 {{ props.hours }} 小时 {{ props.minutes }} 分 {{ props.seconds }} 秒
                             </template>
-                            </countdown>
+                            </countdown>-->
                         </div> 
-                        <span class="card-game-pool">本轮奖池金额： {{$store.state.LandStore.poolBalace}}</span>   
+                       <!-- <span class="card-game-pool">本轮奖池金额： {{$store.state.LandStore.poolBalace}}</span> -->  
                     </div>
                    </router-link>
                 </el-col>
@@ -74,19 +74,23 @@ export default {
     },
   },
   methods: {
+     greet: function (event)  {
+      alert('游戏挖矿将于11月1号正式开始')
+    },
     async initGame () {
         let counterlist = await get_gameInfo_list()
         if (!counterlist.is_error) {
             store.commit('getGameInfo',counterlist.data.rows[0])
         } 
         let state = store.state.LandStore.gameState;
-        if (state == 0) {
+        this.gameStateInfo = "游戏挖矿将于11月1号20:00正式开始，签到即送首个价格瞄定资产机制社区通证"
+        /*if (state == 0) {
           this.gameStateInfo = "距离开始还有："
          } else if (state == 1) {
            this.gameStateInfo = "距离结束还有："
          } else if (state == 2) {
            this.gameStateInfo  = "游戏暂未开始："
-        }
+         }*/
     },
   }
 }
