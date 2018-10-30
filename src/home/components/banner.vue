@@ -83,7 +83,7 @@ export default {
             store.commit('getGameInfo',counterlist.data.rows[0])
         } 
         let state = store.state.LandStore.gameState;
-        this.gameStateInfo = "游戏挖矿将于11月1号20:00正式开始，右下角签到领取LEN币"
+        this.gameStateInfo = "游戏挖矿将于11月1号20:00正式开始，每日右下角签到可领取LEN币"
         /*if (state == 0) {
           this.gameStateInfo = "距离开始还有："
          } else if (state == 1) {
