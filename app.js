@@ -2,7 +2,7 @@ const express = require('express')
 const mongoose = require('./db/index')
 const crypto = require('crypto');
 const bufferEq = require('buffer-equal-constant-time');
-
+const cors = require('cors')
 const app = express()
 
 const index = require('./router/index')
@@ -30,6 +30,7 @@ function verifySignature(secret, data, signature) {
 	return bufferEq(new Buffer(signature), new Buffer(signData(secret, data)));
 }
 app.use(bodyParser.json()); 
+app.use(cors())
 
 
 app.use('/deploy',function(req,res){
