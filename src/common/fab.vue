@@ -122,7 +122,10 @@ export default {
     async sign () {
       let res =  await sign_onday(this.account)
       if (res) {
-         EOS_Inviter(this.account)
+        let result = EOS_Inviter(this.account)
+        if (result) {
+          alert("领取 LEN 成功")
+        }
       } 
     },
     share () {

@@ -51,9 +51,6 @@ export default {
         getAccount() {
            return store.state.HomeStore.home_account_name
         },
-        hasScatter() {
-
-        }
     },
     methods: {
       login: async function(event) {

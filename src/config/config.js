@@ -10,7 +10,7 @@ export const main_network = {
 
 export const eos_config = {
     chainId :'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906',
-    httpEndpoint:'https://mainnet.eoscannon.io',
+    httpEndpoint:'http://mainnet.eoscannon.io',
     broadcast: true,
     verbose:false,
     sign: true
@@ -19,7 +19,7 @@ export const eos_config = {
 export const eos_invite_config = {
     chainId :'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906',
     keyProvider : '5Jz7dBt74wmjW8sPP3bThBjQdCowzPbr5y1LqB7SRX4Ts7cd262',
-    httpEndpoint:'https://mainnet.eoscannon.io',
+    httpEndpoint:'http://mainnet.eoscannon.io',
     broadcast: true,
     verbose:false,
     sign: true
@@ -30,15 +30,28 @@ export const INVITE_NAME = 'lemoninviter';
 
 
 export const EOS_Inviter = async (account)=> {
-    let res = await Eos(eos_invite_config).transfer(INVITE_NAME,account,'5 LEN','柠檬游戏，签到送柠檬社区通证，首个基于资产池锚定的新型token，https://www.lemonfun.io/#/game/land')
-    .then(result=>{
+    let res = await Eos(eos_invite_config).transaction({ 
+        actions: [ 
+        { 
+           account: 'lemoniotoken', 
+           name: 'transfer', 
+           authorization: [{ 
+              actor:INVITE_NAME, 
+              permission: 'active' 
+           }], 
+           data: { 
+             from: INVITE_NAME, 
+             to: account, 
+             quantity: '5.0000 LEN', 
+             memo: '首个价格锚定资产社区通证，签到即送token，抽奖即送土地，游戏挖矿即将开始，https://www.lemonfun.io' 
+           } 
+        }] 
+    }).then(result=>{
         return result
     }).catch(err=>{
-        alert(JSON.stringify(err))
-    })
-   
-    return res;
-    
+        console.log(err)
+    });
+    return res; 
 };
 
 
