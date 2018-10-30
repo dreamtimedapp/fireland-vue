@@ -86,8 +86,8 @@ export default {
   mounted: function() {
     setTimeout(this.getHomeAccountName,100);
     //setTimeout(this.initGame,700);
-    setTimeout(this.getLenTokenInfo,500);
-    //setInterval(this.getLandInfo,2000);
+    //setTimeout(this.getLenTokenInfo,500);
+    setInterval(this.getLenTokenInfo,800);
   },
   computed: {
     has_scatter: function() {
@@ -136,7 +136,7 @@ export default {
       if(!res.is_error){
           if (res.data) {
           store.commit('setLenDetail',res.data) 
-      }
+         }
       }
       let len = await get_len_balance_bytable()
       if (!len.is_error) {
