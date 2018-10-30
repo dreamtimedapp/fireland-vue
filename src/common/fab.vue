@@ -120,7 +120,7 @@ export default {
         return "http://www.lemonfun.io/#/game/land?ref=" + this.account;
     },
     async sign () {
-      alert("签到活动将于10月31号0点开始")
+      alert("签到领取token活动将于10月31号0点开始")
       /*
       let res =  await sign_onday(this.account)
       if (res) {
