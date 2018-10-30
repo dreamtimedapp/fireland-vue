@@ -4,16 +4,19 @@
   <Header></Header>
   <Banner> </Banner>
   <Content></Content>
-    
+
+  <popup :title="popTitle" :text="popText" :visible.sync="popVisible"></popup>
 </div>
 </template>
 
 <script>
-import Header from './components/header.vue';
-import Content from './components/content'
-import Banner from './components/banner'
+import Header from './components/header';
+import Content from './components/content';
+import Banner from './components/banner';
 import Fab from '../common/fab';
-import store from '../store'
+import store from '../store';
+import popup from '../components/popup';
+//const popup = require('../components/popup.vue');
 import {
     get_scatter_identity,
     login,
@@ -27,9 +30,9 @@ import {
     get_len_token_info,
     get_len_balance_bytable,
     get_len_balance
-} from '../services/web_wallet_service.js'
+} from '../services/web_wallet_service.js';
 import { setInterval, setTimeout } from 'timers';
-import {add_counter} from '../services/get_data_service.js'
+import {add_counter} from '../services/get_data_service.js';
 
 export default {
   name: 'landGame',
@@ -37,11 +40,17 @@ export default {
     Header,
     Content,
     Banner,
-    Fab
+    Fab,
+    popup,
   },
-  props: {},
+  props: {
+
+  },
   data: function() {
     return {
+      popVisible: true,
+      popTitle: '测试标题',
+      popText: '测试文案',
       account_name: '',
       eos_balance:'',
                 positionTypes: [
