@@ -4,7 +4,7 @@ const Counter = require('../models/counter')
 
 // 查询所有的签到记录
 router.get('/counter',(req,res)=>{
-    router.find({})
+    Counter.find({})
     .sort({logtime : -1})
     .then(gamelog => {
         res.json(gamelog)
