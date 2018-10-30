@@ -51,9 +51,15 @@ export default {
         getAccount() {
            return store.state.HomeStore.home_account_name
         },
+        hasScatter() {
+
+        }
     },
     methods: {
       login: async function(event) {
+        if (!window.scatter) {
+            alert("当前浏览器没有scatter，请安装后再尝试")
+        }
         let res = await login();
         if (res) {
           store.commit('setHomeAccount',res.name)
