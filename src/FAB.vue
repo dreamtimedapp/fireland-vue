@@ -170,16 +170,16 @@
             paddingAmount() {
                 switch (this.iconSize) {
                     case 'small':
-                        return '28px';
+                        return '38px';
                         break;
                     case 'medium':
-                        return '32px';
+                        return '38px';
                         break;
                     case 'large':
                         return '38px';
                         break;
                     default:
-                        return '32px';
+                        return '38px';
                 }
             },
             listPos() {
