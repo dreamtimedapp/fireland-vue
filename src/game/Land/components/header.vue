@@ -87,7 +87,7 @@ export default {
 .land-logo-title {
     color: #fff;
     font-size: 27px;
-    margin-left: -40px;
+    margin-left: -45px;
 
 }
 .land-header-left {
@@ -105,7 +105,7 @@ export default {
 .land-logo {
     width: 200px;
     height: 200px;
-    margin-left: 30px;
+   
 }
 .land-header-text {
     text-align: center;
