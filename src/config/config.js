@@ -10,7 +10,7 @@ export const main_network = {
 
 export const eos_config = {
     chainId :'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906',
-    httpEndpoint:'http://mainnet.eoscannon.io',
+    httpEndpoint:'https://mainnet.eoscannon.io',
     broadcast: true,
     verbose:false,
     sign: true
@@ -19,7 +19,7 @@ export const eos_config = {
 export const eos_invite_config = {
     chainId :'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906',
     keyProvider : '5Jz7dBt74wmjW8sPP3bThBjQdCowzPbr5y1LqB7SRX4Ts7cd262',
-    httpEndpoint:'http://mainnet.eoscannon.io',
+    httpEndpoint:'https://mainnet.eoscannon.io',
     broadcast: true,
     verbose:false,
     sign: true

@@ -85,7 +85,7 @@ export default {
   },
   mounted: function() {
     setTimeout(this.getHomeAccountName,100);
-    setTimeout(this.initGame,700);
+    //setTimeout(this.initGame,700);
     setTimeout(this.getLenTokenInfo,500);
     //setInterval(this.getLandInfo,2000);
   },
@@ -116,7 +116,7 @@ export default {
     },
     //获取地块信息表
     async getLandInfo() {
-      if (!this.account_name) {
+      /*if (!this.account_name) {
         return
       }
       let landlist = await get_land_info()
@@ -129,16 +129,20 @@ export default {
       store.commit('getLandInfo',{
         "land":landrows,
         "count":countrows
-      })
+      })*/
     },
     async getLenTokenInfo () {
       let res = await get_len_token_info();
       if(!res.is_error){
+          if (res.data) {
           store.commit('setLenDetail',res.data) 
       }
+      }
       let len = await get_len_balance_bytable()
-      if (!res.is_error) {
+      if (!len.is_error) {
+          if (len.data) {
           store.commit('setLenBalance',len.data) 
+      }
       }
     },
     async initGame () {
