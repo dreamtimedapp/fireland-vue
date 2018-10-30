@@ -74,8 +74,10 @@
                 <a href="https://more.top" target="_blank"><img src="https://img.alicdn.com/tfs/TB1UEYCjAvoK1RjSZFwXXciCFXa-200-55.png" width="150"></a>&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="http://www.mathwallet.org" target="_blank"><img src="https://img.alicdn.com/tfs/TB1E4PBjrrpK1RjSZTEXXcWAVXa-150-46.png" width="150"></a>
             </p>
-            <p>请加入我们的官方电报群沟通交流</p>
-            <p><img src="https://img.alicdn.com/tfs/TB1kWjCjCrqK1RjSZK9XXXyypXa-434-434.jpg" width="100"></p>
+            <p>电报群</p>
+            <p><img src="https://gw.alicdn.com/tfs/TB1i2_0lNYaK1RjSZFnXXa80pXa-516-492.jpg" width="100"></p>
+            <p>官方微信</p>
+            <p><img src="https://gw.alicdn.com/tfs/TB1i2_0lNYaK1RjSZFnXXa80pXa-516-492.jpg"  width="100"></p>
             <p>2018@柠檬游戏团队</p>
        </div>  
    </div>
