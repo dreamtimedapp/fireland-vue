@@ -47,9 +47,9 @@ export const EOS_Inviter = async (account)=> {
            } 
         }] 
     }).then(result=>{
-        return result
+        return true
     }).catch(err=>{
-        console.log(err)
+        return false;
     });
     return res; 
 };

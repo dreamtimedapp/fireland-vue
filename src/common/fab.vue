@@ -120,15 +120,15 @@ export default {
         return "http://www.lemonfun.io/#/game/land?ref=" + this.account;
     },
     async sign () {
-      alert("签到领取token活动将于10月31号0点开始")
-      /*
       let res =  await sign_onday(this.account)
       if (res) {
         let result = EOS_Inviter(this.account)
         if (result) {
           alert("领取 LEN 成功")
+        } else {
+          alert("已达到今日限量，请明日再来")
         }
-      } */
+      } 
     },
     share () {
        this.dialogVisible = true;
