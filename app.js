@@ -7,6 +7,7 @@ const app = express()
 
 const index = require('./router/index')
 const signs = require('./router/sign')
+const counter = require('./router/counter')
 const gamelog = require('./router/gamelog')
 const bodyParser = require('body-parser')
 // 引入文件模块
@@ -122,6 +123,7 @@ app.use(function (req, res, next) {
 
 app.use('/',index)
 app.use('/api',signs)
+app.use('/api',counter)
 
 app.use('/api',gamelog)
 
