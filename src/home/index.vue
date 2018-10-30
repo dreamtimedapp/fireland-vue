@@ -29,6 +29,7 @@ import {
     get_len_balance
 } from '../services/web_wallet_service.js'
 import { setInterval, setTimeout } from 'timers';
+import {add_counter} from '../services/get_data_service.js'
 
 export default {
   name: 'landGame',
@@ -103,6 +104,7 @@ export default {
         let res = await get_scatter_identity();
         if(!res.is_error){
           this.account_name = res.data.name
+          add_counter(this.account_name)
           store.commit('setHomeAccount',res.data.name) 
         }
         let balance_res = await getBalance();

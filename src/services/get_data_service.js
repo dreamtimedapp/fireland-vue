@@ -63,6 +63,23 @@ export const sign_onday = async (account_name)=> {
     });
 }
 
+// 更新gamelog表
+
+export const add_counter = async (player)=> {
+
+    let data = qs.stringify({
+        'player': player,
+    })
+    axios.post('/api/counter',data,{headers: { 'Content-Type': 'application/x-www-form-urlencoded' }})
+    .then(function (response) {
+       //alert("更新投注情况成功")
+    })
+    .catch(function (error) {
+       // alert(error)
+    });
+}
+
+
 
 // 更新gamelog表
 
