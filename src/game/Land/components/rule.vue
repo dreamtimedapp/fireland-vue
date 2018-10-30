@@ -18,7 +18,7 @@
            <span class="land-len-security-title">游戏规则</span>
            <div class="land-adt_grids">
         
-                <h3 class="land-security-title text-center">EOS大地主游戏玩法</h3>
+                <h3 class="land-security-title text-center">EOS 国土无双游戏玩法</h3>
                 <h4>一、玩法介绍 </h4>
                 <p>
                     游戏板块为145格大小的地图，每一格代表一块地皮，每块地皮初始定价 1eos，其中有2块为黑地皮（作用下面解析）；
@@ -83,7 +83,7 @@
          
           <div class="land-footer">
            <p class="land-footer-title">
-                友情合作伙伴
+                <span class="land-footer-partner-title">友情合作伙伴</span>
                 <br/> <br/>
                 <a href="https://www.mytokenpocket.vip/" target="_blank"><img src="https://img.alicdn.com/tfs/TB1AoDWjxjaK1RjSZKzXXXVwXXa-300-55.png" width="150"></a>&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="https://meet.one" target="_blank"><img src="https://img.alicdn.com/tfs/TB1LYfxjr2pK1RjSZFsXXaNlXXa-200-55.png" width="150"></a>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -157,7 +157,7 @@ export default {
 .land-len-security h3{
     text-transform: uppercase;
     font-weight: 700;
-    font-size: 19px;
+    font-size: 30px;
     line-height: 1.4em;
     margin-bottom: 30px;
     color: #fff;
@@ -166,13 +166,13 @@ export default {
 }
 .land-len-security h4 {
     color: #fff;
-    font-size: 16px;
+    font-size: 26px;
 }
 
 .land-len-security p {
     margin-bottom: 30px;
     color: #fff;
-    font-size: 14px;
+    font-size: 24px;
 }
 .text-center {
     text-align: center;
@@ -191,9 +191,10 @@ export default {
 
 .land-footer p {
     margin-bottom: 20px;
+   
 }
 .land-footer-title {
-   font-size: 34px;
+   font-size: 35px;
 }
 .touzhu-table {
 
@@ -201,6 +202,9 @@ export default {
     margin-right: 20px;
     width: 100%;
 
+}
+.land-footer-partner-title {
+    font-size: 30px;
 }
 .bet-table {
      background-color: #212528 !important;
