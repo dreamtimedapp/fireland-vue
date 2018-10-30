@@ -52,19 +52,6 @@ app.use(bodyParser.urlencoded({
   extended: false
 }))
 
-
-app.all('*', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
-  res.header("X-Powered-By",' 3.2.1')
-  res.header("Content-Type", "application/json;charset=utf-8");
-  if (req.method == 'OPTIONS') {
-    res.send(200); /*让options请求快速返回*/
-  } else {
-    next();
-  }
-});
 // 访问静态资源文件 这里是访问所有dist目录下的静态资源文件
 app.use(express.static(path.resolve(__dirname, './dist')))
 // 因为是单页应用 所有请求都走/dist/index.html
