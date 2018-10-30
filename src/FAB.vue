@@ -137,16 +137,16 @@
             actionIconSize() {
                 switch (this.iconSize) {
                     case 'small':
-                        return 'md-36';
+                        return 'md-48';
                         break;
                     case 'medium':
-                        return 'md-36';
+                        return 'md-48';
                         break;
                     case 'large':
-                        return 'md-36';
+                        return 'md-48';
                         break;
                     default:
-                        return 'md-36';
+                        return 'md-48';
                 }
             },
             allowRotation(){
@@ -420,8 +420,8 @@
     }
 
     .fab-list li {
-        width: 80px;
-        height: 80px;
+        width: 110px;
+        height: 110px;
         padding: 10px;
         margin-top: 2vh;
         display: flex;
