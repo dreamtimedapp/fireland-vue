@@ -50,7 +50,7 @@ export default {
     return {
       popVisible: true,
       popTitle: '活动公告',
-      popText: '北京时间11月1号20:00，将开启游戏即挖矿，同步开启免费送地皮活动.右下角签到可领取柠檬通证.',
+      popText: '北京时间11月1日20:00，将开启游戏即挖矿，12点开启抽奖免费送土地活动，游戏开始前截止.右下角签到可领取柠檬通证.',
       account_name: '',
       eos_balance:'',
                 positionTypes: [
