@@ -50,7 +50,7 @@ export default {
     return {
       popVisible: true,
       popTitle: '活动公告',
-      popText: '北京时间11月1号20点，EOS国士无双盛大开启，游戏即挖矿，1号12点将开启抽奖免费地皮抽奖！右下角签到可领取柠檬通证！',
+      popText: '北京时间11月1号20点，EOS国士无双盛大开启，游戏即挖矿，1号12点将开启抽奖免费送土地活动！右下角签到可领取柠檬通证！',
       account_name: '',
       eos_balance:'',
                 positionTypes: [
