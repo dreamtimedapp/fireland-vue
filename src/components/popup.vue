@@ -9,7 +9,7 @@
       <div class="pop-body">
         {{text}}
       </div>
-      <el-button  class="pop-button" type="danger" disabled>点击抽奖</el-button>
+      <el-button  class="pop-button" type="danger" disabled>即将开始抽奖</el-button>
       <div class="pop-close"  @click="visible = false">
         <img :src="iconClose">
       </div>
