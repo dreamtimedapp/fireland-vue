@@ -14,7 +14,7 @@
   <vue-fab
     :position="position"
     :icon-size="iconSizes"
-    :position-type="positionType"
+    :position-type="positionTypes[0]"
     bg-color="#409EFF"
     :main-icon="mainIcon"
     :actions="actions"

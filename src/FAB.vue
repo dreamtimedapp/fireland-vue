@@ -36,7 +36,7 @@
             <template v-if="mainTooltip">
                 <div v-ripple="rippleColor == 'light' ? 'rgba(255, 255, 255, 0.35)' : ''" @click="toggle = !toggle"
                      v-tooltip="{ content: mainTooltip, placement: tooltipPosition, classes: 'fab-tooltip' }"
-                     class="fab-main pointer" :style="{ 'background-color': bgColor, 'padding': paddingAmount }"
+                     class="fab-main pointer" :style="{ 'background-color': bgColor, 'transform': 'scale(1.5)' }"
                 >
                     <i :class="[ mainIconSize , { rotate: toggle && allowRotation } ,'material-icons main']">{{mainIcon}}</i>
                     <i :class="[ mainIconSize , { rotate: toggle && allowRotation } ,'material-icons close']">add</i>
@@ -44,7 +44,7 @@
             </template>
             <template v-else>
                 <div v-ripple="rippleColor == 'light' ? 'rgba(255, 255, 255, 0.35)' : ''" @click="toggle = !toggle"
-                     class="fab-main pointer" :style="{ 'background-color': bgColor, 'padding': paddingAmount }"
+                     class="fab-main pointer" :style="{ 'background-color': bgColor, 'transform': 'scale(1.5)' }"
                 >
                     <i :class="[ mainIconSize , { rotate: toggle && allowRotation }, 'material-icons main']">{{mainIcon}}</i>
                     <i :class="[ mainIconSize , { rotate: toggle && allowRotation }, 'material-icons close']">add</i>
@@ -54,14 +54,14 @@
         <template v-else>
             <template v-if="mainTooltip">
                 <div v-bind:v-tooltip="{ content: mainTooltip, placement: tooltipPosition, classes: 'fab-tooltip'}"
-                     class="fab-main pointer" :style="{ 'background-color': bgColor, 'padding': paddingAmount }"
+                     class="fab-main pointer" :style="{ 'background-color': bgColor, 'transform': 'scale(1.5)' }"
                 >
                     <i class="material-icons md-36 main" :class="{ rotate: toggle && allowRotation }">{{mainIcon}}</i>
                     <i class="material-icons md-36 close" :class="{ rotate: toggle && allowRotation }">add</i>
                 </div>
             </template>
             <template v-else>
-                <div class="fab-main pointer" :style="{ 'background-color': bgColor, 'padding': paddingAmount }"
+                <div class="fab-main pointer" :style="{ 'background-color': bgColor, 'transform': 'scale(1.5)' }"
                 >
                     <i class="material-icons md-36 main" :class="{ rotate: toggle && allowRotation }">{{mainIcon}}</i>
                     <i class="material-icons md-36 close" :class="{ rotate: toggle && allowRotation }">add</i>
@@ -167,21 +167,6 @@
                         return 'md-36';
                 }
             },
-            paddingAmount() {
-                switch (this.iconSize) {
-                    case 'small':
-                        return '38px';
-                        break;
-                    case 'medium':
-                        return '38px';
-                        break;
-                    case 'large':
-                        return '38px';
-                        break;
-                    default:
-                        return '38px';
-                }
-            },
             listPos() {
                 if (this.position === 'top-right' || this.position === 'top-left') {
                     return {
@@ -250,24 +235,24 @@
                 this.pos = {};
                 switch (this.position) {
                     case 'bottom-right':
-                        this.pos.right = '5vw';
-                        this.pos.bottom = '4vh';
+                        this.pos.right = '6vw';
+                        this.pos.bottom = '5vh';
                         break;
                     case 'bottom-left':
-                        this.pos.left = '5vw';
-                        this.pos.bottom = '4vh';
+                        this.pos.left = '6vw';
+                        this.pos.bottom = '5vh';
                         break;
                     case 'top-left':
-                        this.pos.left = '5vw';
-                        this.pos.top = '4vh';
+                        this.pos.left = '6vw';
+                        this.pos.top = '5vh';
                         break;
                     case 'top-right':
-                        this.pos.right = '5vw';
-                        this.pos.top = '4vh';
+                        this.pos.right = '6vw';
+                        this.pos.top = '5vh';
                         break;
                     default:
-                        this.pos.right = '5vw';
-                        this.pos.bottom = '4vh';
+                        this.pos.right = '6vw';
+                        this.pos.bottom = '5vh';
                 }
             },
             moveTransition() {
@@ -385,11 +370,13 @@
     .fab-main .material-icons.main {
         opacity: 1;
         position: absolute;
+        color: #fff;
     }
 
     .fab-main .material-icons.close {
         opacity: 0;
         position: absolute;
+        color: #fff;
     }
 
     .fab-main .material-icons.main.rotate {
