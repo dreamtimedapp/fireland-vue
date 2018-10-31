@@ -113,7 +113,6 @@ export default {
         let res = await get_scatter_identity();
         if(!res.is_error){
           this.account_name = res.data.name
-          alert('右下角签到即可领取LEN币')
           add_counter(this.account_name)
           store.commit('setHomeAccount',res.data.name) 
         }

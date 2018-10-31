@@ -36,7 +36,7 @@
             <template v-if="mainTooltip">
                 <div v-ripple="rippleColor == 'light' ? 'rgba(255, 255, 255, 0.35)' : ''" @click="toggle = !toggle"
                      v-tooltip="{ content: mainTooltip, placement: tooltipPosition, classes: 'fab-tooltip' }"
-                     class="fab-main pointer" :style="{ 'background-color': bgColor, 'transform': 'scale(1.5)' }"
+                     class="fab-main pointer" :style="{ 'background-color': bgColor, 'padding': paddingAmount }"
                 >
                     <i :class="[ mainIconSize , { rotate: toggle && allowRotation } ,'material-icons main']">{{mainIcon}}</i>
                     <i :class="[ mainIconSize , { rotate: toggle && allowRotation } ,'material-icons close']">add</i>
@@ -44,7 +44,7 @@
             </template>
             <template v-else>
                 <div v-ripple="rippleColor == 'light' ? 'rgba(255, 255, 255, 0.35)' : ''" @click="toggle = !toggle"
-                     class="fab-main pointer" :style="{ 'background-color': bgColor, 'transform': 'scale(1.5)' }"
+                     class="fab-main pointer" :style="{ 'background-color': bgColor, 'padding': paddingAmount }"
                 >
                     <i :class="[ mainIconSize , { rotate: toggle && allowRotation }, 'material-icons main']">{{mainIcon}}</i>
                     <i :class="[ mainIconSize , { rotate: toggle && allowRotation }, 'material-icons close']">add</i>
@@ -54,14 +54,14 @@
         <template v-else>
             <template v-if="mainTooltip">
                 <div v-bind:v-tooltip="{ content: mainTooltip, placement: tooltipPosition, classes: 'fab-tooltip'}"
-                     class="fab-main pointer" :style="{ 'background-color': bgColor, 'transform': 'scale(1.5)' }"
+                     class="fab-main pointer" :style="{ 'background-color': bgColor, 'padding': paddingAmount }"
                 >
                     <i class="material-icons md-36 main" :class="{ rotate: toggle && allowRotation }">{{mainIcon}}</i>
                     <i class="material-icons md-36 close" :class="{ rotate: toggle && allowRotation }">add</i>
                 </div>
             </template>
             <template v-else>
-                <div class="fab-main pointer" :style="{ 'background-color': bgColor, 'transform': 'scale(1.5)' }"
+                <div class="fab-main pointer" :style="{ 'background-color': bgColor, 'padding': paddingAmount }"
                 >
                     <i class="material-icons md-36 main" :class="{ rotate: toggle && allowRotation }">{{mainIcon}}</i>
                     <i class="material-icons md-36 close" :class="{ rotate: toggle && allowRotation }">add</i>
@@ -75,7 +75,6 @@
     import {mixin as clickaway} from 'vue-clickaway';
     import Ripple from 'vue-ripple-directive';
     import {VTooltip} from 'v-tooltip'
-
     export default {
         mixins: [clickaway],
         directives: {Ripple, tooltip: VTooltip},
@@ -167,6 +166,21 @@
                         return 'md-36';
                 }
             },
+            paddingAmount() {
+                switch (this.iconSize) {
+                    case 'small':
+                        return '38px';
+                        break;
+                    case 'medium':
+                        return '38px';
+                        break;
+                    case 'large':
+                        return '38px';
+                        break;
+                    default:
+                        return '38px';
+                }
+            },
             listPos() {
                 if (this.position === 'top-right' || this.position === 'top-left') {
                     return {
@@ -206,11 +220,9 @@
                 }
             },
             tooltipTrigger() {
-
                 if (this.fixedTooltip) {
                     return 'manual';
                 }
-
                 return 'hover';
             }
         },
@@ -235,30 +247,29 @@
                 this.pos = {};
                 switch (this.position) {
                     case 'bottom-right':
-                        this.pos.right = '6vw';
-                        this.pos.bottom = '5vh';
+                        this.pos.right = '5vw';
+                        this.pos.bottom = '4vh';
                         break;
                     case 'bottom-left':
-                        this.pos.left = '6vw';
-                        this.pos.bottom = '5vh';
+                        this.pos.left = '5vw';
+                        this.pos.bottom = '4vh';
                         break;
                     case 'top-left':
-                        this.pos.left = '6vw';
-                        this.pos.top = '5vh';
+                        this.pos.left = '5vw';
+                        this.pos.top = '4vh';
                         break;
                     case 'top-right':
-                        this.pos.right = '6vw';
-                        this.pos.top = '5vh';
+                        this.pos.right = '5vw';
+                        this.pos.top = '4vh';
                         break;
                     default:
-                        this.pos.right = '6vw';
-                        this.pos.bottom = '5vh';
+                        this.pos.right = '5vw';
+                        this.pos.bottom = '4vh';
                 }
             },
             moveTransition() {
                 let wrapper = document.getElementById(this.position + '-wrapper');
                 let el = document.getElementById(this.position + '-action');
-
                 if (this.position === 'top-right' || this.position === 'top-left') {
                     wrapper.appendChild(el);
                 } else {
@@ -283,7 +294,6 @@
         watch: {
             position(val){
                 this.setPosition();
-
                 this.$nextTick(() => {
                     this.moveTransition();
                     this.tooltipPos();
@@ -295,7 +305,6 @@
         },
         created() {
             this.setPosition();
-
             if (this.startOpened) {
                 this.showTooltip(this.tooltipTimeOutWhenStartOpened);
             }
@@ -310,24 +319,20 @@
         z-index: 10000;
         font-size: 35px;
     }
-
     .fab-tooltip.tooltip .tooltip-inner {
         background: #333333;
         color: white;
         border-radius: 0px;
         padding: 5px 10px 4px;
     }
-
     .fab-tooltip.tooltip tooltip-arrow {
         display: none;
     }
-
     .fab-tooltip.tooltip[aria-hidden='true'] {
         visibility: hidden;
         opacity: 0;
         transition: opacity .15s, visibility .15s;
     }
-
     .fab-tooltip.tooltip[aria-hidden='false'] {
         visibility: visible;
         opacity: 1;
@@ -340,11 +345,9 @@
         -webkit-animation-duration: .7s !important;
         animation-duration: .7s !important;
     }
-
     .fab-wrapper {
         z-index: 999;
     }
-
     .fab-main {
         border-radius: 100px;
         /*width: 65px;*/
@@ -358,7 +361,6 @@
         z-index: 2;
         justify-content: center;
     }
-
     .fab-main .material-icons {
         color: white;
         -webkit-transition: .4s all;
@@ -366,19 +368,14 @@
         transition: .4s all;
         margin: 0px auto;
     }
-
     .fab-main .material-icons.main {
         opacity: 1;
         position: absolute;
-        color: #fff;
     }
-
     .fab-main .material-icons.close {
         opacity: 0;
         position: absolute;
-        color: #fff;
     }
-
     .fab-main .material-icons.main.rotate {
         -ms-transform: rotate(315deg); /* IE 9 */
         -webkit-transform: rotate(315deg); /* Chrome, Safari, Opera */
@@ -387,7 +384,6 @@
         -webkit-transition: opacity .3s ease-in, -webkit-transform .4s; /* Safari */
         transition: opacity .3s ease-in, transform .4s;
     }
-
     .fab-main .material-icons.close.rotate {
         -ms-transform: rotate(315deg); /* IE 9 */
         -webkit-transform: rotate(315deg); /* Chrome, Safari, Opera */
@@ -396,7 +392,6 @@
         -webkit-transition: opacity .3s ease-in, -webkit-transform .4s; /* Safari */
         transition: opacity .3s ease-in, transform .4s;
     }
-
     .fab-list {
         position: relative;
         z-index: 1;
@@ -405,7 +400,6 @@
         flex-direction: column;
         align-items: center;
     }
-
     .fab-list li {
         width: 110px;
         height: 110px;
@@ -416,87 +410,69 @@
         border-radius: 100px;
         box-shadow: 0 10px 10px rgba(0, 0, 0, 0.20), 0 4px 4px rgba(0, 0, 0, 0.15);
     }
-
     .fab-list li .material-icons {
         color: white;
         
         margin: 0px auto;
     }
-
     .pointer {
         cursor: pointer;
     }
-
     ul {
         list-style-type: none;
         padding: 0 !important;
     }
-
     .fab-wrapper .actions-container {
         overflow: hidden;
         z-index: 0;
         position: relative;
     }
-
     /* Rules for sizing the icon. */
     .material-icons.md-18 {
         font-size: 18px;
     }
-
     .material-icons.md-24 {
         font-size: 24px;
     }
-
     .material-icons.md-36 {
         font-size: 36px;
     }
-
     .material-icons.md-48 {
         font-size: 48px;
     }
-
     /* Rules for using icons as black on a light background. */
     .material-icons.md-dark {
         color: rgba(0, 0, 0, 0.54);
     }
-
     .material-icons.md-dark.md-inactive {
         color: rgba(0, 0, 0, 0.26);
     }
-
     /* Rules for using icons as white on a dark background. */
     .material-icons.md-light {
         color: rgba(255, 255, 255, 1);
     }
-
     .material-icons.md-light.md-inactive {
         color: rgba(255, 255, 255, 0.3);
     }
-
     @media screen and (max-width: 768px) {
         .fab-list {
             margin: 2vh 0;
         }
-
         .fab-list li {
             /*width: 40px;*/
             /*height: 40px;*/
             /*padding: .6rem;*/
         }
-
         .fab-list li i {
             /*font-size: 24px !important;*/
         }
-
         .fab-main {
             /*width: 55px;*/
             /*height: 55px;*/
             /*padding: 1.5rem;*/
         }
-
         .fab-main i {
             /*font-size: 34px !important;*/
         }
-
     }
 </style>
