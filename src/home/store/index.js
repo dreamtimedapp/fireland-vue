@@ -112,7 +112,7 @@ export default {
         },
         setLenDetail(state,data) {
             let len = data.rows[0]
-            state.supply = Math.abs(parseFloat(len.supply.replace(' LEN')).toFixed(4) -  990000) + ' LEN'
+            state.supply = len.supply
             state.max_supply = len.max_supply
             state.price = len.price 
             state.cash_pool = len.cash_pool 
