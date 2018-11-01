@@ -30,7 +30,7 @@ export default {
         gameInfo:{},
         gameCount:0,
         blackLand:'',
-        blackLandArray:'',
+        blackLandArray:[],
         gameState: 0  // 0代表未开始，1代表进行中，2代表已结束
     },
     mutations:{
