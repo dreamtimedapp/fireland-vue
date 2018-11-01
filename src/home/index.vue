@@ -15,6 +15,7 @@ import Banner from './components/banner';
 import Fab from '../common/fab';
 import store from '../store';
 import popup from '../components/popup';
+import {getQueryString} from '../utils/utils.js';
 //const popup = require('../components/popup.vue');
 import {
     get_scatter_identity,
@@ -108,8 +109,11 @@ export default {
   },
   methods: {
      getRefInviteAccount() {
-           
-           return "lemoneosgame";
+           if (!getQueryString('ref')) {
+              return "lemoneosgame";
+           }else {
+             return getQueryString('ref');
+           }
        },
     async popCick() {
       if (new Date(1541044800000).getTime() >= new Date().getTime()) {
