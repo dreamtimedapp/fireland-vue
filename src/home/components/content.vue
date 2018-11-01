@@ -26,7 +26,7 @@
                         </div>
                         <div class="table-item-info">
                             <span>EOS数量：</span>
-                            <span>{{$store.state.HomeStore.eos_balance}}</span>
+                            <span>{{getEosBalance}}</span>
                         </div>    
                         <div class="table-item-info">
                             <span>LEN价格：</span>
@@ -42,7 +42,7 @@
                         </div> 
                         <div class="table-item-info">
                             <span>我的LEN数量：</span>
-                            <span>{{$store.state.HomeStore.len_balance}}</span>
+                            <span>{{getLenBalance}}</span>
                         </div>
                         <div class="table-item-info">
                             <span>Len资金蓄池：</span>
@@ -118,6 +118,12 @@ export default {
     computed: {
         getAccount() {
            return store.state.HomeStore.home_account_name
+        },
+        getEosBalance() {
+           return store.state.HomeStore.eos_balance
+        },
+        getLenBalance() {
+           return store.state.HomeStore.len_balance
         },
         getCalculatePrice() {
           let len_price = store.state.HomeStore.price + ""

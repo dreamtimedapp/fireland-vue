@@ -98,9 +98,7 @@ export default {
   mounted: function() {
     setTimeout(this.getHomeAccountName,100);
     setTimeout(this.getLenTokenInfo,300);
-    setTimeout(this.getHomeAccountName,800);
     setTimeout(this.initGame,700);
-    setInterval(this.getLen,1000);
   },
   computed: {
     has_scatter: function() {
@@ -152,9 +150,13 @@ export default {
         if (balance_res && balance_res.result && balance_res.result.length > 0) {
           this.eos_balance = balance_res.result[0]
           store.commit('setEosBalance',balance_res.result[0])
-        } else {
-          store.commit('setEosBalance',0)
-        }
+        } 
+      let len = await get_len_balance_bytable(res.name)
+      if (!len.is_error) {
+          if (len.data) {
+          store.commit('setLenBalance',len.data) 
+      }
+      }
     },
     async getLen() {
         let len = await get_len_balance_bytable()
@@ -192,12 +194,6 @@ export default {
           if (res.data) {
           store.commit('setLenDetail',res.data) 
          }
-      }
-      let len = await get_len_balance_bytable()
-      if (!len.is_error) {
-          if (len.data) {
-          store.commit('setLenBalance',len.data) 
-      }
       }
     },
     async initGame () {

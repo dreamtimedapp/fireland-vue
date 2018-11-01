@@ -52,6 +52,9 @@ export default {
         getAccount() {
            return store.state.HomeStore.home_account_name
         },
+        getEosBalance() {
+          return store.state.HomeStore.home_account_name
+        }
     },
     methods: {
       login: async function(event) {

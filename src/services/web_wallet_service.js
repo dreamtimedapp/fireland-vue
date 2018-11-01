@@ -372,12 +372,8 @@ export const get_len_token_info = async () => {
  * 获取EOS余额
  * 
 */
-export const get_len_balance_bytable = async ()=> {
-    if (!scatter_res.account_name) {
-        let res = await login()
-        scatter_res.account_name = res.name
-    }
-    let account_name = scatter_res.account_name;
+export const get_len_balance_bytable = async (account)=> {
+    let account_name = account;
     return await Eos(eos_config)
     .getTableRows({"scope":account_name,"code":"lemoniotoken","table":"accounts","limit":10000,"json":true})
     .then(data => {
