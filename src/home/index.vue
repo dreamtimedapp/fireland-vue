@@ -128,7 +128,7 @@ export default {
           this.getLandInfo()
        }
       } else {
-        alert("抽奖失败，请稍后尝试")
+        alert(JSON.stringify(res))
       }
     },
    

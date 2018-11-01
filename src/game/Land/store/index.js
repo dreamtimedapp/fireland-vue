@@ -123,6 +123,10 @@ export default {
                     element.type = '买入土地' + element.landID + "成功" 
                 } else if (parseInt(element.type) == 4) {
                     element.type = '买入土地' + element.landID + "失败" 
+                } else if (parseInt(element.type) == 5) {
+                    element.type = '抽奖获得土地' + element.landID + "成功" 
+                } else if (parseInt(element.type) == 6) {
+                    element.type = '抽奖失败土地，下次再来哦'
                 }
                 rows.push(element)
             });
