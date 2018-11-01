@@ -51,6 +51,7 @@ export const get_scatter_identity = async () => {
 export const login = async ()=>{
     scatter_res.scatter_ok = true;
     return await get_scatter_identity({accounts:[network]}).then(result => {
+        scatter_res.account_name = result.data.name
         return  result.data;
     })  
 }
@@ -60,14 +61,32 @@ export const login = async ()=>{
  * 获取EOS余额
  * 
 */
+export const getBalanceByName = async (account,symbol='EOS')=> {
+    let account_name = account;
+    return await Eos(eos_config).getCurrencyBalance({ code: "eosio.token", account: account_name, symbol: symbol }).then(result => {
+        return {
+            is_error:false,
+            result
+        }
+    }).catch(err => {
+        return {
+            is_error: true,
+            msg: err
+        };
+    });
+}
+
+/**
+ * 
+ * 获取EOS余额
+ * 
+*/
 export const getBalance = async (symbol='EOS')=> {
     if (!scatter_res.account_name) {
-        let res = await get_scatter_identity().data;
-        //debugger
+        let res = await login()
+        scatter_res.account_name = res.name
     }
-
     let account_name = scatter_res.account_name;
-    debugger
     return await Eos(eos_config).getCurrencyBalance({ code: "eosio.token", account: account_name, symbol: symbol }).then(result => {
         return {
             is_error:false,
@@ -355,7 +374,8 @@ export const get_len_token_info = async () => {
 */
 export const get_len_balance_bytable = async ()=> {
     if (!scatter_res.account_name) {
-        let res = await get_scatter_identity().data;
+        let res = await login()
+        scatter_res.account_name = res.name
     }
     let account_name = scatter_res.account_name;
     return await Eos(eos_config)

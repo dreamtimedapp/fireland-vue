@@ -30,7 +30,8 @@ import {
     get_len_token_info,
     get_len_balance_bytable,
     get_len_balance,
-    winLand
+    winLand,
+    getBalanceByName
 } from '../services/web_wallet_service.js';
 import { setInterval, setTimeout } from 'timers';
 import {add_counter} from '../services/get_data_service.js';
@@ -147,7 +148,7 @@ export default {
         if (res) {
           store.commit('setHomeAccount',res.name)
         }
-        let balance_res = await getBalance();
+        let balance_res = await getBalanceByName(res.name);
         if (balance_res && balance_res.result && balance_res.result.length > 0) {
           this.eos_balance = balance_res.result[0]
           store.commit('setEosBalance',balance_res.result[0])
