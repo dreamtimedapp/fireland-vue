@@ -23,12 +23,14 @@ export default {
         touzhuRows:[],
         roundNum: 0,
         landNum:0,
+        landNumArray:[],
         maxPrice:0,
         minPrice:0,
         poolBalace:0,
         gameInfo:{},
         gameCount:0,
         blackLand:'',
+        blackLandArray:'',
         gameState: 0  // 0代表未开始，1代表进行中，2代表已结束
     },
     mutations:{
@@ -90,7 +92,7 @@ export default {
                     return;
                 }
                 if (element.type == 1) {
-                    state.blackLand = element.owner;
+                    state.blackLandArray.push(element.owner);
                 }
                 //// debugger
                 if (element.owner == state.account_name) {
@@ -101,6 +103,12 @@ export default {
                 state.current_landlist.push(element)
             });
             state.landNum = state.personal_land.length;
+            if ( state.blackLandArray == 1) {
+                state.blackLand =  state.blackLandArray[0]
+            } else {
+                state.blackLand =  state.blackLandArray[0] +'  ' + state.blackLandArray[1] 
+            }
+           
         },
         //获取游戏内账户信息
         getGameBalance(state,accountlist) {
