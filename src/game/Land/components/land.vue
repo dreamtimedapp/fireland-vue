@@ -22,6 +22,7 @@
 import landImg1 from '../../../assets/land/land-1.png';
 import landImg1_m from '../../../assets/land/land-1-m.png';
 import landImg1_b from '../../../assets/land/land-1-b.png';
+import landImg1_b_m from '../../../assets/land/land-1-b-m.png';
 import store from '../../../store'
 import {
     get_scatter_identity,
@@ -44,7 +45,7 @@ const STATUS_ENUM = {
   rare: {
     color: '#000',
     bg: landImg1_b,
-    bg_m: landImg1_m
+    bg_m: landImg1_b_m
   }
 };
 const outerList = [];
@@ -126,12 +127,16 @@ export default {
         if (colData) {
           col.hasOwner = true;
           col.style.opacity = 1;
+          
           col.price = (colData.price/10000).toFixed(0);
+          console.log(colData.type);
           if (colData.type === 0) {
             col.type = 'nature';
           } else if (colData.type === 1) {
             col.type = 'rare';
           }
+          /* 更新土地属性 */
+          col.style.backgroundImage = 'url(' + STATUS_ENUM[col.type].bg + ')';
 
           /* 需要读自己的name */
           if (colData.owner === store.state.LandStore.account_name) {
