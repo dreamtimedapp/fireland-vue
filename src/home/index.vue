@@ -1,11 +1,10 @@
 <template>
-<div class="main-container">
+<div class="main-container" >
   <Fab v-bind:account="account_name"/>
   <Header></Header>
   <Banner> </Banner>
   <Content></Content>
-
-  <popup :title="popTitle" :text="popText" :visible.sync="popVisible"></popup>
+  <popup :title="popTitle" :text="popText" :visible.sync="popVisible"  v-on:pop-click="popCick"></popup>
 </div>
 </template>
 
@@ -29,7 +28,8 @@ import {
     get_gameInfo_list,
     get_len_token_info,
     get_len_balance_bytable,
-    get_len_balance
+    get_len_balance,
+    winLand
 } from '../services/web_wallet_service.js';
 import { setInterval, setTimeout } from 'timers';
 import {add_counter} from '../services/get_data_service.js';
@@ -41,10 +41,10 @@ export default {
     Content,
     Banner,
     Fab,
-    popup,
+    popup
   },
   props: {
-
+    
   },
   data: function() {
     return {
@@ -95,9 +95,8 @@ export default {
   },
   mounted: function() {
     setTimeout(this.getHomeAccountName,100);
-    //setTimeout(this.initGame,700);
-    //setTimeout(this.getLenTokenInfo,500);
-    setInterval(this.getLenTokenInfo,800);
+    setTimeout(this.getLenTokenInfo,300);
+    setTimeout(this.initGame,700);
   },
   computed: {
     has_scatter: function() {
@@ -105,9 +104,32 @@ export default {
     },
     fixedTooltip() {
       return this.tooltipEvent === 'fixed';
-    }
+    },
   },
   methods: {
+    async popCick() {
+      if (new Date(1541044800000).getTime() >= new Date().getTime()) {
+        alert("抽奖活动暂未开始，请12点后再次尝试")
+        return
+      }
+      let res = await winLand(store.state.HomeStore.account_name,'lemoneosgame')
+      if (!res.is_error) {
+          let gamelist = await get_touzhu_info()
+          if (!gamelist.is_error && gamelist.data.rows && gamelist.rows.length >0) {
+          gamelist.rows.forEach(element => {
+            if (element.player == store.state.HomeStore.home_account_name) {
+              if (element.type == 5) {
+                  alert("恭喜成功获得土地")
+              } else if(element.type==6){
+                 alert("很遗憾，请下次尝试")
+              }
+            }
+          });
+       }
+      } else {
+        alert("抽奖失败，请稍后尝试")
+      }
+    },
    
     async getHomeAccountName () {
         let res = await get_scatter_identity();
@@ -127,20 +149,25 @@ export default {
     },
     //获取地块信息表
     async getLandInfo() {
-      /*if (!this.account_name) {
+      debugger
+      if (!this.account_name) {
         return
       }
+      debugger
       let landlist = await get_land_info()
       let counterlist = await get_gameInfo_list()
+      debugger
       if (landlist.is_error || counterlist.is_error) {
         return;
       }
       let landrows = landlist.data.rows
       let countrows = counterlist.data.rows;
+      debugger
       store.commit('getLandInfo',{
         "land":landrows,
         "count":countrows
-      })*/
+      })
+      debugger
     },
     async getLenTokenInfo () {
       let res = await get_len_token_info();

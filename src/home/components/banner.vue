@@ -14,14 +14,16 @@
                           </span>
                         </p>
                         <div  class="card-subtitle">
-                         <span>{{gameStateInfo}}</span><!--
+                         <span>{{gameStateInfo}}</span>
                             <countdown :time="getCountTime">
                             <template slot-scope="props">
                             {{ props.days }} 天 {{ props.hours }} 小时 {{ props.minutes }} 分 {{ props.seconds }} 秒
                             </template>
-                            </countdown>-->
+                            </countdown>
                         </div> 
-                       <!-- <span class="card-game-pool">本轮奖池金额： {{$store.state.LandStore.poolBalace}}</span> -->  
+                        <span class="card-game-pool">本轮奖池金额： {{$store.state.LandStore.poolBalace}}</span>
+                        <br/> 
+                        <span class="card-game-pool">我的土地： {{$store.state.LandStore.landNum}}</span> 
                     </div>
                    </router-link>
                 </el-col>
@@ -75,7 +77,6 @@ export default {
   },
   methods: {
      greet: function (event)  {
-      alert('游戏挖矿将于11月1号正式开始')
     },
     async initGame () {
         let counterlist = await get_gameInfo_list()
@@ -83,14 +84,13 @@ export default {
             store.commit('getGameInfo',counterlist.data.rows[0])
         } 
         let state = store.state.LandStore.gameState;
-        this.gameStateInfo = "游戏挖矿将于11月1号20:00正式开始，每日右下角签到可领取LEN币"
-        /*if (state == 0) {
+        if (state == 0) {
           this.gameStateInfo = "距离开始还有："
          } else if (state == 1) {
            this.gameStateInfo = "距离结束还有："
          } else if (state == 2) {
            this.gameStateInfo  = "游戏暂未开始："
-         }*/
+         }
     },
   }
 }

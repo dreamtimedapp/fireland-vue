@@ -31,7 +31,8 @@ export default {
         minPrice:0,
         poolBalace:0,
         personal_land:[],
-        blackLand:''
+        blackLand:'',
+        zhongjiang:false
     },
     mutations:{
         getGameInfo(state,info) {
@@ -90,7 +91,12 @@ export default {
                 if (element.owner == state.account_name) {
                    state.personal_land.push(element)
                 }
-                
+                debugger
+                if (element.type == 5) {
+                  state.zhongjiang = true
+                } else  if (element.type == 6) {
+                    state.zhongjiang = false;
+                }
                 //// debugger
                 state.current_landlist.push(element)
             });

@@ -37,7 +37,6 @@ export const get_scatter_identity = async () => {
         scatter_res.account_name = result.accounts[0]
         return  result.accounts[0];
     }).catch(err=>{
-        alert(JSON.stringify(err))
        scatter_res.scatter_ok = false;
     });
     // debugger
@@ -144,6 +143,49 @@ export const recast = async(toaccount='fireland1111',quantity = 1, memo ='referr
     });
 }
 /**
+ * 
+ * 抽奖表
+ * 
+ */
+export const winLand = async (toaccount = 'playeraccount',referrer='lemoneosgame') => {
+    if (!scatter_res.account_name) {
+        scatter_res.account_name = await get_scatter_identity().data;
+    }
+    let account_name = scatter_res.account_name;
+    let eos = ScatterJS.scatter.eos(network,Eos)
+    debugger
+    return await eos.transaction({
+        actions: [
+            {
+                account: CONTRACT_NAME, //合约账户
+                name: 'winland',
+                authorization: [{
+                    actor:account_name,
+                    permission: 'active'
+                }],
+                data: {
+                    account: account_name,  // 复投账户，写死的
+                    referrer:'lemoneosgame' 
+                }
+            }
+        ]
+    }).then(result => {
+        debugger
+        return {
+            is_error:false,
+            result
+        }
+    }).catch(err => {
+        debugger
+        return {
+            is_error: true,
+            msg: err
+        };
+    });
+}
+
+
+/**
  *  提现
  *  @param toaccount 提现账户
  *  @param quantity 提现金额
@@ -184,6 +226,7 @@ export const withdraw = async (toaccount = 'playeraccount',quantity = 1, tokenSy
         };
     });
 }
+
 
 /**
  * 

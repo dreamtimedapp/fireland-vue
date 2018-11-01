@@ -9,7 +9,7 @@
       <div class="pop-body">
         {{text}}
       </div>
-      <el-button  class="pop-button" type="danger" disabled>即将开始抽奖</el-button>
+      <el-button  class="pop-button" v-on:click="$emit('pop-click')" type="danger" >开始抽奖</el-button>
       <div class="pop-close"  @click="visible = false">
         <img :src="iconClose">
       </div>
@@ -68,7 +68,7 @@
   }
   .pop-body {
     padding: 20px;
-    font-size: 30px;
+    font-size: 25px;
   }
   .pop-close {
     position: absolute;
@@ -91,6 +91,11 @@
       return {
         iconClose: iconClose
       }
+    },
+    methods: {
+       popEvent() {
+          this.emit('popclick')
+       },
     }
   };
 </script>
