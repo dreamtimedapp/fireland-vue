@@ -45,8 +45,7 @@
        <el-dialog
            title="邀请好友享受分红"
            :visible.sync="dialogVisible"
-           width="80%"
-           :before-close="handleClose">
+           width="80%">
            <span>{{getInviteMessage}}</span>
            <span slot="footer" class="dialog-footer">
               <el-button @click="dialogVisible = false">取 消</el-button>
