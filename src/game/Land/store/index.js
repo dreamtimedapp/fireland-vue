@@ -81,7 +81,7 @@ export default {
 
             let landrows = data.land;
             state.roundNum = data.count[0].roundNum;
-            state.maxPrice  = data.count[0].landMaxPrice / 10000;
+  
             state.minPrice = data.count[0].landMinPrice / 10000;
      
             state.poolBalace = data.count[0].potBalance / 10000;

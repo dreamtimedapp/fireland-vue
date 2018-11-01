@@ -224,9 +224,6 @@ export const withdraw = async (account_name,toaccount = 'playeraccount',quantity
     if (!account_name) {
         account_name = await login().name;
      }
-    if (!quantity) {
-        quantity = 1
-    }
     let eos = ScatterJS.scatter.eos(network,Eos)
     return await eos.transaction({
         actions: [
@@ -239,7 +236,6 @@ export const withdraw = async (account_name,toaccount = 'playeraccount',quantity
                 }],
                 data: {
                     account: account_name,  // 复投账户，写死的
-                    quantity: toAsset(quantity, tokenSymbol),
                 }
             }
         ]

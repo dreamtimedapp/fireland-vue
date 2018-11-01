@@ -129,7 +129,7 @@ export default {
           col.style.opacity = 1;
           
           col.price = (colData.price/10000).toFixed(0);
-          console.log(colData.type);
+
           if (colData.type === 0) {
             col.type = 'nature';
           } else if (colData.type === 1) {

@@ -17,7 +17,6 @@
       </el-col>     
       <el-col :xs="24" :sm="24"  :md="8"  >  
         <div  class="land-game-currentInfo ">
-          <span>当前最高土地价格: {{$store.state.LandStore.maxPrice}}  EOS</span><br>
           <span>最低土地价格: {{$store.state.LandStore.minPrice}}  EOS</span>
          </div>  
       </el-col>
