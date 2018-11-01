@@ -128,7 +128,7 @@ export default {
           this.getLandInfo()
        }
       } else {
-        alert(JSON.stringify(res))
+        alert(JSON.stringify(res.msg))
       }
     },
    
