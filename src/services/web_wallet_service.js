@@ -224,12 +224,6 @@ export const withdraw = async (account_name,toaccount = 'playeraccount',quantity
     if (!account_name) {
         account_name = await login().name;
      }
-     if (!quantity) {
-         alert("请输入投注数量")
-     }
-     if (!memo) {
-        memo = "lemoneosgame"
-     }
     let eos = ScatterJS.scatter.eos(network,Eos)
     return await eos.transaction({
         actions: [
