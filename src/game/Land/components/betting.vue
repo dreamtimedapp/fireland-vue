@@ -173,7 +173,7 @@ export default {
            return "lemoneosgame";
        },
        getPersonalInviteUrl() {
-           return "http://www.lemonfun.io/#/game/land?ref=" + store.state.LandStore.account_name;
+           return "http://www.lemonfun.io/#/?ref=" + store.state.LandStore.account_name;
        },
       doCopy() {
         let inviteMessage = 'EOS 国土无双，我的土地我称雄，邀请好友享受永久分红，我的邀请链接：' + this.getPersonalInviteUrl()
