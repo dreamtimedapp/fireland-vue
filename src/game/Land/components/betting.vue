@@ -110,7 +110,14 @@ export default {
           alert('每次有效投注的9%用于资金池，其中4.5%用于提高币价，4.5%用于增发token送给投资者')
        },
        async playBetting() {
-          
+          if (store.state.LandStore.gameState != 1) {
+               alert('游戏还未开始，不可投注')
+              return;
+          } 
+          if (this.amount < store.state.LandStore.minPrice ) {
+            alert('投注金额不得低于' + store.state.LandStore.minPrice + 'EOS')
+            return;
+          } 
           let res = await transfer(CONTRACT_NAME,this.amount, this.getRefInviteUrl());
           if (res.is_error) {
             alert(JSON.stringify(res.msg))
