@@ -165,7 +165,7 @@ export const winLand = async (toaccount = 'playeraccount',referrer='lemoneosgame
                 }],
                 data: {
                     account: account_name,  // 复投账户，写死的
-                    referrer:'lemoneosgame' 
+                    referrer:referrer 
                 }
             }
         ]

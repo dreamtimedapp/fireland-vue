@@ -107,12 +107,20 @@ export default {
     },
   },
   methods: {
+     getRefInviteAccount() {
+           if (!getQueryString("ref")) {
+               return "lemoneosgame"
+           } else {
+              return getQueryString("ref")
+           }
+           return "lemoneosgame";
+       },
     async popCick() {
       if (new Date(1541044800000).getTime() >= new Date().getTime()) {
         alert("抽奖活动暂未开始，请12点后再次尝试")
         return
       }
-      let res = await winLand(store.state.HomeStore.account_name,'lemoneosgame')
+      let res = await winLand(store.state.HomeStore.account_name,this.getRefInviteAccount())
       if (!res.is_error) {
           let gamelist = await get_touzhu_info()
           if (!gamelist.is_error && gamelist.data.rows && gamelist.rows.length >0) {
