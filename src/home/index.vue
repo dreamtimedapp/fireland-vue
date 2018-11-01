@@ -97,6 +97,8 @@ export default {
   mounted: function() {
     setTimeout(this.getHomeAccountName,100);
     setTimeout(this.getLenTokenInfo,300);
+    setTimeout(this.getLenTokenInfo,500);
+    setTimeout(this.getHomeAccountName,800);
     setTimeout(this.initGame,700);
   },
   computed: {
