@@ -83,13 +83,13 @@
   }
 </style>
 <script>
-  import iconClose from '../assets/icon/icon-close.png';
+
   export default {
     name: 'popup',
     props: ['visible', 'title', 'text'],
     data: function() {
       return {
-        iconClose: iconClose
+        iconClose: ''
       }
     },
     methods: {

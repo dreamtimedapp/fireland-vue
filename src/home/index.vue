@@ -50,7 +50,7 @@ export default {
   },
   data: function() {
     return {
-      popVisible: true,
+      popVisible: false,
       popTitle: '活动公告',
       popText: '游戏即挖矿已经开始',
       account_name: '',
