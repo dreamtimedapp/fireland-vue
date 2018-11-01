@@ -108,11 +108,7 @@ export default {
   },
   methods: {
      getRefInviteAccount() {
-           if (!getQueryString("ref")) {
-               return "lemoneosgame"
-           } else {
-              return getQueryString("ref")
-           }
+           
            return "lemoneosgame";
        },
     async popCick() {
