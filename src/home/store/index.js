@@ -32,6 +32,7 @@ export default {
         poolBalace:0,
         personal_land:[],
         blackLand:'',
+        my_len:0,
         zhongjiang:false
     },
     mutations:{
@@ -91,7 +92,6 @@ export default {
                 if (element.owner == state.account_name) {
                    state.personal_land.push(element)
                 }
-                debugger
                 if (element.type == 5) {
                   state.zhongjiang = true
                 } else  if (element.type == 6) {
@@ -106,15 +106,18 @@ export default {
            state.home_account_name = name
         },
         setEosBalance(state,balance) {
+            alert(state.eos_balance )
            state.eos_balance = balance
         },
+        setMyLen(state,balance) {
+            debugger
+            state.my_len = balance
+         },
         setLenBalance(state,data) {
-            if (!data || !data.rows || data.rows.length == 0) {
-                state.len_balance = 0;
-                return
+            if (data && data.rows && data.rows.length >0) {
+                let len = data.rows[0]
+                state.len_balance = len.balance;
             }
-            let len = data.rows[0]
-            state.len_balance = len.balance;
         },
         setLenDetail(state,data) {
             let len = data.rows[0]

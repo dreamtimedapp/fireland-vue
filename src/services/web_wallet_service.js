@@ -60,14 +60,15 @@ export const login = async ()=>{
  * 获取EOS余额
  * 
 */
-export const getBalance = async ()=> {
+export const getBalance = async (symbol='EOS')=> {
     if (!scatter_res.account_name) {
         let res = await get_scatter_identity().data;
         //debugger
     }
+
     let account_name = scatter_res.account_name;
-    //debugger
-    return await Eos(eos_config).getCurrencyBalance({ code: "eosio.token", account: account_name, symbol: "EOS" }).then(result => {
+    debugger
+    return await Eos(eos_config).getCurrencyBalance({ code: "eosio.token", account: account_name, symbol: symbol }).then(result => {
         return {
             is_error:false,
             result

@@ -26,6 +26,7 @@ import {
     get_land_info,
     get_touzhu_info,
     get_gameInfo_list,
+    get_len_balance_bytable
 } from '../../services/web_wallet_service.js'
 import store from '../../store'
 const rule = 
@@ -67,6 +68,12 @@ export default {
           store.commit('setEosBalance',balance_res.result[0])
         } else {
           store.commit('setEosBalance',0)
+        }
+        let len = await get_len_balance_bytable()
+        if (!len.is_error) {
+            if (len.data) {
+              store.commit('setLenBalance',len.data) 
+            }
         }
        },
     }

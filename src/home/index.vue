@@ -147,13 +147,11 @@ export default {
           add_counter(this.account_name)
           store.commit('setHomeAccount',res.data.name) 
         }
-        let balance_res = await getBalance();
-    
-        if (balance_res && balance_res.result && balance_res.result.length > 0) {
-          this.eos_balance = balance_res.result[0]
-          store.commit('setEosBalance',balance_res.result[0])
-        } else {
-          store.commit('setEosBalance',0)
+        let len = await get_len_balance_bytable()
+        if (!len.is_error) {
+            if (len.data && len.data.rows && len.data.rows.length > 1) {
+             store.commit('setLenBalance',len.data) 
+            }
         }
     },
     //获取地块信息表
