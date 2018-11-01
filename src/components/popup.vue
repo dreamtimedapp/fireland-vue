@@ -9,7 +9,7 @@
       <div class="pop-body">
         {{text}}
       </div>
-      <el-button  class="pop-button" v-on:click="$emit('pop-click')" type="danger" >开始抽奖</el-button>
+      <el-button  class="pop-button" v-on:click="$emit('pop-click')" type="danger" >进入游戏</el-button>
       <div class="pop-close"  @click="visible = false">
         <img :src="iconClose">
       </div>

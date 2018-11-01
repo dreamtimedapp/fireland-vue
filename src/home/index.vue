@@ -51,8 +51,8 @@ export default {
   data: function() {
     return {
       popVisible: true,
-      popTitle: '活动公告（签到送Token&抽奖获土地）',
-      popText: '北京时间11月1日20:00，将开启游戏即挖矿，12点开启抽奖免费送土地活动，游戏开始前截止。中奖的地皮初始是价值1eos，卖出可获利0.65eos，越早参与，中奖率越高，每个账户一次抽奖机会，共有145块地皮，送完即止',
+      popTitle: '活动公告',
+      popText: '游戏即挖矿已经开始',
       account_name: '',
       eos_balance:'',
                 positionTypes: [
@@ -117,6 +117,8 @@ export default {
            }
        },
     async popCick() {
+      location.href='https://www.lemonfun.io/#/game/land?ref=' + this.getRefInviteAccount()
+      /*
       if (new Date(1541044800000).getTime() >= new Date().getTime()) {
         alert("抽奖活动暂未开始，请12点后再次尝试")
         return
@@ -138,7 +140,7 @@ export default {
        }
       } else {
         alert(JSON.stringify(res.msg))
-      }
+      }*/
     },
    
     async getHomeAccountName () {
