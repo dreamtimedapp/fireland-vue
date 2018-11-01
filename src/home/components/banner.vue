@@ -2,7 +2,7 @@
     <div v-on:click="greet"  class="home-banner-carousel-item">
        <el-row>
             <el-col :xs="24" :sm="12" :md="12" :lg="12">
-                   <router-link to="/" class="card bg-dark text-white hidden-sm-only">
+                   <router-link to="/game/land" class="card bg-dark text-white hidden-sm-only">
                     <img  class="card-img" src="https://gw.alicdn.com/tfs/TB12sQ3lhnaK1RjSZFBXXcW7VXa-1378-1378.jpg" style="min-height: 100px;">
                     <div class="card-img-overlay"  >
                         <h5 class="card-title">
