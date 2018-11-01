@@ -97,7 +97,6 @@ export default {
   mounted: function() {
     setTimeout(this.getHomeAccountName,100);
     setTimeout(this.getLenTokenInfo,300);
-    setTimeout(this.getLenTokenInfo,500);
     setTimeout(this.getHomeAccountName,800);
     setTimeout(this.initGame,700);
     setInterval(this.getLen,1000);
@@ -144,11 +143,9 @@ export default {
     },
    
     async getHomeAccountName () {
-        let res = await get_scatter_identity();
-        if(!res.is_error){
-          this.account_name = res.data.name
-          add_counter(this.account_name)
-          store.commit('setHomeAccount',res.data.name) 
+        let res = await login();
+        if (res) {
+          store.commit('setHomeAccount',res.name)
         }
         let balance_res = await getBalance();
         if (balance_res && balance_res.result && balance_res.result.length > 0) {
