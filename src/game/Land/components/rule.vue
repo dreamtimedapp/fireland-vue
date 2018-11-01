@@ -1,5 +1,5 @@
 <template>
-    <div class="land-len-security" id="rule">
+    <div class="land-len-security" >
          <div class="touzhu-table" id="touzhu-table">
                <h3 class="security-title ">
                     投注风云榜
@@ -15,7 +15,7 @@
                  </el-table-column>
               </el-table>
           </div>
-           <span class="land-len-security-title">游戏规则</span>
+           <span class="land-len-security-title" id="rule">游戏规则</span>
            <div class="land-adt_grids">
         
                 <h3 class="land-security-title text-center">EOS 国土无双游戏玩法</h3>
