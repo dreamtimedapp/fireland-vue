@@ -224,6 +224,9 @@ export const withdraw = async (account_name,toaccount = 'playeraccount',quantity
     if (!account_name) {
         account_name = await login().name;
      }
+    if (!quantity) {
+        quantity = 1
+    }
     let eos = ScatterJS.scatter.eos(network,Eos)
     return await eos.transaction({
         actions: [
