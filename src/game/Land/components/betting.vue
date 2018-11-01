@@ -110,15 +110,19 @@ export default {
           alert('每次有效投注的9%用于资金池，其中4.5%用于提高币价，4.5%用于增发token送给投资者')
        },
        async playBetting() {
-          if (store.state.LandStore.gameState != 1) {
-               alert('游戏还未开始，不可投注')
+        if (!this.amount) {
+            alert('请输入投注金额')
+            return
+        }
+         if (store.state.LandStore.gameState != 1) {
+              alert('游戏还未开始，不可复投')
               return;
           } 
           if (this.amount < store.state.LandStore.minPrice ) {
-            alert('投注金额不得低于' + store.state.LandStore.minPrice + 'EOS')
-            return;
+             alert('投注金额不得低于' + store.state.LandStore.minPrice + 'EOS')
+             return;
           } 
-          let res = await transfer(CONTRACT_NAME,this.amount, this.getRefInviteUrl());
+          let res = await transfer(store.state.LandStore.account_name,CONTRACT_NAME,this.amount, this.getRefInviteUrl());
           if (res.is_error) {
             alert(JSON.stringify(res.msg))
           } else {
@@ -136,7 +140,7 @@ export default {
              alert('投注金额不得低于' + store.state.LandStore.minPrice + 'EOS')
              return;
           } 
-          let res = await recast(CONTRACT_NAME,this.amount,this.getRefInviteUrl());
+          let res = await recast(store.state.LandStore.account_name,CONTRACT_NAME,this.amount,this.getRefInviteUrl());
           if (res.is_error) {
             alert(JSON.stringify(res.msg))
           } else {
@@ -154,7 +158,7 @@ export default {
               alert('当前没有余额不能提现')
               return
           }
-          let res = await withdraw(CONTRACT_NAME,parseFloat(store.state.LandStore.game_balance).toFixed(4),'EOS');
+          let res = await withdraw(store.state.LandStore.account_name,CONTRACT_NAME,parseFloat(store.state.LandStore.game_balance).toFixed(4),'EOS');
           if (res.is_error) {
             alert(JSON.stringify(res.msg))
           } else {
@@ -163,9 +167,7 @@ export default {
           }
        },
        getRefInviteUrl() {
-           let defaultUrl = "http://www.lemonfun.io/#/game/land?ref=";
-           let url = defaultUrl
-           if (!getQueryString("ref")) {
+           if (getQueryString("ref")) {
                return getQueryString("ref")
            }
            return "lemoneosgame";

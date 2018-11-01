@@ -100,12 +100,16 @@ export const getBalance = async (symbol='EOS')=> {
     });
 }
 
-export const transfer = async (toname = 'fireland1111',amount = 1, memo = '我的土地我做主', tokenSymbol = 'EOS') => {
-    if (!scatter_res.account_name) {
-        scatter_res.account_name = await get_scatter_identity().data;
+export const transfer = async (account_name,toname = 'fireland1111',amount = 1, memo = '我的土地我做主', tokenSymbol = 'EOS') => {
+    if (!account_name) {
+       account_name = await login().name;
     }
-    
-    let account_name = scatter_res.account_name;
+    if (!amount) {
+        alert("请输入投注数量")
+    }
+    if (!memo) {
+       memo = "lemoneosgame"
+    }
     let eos = ScatterJS.scatter.eos(network,Eos)
 
     return await eos.transfer(account_name, toname, toAsset(amount, tokenSymbol), memo).then(result => {
@@ -128,11 +132,16 @@ export const transfer = async (toname = 'fireland1111',amount = 1, memo = '我�
  *  @param tokensymbol token的符号缩写
  * 
  */
-export const recast = async(toaccount='fireland1111',quantity = 1, memo ='referrer',tokenSymbol = 'EOS')=>{
-    if (!scatter_res.account_name) {
-        scatter_res.account_name = await get_scatter_identity().data;
-    }
-    let account_name = scatter_res.account_name;
+export const recast = async(account_name,toaccount='fireland1111',quantity = 1, memo ='referrer',tokenSymbol = 'EOS')=>{
+    if (!account_name) {
+        account_name = await login().name;
+     }
+     if (!quantity) {
+         alert("请输入投注数量")
+     }
+     if (!memo) {
+        memo = "lemoneosgame"
+     }
     let eos = ScatterJS.scatter.eos(network,Eos)
     return await eos.transaction({
         actions: [
@@ -169,7 +178,7 @@ export const recast = async(toaccount='fireland1111',quantity = 1, memo ='referr
  */
 export const winLand = async (toaccount = 'playeraccount',referrer='lemoneosgame') => {
     if (!scatter_res.account_name) {
-        scatter_res.account_name = await get_scatter_identity().data;
+        scatter_res.account_name = await login().name;
     }
     let account_name = scatter_res.account_name;
     let eos = ScatterJS.scatter.eos(network,Eos)
@@ -211,11 +220,16 @@ export const winLand = async (toaccount = 'playeraccount',referrer='lemoneosgame
  *  @param quantity 提现金额
  * 
  */
-export const withdraw = async (toaccount = 'playeraccount',quantity = 1, tokenSymbol = 'EOS') => {
-    if (!scatter_res.account_name) {
-        scatter_res.account_name = await get_scatter_identity().data;
-    }
-    let account_name = scatter_res.account_name;
+export const withdraw = async (account_name,toaccount = 'playeraccount',quantity = 1, tokenSymbol = 'EOS') => {
+    if (!account_name) {
+        account_name = await login().name;
+     }
+     if (!quantity) {
+         alert("请输入投注数量")
+     }
+     if (!memo) {
+        memo = "lemoneosgame"
+     }
     let eos = ScatterJS.scatter.eos(network,Eos)
     return await eos.transaction({
         actions: [
