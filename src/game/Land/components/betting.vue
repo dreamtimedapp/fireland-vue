@@ -149,8 +149,7 @@ export default {
           }
        },
        async withdraw() {
-          
-          let res = await withdraw(store.state.LandStore.account_name,CONTRACT_NAME,parseFloat(store.state.LandStore.game_balance).toFixed(4),'EOS');
+          let res = await withdraw(store.state.LandStore.account_name,CONTRACT_NAME,this.amount,'EOS');
           if (res.is_error) {
             alert(JSON.stringify(res.msg))
           } else {
