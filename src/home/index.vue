@@ -125,6 +125,7 @@ export default {
               }
             }
           });
+          this.getLandInfo()
        }
       } else {
         alert("抽奖失败，请稍后尝试")
@@ -149,25 +150,25 @@ export default {
     },
     //获取地块信息表
     async getLandInfo() {
-      debugger
+   
       if (!this.account_name) {
         return
       }
-      debugger
+    
       let landlist = await get_land_info()
       let counterlist = await get_gameInfo_list()
-      debugger
+     
       if (landlist.is_error || counterlist.is_error) {
         return;
       }
       let landrows = landlist.data.rows
       let countrows = counterlist.data.rows;
-      debugger
+
       store.commit('getLandInfo',{
         "land":landrows,
         "count":countrows
       })
-      debugger
+ 
     },
     async getLenTokenInfo () {
       let res = await get_len_token_info();
