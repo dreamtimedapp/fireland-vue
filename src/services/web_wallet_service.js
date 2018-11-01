@@ -108,7 +108,7 @@ export const transfer = async (toname = 'fireland1111',amount = 1, memo = 'æˆ‘çš
     let account_name = scatter_res.account_name;
     let eos = ScatterJS.scatter.eos(network,Eos)
 
-    return await eos.transfer(account_name, toname, toAsset(amount, tokenSymbol), 'firelandgame').then(result => {
+    return await eos.transfer(account_name, toname, toAsset(amount, tokenSymbol), memo).then(result => {
         return {
             is_error:false,
             result
