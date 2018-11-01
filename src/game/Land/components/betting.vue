@@ -166,9 +166,7 @@ export default {
            let defaultUrl = "http://www.lemonfun.io/#/game/land?ref=";
            let url = defaultUrl
            if (!getQueryString("ref")) {
-               url = defaultUrl+ "lemoneosgame"
-           } else {
-               url = defaultUrl + getQueryString('ref')
+               return getQueryString("ref")
            }
            return "lemoneosgame";
        },
