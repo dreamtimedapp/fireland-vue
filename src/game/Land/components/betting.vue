@@ -150,13 +150,9 @@ export default {
        },
        async withdraw() {
           if (store.state.LandStore.game_balance == '') {
-              alert('当前没有余额不能提现')
+              alert('请输入提现金额')
               return
           } 
-          if (parseFloat(store.state.LandStore.game_balance).toFixed(4) < 0) {
-              alert('当前没有余额不能提现')
-              return
-          }
           let res = await withdraw(store.state.LandStore.account_name,CONTRACT_NAME,parseFloat(store.state.LandStore.game_balance).toFixed(4),'EOS');
           if (res.is_error) {
             alert(JSON.stringify(res.msg))
