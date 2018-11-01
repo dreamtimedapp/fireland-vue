@@ -50,7 +50,7 @@ export default {
     return {
       popVisible: true,
       popTitle: '活动公告',
-      popText: '北京时间11月1日20:00，将开启游戏即挖矿，12点开启抽奖免费送土地活动，游戏开始前截止.右下角签到可领取柠檬通证.',
+      popText: '北京时间11月1日20:00，将开启游戏即挖矿，12点开启抽奖免费送土地活动，游戏开始前截止。中奖的地皮初始是价值1eos，卖出可获利0.65eos，越早参与，中奖率越高，每个账户一次抽奖机会，共有145块地皮，送完即止',
       account_name: '',
       eos_balance:'',
                 positionTypes: [
