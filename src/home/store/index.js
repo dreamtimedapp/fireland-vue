@@ -106,11 +106,9 @@ export default {
            state.home_account_name = name
         },
         setEosBalance(state,balance) {
-            alert(state.eos_balance )
            state.eos_balance = balance
         },
         setMyLen(state,balance) {
-            debugger
             state.my_len = balance
          },
         setLenBalance(state,data) {
