@@ -4,7 +4,7 @@
                <h3 class="security-title ">
                     投注风云榜
                 </h3>    
-              <el-table   :data="getTableRows" >
+              <el-table   :data="landInfo.touzhuRows" >
                   <el-table-column prop="logtime" label="时间">
                   </el-table-column>
                   <el-table-column prop="player" label="玩家">
@@ -116,16 +116,12 @@ const rule = "## 游戏介绍\n" +
 export default {
     ready() {
     },
+    props: ['game','landInfo','balance','account'],
     data() {
       return {
         rule: rule,
         border:false
       }
-    },
-    computed: {
-        getTableRows() {
-            return store.state.LandStore.touzhuRows
-        }
     },
     methods: {
 

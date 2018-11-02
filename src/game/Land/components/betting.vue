@@ -10,7 +10,7 @@
            <el-col :span="12">
                <div class="land-grid-content-betting">
                    <div>
-                    <el-input :placeholder="getAmountHolder"  v-model="amount">
+                    <el-input :placeholder="'最低投注:' + this.landInfo.minPrice + ' EOS'"  v-model="amount">
                        <template slot="append">eos</template>
                     </el-input>
                     <el-button class="land-betting-btn"  v-on:click="playrecast" type="info">复投</el-button>
@@ -23,15 +23,15 @@
               <div class="land-box-input-info">
                 <div class="land-account-balance">
                     <span>EOS余额：</span>
-                    <span> {{$store.state.LandStore.eos_balance}}  </span>
+                    <span> {{balance.eos}}  </span>
                 </div>
                 <div class="land-account-balance">
                     <span>我的土地：</span>
-                    <span>  {{$store.state.LandStore.landNum}}  </span>
+                    <span>  {{landInfo.landNum}}  </span>
                 </div>
                 <div class="land-account-withdraw">
                     <span>游戏内：</span>
-                    <span> {{$store.state.LandStore.game_balance}} EOS  </span>
+                    <span> {{landInfo.game_balance}} EOS  </span>
                     <el-button  type="primary" v-on:click="withdraw" size="mini" class="land-withdraw-btn">提现</el-button>
                 </div>
                 <div class="land-account-invite">
@@ -61,50 +61,36 @@
     </el-row>   
 </template>
 <script>
-import {
-    get_scatter_identity,
-    login,
-    transfer,
-    recast,
-    getBalance,
-    get_player_list,
-    get_land_info,
-    get_touzhu_info,
-    get_gameInfo_list,
-withdraw,
-} from '../../../services/web_wallet_service.js'
+
 import { add_gamelog,get_game_log} from '../../../services/get_data_service.js';
 import {CONTRACT_NAME} from '../../../config/config.js'
 import {getQueryString} from '../../../utils/utils.js'
 import store from '../../../store'
+import { mapState, mapActions, mapGetters } from 'vuex'
+
 export default {
     ready() {
     },
-   
+    props: ['game','landInfo','balance','account'],
     data() {
       return {
           amount: '',
           memo: '',
           dialogVisible:false,
           dialogDetail: false,
-          amountHolder:'最低投注:' + store.state.LandStore.minPrice + ' EOS'
+          amountHolder:''
       }
     },
     computed: {
-        getAccount() {
-           return store.state.LandStore.account_name
-        },
-        getAmountHolder () { 
-         return '最低投注:' + store.state.LandStore.minPrice + ' EOS'
-       },
        getInviteMessage() {
          return 'EOS 国土无双，我的土地我称雄，邀请好友享受永久分红，专属邀请链接：' + this.getPersonalInviteUrl() 
       }
     },
     mounted: function() { 
+    
     },
     methods: {
-       
+       ...mapActions(['buyLand','withdraw','recastLand']),
        getToken() {
           alert('每次有效投注的9%用于资金池，其中4.5%用于提高币价，4.5%用于增发token送给投资者')
        },
@@ -113,49 +99,28 @@ export default {
             alert('请输入投注金额')
             return
         }
-         if (store.state.LandStore.gameState != 1) {
+         if (this.game.gameState != 1) {
               alert('游戏还未开始，不可复投')
               return;
           } 
-          if (this.amount < store.state.LandStore.minPrice ) {
-             alert('投注金额不得低于' + store.state.LandStore.minPrice + 'EOS')
+          if (this.amount < this.landInfo.minPrice ) {
+             alert('投注金额不得低于' + this.landInfo.minPrice + 'EOS')
              return;
           } 
-          let res = await transfer(store.state.LandStore.account_name,CONTRACT_NAME,this.amount, this.getRefInviteUrl());
-          if (res.is_error) {
-            alert(JSON.stringify(res.msg))
-          } else {
-            store.commit('setMyInfo','')  
-            add_gamelog(store.state.LandStore.account_name,'',this.amount,'',0)
-            alert('下注成功！')
-          }
+          add_gamelog(this.account.name,CONTRACT_NAME,this.amount)
+          this.buyLand(this.account.name,CONTRACT_NAME,this.amount, this.getRefInviteUrl());
        },
        async playrecast() {
-          if (store.state.LandStore.gameState != 1) {
+          if (this.game.gameState != 1) {
               alert('游戏还未开始，不可复投')
               return;
           } 
-          if (this.amount < store.state.LandStore.minPrice ) {
-             alert('投注金额不得低于' + store.state.LandStore.minPrice + 'EOS')
+          if (this.amount < this.landInfo.minPrice ) {
+             alert('投注金额不得低于' + this.lanInfo.minPrice.minPrice + 'EOS')
              return;
           } 
-          let res = await recast(store.state.LandStore.account_name,CONTRACT_NAME,this.amount,this.getRefInviteUrl());
-          if (res.is_error) {
-            alert(JSON.stringify(res.msg))
-          } else {
-            store.commit('setMyInfo','')  
-            add_gamelog(store.state.LandStore.account_name,'',this.amount,'',1)
-            alert('下注成功！')
-          }
-       },
-       async withdraw() {
-          let res = await withdraw(store.state.LandStore.account_name,CONTRACT_NAME,store.state.LandStore.game_balance,'EOS');
-          if (res.is_error) {
-            alert(JSON.stringify(res.msg))
-          } else {
-            store.commit('setMyInfo','')
-            alert('提现成功！')
-          }
+          add_gamelog(this.account.name,CONTRACT_NAME,this.amount)
+          this.recast(this.account.name,CONTRACT_NAME,this.amount,this.getRefInviteUrl());
        },
        getRefInviteUrl() {
            if (getQueryString("ref")) {
@@ -164,7 +129,9 @@ export default {
            return "lemoneosgame";
        },
        getPersonalInviteUrl() {
-           return "http://www.lemonfun.io/#/?ref=" + store.state.LandStore.account_name;
+           if (this.account) {
+              return "http://www.lemonfun.io/#/?ref=" + this.account.name;
+           }
        },
       doCopy() {
         let inviteMessage = 'EOS 国土无双，我的土地我称雄，邀请好友享受永久分红，我的邀请链接：' + this.getPersonalInviteUrl()

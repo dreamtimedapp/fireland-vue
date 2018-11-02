@@ -30,7 +30,8 @@
 
 <script>
 import {get_sign_all,
-        sign_onday
+        sign_onday,
+        if_people_sign
 
 } from '../services/get_data_service.js'
 import store from '../store'
@@ -86,17 +87,13 @@ export default {
    
   },
   computed: {
-    has_scatter: function() {
-      return store.state.global_config.has_scatter;
-    },
+ 
     fixedTooltip() {
       return this.tooltipEvent === 'fixed';
     },
     getInviteMessage() {
+
       return 'EOS 国土无双，我的土地我称雄，邀请好友享受永久分红，专属邀请链接：' + this.getPersonalInviteUrl() 
-    },
-    getAccout() {
-      return this.account
     }
   },
   methods: {
@@ -117,18 +114,29 @@ export default {
         this.dialogVisible = false
     },
     getPersonalInviteUrl() {
-        return "http://www.lemonfun.io/#/game/land?ref=" + this.account;
+        if (this.account) {
+            return "http://www.lemonfun.io/#/game/land?ref=" + this.account;
+        } else {
+            return "http://www.lemonfun.io/#/game/land?ref=";
+        }
     },
     async sign () {
-      let res =  await sign_onday(this.account)
-      if (res) {
-        let result = EOS_Inviter(this.account)
-        if (result) {
+      if (!this.account) {
+        alert("请登录后再试")
+        return;
+      }
+      let alreadySign = await if_people_sign(this.account)
+      if (alreadySign) {
+        alert("今天已经签到过，请明天再来")
+        return;
+      }
+      let result = await EOS_Inviter(this.account)
+      if (!result.is_error) {
+          await sign_onday(this.account)
           alert("领取 LEN 成功")
-        } else {
-          alert("已达到今日限量，请明日再来")
-        }
-      } 
+      } else {
+          alert(JSON.stringify(result))
+      }
     },
     share () {
        this.dialogVisible = true;

@@ -1,9 +1,9 @@
 <template>
 <div class="main-container" >
-  <Fab v-bind:account="account_name"/>
-  <Header></Header>
-  <Banner> </Banner>
-  <Content></Content>
+  <Fab :account="account"/>
+  <Header :account="account" v-on:requestId="requestId"></Header>
+  <Banner :game="gameInfo" :landInfo="landInfo"> </Banner>
+  <Content :lenBalance="balance.len" :eosBalance="balance.eos" :lenInfo="lenInfo"></Content>
   <popup :title="popTitle" :text="popText" :visible.sync="popVisible"  v-on:pop-click="popCick"></popup>
 </div>
 </template>
@@ -16,25 +16,12 @@ import Fab from '../common/fab';
 import store from '../store';
 import popup from '../components/popup';
 import {getQueryString} from '../utils/utils.js';
-//const popup = require('../components/popup.vue');
-import {
-    get_scatter_identity,
-    login,
-    transfer,
-    recast,
-    getBalance,
-    get_player_list,
-    get_land_info,
-    get_touzhu_info,
-    get_gameInfo_list,
-    get_len_token_info,
-    get_len_balance_bytable,
-    get_len_balance,
-    winLand,
-    getBalanceByName
-} from '../services/web_wallet_service.js';
+
 import { setInterval, setTimeout } from 'timers';
 import {add_counter} from '../services/get_data_service.js';
+import { mapState, mapActions, mapGetters } from 'vuex'
+import { network } from '../config'
+const requiredFields = { accounts: [network] }
 
 export default {
   name: 'landGame',
@@ -53,55 +40,22 @@ export default {
       popVisible: false,
       popTitle: '活动公告',
       popText: '游戏即挖矿已经开始',
-      account_name: '',
-      eos_balance:'',
-                positionTypes: [
-                    'fixed',
-                    'absolute'
-                ],
-                tooltipEvents: [
-                    'hover',
-                ],
-                actions:[
-                  {
-                    name: 'jumpHome',
-                    icon: 'home', 
-                    tooltip: '主页', 
-                    color:'#000',
-                  },
-                  {
-                    name: 'refresh',
-                    icon: 'refresh', 
-                    tooltip: '刷新', 
-                    color:'#E6A23C',
-                  },
-                  {
-                    name: 'share',
-                    icon: 'share', 
-                    tooltip: '分享', 
-                    color:'#F56C6C',
-                  },
-                  {
-                    name: 'sign',
-                    icon: 'add_alert', 
-                    tooltip: '签到',
-                    color:'#67C23A'
-                  }
-                ],
-                iconSizes:'medium',
-                position: 'bottom-right',
-                tooltipEvent: 'hover',
-                mainIcon: 'add',
-                enableRotation: true
+      eos_balance:''
     }
   },
+  created () {
+    // @TODO: replace with Scatter JS
+    document.addEventListener('scatterLoaded', () => {
+      console.log('Scatter Loaded')
+      this.handleScatterLoaded()
+    })
+  },
   mounted: function() {
-    setTimeout(this.getHomeAccountName,100);
-    setTimeout(this.getLenTokenInfo,300);
-    setTimeout(this.initGame,700);
   },
   computed: {
-    has_scatter: function() {
+    ...mapState(['identity', 'scatter', 'eos','balance','lenInfo','landInfo','gameInfo']),
+    ...mapGetters(['account']),
+     has_scatter: function() {
       return store.state.global_config.has_scatter;
     },
     fixedTooltip() {
@@ -109,6 +63,30 @@ export default {
     },
   },
   methods: {
+    ...mapActions(['initScatter', 'setIdentity','updateBalance','setGameInfo','setLandInfo']),
+    handleScatterLoaded () {
+      const { scatter } = window
+      this.initScatter(scatter)
+      this.requestId();
+      this.setGameInfo();
+      this.setLandInfo();
+    },
+    async requestId () {
+      await this.suggestNetworkSetting()
+      const identity = await this.scatter.getIdentity(requiredFields)
+      this.setIdentity(identity)
+    },
+    async forgetId () {
+      await this.scatter.forgetIdentity()
+      this.setIdentity(null)
+    },
+    async suggestNetworkSetting () {
+      try {
+        await this.scatter.suggestNetwork(network)
+      } catch (error) {
+        console.info('User canceled to suggestNetwork')
+      }
+    },
      getRefInviteAccount() {
            if (!getQueryString('ref')) {
               return "lemoneosgame";
@@ -141,77 +119,7 @@ export default {
       } else {
         alert(JSON.stringify(res.msg))
       }*/
-    },
-   
-    async getHomeAccountName () {
-        let res = await login();
-        if (res) {
-          store.commit('setHomeAccount',res.name)
-        }
-        let balance_res = await getBalanceByName(res.name);
-        if (balance_res && balance_res.result && balance_res.result.length > 0) {
-          this.eos_balance = balance_res.result[0]
-          store.commit('setEosBalance',balance_res.result[0])
-        } 
-      let len = await get_len_balance_bytable(res.name)
-      if (!len.is_error) {
-          if (len.data) {
-          store.commit('setLenBalance',len.data) 
-      }
-      }
-    },
-    async getLen() {
-        let len = await get_len_balance_bytable()
-        if (!len.is_error) {
-            if (len.data && len.data.rows && len.data.rows.length > 1) {
-             store.commit('setLenBalance',len.data) 
-            }
-        }
-    },
-    //获取地块信息表
-    async getLandInfo() {
-   
-      if (!this.account_name) {
-        return
-      }
-    
-      let landlist = await get_land_info()
-      let counterlist = await get_gameInfo_list()
-     
-      if (landlist.is_error || counterlist.is_error) {
-        return;
-      }
-      let landrows = landlist.data.rows
-      let countrows = counterlist.data.rows;
-
-      store.commit('getLandInfo',{
-        "land":landrows,
-        "count":countrows
-      })
- 
-    },
-    async getLenTokenInfo () {
-      let res = await get_len_token_info();
-      if(!res.is_error){
-          if (res.data) {
-          store.commit('setLenDetail',res.data) 
-         }
-      }
-    },
-    async initGame () {
-        let counterlist = await get_gameInfo_list()
-        if (!counterlist.is_error) {
-            store.commit('getGameInfo',counterlist.data.rows[0])
-        } 
-        let state = store.state.LandStore.gameState;
-        if (state == 0) {
-           this.gameStateInfo = "距离游戏开始还有："
-         } else if (state == 1) {
-           this.gameStateInfo = "游戏正在进行，距离结束还有："
-         } else if (state == 2) {
-           this.gameStateInfo  = "游戏暂未开始，请稍后"
-        }
-    },
+    }
   }
 }
 </script>

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import 'element-ui/lib/theme-chalk/index.css'
-
+import i18n from './i18n'
 import VueI18n from 'vue-i18n'
 import Home from './home'
 import Land from './game/Land/index'
@@ -13,10 +13,8 @@ import ElementUI from 'element-ui'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'element-ui/lib/theme-chalk/display.css';
-import ScatterJS from 'scatterjs-core';
 import VueScrollTo from 'vue-scrollto';
 import fab from './FAB.vue';
-import Share from 'vue-social-share'
 import axios from 'axios';
 import VueClipboard from 'vue-clipboard2'
 

@@ -23,16 +23,8 @@ export const get_sign_from_account = async (account)=> {
     })
 }
 
-export const sign_onday = async (account_name)=> {
-    let account = account_name;
-    if (!account) {
-        account = store.state.HomeStore.home_account_name
-    }
-    if (!account) {
-         alert('请使用scatter登录后再进行签到')
-         return;
-    }
-    let accountResult = await get_sign_from_account(account);
+export const if_people_sign = async (account_name) => {
+    let accountResult = await get_sign_from_account(account_name);
     let isAlreadySign = false;
     if (accountResult && accountResult.length > 0 ) {
         accountResult.forEach(element => {
@@ -41,18 +33,18 @@ export const sign_onday = async (account_name)=> {
            }
         });
     }
+
     if (isAlreadySign) {
-        alert("您今天已经签到，请明天再来")
-        return;
+        return true;
     } else {
-       // 使用团队账户进行智能合约转账
+       return false;
     }
+}
+
+export const sign_onday = async (account_name)=> {
     let data = qs.stringify({
-        'account': account
+        'account': account_name
     })
-    if (!account) {
-        alert('请登录后再进行签到')
-    }
     return await axios.post('/api/signs',data,{headers: { 'Content-Type': 'application/x-www-form-urlencoded' }})
     .then(response => {
        alert("签到成功")
@@ -79,13 +71,10 @@ export const add_counter = async (player)=> {
     });
 }
 
-
-
-
 // 更新gamelog表
 
 export const add_gamelog = async (player,landID,amount,type,recast)=> {
-    debugger
+
     let data = qs.stringify({
         'player': player,
         'landID' : landID,

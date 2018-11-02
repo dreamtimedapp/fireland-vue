@@ -24,18 +24,9 @@ import landImg1_m from '../../../assets/land/land-1-m.png';
 import landImg1_b from '../../../assets/land/land-1-b.png';
 import landImg1_b_m from '../../../assets/land/land-1-b-m.png';
 import store from '../../../store'
-import {
-    get_scatter_identity,
-    login,
-    transfer,
-    recast,
-    getBalance,
-    get_player_list,
-    get_land_info,
-    get_touzhu_info,
-    get_gameInfo_list,
-} from '../../../services/web_wallet_service.js'
+
 import { setInterval } from 'timers';
+
 const STATUS_ENUM = {
   nature: {
     color: '#ccc',
@@ -104,7 +95,7 @@ export default {
   name: 'Land',
   components: {
   },
-  props: {},
+  props: ['landInfo','account'],
   data: function() {
     return {
 //      listHeight: 0,
@@ -117,12 +108,13 @@ export default {
       outerList: outerList,
       innerList: innerList,
       personal:[],
-      landList:[]
+      landList:[],
+      account_name:''
     }
   },
   methods: {
-    initLand: function(row, data) {
-      row.map(function(col) {
+    initLand: (row, data,account_name)=> {
+      row.map((col)=> {
         const colData = data[col.id];
         if (colData) {
           col.hasOwner = true;
@@ -139,7 +131,7 @@ export default {
           col.style.backgroundImage = 'url(' + STATUS_ENUM[col.type].bg + ')';
 
           /* 需要读自己的name */
-          if (colData.owner === store.state.LandStore.account_name) {
+          if (colData.owner === account_name) {
             col.style.backgroundImage = 'url(' + STATUS_ENUM[col.type].bg_m + ')';
           }
         } else {
@@ -163,9 +155,12 @@ export default {
 //    this.innerListLeft = outerListWidth / 18 + 'px';
 
     var _this = this;
-    setInterval(function() {
+    if (this.account) {
+       this.account_name = this.account.name
+    }
+    setInterval(()=> {
       const res = {
-        "rows": store.state.LandStore.current_landlist,
+        "rows": this.landInfo.current_landlist,
         "more": false
       };
 //      debugger
@@ -175,15 +170,15 @@ export default {
         data[item.landID] = item;
       });
 
-      _this.outerList.map(function(row) {
-        _this.initLand(row, data);
+      _this.outerList.map((row)=> {
+        _this.initLand(row, data,this.account_name);
       });
 
-      _this.innerList.map(function(row) {
-        _this.initLand(row, data);
+      _this.innerList.map((row)=> {
+        _this.initLand(row, data,this.account_name);
       });
 
-    }, 200);
+    }, 800);
   }
 }
 </script>

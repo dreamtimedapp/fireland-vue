@@ -11,7 +11,7 @@
                         <template slot="prepend">LEN</template>
                         <template slot="append">LEN</template>
                     </el-input>
-                    <span class="token-subtext" >当前len价格：{{$store.state.HomeStore.price}}，卖出可获得EOS数量：{{getCalculatePrice}}</span>
+                    <span class="token-subtext" >当前len价格：{{lenInfo.price}}，卖出可获得EOS数量：{{getCalculatePrice()}}</span>
                      <el-button class="token-button"   v-on:click="sellLen" type="danger" >卖出</el-button>
                 </div>     
               </el-col>     
@@ -26,27 +26,27 @@
                         </div>
                         <div class="table-item-info">
                             <span>EOS数量：</span>
-                            <span>{{getEosBalance}}</span>
+                            <span>{{eosBalance}}</span>
                         </div>    
                         <div class="table-item-info">
                             <span>LEN价格：</span>
-                            <span>{{$store.state.HomeStore.price}}</span>
+                            <span>{{lenInfo.price}}</span>
                         </div>    
                         <div class="table-item-info">
                             <span>LEN最大供应量：</span>
-                            <span>{{$store.state.HomeStore.max_supply}}</span>
+                            <span>{{lenInfo.max_supply}}</span>
                         </div>
                         <div class="table-item-info">
                             <span>LEN当前流通量：</span>
-                            <span>{{$store.state.HomeStore.supply}}</span>
+                            <span>{{lenInfo.supply}}</span>
                         </div> 
                         <div class="table-item-info">
                             <span>我的LEN数量：</span>
-                            <span>{{getLenBalance}}</span>
+                            <span>{{lenBalance}}</span>
                         </div>
                         <div class="table-item-info">
                             <span>Len资金蓄池：</span>
-                            <span>{{$store.state.HomeStore.cash_pool}}</span>
+                            <span>{{lenInfo.cash_pool}}</span>
                         </div>        
                     </el-card>
                 </div>       
@@ -83,18 +83,7 @@
    </div>
 </template>
 <script >
-import {
-    get_scatter_identity,
-    login,
-    transfer,
-    recast,
-    getBalance,
-    get_player_list,
-    get_land_info,
-    get_touzhu_info,
-    get_gameInfo_list,
-    sell_len
-} from '../../services/web_wallet_service.js'
+import { mapState, mapActions, mapGetters } from 'vuex'
 import store from '../../store'
 const rule = 
             "1. 发行量1000万，对标资金蓄池；\n" +
@@ -106,27 +95,22 @@ const rule =
 export default {
     ready() {
     },
+    props:['eosBalance','lenBalance','lenInfo'],
     data() {
       return {
         rule: rule,
-        eos_balance:'',
         buyAmount:'',
         sellAmount:'',
         calculatePrice:'',
       }
     },
-    computed: {
-        getAccount() {
-           return store.state.HomeStore.home_account_name
-        },
-        getEosBalance() {
-           return store.state.HomeStore.eos_balance
-        },
-        getLenBalance() {
-           return store.state.HomeStore.len_balance
-        },
-        getCalculatePrice() {
-          let len_price = store.state.HomeStore.price + ""
+    methods: {
+       ...mapActions(['sellToken']),
+       async sellLen(event) {
+          this.sellToken(this.sellAmount)
+       },
+       getCalculatePrice() {
+          let len_price = this.lenInfo.price + ""
           let amount = this.sellAmount;
           // debugger
           if (amount == "") {
@@ -136,35 +120,6 @@ export default {
           let calculatePrice = parseFloat(len_price.replace(' EOS','')) * parseFloat(amount) * 0.9
           return calculatePrice.toFixed(4) + ' EOS'
         }
-    },
-    methods: {
-      login: async function(event) {
-        let res = await login();
-        if (res) {
-          store.commit('setHomeAccount',res.name)
-        }
-       },
-       async sellLen(event) {
-          if (this.sellAmount == "") {
-              alert("请输入卖出数量")
-              return;
-          }
-          let  len_amount = store.state.HomeStore.len_balance + ""
-          len_amount = len_amount.replace(' LEN')
-          len_amount = len_amount.replace(' EOS')
-          if (parseInt(this.sellAmount) > len_amount) {
-             alert('LEN 数量不足卖出')
-             return;
-          }
-          debugger
-          let res = await sell_len(parseInt(this.sellAmount),  'LEN')
-          if (!res.is_error) {
-              store.commit('sellLenAction',res.name)
-              alert('兑换成功')
-          } else {
-              alert('兑换失败')
-          }
-       }
     }
 }
 </script>

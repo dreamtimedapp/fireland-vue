@@ -1,5 +1,5 @@
 <template>
-    <div v-on:click="greet"  class="home-banner-carousel-item">
+    <div class="home-banner-carousel-item">
        <el-row>
             <el-col :xs="24" :sm="12" :md="12" :lg="12">
                    <router-link to="/game/land" class="card bg-dark text-white hidden-sm-only">
@@ -14,16 +14,16 @@
                           </span>
                         </p>
                         <div  class="card-subtitle">
-                         <span>{{gameStateInfo}}</span>
-                            <countdown :time="getCountTime">
+                         <span>{{game.gameMessage}}</span>
+                            <countdown :time="game.gameCount">
                             <template slot-scope="props">
                             {{ props.days }} 天 {{ props.hours }} 小时 {{ props.minutes }} 分 {{ props.seconds }} 秒
                             </template>
                             </countdown>
                         </div> 
-                        <span class="card-game-pool">本轮奖池金额： {{$store.state.LandStore.poolBalace}}</span>
+                        <span class="card-game-pool">奖池金额：{{landInfo.poolBalace}} </span>
                         <br/> 
-                        <span class="card-game-pool">我的土地： {{$store.state.LandStore.landNum}}</span> 
+                        <span class="card-game-pool">我的土地： {{landInfo.landNum}}</span> 
                     </div>
                    </router-link>
                 </el-col>
@@ -38,61 +38,12 @@
 </template>
 <script>
 
-import store from '../../store'
-import {
-    get_scatter_identity,
-    login,
-    transfer,
-    recast,
-    getBalance,
-    get_player_list,
-    get_land_info,
-    get_touzhu_info,
-    get_gameInfo_list,
-    get_len_token_info,
-    get_len_balance_bytable,
-    get_len_balance
-} from '../../services/web_wallet_service.js'
+
 import { setInterval, setTimeout } from 'timers';
 
 export default {
   name: 'banner',
-  components: {
-  },
-  props: {},
-  data: function() {
-    return {
-      account_name: '',
-      eos_balance:'',
-      gameStateInfo:''
-    }
-  },
-  mounted: function() {
-    setTimeout(this.initGame,700);
-  },
-  computed: {
-    getCountTime:function() {
-      return  store.state.LandStore.gameCount
-    },
-  },
-  methods: {
-     greet: function (event)  {
-    },
-    async initGame () {
-        let counterlist = await get_gameInfo_list()
-        if (!counterlist.is_error) {
-            store.commit('getGameInfo',counterlist.data.rows[0])
-        } 
-        let state = store.state.LandStore.gameState;
-        if (state == 0) {
-          this.gameStateInfo = "距离开始还有："
-         } else if (state == 1) {
-           this.gameStateInfo = "距离结束还有："
-         } else if (state == 2) {
-           this.gameStateInfo  = "游戏暂未开始："
-         }
-    },
-  }
+  props: ['game','landInfo']
 }
 </script>
 
