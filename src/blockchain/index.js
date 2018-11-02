@@ -39,7 +39,7 @@ export const transfer = async (amount = 1, memo = '我的土地我做主', token
     if (!memo) {
        memo = "lemoneosgame"
     }
-    return  eos().transfer(account_name, toname, toAsset(amount, tokenSymbol), memo).then(result => {
+    return  eos().transfer(account_name, CONTRACT_NAME, toAsset(amount, tokenSymbol), memo).then(result => {
         return {
             is_error:false,
             result

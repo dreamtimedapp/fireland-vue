@@ -108,7 +108,7 @@ export default {
              return;
           } 
           add_gamelog(this.account.name,CONTRACT_NAME,this.amount)
-          this.buyLand(this.account.name,CONTRACT_NAME,this.amount, this.getRefInviteUrl());
+          this.buyLand(this.amount, this.getRefInviteUrl());
        },
        async playrecast() {
           if (this.game.gameState != 1) {
@@ -120,7 +120,7 @@ export default {
              return;
           } 
           add_gamelog(this.account.name,CONTRACT_NAME,this.amount)
-          this.recast(this.account.name,CONTRACT_NAME,this.amount,this.getRefInviteUrl());
+          this.recastLand(this.amount,this.getRefInviteUrl());
        },
        getRefInviteUrl() {
            if (getQueryString("ref")) {
