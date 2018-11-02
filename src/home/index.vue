@@ -1,6 +1,6 @@
 <template>
 <div class="main-container" >
-  <Fab :account="account"/>
+  <Fab :account="account.name"/>
   <Header :account="account" v-on:requestId="requestId"></Header>
   <Banner :game="gameInfo" :landInfo="landInfo"> </Banner>
   <Content :lenBalance="balance.len" :eosBalance="balance.eos" :lenInfo="lenInfo"></Content>
