@@ -115,7 +115,7 @@ export default {
     },
     getPersonalInviteUrl() {
         if (this.account) {
-            return "http://www.lemonfun.io/#/game/land?ref=" + this.account;
+            return "http://www.lemonfun.io/#/game/land?ref=" + this.account.name;
         } else {
             return "http://www.lemonfun.io/#/game/land?ref=";
         }
@@ -125,14 +125,14 @@ export default {
         alert("请登录后再试")
         return;
       }
-      let alreadySign = await if_people_sign(this.account)
+      let alreadySign = await if_people_sign(this.account.name)
       if (alreadySign) {
         alert("今天已经签到过，请明天再来")
         return;
       }
-      let result = await EOS_Inviter(this.account)
+      let result = await EOS_Inviter(this.account.name)
       if (!result.is_error) {
-          await sign_onday(this.account)
+          await sign_onday(this.account.name)
           alert("领取 LEN 成功")
       } else {
           alert(JSON.stringify(result))

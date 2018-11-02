@@ -32,7 +32,7 @@
   <Land  :landInfo="landInfo" :account="account"  />
   <Rule :landInfo="landInfo"/>
   <!--<BettingTable/>-->
-  <Fab v-if="account" v-bind:account="account.name"/>
+  <Fab v-if="account" v-bind:account="account"/>
 </div>
 
 </template>
