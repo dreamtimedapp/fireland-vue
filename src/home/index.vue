@@ -70,9 +70,7 @@ export default {
     ...mapActions(['initScatter', 'setIdentity','updateBalance','setGameInfo','setLandInfo']),
     handleScatterLoaded () {
       const { scatter } = window
-      if (window.scatter == null) {
-        alert("没有安装scatter")
-      }
+    
       this.initScatter(scatter)
       this.requestId();
       this.setGameInfo();
