@@ -46,7 +46,10 @@ export default new vuex.Store({
     },
     getters: {
         account: ({ scatter }) => {
-          if (!scatter) { return null }
+          if (!scatter) { 
+            alert("浏览器没有安装scatter")
+            return null 
+          }
           const { identity } = scatter
           return identity ? identity.accounts.find(({ blockchain }) => blockchain === 'eos') : null
         }
