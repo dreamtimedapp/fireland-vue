@@ -49,7 +49,7 @@ export default {
         this.$emit('requestId');
       },
       toland:function(event) {
-          location.href= '/game/land'
+          location.href= '/#/game/land'
       }
     }
 }
