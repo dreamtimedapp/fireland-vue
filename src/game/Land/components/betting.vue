@@ -149,13 +149,14 @@ export default {
 <style>
 .betting-wakuang {
     color: #fff;
-
+    font-size: 14px;
     padding-left: 20px;
 }
 
 .betting-title-jump-area {
     padding-left:20px;
-    color:#409EFF
+    color:#409EFF;
+    font-size:14px;
 }
 .betting-rule-jump {
     color:#000;
@@ -167,7 +168,7 @@ export default {
 }
 
 .land-betting-btn {
-   margin-top: 20px;
+  
    width: 200px;
    justify-content: center;
 }
@@ -232,6 +233,7 @@ export default {
     height: 70px;
     flex-direction: row;
     padding-right: 10px;
+    font-size:14px;
 }
 .el-input-group__append, .el-input-group__prepend {
     padding: 0 10px;
@@ -248,7 +250,7 @@ export default {
 
 .land-grid-content-betting {
     padding-left: 10px;
-    margin-top: 30px;
+    margin-top: -10px;
     display: flex;
     flex-direction: column;
 }

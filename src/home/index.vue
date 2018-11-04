@@ -1,20 +1,23 @@
 <template>
-<div class="main-container" >
-  <Fab :account="account"/>
-  <Header :account="account" v-on:requestId="requestId"></Header>
-  <Banner :game="gameInfo" :landInfo="landInfo"> </Banner>
-  <Content :lenBalance="balance.len" :eosBalance="balance.eos" :lenInfo="lenInfo"></Content>
-  <popup :title="popTitle" :text="popText" :visible.sync="popVisible"  v-on:pop-click="popCick"></popup>
+<div class="main-body" >
+  <div class="main-container">
+     <Fab :account="account"/>
+     <Header :account="account" v-on:requestId="requestId"></Header>
+     <Content :lenBalance="balance.len" :eosBalance="balance.eos" :lenInfo="lenInfo"></Content>
+     <Footer/>
+
+     <popup :title="popTitle" :text="popText" :visible.sync="popVisible"  v-on:pop-click="popCick"></popup>
+   </div>
 </div>
 </template>
 
 <script>
-import Header from './components/header';
-import Content from './components/content';
-import Banner from './components/banner';
-import Fab from '../common/fab';
+const Header = ()=> import ('./components/header');
+const Content = ()=> import ('./components/content');
+const Footer = ()=> import('./components/footer');
+const Fab = ()=>import ('../common/fab');
 import store from '../store';
-import popup from '../components/popup';
+const popup =()=> import('../components/popup');
 import {getQueryString} from '../utils/utils.js';
 
 import { setInterval, setTimeout } from 'timers';
@@ -28,9 +31,9 @@ export default {
   components: {
     Header,
     Content,
-    Banner,
     Fab,
-    popup
+    popup,
+    Footer
   },
   props: {
     
@@ -125,11 +128,24 @@ export default {
 </script>
 
 <style scoped>
+
+.main-body {
+   background: #999999;
+   width: 100%;
+   min-height: 800px;
+   padding-top: 3.15vw;
+   padding-bottom: 3.15vw;
+}
+
 .main-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-left: 1.7vw;
+  margin-right: 1.7vw;
+  background: #ffffff;
+  border-radius: 20px;
 }
 
 </style>

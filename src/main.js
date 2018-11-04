@@ -1,53 +1,48 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import 'element-ui/lib/theme-chalk/index.css'
-import i18n from './i18n'
-import VueI18n from 'vue-i18n'
-import Home from './home'
-import Land from './game/Land/index'
-import store from './store'
-import BootstrapVue from 'bootstrap-vue'
-import VueCountdown from '@xkeshi/vue-countdown';
-import VueMarkdown from 'vue-markdown';
-import ElementUI from 'element-ui'
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
-import 'element-ui/lib/theme-chalk/display.css';
-import VueScrollTo from 'vue-scrollto';
-import fab from './FAB.vue';
-import axios from 'axios';
-import VueClipboard from 'vue-clipboard2'
+/**
+ * 
+ * 全部组件切换为懒加载
+ * 
+*/
 
+const  i18n = ()=> import('./i18n')
+import store  from './store'
+const  fab =()=> import ('./FAB.vue');
 Vue.config.productionTip = false
-Vue.use(VueRouter)
-Vue.use(VueI18n)
-Vue.use(ElementUI)
-Vue.component(VueCountdown.name, VueCountdown);
-Vue.component('vue-markdown', VueMarkdown);
-
 Vue.component('vue-fab',fab);
-Vue.use(BootstrapVue);
-Vue.use(VueScrollTo);
-
-VueClipboard.config.autoSetContainer = true // add this line
-Vue.use(VueClipboard)
-
-Vue.prototype.axios = axios;
 
 const routes = [
-  { path: '/game/land', component: Land },
-  { path:'/home',component:Home},
-  { path: '', component: Home }
+  { 
+    path: '/game/land', 
+    name:'fireland',
+    component:() => import (/* webpackChunkName: "fireland" */ './game/Land/index')
+  },
+  { 
+    path:'/home',
+    name:'home',
+    component:() => import(/* webpackChunkName: "home" */ './home')
+  },
+  
+  { path: '', 
+    name: 'home' ,
+    component:() => import(/* webpackChunkName: "home" */ './home')
+  },
+  { 
+    path: '/game/miner', 
+    name:'miner',
+    component:() => import(/* webpackChunkName: "miner" */ './game/Miner/index')
+  }
 ]
 
 const router = new VueRouter({
+  mode: 'history',
   routes 
 })
 
 /* eslint-disable no-new */
 new Vue({
   router,
-  store
+  store,
+  i18n
   // el: '#app',
   // render: h => h(App)
 }).$mount('#app');

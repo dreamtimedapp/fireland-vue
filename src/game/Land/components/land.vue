@@ -232,6 +232,7 @@ export default {
     display: flex;
     justify-content: center;
     margin: -10px;
+    font-size: 10px;
   }
   #land .land-row .land-col:first-child {
     border-left: none;

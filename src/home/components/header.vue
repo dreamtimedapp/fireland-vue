@@ -3,16 +3,39 @@
     <div class="header-container"> 
        <div>
         <b-img class="logo" src="https://img.alicdn.com/tfs/TB1HrKSjXzqK1RjSZFvXXcB7VXa-2000-2000.png" /> 
-        <span class="logo-title">柠檬游戏</span> 
+        <span class="logo-title">LemonFun</span> 
       </div>
       <div class="header-left">
       <div class="header-nav hidden-sm-only hidden-xs-only">
           <a href="#" v-scroll-to="'#element'" class="text">柠檬通证(LEN)</a>
       </div>
-      <el-button v-if="!account" v-on:click="login" class="login-button" type="primary" >登录(EOS)账户</el-button>
+      <el-button v-if="!account" v-on:click="login" class="login-button" type="danger" >登录(EOS)账户</el-button>
       <div v-if="account" class="login-account-name" type="primary" >{{account.name}}</div>
       </div>
     </div>
+    <div class="banner-cover">
+       <img  class="card-img" src="https://gw.alicdn.com/tfs/TB1ys1OmVYqK1RjSZLeXXbXppXa-800-800.png" >
+    </div>
+    <el-row>
+        <el-col :span="12">
+           <div class="banner-game-item">
+              <span class="banner-game-title">EOS 国土无双</span>
+              <img  class="card-game-item-img" src="https://gw.alicdn.com/tfs/TB12sQ3lhnaK1RjSZFBXXcW7VXa-1378-1378.jpg">
+              <div class="card-game-item-img-cover" >
+                 <el-button type="danger" size="mini"  v-on:click="toland" class="game-entrance-btn">进入游戏</el-button>
+              </div>
+           </div>
+        </el-col>
+        <el-col :span="12">
+            <div class="banner-game-item2">
+              <span class="banner-game-title">城堡寻宝</span>
+              <img  class="card-game-item-img" src="https://gw.alicdn.com/tfs/TB12sQ3lhnaK1RjSZFBXXcW7VXa-1378-1378.jpg">
+               <div class="card-game-item-img-cover" >
+                 <el-button type="danger" size="mini" class="game-entrance-btn" disabled>comming</el-button>
+              </div>
+            </div>
+        </el-col>
+      </el-row>  
     </div>
 </template>
 <script>
@@ -25,6 +48,9 @@ export default {
       login: function(event) {
         this.$emit('requestId');
       },
+      toland:function(event) {
+          location.href= '/game/land'
+      }
     }
 }
 </script>
@@ -33,30 +59,56 @@ export default {
 .box {
     width: 100%;
     display: flex;
-    min-width: 700px;
     justify-content: center;
     flex-direction: column;
+    background-color:#fff; 
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    padding-bottom: 6.2vw;
 }
-.carousel {
-    height: 700px;
+.banner-cover {
+    margin-left: 2.3vw;
+    margin-right: 2.3vw;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    background-color: #ccc;  
+    height: 53vw;
 }
-.banner-what-item  {
-  min-height: 700px;
+.card-img-overlay {
+    background: #333;
+    width: 100px;
+    height: 100%;
+    padding: 20px;
+}
 
- 
+.banner-game-item {
+    position: relative;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    margin-left: 2.3vw;
+    margin-right: 10px;
+    background-color: #ccc;  
+    height: 25vw;
 }
 
+.banner-game-item2 {
+    position: relative;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 2.3vw;
+    background-color: #ccc;  
+    height: 25vw;
+}
 
 .header-container {
-    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
     height: 150px;
     background: #ffffff;
-    min-width: 750px;
     justify-content: space-between;
-   
+    border-radius: 25px;
 }
 .header-left {
     float: right;
@@ -69,15 +121,10 @@ export default {
     flex-direction: row;
     align-items: center;
 }
-.banner {
-    width: 100%;
-    height: 200px;
-    background-color: #333;
-}
+
 .logo {
-    width: 200px;
-    height: 200px;
-    margin-left: 20px;
+    width: 150px;
+    height: 150px;
 }
 .logo-title {
     color: #333;
@@ -85,114 +132,54 @@ export default {
     margin-left: -50px;
 
 }
-.text {
-    text-align: center;
-    height: 40px;
-    font-size:30px;
-    color: #000; 
-    margin-left: 45px;
-  
-}
+
 .login-button {
     margin-left: 60px;
-    margin-right: 60px;
+    margin-right: 2.3vw;
 }
 .login-account-name {
-    margin-left: 60px;
-    margin-right: 60px;
+    margin-left: 90px;
+    margin-right: 40px;
     font-size: 34px;
 }
-.banner-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.bg-dark {
-    background: #fff;
-}
 
-.features-text {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    padding-left: 50px;
-    padding-top: 50px;
-    padding-right: 50px;
-    text-align: center;
-}
-.features-info {
-    margin-top: 20px;
-}
-
-.features-title{
-  color: #ffffff;
-  font-size: 34px;
-  margin-top: 10px;
-}
-.features-text p{
-    color:#00bcd4;
-    margin: 5px 0;
-    font-size:18px;
-    text-align: left
-}
-.features-text p strong {
-    color: #f4b04f;
-}
-
-.card {
-    height: 500px;
-    margin-top: 50px;
-    padding-bottom: 30px;
-    margin-left:60px; 
-    margin-right:60px; 
-    color: #fff;
-    background-color: #343a40;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    min-width: 0;
-    background-clip:border-box;
-    border: 0px solid rgba(0,0,0,.125); 
-    border-radius:.25rem;
-}
 .card-img {
    width: 100%;
    height: 100%;
-   border-radius: calc(.2rem -1px);
-    vertical-align: middle;
-    border-style: none;
+   border-radius: 0;
+   padding-top: 3vw;;
+   padding-bottom: 3vw;
+   padding-left: 3vw;
+   padding-right: 3vw;
+   vertical-align: middle;
+   border-style: none;
 }
-.card-img img {
-    vertical-align: middle;
-    border-style: none;
+.card-game-item-img {
+   width: 100%;
+   height: 100%;
+   border-radius: 10px;
+   vertical-align: middle;
+   border-style: none;
 }
-.card-img-overlay {
+.card-game-item-img-cover {
+   position: absolute;
+   top:14vw;
+   left: 22vw;
+   padding: 20px;
+}
+
+.game-entrance-btn {
+   width: 18vw;
+   height: 6vw;
+   font-size: 3vw;
+   padding: 0;
+}
+.banner-game-title {
     position: absolute;
-    top:0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    padding: 20px;
+    color:#fff;
+    font-size: 4vw;
+    top: 2vw;
+    left: 2vw;
 }
-.card-title {
-    font-size: 40px;
-    line-height: 1.2;
-    padding-left: 70px;
-    padding-top: 40px;
-}
-.card-title  span{
-    padding: 1px;
-    line-height: 100%;
-}
-.card-text {
-    margin-bottom: 0;
-    padding-left: 70px;
-    font-size: 30px;
-}
-.card-text span{
-    padding: 1px;
-    line-height: 100%;
-}
+
 </style>

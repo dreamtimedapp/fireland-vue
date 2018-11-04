@@ -8,19 +8,29 @@ function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
-
-
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
     app: './src/main.js'
+  },
+  externals: {
+    vue: 'Vue',
+    'VueRouter':'vue-router',
+    'ElementUI': 'element-ui',
+    'axios':'axios',
+    'BootstrapVue':'bootstrap-vue',
+    'VueCountdown':'@xkeshi/vue-countdown',
+    'VueScrollTo':'vue-scrollto',
+    'VueMarkdown':'vue-markdown',
+    'VueClipboard':'vue-clipboard2'
   },
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
     publicPath: process.env.NODE_ENV === 'production'
       ? config.build.assetsPublicPath
-      : config.dev.assetsPublicPath
+      : config.dev.assetsPublicPath,
+    chunkFilename:'[name].[chunkhash:100].chunk.js'
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],

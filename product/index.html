@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0"><title>柠檬游戏</title><link type=image/x-icon href=static/logo.png><script type=text/javascript src=static/flex.js></script><link rel=stylesheet href="https://fonts.googleapis.com/icon?family=Material+Icons"><link rel=stylesheet href=https://unpkg.com/element-ui/lib/theme-chalk/index.css><link rel=stylesheet href=https://cdn.bootcss.com/material-design-icons/3.0.1/iconfont/material-icons.css><style type=text/css>html, body {
+<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0"><title>柠檬游戏</title><link type=image/x-icon href=static/logo.png><script type=text/javascript src=static/flex.js></script><script>document.getElementsByTagName('html')[0].style.fontSize = (document.documentElement.clientWidth ||  document.body.clientWidth) /10 + 'px';</script><link rel=stylesheet href="https://fonts.googleapis.com/icon?family=Material+Icons"><link type=text/css rel=stylesheet href=//unpkg.com/bootstrap/dist/css/bootstrap.min.css><link type=text/css rel=stylesheet href=//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css><link rel=stylesheet href=https://unpkg.com/element-ui/lib/theme-chalk/index.css><link rel=stylesheet href=https://unpkg.com/element-ui/lib/theme-chalk/display.css><link rel=stylesheet href=https://cdn.bootcss.com/material-design-icons/3.0.1/iconfont/material-icons.css><style type=text/css>html, body {
         margin: 0;
         padding: 0;
         width: 100%;
@@ -15,4 +15,12 @@
         -moz-osx-font-smoothing: grayscale;
         color: #2c3e50;
         background-color: #f7f8fa;
-      }</style><link href=/static/css/app.181a9106052fa47ea665165d007a7bc7.css rel=stylesheet></head><body><div id=app><router-view></router-view></div><script type=text/javascript src=/static/js/manifest.2ae2e69a05c33dfc65f8.js></script><script type=text/javascript src=/static/js/vendor.5a47ff954784cd85b3d3.js></script><script type=text/javascript src=/static/js/app.87e5997a811d3b47d792.js></script></body></html>
+      }</style><link href=/static/css/app.72a9f0fa5c1933e2c42e961b265f1c10.css rel=stylesheet></head><body><script src=https://cdn.bootcss.com/vue/2.5.17/vue.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.7.1/pixi.min.js></script><script src=//unpkg.com/vue-router></script><script src=https://cdn.bootcss.com/axios/0.18.0/axios.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.4.7/index.js></script><script src=//unpkg.com/babel-polyfill@latest/dist/polyfill.min.js></script><script src=//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js></script><script src=//unpkg.com/vue-markdown@latest/dist/vue-markdown.js></script><script src=//unpkg.com/@xkeshi/vue-countdown></script><script src=//unpkg.com/vue-scrollto></script><script>Vue.use(VueMarkdown);
+      var vm = new Vue({
+        el: "body"
+      });
+      let type = "WebGL"
+      if(!PIXI.utils.isWebGLSupported()){
+        type = "canvas"
+      }
+      PIXI.utils.sayHello(type)</script><div id=app><router-view></router-view></div><script type=text/javascript src=/static/js/manifest.827b65a54dbcc3162a44.js></script><script type=text/javascript src=/static/js/vendor.82bacae0b64285ac468c.js></script><script type=text/javascript src=/static/js/app.a362301a0af38dca810e.js></script></body></html>

@@ -32,17 +32,17 @@
   <Land  :landInfo="landInfo" :account="account"  />
   <Rule :landInfo="landInfo"/>
   <!--<BettingTable/>-->
-  <Fab v-if="account" v-bind:account="account"/>
+  <Fab  v-bind:account="account"/>
 </div>
 
 </template>
 
 <script>
-import Header from './components/header.vue';
-import Land from './components/land.vue';
-import Betting from './components/betting';
-import Rule from './components/rule'
-import Fab from '../../common/fab';
+const  Header = ()=> import('./components/header.vue');
+const  Land = ()=> import ('./components/land.vue');
+const  Betting  = ()=> import ('./components/betting');
+const  Rule = ()=> import ('./components/rule');
+const  Fab = ()=> import ('../../common/fab');
 import store from '../../store'
 
 import { setInterval, setTimeout } from 'timers';
@@ -113,7 +113,8 @@ export default {
 }
 </script>
 
-<style>
+<style  scoped>
+
   .main-container {
     width: 100%;
     min-height: 100vh;

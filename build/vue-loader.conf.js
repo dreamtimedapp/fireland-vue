@@ -6,10 +6,15 @@ const sourceMapEnabled = isProduction
   ? config.build.productionSourceMap
   : config.dev.cssSourceMap
 
+/*引入postcss-px2rem 通过require的形式*/ 
+var px2rem = require('postcss-px2rem');  
+
 module.exports = {
   loaders: utils.cssLoaders({
     sourceMap: sourceMapEnabled,
-    extract: isProduction
+    extract: isProduction,
+    /*允许使用usePostCSS*/
+    usePostCSS:true,
   }),
   cssSourceMap: sourceMapEnabled,
   cacheBusting: config.dev.cacheBusting,
@@ -19,5 +24,7 @@ module.exports = {
     img: 'src',
     image: 'xlink:href'
   },
-  postcss:[require('postcss-px2rem')({'remUnit': 75,'baseDpr':2})]
+  postcss: function() {
+    return [px2rem({remUnit: 75})];
+  }
 }
