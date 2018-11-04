@@ -6,9 +6,7 @@
         <span class="logo-title">LemonFun</span> 
       </div>
       <div class="header-left">
-      <div class="header-nav hidden-sm-only hidden-xs-only">
-          <a href="#" v-scroll-to="'#element'" class="text">柠檬通证(LEN)</a>
-      </div>
+
       <el-button v-if="!account" v-on:click="login" class="login-button" type="danger" >登录(EOS)账户</el-button>
       <div v-if="account" class="login-account-name" type="primary" >{{account.name}}</div>
       </div>
