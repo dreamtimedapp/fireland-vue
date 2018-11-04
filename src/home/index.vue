@@ -71,6 +71,8 @@ export default {
       const { scatter } = window
       if (window.scatter == null) {
         alert("没有安装scatter")
+      }else {
+        alert(JSON.stringify(scatter))
       }
       this.initScatter(scatter)
       this.requestId();
