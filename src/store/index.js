@@ -47,7 +47,6 @@ export default new vuex.Store({
     getters: {
         account: ({ scatter }) => {
           if (!scatter) { 
-            alert("浏览器没有安装scatter")
             return null 
           }
           const { identity } = scatter
