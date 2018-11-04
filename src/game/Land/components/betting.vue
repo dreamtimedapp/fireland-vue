@@ -53,7 +53,7 @@
            </span>
         </el-dialog>
         <div class="betting-wakuang">
-            <span>每次有效投注额，将获得投注额%4.5的LEN代币</span>
+            <span>每次有效投注额，将获得投注额4.5%的LEN代币</span>
             <el-button @click="getToken" type="text">查看详情</el-button>
         </div>
       </div> 

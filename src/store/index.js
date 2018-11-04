@@ -106,7 +106,7 @@ export default new vuex.Store({
 
                 state.landInfo.current_landlist.push(element)
             });
-            state.landInfo.landNum = state.personal_land.length;
+            state.landInfo.landNum = state.landInfo.personal_land.length;
     
             if ( state.landInfo.blackLandArray == 1) {
                 state.landInfo.blackLand =  state.landInfo.blackLandArray[0]
