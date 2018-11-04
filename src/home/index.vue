@@ -54,6 +54,7 @@ export default {
     })
   },
   mounted: function() {
+    this.handleScatterLoaded()
   },
   computed: {
     ...mapState(['identity', 'scatter', 'eos','balance','lenInfo','landInfo','gameInfo']),
