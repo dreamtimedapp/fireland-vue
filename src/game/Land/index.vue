@@ -74,6 +74,7 @@ export default {
     })
   },
   mounted: function() {
+     this.handleScatterLoaded()
     setInterval(this.getGameData,1000)
   },
   computed: {
