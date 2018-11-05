@@ -1,25 +1,16 @@
 <template>
-<div class="main-container">
+<div class="main-body" >
+  <div class="main-container">
   <Header :account="account" v-on:requestId="requestId" date="2019"></Header>
-  <el-row   class="land-info-row" 
-    element-loading-text="拼命加载中"
-    element-loading-spinner="el-icon-loading"
-    element-loading-background="rgba(0, 0, 0, 0.8)">
-      <el-col :xs="24" :sm="24"  :md="8" style="height:100%;backgroundcolor:#000">   
-          <div  class="land-game-countdown" style="height:100%">
-           <span>{{gameInfo.gameMessage}}</span>
-           <countdown :time="gameInfo.gameCount">
-              <template slot-scope="props">
-                 {{ props.days }} 天 {{ props.hours }} 小时 {{ props.minutes }} 分 {{ props.seconds }} 秒
-              </template>
-           </countdown>
-          </div> 
-      </el-col>     
-      <el-col :xs="24" :sm="24"  :md="8"  >  
-        <div  class="land-game-currentInfo ">
-          <span>最低土地价格: {{landInfo.minPrice}}  EOS</span>
-         </div>  
-      </el-col>
+  <div class="ad_title">赢取LEN，永不折价的TOKEN！</div>
+  <div class="pool-box">
+    <div class="pool-title"> 当前奖池金额 </div>
+    <div class="pool-balance">
+      {{landInfo.poolBalace}}  EOS
+    </div> 
+  </div>  
+  <!--
+    <el-row >
       <el-col :xs="24" :sm="24"  :md="8"  >   
             <div  class="land-game-pool" >
             <span>当前奖池金额: {{landInfo.poolBalace}}  EOS</span>
@@ -27,12 +18,26 @@
             <span> {{landInfo.blackLand}}</span>
             </div>   
       </el-col>
-  </el-row>    
+  </el-row>    -->
   <Betting :balance="balance" :landInfo="landInfo" :account="account" :game="gameInfo"/>
+  </div>
+
+  <div class="land-intro">
+     <div class="land-info-title"> 
+       —— 永续合约 ——
+     </div>
+     <div class="land-info-sub-title">
+       全部土地永久1 EOS，每次买入 20% 概率失败，80%，下注即可参与LEN挖矿。失败资金进资金池，隔天按持有土地数量进行分红，
+       持有土地被占有则赢得 1.2 EOS.
+     </div>    
+  </div>  
+
   <Land  :landInfo="landInfo" :account="account"  />
   <Rule :landInfo="landInfo"/>
+  <Footer/>
   <!--<BettingTable/>-->
   <Fab  v-bind:account="account"/>
+  
 </div>
 
 </template>
@@ -43,6 +48,7 @@ const  Land = ()=> import ('./components/land.vue');
 const  Betting  = ()=> import ('./components/betting');
 const  Rule = ()=> import ('./components/rule');
 const  Fab = ()=> import ('../../common/fab');
+const  Footer = ()=> import ('./components/footer.vue');
 import store from '../../store'
 
 import { setInterval, setTimeout } from 'timers';
@@ -58,6 +64,7 @@ export default {
     Land,
     Betting,
     Rule,
+    Footer,
     Fab
   },
   props: {},
@@ -116,51 +123,95 @@ export default {
 
 <style  scoped>
 
-  .main-container {
-    width: 100%;
-    min-height: 100vh;
-    background: #12161b; 
-  }
-  .land-info-row {
-    padding-top: 40px;
-    overflow:hidden;
-    align-items: center;
-   
-  }
-  .land-game-countdown {
-    background-color: #F56C6C;
-    margin-top: 0;
-    margin-bottom: 50px;
-    padding: 30px 15px 30px 15px;
-    border-radius: 8px;
-    margin-left: 20px;
-    margin-right: 20px;
-    color: #FFF;
-    font-size: 30px;
-    height: 100%;
-  }
-  .land-game-currentInfo {
-    background-color: #E6A23C;
-    margin-top: 0;
-    margin-bottom: 50px;
-    padding: 30px 15px 30px 15px;
-    border-radius: 8px;
-    margin-left: 20px;
-    margin-right: 20px;
-    color: #fff;
-    font-size: 30px;
-      height: 100%;
-  }
-  .land-game-pool {
-     background-color: #67C23A;
-    margin-top: 0;
-    margin-bottom: 50px;
-    padding: 30px 15px 30px 15px;
-    border-radius: 8px;
-    margin-left: 20px;
-    margin-right: 20px;
-    color: #fff;
-    font-size: 30px;
-      height: 100%;
-  } 
+.main-body {
+   background: #6e7a92;
+   width: 100%;
+   min-height: 800px;
+   flex-direction: column;
+   padding-top: 3.15vw;
+   padding-bottom: 3.15vw;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+ 
+  width: 730px;
+  background: #ffffff;
+  border-radius: 20px;
+}
+.pool-title {
+  background-color: #6e7a92;
+  display: flex;
+  height: 44px;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}
+.ad_title {
+  width: 670px;
+  padding-left: 5px;
+  font-size: 24px;
+}
+
+.pool-box {
+   height: 130px;
+   width: 670px;
+   border-radius: 15px;
+   justify-content: center;
+   box-shadow: 5px 5px 2px #6e7a92;
+}
+.pool-title {
+  width: 670px;
+  font-size: 22px;
+  height: 40px;
+  color: #ffffff;
+  text-align: center;
+  background-color: #6e7a92;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+.pool-balance {
+  color: #6e7a92;
+  text-align: center;
+  background-color: #f2f2f2;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 90px;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+  border-color: #6e7a92;
+  border-style: solid;
+  border-width: 1px;
+  font-weight: bold;
+  box-shadow:3px 3px 3px #6e7a92 inset;     
+  font-size: 40px;
+}
+.land-intro {
+  background-color: #4d5667;
+  height: 180px;
+  width: 730px;
+  margin-top: 20px;
+  border-radius: 15px;
+}
+.land-info-title {
+  font-size: 30px;
+  color: #ffffff;
+  font-weight: bold;
+  text-align: center;
+}
+.land-info-sub-title {
+  font-size: 16px;
+  color: #ffffff;
+  font-weight: bold;
+  padding-left: 13px;
+  padding-right: 13px;
+  margin-top: 15px;
+}
 </style>

@@ -3,11 +3,11 @@
       <div class="footer-qrcode">
           <div class="qrcode-box">
            <img src="https://gw.alicdn.com/tfs/TB1i2_0lNYaK1RjSZFnXXa80pXa-516-492.jpg" >
-           <a href="https://t.me/lemonfunOfficial">官方电报群</a>
+           <a  class="text-color"  href="https://t.me/lemonfunOfficial">官方电报群</a>
           </div>
           <div class="qrcode-box">  
             <img src="https://gw.alicdn.com/tfs/TB1i2_0lNYaK1RjSZFnXXa80pXa-516-492.jpg" >
-            <a href="https://t.me/lemonfunOfficial">官方微信</a>
+            <a class="text-color" href="https://t.me/lemonfunOfficial">官方微信</a>
           </div> 
       </div>  
       <div class="footer-partner">
@@ -40,14 +40,14 @@
 
 <style scoped>
 .footer-container {
-    width: 100%;
+    width: 730px;
     border-radius: 20px;
-    background-color: #fff;
+    background-color: #6e7a92;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-top: 60px;
+    margin-top: 10px;
 }
 .footer-qrcode {
     display: flex;
@@ -57,9 +57,11 @@
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
+    margin-right: 20px;
+    color: #fff;
 }
 .qrcode-box img {
-    width: 300px;
+    width: 30vw;
 }
 
 .footer-partner {
@@ -70,7 +72,7 @@
     flex-direction: column;
 }
 .footer-partner span {
-    color: #333333;
+    color: #fff;
     font-size: 30px;
     margin-top: 25px;
 }
@@ -95,5 +97,9 @@
     width: 95%;
     height: 25%;
 }
-
+.text-color {
+    margin-top: 10px;
+    color: #fff;
+    font-size: 24px;
+}
 </style>

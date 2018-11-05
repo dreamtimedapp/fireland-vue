@@ -2,7 +2,7 @@
    <div class="token-outside-container1">
        <div class="token-wrapper">   
            <el-row>
-               <el-col :xs="24" :sm="24" :md="12" >
+               <el-col :xs="24" :sm="24" :md="24" >
                     <div class="token-sell-box">
                            <div class="balance-title-len">我的LEN余额</div>
                            <div class="balance-value">{{lenBalance}}</div>
@@ -32,12 +32,12 @@
                         <template slot="prepend">LEN</template>
                         <template slot="append">LEN</template>
                     </el-input>
-                    <span class="token-subtext" >len价格：{{lenInfo.price}}，卖出获得EOS数量为：{{getCalculatePrice()}}</span>
+                    <div class="token-subtext" >len价格：{{lenInfo.price}}，卖出获得EOS数量为：{{getCalculatePrice()}}</div>
                      <el-button class="token-button"   v-on:click="sellLen" type="danger" >卖出</el-button>
                 </div> 
                </el-col>
              
-               <el-col :xs="24" :sm="24" :md="12">
+               <el-col class="align-center" :xs="24" :sm="24" :md="12">
                     <div id="element" class="len-introduce">
                       <span class="len-title">LemonFun社区通证(LEN)介绍</span>
                       <div class="len-info"> 
@@ -92,7 +92,7 @@ export default {
 </script>
 <style scoped>
 .token-outside-container1 {
-    width: 100%;
+    width: 730px;
     height:100%;
     background-color: #fff;
     border-top-color: #00000000;
@@ -104,10 +104,10 @@ export default {
 
 }
 .token-wrapper {
-    background-color: #666;
+    background-color: #6e7a92;
     width: 100%;
-    margin-right: 2.5vw;
-    margin-left: 2.5vw;
+    margin-right: 16px;
+    margin-left: 16px;
     height:100%;
     border-radius: 10px;
     display: flex;
@@ -117,10 +117,10 @@ export default {
 .token-sell-box {
    
     background: #f2f2f2;
-    margin-left: 2.3vw;
-    margin-right: 2.3vw;
-    margin-top: 5.5vw;
-    margin-bottom: 5vw;
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-top: 40px;
+    margin-bottom: 40px;
     padding: 20px;
     border-radius:10px; 
 }
@@ -133,16 +133,15 @@ export default {
     width: 100%;
 }
 .sell-token {
-    margin-left: 2.3vw;
-    margin-right: 2.3vw;
-    margin-top: 20px;
-    margin-bottom: 2vw;
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .len-introduce {
-   margin-top: 5.5vw;
-   margin-left: 5.2vw;
-   padding-right: 3vw;
+   margin-top: 20px;
+   width: 640px;
 }
 .len-title {
     display: flex;
@@ -167,7 +166,7 @@ export default {
   }
   .balance-value {
     margin-top: .026667rem;
-    color: #409EFF;
+    color: #F56C6C;
     font-size: 70px;
   }
   .match-box {
@@ -191,7 +190,13 @@ export default {
   }
   .item-value {
     margin-top: 10px;
-    color: #E6A23C;
+    color: #F56C6C;
     font-size: 28px;
+  }
+  .align-center {
+      width: 100%;
+      justify-content: center;
+      display: flex;
+      align-items: center;
   }
 </style>

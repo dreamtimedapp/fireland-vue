@@ -222,7 +222,8 @@ export default new vuex.Store({
             }
           })
         },
-        async buyLand({commit,dispatch},amount = 1, memo = '我的土地我做主', tokenSymbol = 'EOS') {
+        async buyLand({commit,dispatch},amount = 1, memo, tokenSymbol = 'EOS') {
+          debugger
           let result = await transfer(amount,memo,tokenSymbol)
           if (result.is_error) {
             alert(JSON.stringify(result.msg))

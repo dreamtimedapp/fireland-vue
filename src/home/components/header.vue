@@ -58,6 +58,7 @@ export default {
     width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-direction: column;
     background-color:#fff; 
     border-top-left-radius: 15px;
@@ -65,12 +66,11 @@ export default {
     padding-bottom: 6.2vw;
 }
 .banner-cover {
-    margin-left: 2.3vw;
-    margin-right: 2.3vw;
     margin-bottom: 25px;
     border-radius: 10px;
     background-color: #ccc;  
-    height: 53vw;
+    height: 360px;
+    width: 700px;
 }
 .card-img-overlay {
     background: #333;
@@ -83,10 +83,11 @@ export default {
     position: relative;
     border-radius: 15px;
     margin-bottom: 10px;
-    margin-left: 2.3vw;
+    margin-left: 16px;
     margin-right: 10px;
     background-color: #ccc;  
-    height: 25vw;
+    width: 350px;
+    height: 180px;
 }
 
 .banner-game-item2 {
@@ -96,7 +97,8 @@ export default {
     margin-left: 10px;
     margin-right: 2.3vw;
     background-color: #ccc;  
-    height: 25vw;
+    width: 350px;
+    height: 180px;
 }
 
 .header-container {
@@ -104,6 +106,7 @@ export default {
     flex-direction: row;
     align-items: center;
     height: 150px;
+    width: 730px;
     background: #ffffff;
     justify-content: space-between;
     border-radius: 25px;
@@ -161,22 +164,23 @@ export default {
 }
 .card-game-item-img-cover {
    position: absolute;
-   top:14vw;
-   left: 22vw;
+   top:100px;
+   left: 180px;
    padding: 20px;
 }
 
 .game-entrance-btn {
-   width: 18vw;
-   height: 6vw;
-   font-size: 3vw;
+   width: 130px;
+   height: 40px;
+   border-radius: 7px;
+   font-size: 18px;
    padding: 0;
 }
 .banner-game-title {
     position: absolute;
     color:#fff;
-    font-size: 4vw;
-    top: 2vw;
+    font-size: 30px;
+    top: 20px;
     left: 2vw;
 }
 

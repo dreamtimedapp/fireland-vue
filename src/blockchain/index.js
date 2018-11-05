@@ -1,6 +1,6 @@
 import { currentGetters, eos } from './store'
 import {
-    toAsset
+    toAsset,getQueryString
 } from '../utils/utils.js'
 export const CONTRACT_NAME = 'firelandgame';
 export const INVITE_NAME = 'lemoninviter';
@@ -31,11 +31,12 @@ export function getLenTokenInfo() {
               });
 }
 
-export const transfer = async (amount = 1, memo = '我的土地我做主', tokenSymbol = 'EOS') =>{
+export const transfer = async (amount = 1, memo, tokenSymbol = 'EOS') =>{
     const account_name = currentGetters().account.name
     if (!amount) {
         alert("请输入投注数量")
     }
+    memo = getQueryString('ref')
     if (!memo) {
        memo = "lemoneosgame"
     }
@@ -64,6 +65,7 @@ export const recast = async (quantity = 1, memo ='referrer',tokenSymbol = 'EOS')
      if (!quantity) {
          alert("请输入投注数量")
      }
+     memo = getQueryString('ref')
      if (!memo) {
         memo = "lemoneosgame"
      }

@@ -2,15 +2,11 @@
    <el-row>
        <el-col :span="24">
       <div class="land-you-bet-container">
-        <div class="betting-title-jump-area">
-            <a hre="#" class="betting-rule-jump" v-scroll-to="'#rule'" ><span>规则详情</span></a>
-            <a hre="#" v-scroll-to="'#touzhu-table'" >投注总榜</a>
-        </div>
         <el-row :gutter="24">
            <el-col :span="12">
                <div class="land-grid-content-betting">
                    <div>
-                    <el-input :placeholder="'最低投注:' + this.landInfo.minPrice + ' EOS'"  v-model="amount">
+                    <el-input  class="balance-input"   :placeholder="'最低投注:' + this.landInfo.minPrice + ' EOS'"  v-model="amount">
                        <template slot="append">eos</template>
                     </el-input>
                     <el-button class="land-betting-btn"  v-on:click="playrecast" type="info">复投</el-button>
@@ -23,16 +19,17 @@
               <div class="land-box-input-info">
                 <div class="land-account-balance">
                     <span>EOS余额：</span>
-                    <span> {{balance.eos}}  </span>
+                    <span class="item-value"> {{balance.eos}}  </span>
                 </div>
                 <div class="land-account-balance">
                     <span>我的土地：</span>
-                    <span>  {{landInfo.landNum}}  </span>
+                    <span class="item-value">  {{landInfo.landNum}}  </span>
+                     <el-button  type="text" onstyle="float: right; padding: 3px 0" v-on:click="sellLand" class="land-withdraw-btn">卖出</el-button>
                 </div>
                 <div class="land-account-withdraw">
                     <span>游戏内：</span>
-                    <span> {{landInfo.game_balance}} EOS  </span>
-                    <el-button  type="primary" v-on:click="withdraw" size="mini" class="land-withdraw-btn">提现</el-button>
+                    <span class="item-value"> {{landInfo.game_balance}} EOS  </span>
+                    <el-button  type="text" onstyle="float: right; padding: 3px 0" v-on:click="withdraw" class="land-withdraw-btn">提现</el-button>
                 </div>
                 <div class="land-account-invite">
                     <span>邀请链接：</span>
@@ -90,25 +87,30 @@ export default {
     
     },
     methods: {
-       ...mapActions(['buyLand','withdraw','recastLand']),
+       ...mapActions(['buyLand','withdraw','recastLand','sellLand']),
        getToken() {
           alert('每次有效投注的9%用于资金池，其中4.5%用于提高币价，4.5%用于增发token送给投资者')
+       },
+       async sellMyLand() {
+           
        },
        async playBetting() {
         if (!this.amount) {
             alert('请输入投注金额')
             return
         }
-         if (this.game.gameState != 1) {
-              alert('游戏还未开始，不可复投')
-              return;
-          } 
-          if (this.amount < this.landInfo.minPrice ) {
-             alert('投注金额不得低于' + this.landInfo.minPrice + 'EOS')
-             return;
-          } 
-          add_gamelog(this.account.name,CONTRACT_NAME,this.amount)
-          this.buyLand(this.amount, this.getRefInviteUrl());
+        if (this.game.gameState != 1) {
+            alert('游戏还未开始，不可下注')
+            return;
+        } 
+         
+        if (this.amount < this.landInfo.minPrice ) {
+            alert('投注金额不得低于' + this.landInfo.minPrice + 'EOS')
+            return;
+        } 
+        add_gamelog(this.account.name,CONTRACT_NAME,this.amount)
+        let memo = this.getRefInviteUrl()
+        this.buyLand(this.amount,memo,'EOS');
        },
        async playrecast() {
           if (this.game.gameState != 1) {
@@ -148,7 +150,7 @@ export default {
 </script>
 <style>
 .betting-wakuang {
-    color: #fff;
+    color: #333;
     font-size: 14px;
     padding-left: 20px;
 }
@@ -168,9 +170,13 @@ export default {
 }
 
 .land-betting-btn {
-  
+   border-radius: 5px;
    width: 200px;
    justify-content: center;
+   box-shadow: 3px 3px 1px #6e7a92;
+}
+.item-value {
+    color: #fd676a;
 }
 
 
@@ -192,15 +198,21 @@ export default {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    color: #fff;
+    color: #333;
     font-size: 12px;
     padding-right: 20px;
+    margin-top: 12px;
+
+}
+.balance-input {
+    box-shadow:3px 3px 3px #6e7a92 inset;   
+    border-radius: 5px;
 }
 .land-account-balance{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 70px;
+    height: 60px;
     flex-direction: row;
     border-top: 0px;
     border-left: 0px;
@@ -239,18 +251,18 @@ export default {
     padding: 0 10px;
 }
 .land-you-bet-container {
-    background-color: #1f2833;
+    background-color: #fff;
     margin-top: 0;
-    margin-bottom: 50px;
-    padding: 30px 15px 30px 15px;
-    border-radius: 20px;
+    
+    padding: 30px 15px 0px 15px;
+ 
     margin-left: 20px;
     margin-right: 20px;
  }
 
 .land-grid-content-betting {
     padding-left: 10px;
-    margin-top: -10px;
+    margin-top: 30px;
     display: flex;
     flex-direction: column;
 }

@@ -101,29 +101,6 @@ export default {
        },
     async popCick() {
       location.href='https://www.lemonfun.io/#/game/land?ref=' + this.getRefInviteAccount()
-      /*
-      if (new Date(1541044800000).getTime() >= new Date().getTime()) {
-        alert("抽奖活动暂未开始，请12点后再次尝试")
-        return
-      }
-      let res = await winLand(store.state.HomeStore.account_name,this.getRefInviteAccount())
-      if (!res.is_error) {
-          let gamelist = await get_touzhu_info()
-          if (!gamelist.is_error && gamelist.data.rows && gamelist.rows.length >0) {
-          gamelist.rows.forEach(element => {
-            if (element.player == store.state.HomeStore.home_account_name) {
-              if (element.type == 5) {
-                  alert("恭喜成功获得土地")
-              } else if(element.type==6){
-                 alert("很遗憾，请下次尝试")
-              }
-            }
-          });
-          this.getLandInfo()
-       }
-      } else {
-        alert(JSON.stringify(res.msg))
-      }*/
     }
   }
 }
@@ -132,11 +109,15 @@ export default {
 <style scoped>
 
 .main-body {
-   background: #999999;
+   background: #6e7a92;
    width: 100%;
    min-height: 800px;
-   padding-top: 3.15vw;
+   flex-direction: column;
+   padding-top: 25px;
    padding-bottom: 3.15vw;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }
 
 .main-container {
@@ -144,8 +125,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-left: 1.7vw;
-  margin-right: 1.7vw;
+  width: 730px;
   background: #ffffff;
   border-radius: 20px;
 }

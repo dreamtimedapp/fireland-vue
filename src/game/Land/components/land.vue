@@ -184,17 +184,13 @@ export default {
 </script>
 
 <style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-  }
+
   #land {
     position: relative;
     margin: 0;
     padding: 0;
-    width: 100%;
+    margin-top: 30px;
+    width: 730px;
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -210,6 +206,7 @@ export default {
     flex-direction: column;
     max-width: 100%;
     z-index: unset;
+    background-color: #959dae;
   }
   #land .land-list.inner-rect {
     position: absolute;

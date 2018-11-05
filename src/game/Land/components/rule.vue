@@ -4,7 +4,7 @@
                <h3 class="security-title ">
                     投注风云榜
                 </h3>    
-              <el-table   :data="landInfo.touzhuRows" >
+              <el-table  class="bet-table" :data="landInfo.touzhuRows" >
                   <el-table-column prop="logtime" label="时间">
                   </el-table-column>
                   <el-table-column prop="player" label="玩家">
@@ -12,6 +12,9 @@
                   <el-table-column prop="amount" label="金额" >
                   </el-table-column>
                   <el-table-column prop="type" label="投注情况" >
+                    <template slot-scope="scope">
+                        <span class="table-value"> {{ scope.row.type }}</span>
+                    </template>
                  </el-table-column>
               </el-table>
           </div>
@@ -79,21 +82,7 @@
                 <p>
                   合约地址： <a href="https://eospark.com/MainNet/contract/firelandgame" target="_blank">https://eospark.com/...firelandgame</a>
                 </p> 
-           </div>  
-         
-          <div class="land-footer">
-           <p class="land-footer-title">
-                <span class="land-footer-partner-title">友情合作伙伴</span>
-                <br/> <br/>
-                <a href="https://www.mytokenpocket.vip/" target="_blank"><img src="https://img.alicdn.com/tfs/TB1AoDWjxjaK1RjSZKzXXXVwXXa-300-55.png" width="150"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="https://meet.one" target="_blank"><img src="https://img.alicdn.com/tfs/TB1LYfxjr2pK1RjSZFsXXaNlXXa-200-55.png" width="150"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="https://more.top" target="_blank"><img src="https://img.alicdn.com/tfs/TB1UEYCjAvoK1RjSZFwXXciCFXa-200-55.png" width="150"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="http://www.mathwallet.org" target="_blank"><img src="https://img.alicdn.com/tfs/TB1E4PBjrrpK1RjSZTEXXcWAVXa-150-46.png" width="150"></a>
-            </p>
-            <p>请加入我们的官方电报群沟通交流</p>
-            <p><img src="https://img.alicdn.com/tfs/TB1kWjCjCrqK1RjSZK9XXXyypXa-434-434.jpg" width="100"></p>
-            <p>2018@柠檬游戏团队</p>
-       </div>   
+           </div>   
        </div>   
 </template>
 <script>
@@ -131,13 +120,14 @@ export default {
 <style>
 .land-len-security {
    display: flex;
-   width: 100%;
+   width: 730px;
    flex-direction: column;
-  
    align-items: center;
-   padding-left: 20px;
-   padding-right: 20px;
-   margin-top:30px;
+   margin-top:0px;
+   border-radius: 25px;
+}
+.table-value {
+    color: #F56C6C
 }
 .land-len-security-title {
     color:#fff;
@@ -192,8 +182,11 @@ export default {
 .land-footer-title {
    font-size: 35px;
 }
+.bet-table {
+    border-radius: 15px;
+}
 .touzhu-table {
-
+    border-radius: 25px;
     margin-left: 20px;
     margin-right: 20px;
     width: 100%;
