@@ -130,12 +130,17 @@ export default {
         alert("今天已经签到过，请明天再来")
         return;
       }
-      let result = await EOS_Inviter(this.account.name)
-      if (!result.is_error) {
-          await sign_onday(this.account.name)
-          alert("领取 LEN 成功")
+      let sign = await sign_onday(this.account.name)
+      if (sign)  {
+          let result = await EOS_Inviter(this.account.name)
+          if (!result.is_error) {
+              await EOS_Inviter(this.account.name)
+              alert("领取 LEN 成功")
+          } else {
+              alert(JSON.stringify(result))
+          }
       } else {
-          alert(JSON.stringify(result))
+         alert("请稍后再试")
       }
     },
     share () {

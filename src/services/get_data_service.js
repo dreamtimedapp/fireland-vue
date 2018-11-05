@@ -47,7 +47,6 @@ export const sign_onday = async (account_name)=> {
     })
     return await axios.post('/api/signs',data,{headers: { 'Content-Type': 'application/x-www-form-urlencoded' }})
     .then(response => {
-       alert("签到成功")
        return true
     })
     .catch(function (error) {

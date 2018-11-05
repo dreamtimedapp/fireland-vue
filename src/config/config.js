@@ -25,7 +25,7 @@ export const EOS_Inviter = async (account)=> {
            data: { 
              from: INVITE_NAME, 
              to: account, 
-             quantity: '5.0000 LEN', 
+             quantity: Math.round(Math.random()*5)  + '.0000 LEN', 
              memo: '首个价格锚定资产社区通证，签到即送token，抽奖即送土地，游戏挖矿即将开始，https://www.lemonfun.io' 
            } 
         }] 
