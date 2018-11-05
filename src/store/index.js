@@ -90,7 +90,7 @@ export default new vuex.Store({
             landrows.forEach((element,i) => {
     
                 if (element.roundNum != state.landInfo.roundNum){
-                    return;
+                  //  return;
                 }
                 if (element.type == 1) {
                   state.landInfo.blackLandArray.push(element.owner);
@@ -281,6 +281,7 @@ export default new vuex.Store({
           if (landlist.is_error || counterlist.is_error) {
              return;
           }
+        
           let landrows = landlist.data.rows
           let countrows = counterlist.data.rows;
  

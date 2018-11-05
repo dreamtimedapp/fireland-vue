@@ -7,8 +7,10 @@
 const  i18n = ()=> import('./i18n')
 import store  from './store'
 const  fab =()=> import ('./FAB.vue');
+import VueClipboard from 'vue-clipboard2'
 Vue.config.productionTip = false
 Vue.component('vue-fab',fab);
+Vue.use(VueClipboard)
 
 const routes = [
   { 
