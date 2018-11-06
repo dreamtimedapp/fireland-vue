@@ -195,6 +195,7 @@ export default new vuex.Store({
           commit('setIdentity', identity)
           dispatch('updateBalance')
           dispatch('setTokenInfo')
+          dispatch('getGameBalance')
         },
         sellToken({commit,dispatch},quantity ) {
           sellLen(quantity).then((result)=>{
@@ -258,6 +259,7 @@ export default new vuex.Store({
            if (!rows) {
                return;
             }
+            debugger
             commit('setGameBalance',rows,account_name)
        },
        async getTouzhuInfo({commit,dispatch}) {
