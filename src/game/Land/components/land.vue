@@ -119,8 +119,8 @@ export default {
         if (colData) {
           col.hasOwner = true;
           col.style.opacity = 1;
-          
-          col.price = 1;
+     
+          col.price = colData.landID;
 
           if (colData.type === 0) {
             col.type = 'nature';

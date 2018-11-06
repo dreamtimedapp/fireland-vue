@@ -23,7 +23,7 @@
                 </div>
                 <div class="land-account-balance">
                     <span>我的土地：</span>
-                    <span class="item-value">  {{landInfo.landNum}}  </span>
+                    <span class="item-value">  {{landInfo.landNum}} 块 </span>
                      <el-button type="text" onstyle="float: right; padding: 3px 0" v-on:click="sellMyLand" class="land-withdraw-btn">卖出</el-button>
                 </div>
                 <div class="land-account-withdraw">
