@@ -6,7 +6,7 @@
            <a  class="text-color"  href="https://t.me/lemonfunOfficial">官方电报群</a>
           </div>
           <div class="qrcode-box">  
-            <img src="https://gw.alicdn.com/tfs/TB1i2_0lNYaK1RjSZFnXXa80pXa-516-492.jpg" >
+            <img src="https://gw.alicdn.com/tfs/TB1iZ03nHrpK1RjSZTEXXcWAVXa-884-876.jpg" >
             <a class="text-color" href="https://t.me/lemonfunOfficial">官方微信</a>
           </div> 
       </div>  
