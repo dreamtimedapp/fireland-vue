@@ -18,49 +18,6 @@
                  </el-table-column>
               </el-table>
           </div>
-           <span class="land-len-security-title" id="rule">游戏规则</span>
-           <div class="land-adt_grids">
-        
-                <h3 class="land-security-title text-center">EOS 国土无双游戏玩法</h3>
-                <h4>一、玩法介绍 </h4>
-                <p>
-                    游戏板块为145格大小的地图，每一格代表一块地皮，所有土地永久定价 1eos）；
-                </p>  
-                <p>
-                    玩家每次下注 1 EOS，9%用于挖矿，获得LEN返还。20%概率购买成功，80%概率购买失败。失败金额进入资金池，
-                    隔天按照土地持有比例进行分红。玩家土地被占有则赢得 1.2 EOS。
-                </p>   
-                <p>
-                   玩家持有的土地可随时卖出，即投降可退出，卖出扣%50手续费进入资金池，玩家每隔一天可按照持有土地的数量等比例瓜分资金池。
-                </p>                    
-                <h4>
-                    二、有效费用分配
-                </h4>    
-
-                <p>
-                  9%——计入token池，一半增发token赠送给玩家，另外一半增值币价(详情参考token发行规则)。   
-                </p>    
-              
-                <p>
-                  1%——邀请人永久奖励   
-                </p>       
-                <h4>
-                    四、游戏结束
-                </h4>    
-                <p>
-                   结束时，最终持有2块黑地皮的玩家均分累计奖池金额；
-                </p>
-                <h3 class="land-security-title ">
-                    EOS 国土无双智能合约
-                </h3>    
-               
-                <p>
-                  合约账号：<a href="" target="_blank">firelandgame</a>
-                </p>    
-                <p>
-                  合约地址： <a href="https://eospark.com/MainNet/contract/firelandgame" target="_blank">https://eospark.com/...firelandgame</a>
-                </p> 
-           </div>   
        </div>   
 </template>
 <script>

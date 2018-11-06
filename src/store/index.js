@@ -126,7 +126,7 @@ export default new vuex.Store({
               state.gameInfo.gameCount = 0
               state.gameInfo.gameState = 2;
           }
-          state.landInfo.poolBalace = info.PotBalance
+          state.landInfo.poolBalace = info.potBalance
           if (state.gameInfo.gameState == 0) {
             state.gameInfo.gameMessage = "距离游戏开始还有："
           } else if (state.gameInfo.gameState == 1) {
@@ -220,7 +220,7 @@ export default new vuex.Store({
         async sellLand({commit,dispatch}) {
           landID = 0;
           if (state.landInfo.personal_land && state.landInfo.personal_land.length > 0) {
-            landID =  state.landInfo.personal_land[0]
+            landID =  state.landInfo.personal_land[0].landID
           } else {
             alert("你没有土地可以售出")
           }
@@ -231,7 +231,7 @@ export default new vuex.Store({
             dispatch('getGameBalance')
             dispatch('getTouzhuInfo')
             dispatch('setLandInfo')
-            alert('下注成功！')
+            alert('卖出1块土地成功')
           }
         },
         async recastLand({commit,dispatch},amount = 1, memo = '我的土地我做主', tokenSymbol = 'EOS') {
