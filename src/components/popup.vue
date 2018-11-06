@@ -89,7 +89,7 @@
     props: ['visible', 'title', 'text'],
     data: function() {
       return {
-        iconClose: '../assets/icon-close.png'
+        iconClose: 'https://gw.alicdn.com/tfs/TB1pFJwnFzqK1RjSZFvXXcB7VXa-88-88.png'
       }
     },
     methods: {

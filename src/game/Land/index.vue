@@ -1,8 +1,9 @@
 <template>
 <div class="main-body" >
+
   <div class="main-container">
   <Header :account="account" v-on:requestId="requestId" date="2019"></Header>
-  <div class="ad_title">赢取LEN，永不折价的TOKEN！</div>
+  <div class="ad_title">赢取LEN，永不折价的TOKEN！今晚8点开始游戏！</div>
   <div class="pool-box">
     <div class="pool-title"> 当前奖池金额 </div>
     <div class="pool-balance">
@@ -40,7 +41,6 @@
   <Footer/>
   <!--<BettingTable/>-->
   <Fab  v-bind:account="account"/>
-  
 </div>
 
 </template>
@@ -73,7 +73,9 @@ export default {
   props: {},
   data: function() {
     return {
-      
+      popVisible: true,
+      popTitle: '永续合约，持有土地即分红（今晚8点开始）',
+      popText: '所有土地永久售价1 EOS，持有土地即分红，随机购买土地。土地被买则赢得1.3 EOS。用户可向系统卖出自己持有的地块，每块地块系统将向其返还0.5EOS。',
     }
   },
   created () {
@@ -84,7 +86,12 @@ export default {
     })
   },
   mounted: function() {
-     this.handleScatterLoaded()
+    if (new Date().getTime() < 1541505600000) {
+     // this.popVisible = true
+    } else {
+      //this.popVisible = false;
+    }
+    this.handleScatterLoaded()
     setInterval(this.getGameData,1000)
   },
   computed: {
@@ -120,6 +127,9 @@ export default {
         console.info('User canceled to suggestNetwork')
       }
     },
+    async popLandCick() {
+      
+    }
   }
 }
 </script>
@@ -198,7 +208,7 @@ export default {
 }
 .land-intro {
   background-color: #4d5667;
-  height: 330px;
+  height: 300px;
   width: 730px;
   margin-top: 20px;
   border-radius: 15px;
