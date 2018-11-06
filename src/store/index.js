@@ -126,7 +126,7 @@ export default new vuex.Store({
               state.gameInfo.gameCount = 0
               state.gameInfo.gameState = 2;
           }
-          state.landInfo.poolBalace = info.potBalance
+          state.landInfo.poolBalace = info.potBalance /  10000 
           if (state.gameInfo.gameState == 0) {
             state.gameInfo.gameMessage = "距离游戏开始还有："
           } else if (state.gameInfo.gameState == 1) {
