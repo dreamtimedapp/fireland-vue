@@ -71,7 +71,7 @@ export default {
     props: ['game','landInfo','balance','account'],
     data() {
       return {
-          amount: '',
+          amount: '1',
           memo: '',
           dialogVisible:false,
           dialogDetail: false,
@@ -228,6 +228,7 @@ export default {
     border-color: #ebeef5;
     border-style: solid;
     padding-right: 10px;
+    font-size: 24px;
 }
 
 .land-account-withdraw{
@@ -243,6 +244,7 @@ export default {
     border-color: #ebeef5;
     border-style: solid;
     padding-right: 10px;
+    font-size: 24px;
    
 }
 .land-account-invite{
@@ -252,7 +254,7 @@ export default {
     height: 70px;
     flex-direction: row;
     padding-right: 10px;
-    font-size:14px;
+    font-size:24px;
 }
 .el-input-group__append, .el-input-group__prepend {
     padding: 0 10px;
