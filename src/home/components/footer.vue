@@ -2,12 +2,24 @@
    <div class="footer-container">
       <div class="footer-qrcode">
           <div class="qrcode-box">
-           <img src="https://gw.alicdn.com/tfs/TB1i2_0lNYaK1RjSZFnXXa80pXa-516-492.jpg" >
-           <a href="https://t.me/lemonfunOfficial">官方电报群</a>
+                <el-popover
+                   placement="top-start"
+                   title="官方微信群"
+                   trigger="hover">
+                      <img src="https://gw.alicdn.com/tfs/TB1i2_0lNYaK1RjSZFnXXa80pXa-516-492.jpg" >
+                </el-popover>
+                <img slot="reference"  src="https://gw.alicdn.com/tfs/TB1i2_0lNYaK1RjSZFnXXa80pXa-516-492.jpg" >
+                <a slot="reference" href="https://t.me/lemonfunOfficial">官方电报群</a>
           </div>
           <div class="qrcode-box">  
-            <img src="https://gw.alicdn.com/tfs/TB1iZ03nHrpK1RjSZTEXXcWAVXa-884-876.jpg" >
-            <a href="https://t.me/lemonfunOfficial">官方微信</a>
+              <el-popover
+                   placement="top-start"
+                   title="官方微信群"
+                   trigger="hover">
+                    <img src="https://gw.alicdn.com/tfs/TB1iZ03nHrpK1RjSZTEXXcWAVXa-884-876.jpg" >
+                </el-popover>
+              <img slot="reference" src="https://gw.alicdn.com/tfs/TB1iZ03nHrpK1RjSZTEXXcWAVXa-884-876.jpg" >   
+            <a slot="reference" href="https://t.me/lemonfunOfficial">官方微信</a>
           </div> 
       </div>  
       <div class="footer-partner">

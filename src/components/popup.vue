@@ -9,7 +9,7 @@
       <div class="pop-body">
         {{text}}
         <div>
-          <img class="icon-content" :src="iconContent">
+          <img class="icon-content" v-show="!buttonVisible" :src="iconContent">
         </div>  
       </div>
       <el-button v-show="buttonVisible"  class="pop-button" v-on:click="$emit('pop-click')" type="danger" >进入游戏</el-button>
