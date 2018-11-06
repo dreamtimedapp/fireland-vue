@@ -94,7 +94,7 @@ export default {
        async playBetting() {
         if (new Date().getTime() < 1541505600000) {
               alert('游戏20:00 点开始，敬请期待')
-              //return;
+              return;
         }    
         if (!this.amount) {
             alert('请输入投注金额')
@@ -121,7 +121,6 @@ export default {
           if (new Date().getTime() < 1541505600000) {
               alert('游戏20:00点开始，敬请期待')
               return;
-             // this.popVisible = true
           } 
           if (this.amount < this.landInfo.minPrice ) {
              alert('投注金额不得低于' + this.lanInfo.minPrice.minPrice + 'EOS')
