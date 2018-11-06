@@ -40,9 +40,9 @@ export default {
   },
   data: function() {
     return {
-      popVisible: false,
-      popTitle: '活动公告',
-      popText: '游戏即挖矿已经开始',
+      popVisible: true,
+      popTitle: '永续合约，持有土地即分红（今晚8点开始）',
+      popText: '所有土地永久售价1 EOS，持有土地即分红，随机购买土地。土地被买则赢得1.3 EOS。用户可向系统卖出自己持有的地块，每块地块系统将向其返还0.5EOS。',
       eos_balance:''
     }
   },

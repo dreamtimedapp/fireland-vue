@@ -89,7 +89,7 @@
     props: ['visible', 'title', 'text'],
     data: function() {
       return {
-        iconClose: ''
+        iconClose: '../assets/icon-close.png'
       }
     },
     methods: {
