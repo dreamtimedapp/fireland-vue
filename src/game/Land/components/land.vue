@@ -120,7 +120,7 @@ export default {
           col.hasOwner = true;
           col.style.opacity = 1;
           
-          col.price = (colData.price/10000).toFixed(0);
+          col.price = 1;
 
           if (colData.type === 0) {
             col.type = 'nature';

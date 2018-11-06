@@ -99,6 +99,45 @@ export const recast = async (quantity = 1, memo ='referrer',tokenSymbol = 'EOS')
 }
 /**
  * 
+ *  卖土地
+ * 
+ */
+
+ export function sellMyLand(landId) {
+    const account_name = currentGetters().account.name
+    return  eos().transaction({
+        actions: [
+            {
+                account: CONTRACT_NAME, //合约账户
+                name: 'sellland',
+                authorization: [{
+                    actor:account_name,
+                    permission: 'active'
+                }],
+                data: {
+                    account: account_name,  // 复投账户，写死的
+                    landID:landId 
+                }
+            }
+        ]
+    }).then(result => {
+        debugger
+        return {
+            is_error:false,
+            result
+        }
+    }).catch(err => {
+        debugger
+        return {
+            is_error: true,
+            msg: err
+        };
+    });
+ }
+
+
+/**
+ * 
  * 抽奖表
  * 
  */
@@ -120,13 +159,11 @@ export function winLand(toaccount = 'playeraccount',referrer='lemoneosgame'){
             }
         ]
     }).then(result => {
-        debugger
         return {
             is_error:false,
             result
         }
     }).catch(err => {
-        debugger
         return {
             is_error: true,
             msg: err

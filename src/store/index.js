@@ -4,7 +4,7 @@ Vue.use(vuex);
 import Eos from 'eosjs'
 import { network } from '../config'
 import { getMyBalancesByContract, getLenTokenInfo,sellLen,
-  getGameInfoList,getLandInfo,transfer,getPlayerList,get_touzhu_info,recast,withdraw} from '../blockchain'
+  getGameInfoList,getLandInfo,transfer,getPlayerList,get_touzhu_info,recast,withdraw,sellMyLand} from '../blockchain'
 
 import axios from 'axios'
 import qs from 'qs';
@@ -81,38 +81,20 @@ export default new vuex.Store({
             state.current_landlist = []
 
             let landrows = data.land;
-            state.landInfo.roundNum = data.count[0].roundNum;
 
-            state.landInfo.minPrice = data.count[0].landMinPrice / 10000;
-     
-            state.landInfo.poolBalace = data.count[0].potBalance / 10000;
 
             landrows.forEach((element,i) => {
     
                 if (element.roundNum != state.landInfo.roundNum){
                   //  return;
                 }
-                if (element.type == 1) {
-                  state.landInfo.blackLandArray.push(element.owner);
-                }
                 if (element.owner == state.account_name) {
                    state.landInfo.personal_land.push(element)
                 }
-                if (element.type == 5) {
-                  state.landInfo.zhongjiang = true
-                } else  if (element.type == 6) {
-                    state.landInfo.zhongjiang = false;
-                }
-
                 state.landInfo.current_landlist.push(element)
             });
             state.landInfo.landNum = state.landInfo.personal_land.length;
-    
-            if ( state.landInfo.blackLandArray == 1) {
-                state.landInfo.blackLand =  state.landInfo.blackLandArray[0]
-            } else {
-                state.landInfo.blackLand =  state.landInfo.blackLandArray[0] +'  ' + state.landInfo.blackLandArray[1] 
-            }
+  
         },
         setGameInfo(state,info) {
           let currentTime = Date.parse(new Date());
@@ -144,6 +126,7 @@ export default new vuex.Store({
               state.gameInfo.gameCount = 0
               state.gameInfo.gameState = 2;
           }
+          state.landInfo.poolBalace = info.PotBalance
           if (state.gameInfo.gameState == 0) {
             state.gameInfo.gameMessage = "距离游戏开始还有："
           } else if (state.gameInfo.gameState == 1) {
@@ -223,8 +206,25 @@ export default new vuex.Store({
           })
         },
         async buyLand({commit,dispatch},amount = 1, memo, tokenSymbol = 'EOS') {
-          debugger
+  
           let result = await transfer(amount,memo,tokenSymbol)
+          if (result.is_error) {
+            alert(JSON.stringify(result.msg))
+          } else {
+            dispatch('getGameBalance')
+            dispatch('getTouzhuInfo')
+            dispatch('setLandInfo')
+            alert('下注成功！')
+          }
+        },
+        async sellLand({commit,dispatch}) {
+          landID = 0;
+          if (state.landInfo.personal_land && state.landInfo.personal_land.length > 0) {
+            landID =  state.landInfo.personal_land[0]
+          } else {
+            alert("你没有土地可以售出")
+          }
+          let result = await sellMyLand(landID)
           if (result.is_error) {
             alert(JSON.stringify(result.msg))
           } else {
