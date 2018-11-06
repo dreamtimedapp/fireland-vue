@@ -136,9 +136,9 @@ export default new vuex.Store({
          }
         },
          //获取游戏内账户信息
-         setGameBalance(state,accountlist,account_name) {
+         setGameBalance(state,accountlist,account_name) { 
           accountlist.forEach(element => {
-              if (element.player == account_name) {
+              if (element.player == state.account_name) {
                   state.landInfo.game_balance = element.balance / 10000 
               }
           });
@@ -195,6 +195,7 @@ export default new vuex.Store({
           commit('setIdentity', identity)
           dispatch('updateBalance')
           dispatch('setTokenInfo')
+          debugger
           dispatch('getGameBalance')
         },
         sellToken({commit,dispatch},quantity ) {
@@ -251,6 +252,7 @@ export default new vuex.Store({
         },
          //获取玩家的信息
         async getGameBalance({commit,dispatch},account_name){
+          debugger
            let res = await getPlayerList()
            if (res.is_error) {
                return;
