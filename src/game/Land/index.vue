@@ -42,7 +42,6 @@
   <Rule :landInfo="landInfo"/>
   <Footer/>
   <!--<BettingTable/>-->
-   <popup :title="popTitle" :iconBack="iconBack" :iconContent="iconContent" :buttonVisible="false" :text="popText" :visible.sync="popVisible"  v-on:pop-click="popCick"></popup>
   <Fab  v-bind:account="account"/>
 </div>
 
