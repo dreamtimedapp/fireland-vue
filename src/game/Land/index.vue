@@ -229,7 +229,7 @@ export default {
   text-align: center;
 }
 .land-info-sub-title {
-  font-size: 16px;
+  font-size: 20px;
   color: #ffffff;
   font-weight: bold;
   padding-left: 13px;
