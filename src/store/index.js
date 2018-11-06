@@ -27,7 +27,7 @@ export default new vuex.Store({
         },
         landInfo: {
           roundNum:0,
-          minPrice:0,
+          minPrice:1,
           blackLand:'',
           personal_land:[],
           zhongjiang:[],
