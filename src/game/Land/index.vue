@@ -4,7 +4,7 @@
   <div class="main-container">
   <Header :account="account" v-on:requestId="requestId" date="2019"></Header>
   <div class="ad_title">赢取LEN，永不折价的TOKEN！今晚 20：00 点开始游戏！
-    <el-button type="text" onstyle="float: right; padding: 3px 0" v-on:click="getinfo" class="land-withdraw-btn">查看详情</el-button>
+    <el-button type="text" onstyle="float: right; padding: 3px 0" v-on:click="getinfo" class="land-withdraw-btn" >查看详情</el-button>
   </div>
   <div class="pool-box">
     <div class="pool-title"> 当前奖池金额 </div>
@@ -42,6 +42,7 @@
   <Rule :landInfo="landInfo"/>
   <Footer/>
   <!--<BettingTable/>-->
+   <popup :title="popTitle" :iconBack="iconBack" :iconContent="iconContent" :buttonVisible="false" :text="popText" :visible.sync="popVisible"  v-on:pop-click="popCick"></popup>
   <Fab  v-bind:account="account"/>
 </div>
 
@@ -55,7 +56,7 @@ const  Rule = ()=> import ('./components/rule');
 const  Fab = ()=> import ('../../common/fab');
 const  Footer = ()=> import ('./components/footer.vue');
 import store from '../../store'
-
+const popup =()=> import('../../components/popup.vue');
 import { setInterval, setTimeout } from 'timers';
 import { stat } from 'fs';
 import { mapState, mapActions, mapGetters } from 'vuex'
@@ -70,14 +71,17 @@ export default {
     Betting,
     Rule,
     Footer,
-    Fab
+    Fab,
+    popup
   },
   props: {},
   data: function() {
     return {
       popVisible: true,
-      popTitle: '永续合约，持有土地即分红（今晚8点开始）',
-      popText: '所有土地永久售价1 EOS，持有土地即分红，随机购买土地。土地被买则赢得1.3 EOS。用户可向系统卖出自己持有的地块，每块地块系统将向其返还0.5EOS。',
+      iconBack:'',
+      iconContent:'https://gw.alicdn.com/tfs/TB1iZ03nHrpK1RjSZTEXXcWAVXa-884-876.jpg',
+      popTitle: '持有土地即分红（今晚8点开始) ，右下角签到领LEN币',
+      popText: '加官方微信群了解详细',
     }
   },
   created () {

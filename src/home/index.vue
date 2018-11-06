@@ -6,7 +6,7 @@
      <Content :lenBalance="balance.len" :eosBalance="balance.eos" :lenInfo="lenInfo"></Content>
      <Footer/>
 
-     <popup :title="popTitle" :text="popText" :visible.sync="popVisible"  v-on:pop-click="popCick"></popup>
+     <popup :title="popTitle" :iconBack="iconBack" :buttonVisible="true" :text="popText" :visible.sync="popVisible"  v-on:pop-click="popCick"></popup>
    </div>
 </div>
 </template>
@@ -41,6 +41,7 @@ export default {
   data: function() {
     return {
       popVisible: true,
+      iconBack:'https://gw.alicdn.com/tfs/TB12sQ3lhnaK1RjSZFBXXcW7VXa-1378-1378.jpg',
       popTitle: '永续合约，持有土地即分红（今晚8点开始）',
       popText: '所有土地永久售价1 EOS，持有土地即分红，随机购买土地。土地被买则赢得1.3 EOS。用户可向系统卖出自己持有的地块，每块地块系统将向其返还0.5EOS。',
       eos_balance:''

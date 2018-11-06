@@ -1,15 +1,18 @@
 <template>
   <div v-show="visible" class="pop-container">
     <div class="pop-mask"></div>
-       <img  class="pop-card-img-overlay" src="https://gw.alicdn.com/tfs/TB12sQ3lhnaK1RjSZFBXXcW7VXa-1378-1378.jpg"/>
+       <img  class="pop-card-img-overlay" :src="iconBack"/>
     <div class="pop-content">
       <div class="pop-title">
         {{title}}
       </div>
       <div class="pop-body">
         {{text}}
+        <div>
+          <img class="icon-content" :src="iconContent">
+        </div>  
       </div>
-      <el-button  class="pop-button" v-on:click="$emit('pop-click')" type="danger" >进入游戏</el-button>
+      <el-button v-show="buttonVisible"  class="pop-button" v-on:click="$emit('pop-click')" type="danger" >进入游戏</el-button>
       <div class="pop-close"  @click="visible = false">
         <img :src="iconClose">
       </div>
@@ -17,6 +20,10 @@
   </div>
 </template>
 <style>
+  .icon-content {
+    width: 400px;
+    height: 400px;
+  }
   .pop-container {
     position: fixed;
     left: 0;
@@ -67,6 +74,10 @@
     font-size: 38px;
   }
   .pop-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     padding: 20px;
     font-size: 25px;
   }
@@ -86,7 +97,7 @@
 
   export default {
     name: 'popup',
-    props: ['visible', 'title', 'text'],
+    props: ['visible', 'title', 'text','iconBack','iconContent','buttonVisible'],
     data: function() {
       return {
         iconClose: 'https://gw.alicdn.com/tfs/TB1pFJwnFzqK1RjSZFvXXcB7VXa-88-88.png'
