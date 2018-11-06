@@ -4,7 +4,7 @@
                <h3 class="security-title ">
                     投注风云榜
                 </h3>    
-              <el-table  class="bet-table" :data="landInfo.touzhuRows" >
+              <el-table  :default-sort = "{prop: 'logtime', order: 'descending'}" class="bet-table" :data="landInfo.touzhuRows" >
                   <el-table-column prop="logtime" label="时间">
                   </el-table-column>
                   <el-table-column prop="player" label="玩家">
