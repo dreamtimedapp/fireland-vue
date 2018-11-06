@@ -35,7 +35,7 @@
                     <span>邀请链接：</span>
                     <el-button  @click="dialogVisible = true" onstyle="float: right; padding: 3px 0" type="text">复制</el-button>
                 </div>
-                <span class="land-invite-text ">邀请将永久享受好友投注的2%的分红</span>
+                <span class="land-invite-text ">邀请将永久享受好友投注的0.4%的分红</span>
               </div>  
             </el-col>
        </el-row>
@@ -89,7 +89,7 @@ export default {
     methods: {
        ...mapActions(['buyLand','withdraw','recastLand','sellLand']),
        getToken() {
-          alert('每次有效投注的9%用于资金池，其中4.5%用于提高币价，4.5%用于增发token送给投资者')
+          alert('每次有效投注的1%用于资金池，其中0.5%用于提高币价，0.5%用于增发token送给投资者')
        },
        async sellMyLand() {
            
