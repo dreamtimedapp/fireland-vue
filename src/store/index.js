@@ -15,6 +15,7 @@ export default new vuex.Store({
         scatter: null,
         identity: null,
         eos: null,
+        account_name:'',
         balance: {
           eos: '0.0000 EOS',
           len: '0.0000 LEN'
@@ -61,6 +62,7 @@ export default new vuex.Store({
         },
         setIdentity (state, identity) {
           state.identity = identity
+          state.account_name = identity.accounts.find(({ blockchain }) => blockchain === 'eos').name;
         },
         setBalance (state, { symbol, balance }) {
           state.balance[symbol] = balance || `0.0000 ${symbol.toUpperCase()}`
@@ -82,7 +84,6 @@ export default new vuex.Store({
 
             let landrows = data.land;
 
-
             landrows.forEach((element,i) => {
     
                 if (element.roundNum != state.landInfo.roundNum){
@@ -94,7 +95,6 @@ export default new vuex.Store({
                 state.landInfo.current_landlist.push(element)
             });
             state.landInfo.landNum = state.landInfo.personal_land.length;
-  
         },
         setGameInfo(state,info) {
           let currentTime = Date.parse(new Date());
