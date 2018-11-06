@@ -79,8 +79,8 @@ export default new vuex.Store({
         },
         setLandInfo(state,data) {
 
-          state.personal_land = []
-            state.current_landlist = []
+          state.landInfo.personal_land = []
+            state.landInfo.current_landlist = []
 
             let landrows = data.land;
 
