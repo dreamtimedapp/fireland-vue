@@ -183,6 +183,7 @@ export default {
 }
 .item-value {
     color: #fd676a;
+    font-size: 24px;
 }
 
 
