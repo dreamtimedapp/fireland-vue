@@ -146,6 +146,9 @@ export default {
 //    const outerListHeight = (outerListWidth/330*196);
     const outerListHeight = outerListWidth / 670 * 375;
     this.outerListHeight = outerListHeight + 'px';
+    if (this.account) {
+       this.account_name = this.account.name
+    }
 
 //    const innerListWidth = outerListWidth * 8/9;
 //    const innerListHeight = outerListHeight * 8/9;
@@ -175,7 +178,7 @@ export default {
       });
 
       _this.innerList.map((row)=> {
-        _this.initLand(row, data,this.account_name);
+        _this.initLand(row, data,this.account.name);
       });
 
     }, 800);
