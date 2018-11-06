@@ -95,17 +95,17 @@ export default {
            
        },
        async playBetting() {
+        if (new Date().getTime() < 1541505600000) {
+              alert('游戏20:00 点开始，敬请期待')
+              return;
+        }    
         if (!this.amount) {
             alert('请输入投注金额')
             return
         }
-        if (this.game.gameState != 1) {
-            alert('游戏还未开始，不可下注')
-            return;
-        } 
-         
-        if (this.amount < this.landInfo.minPrice ) {
-            alert('投注金额不得低于' + this.landInfo.minPrice + 'EOS')
+        
+        if (this.amount < 1 ) {
+            alert('投注金额不得低于 1 EOS')
             return;
         } 
         add_gamelog(this.account.name,CONTRACT_NAME,this.amount)
@@ -121,9 +121,10 @@ export default {
           }
        },
        async playrecast() {
-          if (this.game.gameState != 1) {
-              alert('游戏还未开始，不可复投')
+          if (new Date().getTime() < 1541505600000) {
+              alert('游戏20:00点开始，敬请期待')
               return;
+             // this.popVisible = true
           } 
           if (this.amount < this.landInfo.minPrice ) {
              alert('投注金额不得低于' + this.lanInfo.minPrice.minPrice + 'EOS')

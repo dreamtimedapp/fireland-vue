@@ -3,7 +3,7 @@
 
   <div class="main-container">
   <Header :account="account" v-on:requestId="requestId" date="2019"></Header>
-  <div class="ad_title">赢取LEN，永不折价的TOKEN！今晚8点开始游戏！
+  <div class="ad_title">赢取LEN，永不折价的TOKEN！今晚 20：00 点开始游戏！
     <el-button type="text" onstyle="float: right; padding: 3px 0" v-on:click="getinfo" class="land-withdraw-btn">查看详情</el-button>
   </div>
   <div class="pool-box">
