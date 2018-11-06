@@ -217,13 +217,7 @@ export default new vuex.Store({
             alert('下注成功！')
           }
         },
-        async sellLand({commit,dispatch}) {
-          landID = 0;
-          if (state.landInfo.personal_land && state.landInfo.personal_land.length > 0) {
-            landID =  state.landInfo.personal_land[0].landID
-          } else {
-            alert("你没有土地可以售出")
-          }
+        async sellLand({commit,dispatch},landID) {
           let result = await sellMyLand(landID)
           if (result.is_error) {
             alert(JSON.stringify(result.msg))

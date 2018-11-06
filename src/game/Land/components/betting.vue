@@ -24,7 +24,7 @@
                 <div class="land-account-balance">
                     <span>我的土地：</span>
                     <span class="item-value">  {{landInfo.landNum}}  </span>
-                     <el-button type="text" onstyle="float: right; padding: 3px 0" v-on:click="sellLand" class="land-withdraw-btn">卖出</el-button>
+                     <el-button type="text" onstyle="float: right; padding: 3px 0" v-on:click="sellMyLand" class="land-withdraw-btn">卖出</el-button>
                 </div>
                 <div class="land-account-withdraw">
                     <span>游戏内：</span>
@@ -112,8 +112,13 @@ export default {
         let memo = this.getRefInviteUrl()
         this.buyLand(this.amount,memo,'EOS');
        },
-       async sellLand() {
-           this.sellLand();
+       async sellMyLand() {
+          if (this.landInfo.personal_land && this.landInfo.personal_land.length > 0) {
+            landID =  thos.landInfo.personal_land[0].landID
+            this.sellLand();
+          } else {
+            alert("你没有土地可以售出")
+          }
        },
        async playrecast() {
           if (this.game.gameState != 1) {
