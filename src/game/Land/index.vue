@@ -93,9 +93,9 @@ export default {
   },
   mounted: function() {
     if (new Date().getTime() < 1541505600000) {
-     // this.popVisible = true
+      this.popVisible = true
     } else {
-      //this.popVisible = false;
+      this.popVisible = false;
     }
     this.handleScatterLoaded()
     setInterval(this.getGameData,1000)

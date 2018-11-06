@@ -89,13 +89,11 @@ export default new vuex.Store({
                 if (element.roundNum != state.landInfo.roundNum){
                   //  return;
                 }
-                debugger
                 if (element.owner == state.account_name) {
                    state.landInfo.personal_land.push(element)
                 }
                 state.landInfo.current_landlist.push(element)
             });
-            debugger
             state.landInfo.landNum = state.landInfo.personal_land.length;
         },
         setGameInfo(state,info) {
