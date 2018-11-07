@@ -91,11 +91,7 @@ export default {
        getToken() {
           alert('每次有效投注的1%用于资金池，其中0.5%用于提高币价，0.5%用于增发token送给投资者')
        },
-       async playBetting() {
-        if (new Date().getTime() < 1541505600000) {
-              alert('游戏20:00 点开始，敬请期待')
-              return;
-        }    
+       async playBetting() {  
         if (!this.amount) {
             alert('请输入投注金额')
             return
@@ -118,10 +114,6 @@ export default {
           }
        },
        async playrecast() {
-          if (new Date().getTime() < 1541505600000) {
-              alert('游戏20:00点开始，敬请期待')
-              return;
-          } 
           if (this.amount < this.landInfo.minPrice ) {
              alert('投注金额不得低于' + this.lanInfo.minPrice.minPrice + 'EOS')
              return;

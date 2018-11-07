@@ -3,7 +3,7 @@
 
   <div class="main-container">
   <Header :account="account" v-on:requestId="requestId" date="2019"></Header>
-  <div class="ad_title">赢取LEN，永不折价的TOKEN！今晚 20：00 点开始游戏！
+  <div class="ad_title">赢取LEN，永不折价的TOKEN！
     <el-button type="text" onstyle="float: right; padding: 3px 0" v-on:click="getinfo" class="land-withdraw-btn" >查看详情</el-button>
   </div>
   <div class="pool-box">
@@ -12,6 +12,12 @@
       {{landInfo.poolBalace}}  EOS
     </div> 
   </div>  
+   <div class="pool-box">
+    <div class="pool-title"> 累积分红 </div>
+    <div class="pool-balance">
+      {{landInfo.poolBalace}}  EOS
+    </div> 
+  </div> 
   <!--
     <el-row >
       <el-col :xs="24" :sm="24"  :md="8"  >   
@@ -33,7 +39,7 @@
        所有土地永久售价1 EOS，每次买入30%失败，70%成功。
        1%资金进入LEN池（0.5%增发归用户所有，0.5%增值LEN池），0.6%团队开发资金，0.4%推荐人奖励。
        买入成功即可获取0.3EOS奖励及成为该地块持有者，原地块持有者获取1EOS出场。
-       买入失败资金将进入资金池，每天12点按持有土地数量进行分红（分得资金池的一半）。
+       买入失败资金将进入资金池，每天24点按持有土地数量进行分红（分得资金池的一半）。
        用户可向系统卖出自己持有的地块，每块地块系统将向其返还0.5EOS。
      </div>    
   </div>  
@@ -79,7 +85,7 @@ export default {
       popVisible: true,
       iconBack:'',
       iconContent:'https://gw.alicdn.com/tfs/TB1iZ03nHrpK1RjSZTEXXcWAVXa-884-876.jpg',
-      popTitle: '持有土地即分红（今晚8点开始) ，右下角签到领LEN币',
+      popTitle: '持有土地即分红 ，右下角签到领LEN币',
       popText: '加官方微信群了解详细',
     }
   },
