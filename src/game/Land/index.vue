@@ -12,12 +12,7 @@
       {{landInfo.poolBalace}}  EOS
     </div> 
   </div>  
-   <div class="pool-box">
-    <div class="pool-title"> 累积分红 </div>
-    <div class="pool-balance">
-      {{landInfo.poolBalace}}  EOS
-    </div> 
-  </div> 
+
   <!--
     <el-row >
       <el-col :xs="24" :sm="24"  :md="8"  >   
