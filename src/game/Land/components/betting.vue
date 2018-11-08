@@ -1,33 +1,23 @@
 <template>
-   <el-row>
-       <el-col :span="24">
+
       <div class="land-you-bet-container">
-        <el-row :gutter="24">
-           <el-col :span="12">
-               <div class="land-grid-content-betting">
+            <el-tabs v-model="activeName" type="card">
+              <el-tab-pane label="投注" name="first">
+                  <div class="land-grid-content-betting">
                    <div>
-                    <el-input  class="balance-input"   :placeholder="'最低投注:' + this.landInfo.minPrice + ' EOS'"  v-model="amount">
+                    <el-input  class="balance-input"   :placeholder="'最低投注:1 EOS，10 EOS即一次性买10块'"  v-model="amount">
                        <template slot="append">eos</template>
                     </el-input>
-                    <!--
-                     <div class="block">
-                       <span class="demonstration">选择胜率，默认95%，即投注95%概率成功</span>
-                       <el-slider
-                          v-model="beilv"
-                          :step="17"
-                          :min="10"
-                          :max="95"
-                          show-stops>
-                      </el-slider>
-                     </div>-->
+                     <vue-slider :min="10"
+                          :max="95" v-model="beilv" class="land-bet-slider"></vue-slider>
                     <el-button class="land-betting-btn"  v-on:click="playrecast" type="info">复投</el-button>
                     <span></span>
                     <el-button class="land-betting-btn"  v-on:click="playBetting" type="danger">下注</el-button>
                    </div>
                 </div>
-           </el-col>
-           <el-col :span="12">
-              <div class="land-box-input-info">
+              </el-tab-pane>
+              <el-tab-pane label="我的账户" name="second">
+                    <div class="land-box-input-info">
                 <div class="land-account-balance">
                     <span>EOS余额：</span>
                     <span class="item-value"> {{balance.eos}}  </span>
@@ -48,8 +38,8 @@
                 </div>
                 <span class="land-invite-text ">邀请将永久享受好友投注的0.4%的分红</span>
               </div>  
-            </el-col>
-       </el-row>
+              </el-tab-pane>
+           </el-tabs>  
        <el-dialog
            title="邀请好友享受分红"
            :visible.sync="dialogVisible"
@@ -65,8 +55,6 @@
             <el-button @click="getToken" type="text">查看详情</el-button>
         </div>
       </div> 
-     </el-col>
-    </el-row>   
 </template>
 <script>
 
@@ -75,6 +63,7 @@ import {CONTRACT_NAME} from '../../../config/config.js'
 import {getQueryString} from '../../../utils/utils.js'
 import store from '../../../store'
 import { mapState, mapActions, mapGetters } from 'vuex'
+import vueSlider from 'vue-slider-component';
 
 export default {
     ready() {
@@ -82,12 +71,14 @@ export default {
     props: ['game','landInfo','balance','account'],
     data() {
       return {
-          amount: '1',
+          amount: '',
           memo: '',
           dialogVisible:false,
           dialogDetail: false,
           amountHolder:'',
-          beilv:95
+          beilv:85,
+          
+          activeName:"first"
       }
     },
     computed: {
@@ -114,7 +105,7 @@ export default {
         } 
         add_gamelog(this.account.name,CONTRACT_NAME,this.amount)
         let memo = this.getRefInviteUrl()
-        this.buyLand(this.amount,memo,'EOS');
+        this.buyLand([this.amount,this.beilv/100]);
        },
        async sellMyLand() {
           if (this.landInfo.personal_land && this.landInfo.personal_land.length > 0) {
@@ -125,12 +116,12 @@ export default {
           }
        },
        async playrecast() {
-          if (this.amount < this.landInfo.minPrice ) {
-             alert('投注金额不得低于' + this.lanInfo.minPrice.minPrice + 'EOS')
+          if (this.amount < 1 ) {
+             alert('投注金额不得低于 1 EOS')
              return;
           } 
           add_gamelog(this.account.name,CONTRACT_NAME,this.amount)
-          this.recastLand(this.amount,this.getRefInviteUrl());
+          this.recastLand([this.amount,this.beilv / 100]);
        },
        getRefInviteUrl() {
            if (getQueryString("ref")) {
@@ -157,6 +148,10 @@ export default {
 }
 </script>
 <style>
+.land-bet-slider {
+    margin-top: 50px;
+    
+}
 .betting-wakuang {
     color: #333;
     font-size: 14px;
@@ -266,18 +261,12 @@ export default {
 }
 .land-you-bet-container {
     background-color: #fff;
-    margin-top: 0;
-    
-    padding: 30px 15px 0px 15px;
- 
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-top: 50px;
  }
 
 .land-grid-content-betting {
-    padding-left: 10px;
-    margin-top: 30px;
     display: flex;
+    width: 660px;
     flex-direction: column;
 }
 .land-input-memo {

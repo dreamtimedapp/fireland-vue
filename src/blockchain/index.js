@@ -31,14 +31,14 @@ export function getLenTokenInfo() {
               });
 }
 
-export const transfer = async (amount = 1, memo, tokenSymbol = 'EOS') =>{
+export const transfer = async (amount = 1, beilv) =>{
     const account_name = currentGetters().account.name
     if (!amount) {
         alert("请输入投注数量")
     }
-    memo = getQueryString('ref')
-    if (!memo) {
-       memo = "lemoneosgame"
+    let ref = getQueryString('ref')
+    if (!ref) {
+       ref = "lemoneosgame"
     }
     var num = new Number(amount);
     let multiple = num.toFixed(0);
@@ -48,8 +48,8 @@ export const transfer = async (amount = 1, memo, tokenSymbol = 'EOS') =>{
     if (multiple > 10) {
         multiple = 10;
     }
-    memo = memo +";"+ multiple
-    return  eos().transfer(account_name, CONTRACT_NAME, toAsset(amount, tokenSymbol), memo).then(result => {
+    let memo = beilv + ";" + ref + ";"+ multiple;
+    return  eos().transfer(account_name, CONTRACT_NAME, toAsset(amount, 'EOS'), memo).then(result => {
         return {
             is_error:false,
             result
@@ -69,15 +69,24 @@ export const transfer = async (amount = 1, memo, tokenSymbol = 'EOS') =>{
  *  @param tokensymbol token的符号缩写
  * 
  */
-export const recast = async (quantity = 1, memo ='referrer',tokenSymbol = 'EOS')=>{
+export const recast = async (quantity = 1, beilv)=>{
     const account_name = currentGetters().account.name
      if (!quantity) {
          alert("请输入投注数量")
      }
-     memo = getQueryString('ref')
-     if (!memo) {
-        memo = "lemoneosgame"
+     let ref = getQueryString('ref')
+     if (!ref) {
+        ref = "lemoneosgame"
      }
+     var num = new Number(quantity);
+     let multiple = num.toFixed(0);
+     if (multiple < 1) {
+         alert("投注必须大于1 EOS")
+     }
+     if (multiple > 10) {
+         multiple = 10;
+     }
+     let memo = beilv + ";" + ref + ";"+ multiple;
     return eos().transaction({
         actions: [
             {
@@ -89,7 +98,7 @@ export const recast = async (quantity = 1, memo ='referrer',tokenSymbol = 'EOS')
                 }],
                 data: {
                     account: account_name,  // 用户自己的账户
-                    quantity: toAsset(quantity, tokenSymbol),
+                    quantity: toAsset(quantity, 'EOS'),
                     memo: memo
                 }
             }

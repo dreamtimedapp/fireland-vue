@@ -218,9 +218,9 @@ export default new vuex.Store({
             }
           })
         },
-        async buyLand({commit,dispatch},amount = 1, memo, tokenSymbol = 'EOS') {
-  
-          let result = await transfer(amount,memo,tokenSymbol)
+        async buyLand({commit,dispatch},data) {
+          debugger
+          let result = await transfer(data[0],data[1])
           if (result.is_error) {
             alert(JSON.stringify(result.msg))
           } else {
@@ -243,8 +243,8 @@ export default new vuex.Store({
             alert('卖出1块土地成功')
           }
         },
-        async recastLand({commit,dispatch},amount = 1, memo = '我的土地我做主', tokenSymbol = 'EOS') {
-           let result = await recast(amount,memo,tokenSymbol)
+        async recastLand({commit,dispatch},data) {
+           let result = await recast(amount,data[0],data[1])
            if (result.is_error) {
               alert(JSON.stringify(result.msg))
            } else{
