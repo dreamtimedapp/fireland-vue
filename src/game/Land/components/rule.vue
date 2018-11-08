@@ -9,7 +9,7 @@
                   </el-table-column>
                   <el-table-column prop="player" label="玩家">
                   </el-table-column>
-                  <el-table-column prop="amount" label="金额" >
+                  <el-table-column prop="amount" label="当前赢得金额" >
                   </el-table-column>
                   <el-table-column prop="type" label="投注情况" >
                     <template slot-scope="scope">

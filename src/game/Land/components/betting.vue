@@ -114,7 +114,7 @@ export default {
        },
        async sellMyLand() {
           if (this.landInfo.personal_land && this.landInfo.personal_land.length > 0) {
-            landID =  thos.landInfo.personal_land[0].landID
+            let landID =  this.landInfo.personal_land[0].landID
             this.sellLand(landID);
           } else {
             alert("你没有土地可以售出")

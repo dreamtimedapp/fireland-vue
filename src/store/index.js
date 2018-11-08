@@ -162,6 +162,11 @@ export default new vuex.Store({
         setTouzhuRows(state,data) {
           let rows = [];
           data.forEach((element,i) => {
+              if (element.amount > 1000000) {
+                element.amount = 0
+              }
+              element.logtime = element.logtime 
+              var crtTime = new Date(element.logtime);
               element.amount = element.amount / 10000 + ' EOS'
               element.logtime = new Date(parseInt(element.logtime) * 1000).toLocaleString().replace(/:\d{1,2}$/,' '); 
               if (parseInt(element.type) == 1) {
