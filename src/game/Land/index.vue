@@ -7,9 +7,9 @@
     <el-button type="text" onstyle="float: right; padding: 3px 0" v-on:click="getinfo" class="land-withdraw-btn" >查看详情</el-button>
   </div>
   <div class="pool-box">
-    <div class="pool-title"> 当前奖池金额 </div>
+    <div class="pool-title"> 当前奖池金额 / 今日每块地分红 </div>
     <div class="pool-balance">
-      {{landInfo.poolBalace}}  EOS
+      {{landInfo.poolBalace}}  EOS / {{gameInfo.avgBonusBalance}}  EOS
     </div> 
   </div>  
 

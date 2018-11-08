@@ -4,11 +4,12 @@ Vue.use(vuex);
 import Eos from 'eosjs'
 import { network } from '../config'
 import { getMyBalancesByContract, getLenTokenInfo,sellLen,
-  getGameInfoList,getLandInfo,transfer,getPlayerList,get_touzhu_info,recast,withdraw,sellMyLand} from '../blockchain'
+  getGameInfoList,getLandInfo,transfer,getPlayerList,get_touzhu_info,recast,withdraw,sellMyLand,get_fenhong_info} from '../blockchain'
 
 import axios from 'axios'
 import qs from 'qs';
 import { debug } from 'util';
+import { stat } from 'fs';
 
 export default new vuex.Store({
     state: {
@@ -42,7 +43,8 @@ export default new vuex.Store({
         gameInfo : {
           gameCount :0,
           gameState: 0,
-          gameMessage:''
+          gameMessage:'',
+          avgBonusBalance:0
         }
     },
     getters: {
@@ -73,6 +75,10 @@ export default new vuex.Store({
           state.lenInfo.max_supply = len.max_supply
           state.lenInfo.price = len.price 
           state.lenInfo.cash_pool = len.cash_pool 
+        },
+        setFenhongRows(state,data) {
+          let fenhong = data[0]
+          state.gameInfo.avgBonusBalance = fenhong.avgBonusBalance / 10000
         },
         setGlobal (state, globalInfo) {
           state.globalInfo = globalInfo
@@ -197,6 +203,7 @@ export default new vuex.Store({
           dispatch('setTokenInfo')
           debugger
           dispatch('getGameBalance')
+          dispatch('getFenHongInfo')
         },
         sellToken({commit,dispatch},quantity ) {
           sellLen(quantity).then((result)=>{
@@ -204,6 +211,7 @@ export default new vuex.Store({
               alert('兑换成功')
               dispatch('updateBalance')
               dispatch('setTokenInfo')
+              dispatch('getFenHongInfo')
             }
           })
         },
@@ -216,6 +224,7 @@ export default new vuex.Store({
             dispatch('getGameBalance')
             dispatch('getTouzhuInfo')
             dispatch('setLandInfo')
+            dispatch('getFenHongInfo')
             alert('下注成功！')
           }
         },
@@ -227,6 +236,7 @@ export default new vuex.Store({
             dispatch('getGameBalance')
             dispatch('getTouzhuInfo')
             dispatch('setLandInfo')
+            dispatch('getFenHongInfo')
             alert('卖出1块土地成功')
           }
         },
@@ -238,6 +248,7 @@ export default new vuex.Store({
             dispatch('getGameBalance')
             dispatch('getTouzhuInfo')
             dispatch('setLandInfo')
+            dispatch('getFenHongInfo')
             alert('下注成功！')
            }
         },
@@ -252,7 +263,6 @@ export default new vuex.Store({
         },
          //获取玩家的信息
         async getGameBalance({commit,dispatch},account_name){
-          debugger
            let res = await getPlayerList()
            if (res.is_error) {
                return;
@@ -270,6 +280,16 @@ export default new vuex.Store({
             }
             let touzhurows = res.data.rows
             commit('setTouzhuRows',touzhurows);
+       },
+       async getFenHongInfo({commit,dispatch}) {
+         debugger
+            let res = await get_fenhong_info()
+            if (res.is_error) {
+              return;
+            } 
+            let fenhongros = res.data.rows
+            debugger
+            commit('setFenhongRows',fenhongros);
        },
         async setLandInfo({commit,dispatch}) {
 

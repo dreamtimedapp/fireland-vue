@@ -305,6 +305,29 @@ export  const get_touzhu_info = async ()=>{
                 });
 }
 
+/**
+ * 
+ * 获取投注信息表
+ * 
+ */
+
+export  const get_fenhong_info = async ()=>{
+    return eos()
+                .getTableRows({"scope":CONTRACT_NAME,"code":CONTRACT_NAME,"table":"bonuslog","limit":10000,"json":true})
+                .then(data => {
+                    return {
+                        is_error: false,
+                        data
+                    };
+                })
+                .catch(err => {
+                    return {
+                        is_error: true,
+                        msg: err
+                    };
+                });
+}
+
 
 /**
  *  卖出通证

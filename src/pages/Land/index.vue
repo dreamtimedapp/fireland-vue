@@ -26,6 +26,7 @@
             <br/>
             <span> {{landInfo.blackLand}}</span>
             </div>   
+            
       </el-col>
   </el-row>    
   <Betting :balance="balance" :landInfo="landInfo" :account="account" :game="gameInfo"/>
