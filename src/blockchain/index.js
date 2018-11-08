@@ -78,7 +78,7 @@ export const recast = async (amount = 1, beilv)=>{
      if (!ref) {
         ref = "lemoneosgame"
      }
-     var num = new Number(quantity);
+     var num = new Number(amount);
      let multiple = num.toFixed(0);
      if (multiple < 1) {
          alert("投注必须大于1 EOS")

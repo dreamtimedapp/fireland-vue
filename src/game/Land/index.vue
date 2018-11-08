@@ -7,7 +7,7 @@
     <el-button type="text" onstyle="float: right; padding: 3px 0" v-on:click="getinfo" class="land-withdraw-btn" >查看详情</el-button>
   </div>
   <div class="pool-emperor">
-    <div class="pool-emperor-title"> 今日地王，独享666 LEN奖励 </div>
+    <div class="pool-emperor-title"> 地王独享666 LEN奖励 </div>
     <div class="pool-emperor-balance">
      <div class="pool-today-emperor"> 今日地王：{{landInfo.emperor.account}}，拥有国土{{landInfo.emperor.num}}万公里 </div>
      <div class="pool-manifesto"><span>竞选宣言：</span> 爱妃，这是朕给你打下来的江山！</div>
