@@ -103,7 +103,7 @@ export default {
              beilv = this.amount
            }
            let origin = value;
-           value = ( 0.98 / (value / 100)).toFixed(2) * beilv; 
+           value = ( 0.98 / (value / 100)) * beilv; 
            return "胜率"+origin+"%,赢:"+ value.toFixed(4) + "的奖励"
        },
        async playBetting() {  
@@ -216,7 +216,7 @@ export default {
     flex-direction: column;
     color: #333;
     font-size: 12px;
-    padding-right: 20px;
+    width: 100%;
     margin-top: 12px;
 
 }

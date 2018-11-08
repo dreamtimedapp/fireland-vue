@@ -13,6 +13,30 @@ const toBigNumber = asset => {
   }
 };
 
+export const getMax = (landlist)=> {
+  let map = new Map();
+  for (var i =0; i< landlist.length;i++) {
+    if (map.has(landlist[i].owner)) {
+      let num = map.get(landlist[i].owner);
+      map.set(landlist[i].owner, num +1);
+    } else {
+      map.set(landlist[i].owner, 1)
+    }
+  }
+  let max = 1;
+  let account = "";
+  map.forEach((value,key)=>{
+    if (value > max) {
+       account = key;
+       max = value;
+    } 
+  })
+  return {
+    "account":account,
+    "num":max
+  }
+}
+
 
 
 export const  getQueryString =(name)=> {

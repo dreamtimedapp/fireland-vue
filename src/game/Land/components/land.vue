@@ -209,7 +209,7 @@ export default {
     flex-direction: column;
     max-width: 100%;
     z-index: unset;
-    background-color: #959dae;
+   
   }
   #land .land-list.inner-rect {
     position: absolute;

@@ -6,6 +6,13 @@
   <div class="ad_title">赢取LEN，永不折价的TOKEN！
     <el-button type="text" onstyle="float: right; padding: 3px 0" v-on:click="getinfo" class="land-withdraw-btn" >查看详情</el-button>
   </div>
+  <div class="pool-emperor">
+    <div class="pool-emperor-title"> 今日地王，独享666 LEN奖励 </div>
+    <div class="pool-emperor-balance">
+     <div class="pool-today-emperor"> 今日地王：{{landInfo.emperor.account}}，拥有国土{{landInfo.emperor.num}}万公里 </div>
+     <div class="pool-manifesto"><span>竞选宣言：</span> 爱妃，这是朕给你打下来的江山！</div>
+    </div> 
+  </div>  
   <div class="pool-box">
     <div class="pool-title"> 当前奖池金额 /  今日每块地分红 / 累积分红 </div>
     <div class="pool-balance">
@@ -149,6 +156,13 @@ export default {
 
 <style  scoped>
 
+.pool-today-emperor {
+  font-size: 24px;
+}
+.pool-manifesto {
+  font-size: 20px;
+}
+
 .main-body {
    background: #6e7a92;
    width: 100%;
@@ -188,8 +202,10 @@ export default {
 .pool-box {
    height: 130px;
    width: 670px;
+   margin-top: 20px;
    border-radius: 15px;
    justify-content: center;
+  
    box-shadow: 5px 5px 2px #6e7a92;
 }
 .pool-title {
@@ -217,6 +233,47 @@ export default {
   border-width: 1px;
   font-weight: bold;
   box-shadow:3px 3px 3px #6e7a92 inset;     
+  font-size: 28px;
+}
+
+.pool-emperor {
+   height: 130px;
+   width: 670px;
+   border-radius: 15px;
+   justify-content: center;
+   text-align: center;
+   display: flex;
+   flex-direction: column;
+   box-shadow: 5px 5px 2px #F56C6C;
+   
+}
+.pool-emperor-title {
+  width: 670px;
+  font-size: 22px;
+  color: #ffffff;
+  text-align: center;
+  background-color: #F56C6C;
+  text-align: center;
+  
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+.pool-emperor-balance {
+  color: #6e7a92;
+  text-align: center;
+  background-color: #f2f2f2;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  display: flex;
+  height: 90px;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+  border-color: #F56C6C;
+  border-style: solid;
+  border-width: 1px;
+  font-weight: bold;
+  box-shadow:3px 3px 3px #F56C6C inset;     
   font-size: 28px;
 }
 .land-intro {

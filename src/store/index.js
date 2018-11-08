@@ -3,6 +3,7 @@ import vuex from 'vuex'
 Vue.use(vuex);
 import Eos from 'eosjs'
 import { network } from '../config'
+import {getMax} from '../utils/utils'
 import { getMyBalancesByContract, getLenTokenInfo,sellLen,
   getGameInfoList,getLandInfo,transfer,getPlayerList,get_touzhu_info,recast,withdraw,sellMyLand,get_fenhong_info} from '../blockchain'
 
@@ -39,6 +40,10 @@ export default new vuex.Store({
           touzhuRows:[],
           game_balance:0,
           blackLandArray:[],
+          emperor: {
+            "account":"",
+            "num":0
+          }
         },
         gameInfo : {
           gameCount :0,
@@ -87,10 +92,12 @@ export default new vuex.Store({
         setLandInfo(state,data) {
 
           state.landInfo.personal_land = []
-            state.landInfo.current_landlist = []
+            state.landInfo .current_landlist = []
 
             let landrows = data.land;
-
+          
+            state.landInfo.emperor = getMax(landrows)
+          
             landrows.forEach((element,i) => {
     
                 if (element.roundNum != state.landInfo.roundNum){
@@ -102,7 +109,7 @@ export default new vuex.Store({
                 state.landInfo.current_landlist.push(element)
             });
             state.landInfo.landNum = state.landInfo.personal_land.length;
-            let oneLand =(state.landInfo.poolBalace / 2.0 ) / state.landInfo.current_landlist.length;
+            let oneLand =(state.landInfo.poolBalace / 3.0 ) / state.landInfo.current_landlist.length;
             state.gameInfo.todayBonus = oneLand.toFixed(2)
         },
         setGameInfo(state,info) {
