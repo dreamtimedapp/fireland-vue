@@ -28,9 +28,13 @@
                      <el-button type="text" onstyle="float: right; padding: 3px 0" v-on:click="sellMyLand" class="land-withdraw-btn">卖出</el-button>
                 </div>
                 <div class="land-account-withdraw">
-                    <span>游戏内：</span>
+                    <span>游戏内余额：</span>
                     <span class="item-value"> {{landInfo.game_balance}} EOS  </span>
                     <el-button  type="text" onstyle="float: right; padding: 3px 0" v-on:click="withdraw" class="land-withdraw-btn">提现</el-button>
+                </div>
+                <div class="land-account-withdraw">
+                    <span>累积下注总额：</span>
+                    <span class="item-value"> {{landInfo.accTotal}} EOS  </span>
                 </div>
                 <div class="land-account-invite">
                     <span>邀请链接：</span>

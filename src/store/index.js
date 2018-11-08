@@ -40,6 +40,7 @@ export default new vuex.Store({
           touzhuRows:[],
           game_balance:0,
           blackLandArray:[],
+          accTotal:0,
           emperor: {
             "account":"",
             "num":0
@@ -110,7 +111,8 @@ export default new vuex.Store({
             });
             state.landInfo.landNum = state.landInfo.personal_land.length;
             let oneLand =(state.landInfo.poolBalace / 3.0 ) / state.landInfo.current_landlist.length;
-            state.gameInfo.todayBonus = oneLand.toFixed(2)
+            state.gameInfo.todayBonus = oneLand.toFixed(2);
+            
         },
         setGameInfo(state,info) {
           let currentTime = Date.parse(new Date());
@@ -143,6 +145,7 @@ export default new vuex.Store({
               state.gameInfo.gameState = 2;
           }
           state.landInfo.poolBalace = info.potBalance /  10000 
+          state.landInfo.accTotal = info.accTotal / 10000
           if (state.gameInfo.gameState == 0) {
             state.gameInfo.gameMessage = "距离游戏开始还有："
           } else if (state.gameInfo.gameState == 1) {
