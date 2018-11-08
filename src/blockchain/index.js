@@ -69,9 +69,9 @@ export const transfer = async (amount = 1, beilv) =>{
  *  @param tokensymbol token的符号缩写
  * 
  */
-export const recast = async (quantity = 1, beilv)=>{
+export const recast = async (amount = 1, beilv)=>{
     const account_name = currentGetters().account.name
-     if (!quantity) {
+     if (!amount) {
          alert("请输入投注数量")
      }
      let ref = getQueryString('ref')
@@ -98,7 +98,7 @@ export const recast = async (quantity = 1, beilv)=>{
                 }],
                 data: {
                     account: account_name,  // 用户自己的账户
-                    quantity: toAsset(quantity, 'EOS'),
+                    quantity: toAsset(amount, 'EOS'),
                     memo: memo
                 }
             }

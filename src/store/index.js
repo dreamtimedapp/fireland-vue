@@ -244,7 +244,7 @@ export default new vuex.Store({
           }
         },
         async recastLand({commit,dispatch},data) {
-           let result = await recast(amount,data[0],data[1])
+           let result = await recast(data[0],data[1])
            if (result.is_error) {
               alert(JSON.stringify(result.msg))
            } else{
