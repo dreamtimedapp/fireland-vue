@@ -162,8 +162,8 @@ export default {
 
 .betting-wakuang {
     color: #333;
-    font-size: 14px;
-    padding-left: 20px;
+    font-size: 24px;
+   
 
 }
 .demonstration {
@@ -216,7 +216,7 @@ export default {
     flex-direction: column;
     color: #333;
     font-size: 12px;
-    width: 100%;
+    width: 660px;
     margin-top: 12px;
 
 }

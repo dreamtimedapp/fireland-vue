@@ -5,7 +5,9 @@
                     投注风云榜
                 </h3>    
               <el-table  :default-sort = "{prop: 'logtime', order: 'descending'}" class="bet-table" :data="landInfo.touzhuRows" >
-                  <el-table-column prop="logtime" label="时间">
+                  <el-table-column 
+                  sortable
+                  prop="logtime" label="时间">
                   </el-table-column>
                   <el-table-column prop="player" label="玩家">
                   </el-table-column>
@@ -22,6 +24,7 @@
 </template>
 <script>
 import store from '../../../store'
+import {formatDate} from '../../../utils/utils.js'
 const rule = "## 游戏介绍\n" +
                 "### 玩法\n" +
                 "* 游戏板块为20×20的地图，每一格代表一块地皮，每块地皮初始定价0.5eos，其中有2块为黑地皮没定价（作用下面解析）；\n" +
@@ -48,7 +51,10 @@ export default {
       }
     },
     methods: {
-
+      formatter(row, column) {
+          debugger
+        return formatDate(row.logtime);
+      }
     }
 }
 </script>

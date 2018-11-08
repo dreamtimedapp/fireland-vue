@@ -7,14 +7,14 @@
     <el-button type="text" onstyle="float: right; padding: 3px 0" v-on:click="getinfo" class="land-withdraw-btn" >查看详情</el-button>
   </div>
   <div class="pool-emperor">
-    <div class="pool-emperor-title"> 地王独享666 LEN奖励 </div>
+    <div class="pool-emperor-title"> 地王独享666 LEN奖励 (24点快照)</div>
     <div class="pool-emperor-balance">
      <div class="pool-today-emperor"> 今日地王：{{landInfo.emperor.account}}，拥有国土{{landInfo.emperor.num}}万公里 </div>
      <div class="pool-manifesto"><span>竞选宣言：</span> 爱妃，这是朕给你打下来的江山！</div>
     </div> 
   </div>  
   <div class="pool-box">
-    <div class="pool-title"> 当前奖池金额 /  今日每块地分红 / 累积分红 </div>
+    <div class="pool-title"> 当前奖池金额 /  今日每块地分红（21点快照） / 累积分红 </div>
     <div class="pool-balance">
       {{landInfo.poolBalace}}EOS/ {{gameInfo.todayBonus}}EOS /  42.99EOS
     </div> 
@@ -41,7 +41,7 @@
        所有土地永久售价1 EOS，每次买入玩家可以自由选择成功率，最低0.1，最高0.95。
        买入成功将获取奖励，并占有土地，例如 0.1胜率, 1 EOS 成功将立即获取8.85 EOS奖励，并持有土地。
        0.7%资金进入LEN池（0.35%增发归用户所有，0.35%增值LEN池），0.2%团队开发资金，0.1%推荐人奖励。
-       每天24点按持有土地数量进行分红（分得资金池的 1/3 ）。
+       每天21点按持有土地数量进行分红（分得当前资金池的 1/3 ）。
        用户可向系统卖出自己持有的地块，每块地块系统将向其返还0.5EOS，即扣除一半手续费。
      </div>    
   </div>  

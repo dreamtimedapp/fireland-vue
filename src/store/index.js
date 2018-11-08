@@ -3,7 +3,7 @@ import vuex from 'vuex'
 Vue.use(vuex);
 import Eos from 'eosjs'
 import { network } from '../config'
-import {getMax} from '../utils/utils'
+import {getMax,formatDate} from '../utils/utils'
 import { getMyBalancesByContract, getLenTokenInfo,sellLen,
   getGameInfoList,getLandInfo,transfer,getPlayerList,get_touzhu_info,recast,withdraw,sellMyLand,get_fenhong_info} from '../blockchain'
 
@@ -165,8 +165,7 @@ export default new vuex.Store({
               if (element.amount > 1000000) {
                 element.amount = 0
               }
-              element.logtime = element.logtime 
-              var crtTime = new Date(element.logtime);
+             
               element.amount = element.amount / 10000 + ' EOS'
               element.logtime = new Date(parseInt(element.logtime) * 1000).toLocaleString().replace(/:\d{1,2}$/,' '); 
               if (parseInt(element.type) == 1) {
@@ -216,7 +215,6 @@ export default new vuex.Store({
           commit('setIdentity', identity)
           dispatch('updateBalance')
           dispatch('setTokenInfo')
-          debugger
           dispatch('getGameBalance')
           dispatch('getFenHongInfo')
         },
@@ -231,7 +229,6 @@ export default new vuex.Store({
           })
         },
         async buyLand({commit,dispatch},data) {
-          debugger
           let result = await transfer(data[0],data[1])
           if (result.is_error) {
             alert(JSON.stringify(result.msg))
@@ -297,13 +294,11 @@ export default new vuex.Store({
             commit('setTouzhuRows',touzhurows);
        },
        async getFenHongInfo({commit,dispatch}) {
-         debugger
             let res = await get_fenhong_info()
             if (res.is_error) {
               return;
             } 
             let fenhongros = res.data.rows
-            debugger
             commit('setFenhongRows',fenhongros);
        },
         async setLandInfo({commit,dispatch}) {
