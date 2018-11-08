@@ -38,7 +38,7 @@
                 </div>
                 <div class="land-account-invite">
                     <span>邀请链接：</span>
-                    <el-button  @click="dialogVisible = true" onstyle="float: right; padding: 3px 0" type="text">复制</el-button>
+                    <el-button  @click="dialogVisible = true" onstyle="float: right; padding: 3px 0" type="text"  class="land-withdraw-btn">复制</el-button>
                 </div>
                 <span class="land-invite-text ">邀请将永久享受好友投注的0.1%的分红</span>
               </div>  
@@ -56,7 +56,7 @@
         </el-dialog>
         <div class="betting-wakuang">
             <span>每次有效投注额，将获得投注额0.35%的LEN代币</span>
-            <el-button @click="getToken" type="text">查看详情</el-button>
+            <el-button @click="getToken" type="text"  class="land-withdraw-btn">查看详情</el-button>
         </div>
       </div> 
 </template>
@@ -112,7 +112,7 @@ export default {
        },
        async playBetting() {  
       
-        add_gamelog(this.account.name,CONTRACT_NAME,this.amount)
+        add_gamelog(this.account.name,this.amount,0,this.beilv)
         let memo = this.getRefInviteUrl()
         this.buyLand([this.amount,this.beilv]);
        },
@@ -126,7 +126,7 @@ export default {
        },
        async playrecast() {
        
-          add_gamelog(this.account.name,CONTRACT_NAME,this.amount)
+          add_gamelog(this.account.name,this.amount,1,this.beilv)
           this.recastLand([this.amount,this.beilv]);
        },
        getRefInviteUrl() {
@@ -166,10 +166,12 @@ export default {
 
 .betting-wakuang {
     color: #333;
-    font-size: 24px;
-   
-
+    font-size: 24px; 
 }
+.land-withdraw-btn {
+    font-size: 24px;
+}
+
 .demonstration {
     font-size: 20px;
 }

@@ -72,14 +72,14 @@ export const add_counter = async (player)=> {
 
 // 更新gamelog表
 
-export const add_gamelog = async (player,landID,amount,type,recast)=> {
+export const add_gamelog = async (player,amount,type,beilv)=> {
 
     let data = qs.stringify({
         'player': player,
         'landID' : landID,
         "amount" : amount,
         "type" : type,
-        "recast" : recast
+        "beilv":beilv
     })
 
     axios.post('/api/gamelog',data,{headers: { 'Content-Type': 'application/x-www-form-urlencoded' }})
