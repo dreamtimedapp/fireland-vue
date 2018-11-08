@@ -44,7 +44,8 @@ export default new vuex.Store({
           gameCount :0,
           gameState: 0,
           gameMessage:'',
-          avgBonusBalance:0
+          avgBonusBalance:0,
+          todayBonus:0
         }
     },
     getters: {
@@ -101,6 +102,8 @@ export default new vuex.Store({
                 state.landInfo.current_landlist.push(element)
             });
             state.landInfo.landNum = state.landInfo.personal_land.length;
+            let oneLand =(state.landInfo.poolBalace / 2.0 ) / state.landInfo.current_landlist.length;
+            state.gameInfo.todayBonus = oneLand.toFixed(2)
         },
         setGameInfo(state,info) {
           let currentTime = Date.parse(new Date());
