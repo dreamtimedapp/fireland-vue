@@ -99,10 +99,7 @@ export default {
             alert('请输入投注金额')
             return
         }
-         if (this.game.gameState != 1) {
-              alert('游戏还未开始，不可复投')
-              return;
-          } 
+
           if (this.amount < this.landInfo.minPrice ) {
              alert('投注金额不得低于' + this.landInfo.minPrice + 'EOS')
              return;
@@ -111,10 +108,7 @@ export default {
           this.buyLand(this.amount, this.getRefInviteUrl());
        },
        async playrecast() {
-          if (this.game.gameState != 1) {
-              alert('游戏还未开始，不可复投')
-              return;
-          } 
+      
           if (this.amount < this.landInfo.minPrice ) {
              alert('投注金额不得低于' + this.lanInfo.minPrice.minPrice + 'EOS')
              return;

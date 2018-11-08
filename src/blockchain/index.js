@@ -40,6 +40,15 @@ export const transfer = async (amount = 1, memo, tokenSymbol = 'EOS') =>{
     if (!memo) {
        memo = "lemoneosgame"
     }
+    var num = new Number(amount);
+    let multiple = num.toFixed(0);
+    if (multiple < 1) {
+        alert("投注必须大于1 EOS")
+    }
+    if (multiple > 10) {
+        multiple = 10;
+    }
+    memo = memo +";"+ multiple
     return  eos().transfer(account_name, CONTRACT_NAME, toAsset(amount, tokenSymbol), memo).then(result => {
         return {
             is_error:false,

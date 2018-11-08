@@ -9,6 +9,17 @@
                     <el-input  class="balance-input"   :placeholder="'最低投注:' + this.landInfo.minPrice + ' EOS'"  v-model="amount">
                        <template slot="append">eos</template>
                     </el-input>
+                    <!--
+                     <div class="block">
+                       <span class="demonstration">选择胜率，默认95%，即投注95%概率成功</span>
+                       <el-slider
+                          v-model="beilv"
+                          :step="17"
+                          :min="10"
+                          :max="95"
+                          show-stops>
+                      </el-slider>
+                     </div>-->
                     <el-button class="land-betting-btn"  v-on:click="playrecast" type="info">复投</el-button>
                     <span></span>
                     <el-button class="land-betting-btn"  v-on:click="playBetting" type="danger">下注</el-button>
@@ -75,7 +86,8 @@ export default {
           memo: '',
           dialogVisible:false,
           dialogDetail: false,
-          amountHolder:''
+          amountHolder:'',
+          beilv:95
       }
     },
     computed: {
@@ -96,7 +108,6 @@ export default {
             alert('请输入投注金额')
             return
         }
-        
         if (this.amount < 1 ) {
             alert('投注金额不得低于 1 EOS')
             return;
@@ -150,6 +161,9 @@ export default {
     color: #333;
     font-size: 14px;
     padding-left: 20px;
+}
+.demonstration {
+    font-size: 20px;
 }
 
 .betting-title-jump-area {
