@@ -8,8 +8,8 @@
                     <el-input  class="balance-input"   :placeholder="'最低投注:1 EOS，10 EOS即一次性买10块'"  v-model="amount">
                        <template slot="append">eos</template>
                     </el-input>
-                     <vue-slider :min="10"
-                          :max="95" v-model="beilv" class="land-bet-slider"></vue-slider>
+                     <vue-slider :min="10" 
+                          :max="95" v-model="beilv" :dotSize="10"   :value="beilv" :formatter='format' class="land-bet-slider"></vue-slider>
                     <el-button class="land-betting-btn"  v-on:click="playrecast" type="info">复投</el-button>
                     <span></span>
                     <el-button class="land-betting-btn"  v-on:click="playBetting" type="danger">下注</el-button>
@@ -36,7 +36,7 @@
                     <span>邀请链接：</span>
                     <el-button  @click="dialogVisible = true" onstyle="float: right; padding: 3px 0" type="text">复制</el-button>
                 </div>
-                <span class="land-invite-text ">邀请将永久享受好友投注的0.4%的分红</span>
+                <span class="land-invite-text ">邀请将永久享受好友投注的0.1%的分红</span>
               </div>  
               </el-tab-pane>
            </el-tabs>  
@@ -51,7 +51,7 @@
            </span>
         </el-dialog>
         <div class="betting-wakuang">
-            <span>每次有效投注额，将获得投注额0.5%的LEN代币</span>
+            <span>每次有效投注额，将获得投注额0.35%的LEN代币</span>
             <el-button @click="getToken" type="text">查看详情</el-button>
         </div>
       </div> 
@@ -92,20 +92,24 @@ export default {
     methods: {
        ...mapActions(['buyLand','withdraw','recastLand','sellLand']),
        getToken() {
-          alert('每次有效投注的1%用于资金池，其中0.5%用于提高币价，0.5%用于增发token送给投资者')
+          alert('每次有效投注的0.7%用于资金池，其中0.35%用于提高币价，0.35%用于增发token送给投资者')
+       },
+       format (value) {
+           if (!value) {
+               value = 1
+           }
+           let beilv = 1;
+           if (this.amount) {
+             beilv = this.amount
+           }
+           value = ( 0.98 / (value / 100)).toFixed(2) * beilv; 
+           return "将赢:"+ value.toFixed(4) + "的奖励"
        },
        async playBetting() {  
-        if (!this.amount) {
-            alert('请输入投注金额')
-            return
-        }
-        if (this.amount < 1 ) {
-            alert('投注金额不得低于 1 EOS')
-            return;
-        } 
+      
         add_gamelog(this.account.name,CONTRACT_NAME,this.amount)
         let memo = this.getRefInviteUrl()
-        this.buyLand([this.amount,this.beilv/100]);
+        this.buyLand([this.amount,this.beilv]);
        },
        async sellMyLand() {
           if (this.landInfo.personal_land && this.landInfo.personal_land.length > 0) {
@@ -116,12 +120,9 @@ export default {
           }
        },
        async playrecast() {
-          if (this.amount < 1 ) {
-             alert('投注金额不得低于 1 EOS')
-             return;
-          } 
+       
           add_gamelog(this.account.name,CONTRACT_NAME,this.amount)
-          this.recastLand([this.amount,this.beilv / 100]);
+          this.recastLand([this.amount,this.beilv]);
        },
        getRefInviteUrl() {
            if (getQueryString("ref")) {
@@ -150,12 +151,19 @@ export default {
 <style>
 .land-bet-slider {
     margin-top: 50px;
-    
+    width: 90%;
+    padding-left: 40px;
+    padding-right: 20px;
+    margin-left: 30px;
+    margin-right: 20px;
+  
 }
+
 .betting-wakuang {
     color: #333;
     font-size: 14px;
     padding-left: 20px;
+
 }
 .demonstration {
     font-size: 20px;

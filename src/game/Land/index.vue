@@ -31,11 +31,11 @@
        —— 永续合约 ——
      </div>
      <div class="land-info-sub-title">
-       所有土地永久售价1 EOS，每次买入30%失败，70%成功。
-       1%资金进入LEN池（0.5%增发归用户所有，0.5%增值LEN池），0.6%团队开发资金，0.4%推荐人奖励。
-       买入成功即可获取0.3EOS奖励及成为该地块持有者，原地块持有者获取1EOS出场。
-       买入失败资金将进入资金池，每天24点按持有土地数量进行分红（分得资金池的一半）。
-       用户可向系统卖出自己持有的地块，每块地块系统将向其返还0.5EOS。
+       所有土地永久售价1 EOS，每次买入玩家可以自由选择成功率，最低0.1，最高0.95。
+       买入成功将获取奖励，并占有土地，例如 0.1胜率, 1 EOS 成功将立即获取8.85 EOS奖励，并持有土地。
+       0.7%资金进入LEN池（0.35%增发归用户所有，0.35%增值LEN池），0.2%团队开发资金，0.1%推荐人奖励。
+       每天24点按持有土地数量进行分红（分得资金池的 1/3 ）。
+       用户可向系统卖出自己持有的地块，每块地块系统将向其返还0.5EOS，即扣除一半手续费。
      </div>    
   </div>  
 
@@ -221,13 +221,14 @@ export default {
 }
 .land-intro {
   background-color: #4d5667;
-  height: 300px;
+  height: 345px;
   width: 730px;
   margin-top: 20px;
   border-radius: 15px;
 }
 .land-info-title {
   font-size: 30px;
+  margin-top: 15px;
   color: #ffffff;
   font-weight: bold;
   text-align: center;

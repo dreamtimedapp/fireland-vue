@@ -34,7 +34,7 @@ export function getLenTokenInfo() {
 export const transfer = async (amount = 1, beilv) =>{
     const account_name = currentGetters().account.name
     if (!amount) {
-        alert("请输入投注数量")
+        amount = 1;
     }
     let ref = getQueryString('ref')
     if (!ref) {
@@ -72,7 +72,7 @@ export const transfer = async (amount = 1, beilv) =>{
 export const recast = async (amount = 1, beilv)=>{
     const account_name = currentGetters().account.name
      if (!amount) {
-         alert("请输入投注数量")
+        amount =1;
      }
      let ref = getQueryString('ref')
      if (!ref) {

@@ -96,7 +96,7 @@ export default new vuex.Store({
                 if (element.roundNum != state.landInfo.roundNum){
                   //  return;
                 }
-                if (element.owner == state.account_name) {
+                if (element.owner == 'jackma111111') {
                    state.landInfo.personal_land.push(element)
                 }
                 state.landInfo.current_landlist.push(element)
