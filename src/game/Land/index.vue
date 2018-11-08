@@ -9,7 +9,7 @@
   <div class="pool-box">
     <div class="pool-title"> 当前奖池金额 /  今日每块地分红 / 累积分红 </div>
     <div class="pool-balance">
-      {{landInfo.poolBalace}}EOS/ {{gameInfo.todayBonus}}EOS /  20.6EOS
+      {{landInfo.poolBalace}}EOS/ {{gameInfo.todayBonus}}EOS /  42.99EOS
     </div> 
   </div>  
 
