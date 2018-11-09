@@ -111,7 +111,7 @@ export default new vuex.Store({
             });
             state.landInfo.landNum = state.landInfo.personal_land.length;
             let oneLand =(state.landInfo.poolBalace / 3.0 ) / state.landInfo.current_landlist.length;
-            state.gameInfo.todayBonus = oneLand.toFixed(2);
+            state.gameInfo.todayBonus = oneLand.toFixed(4);
             
         },
         setGameInfo(state,info) {
