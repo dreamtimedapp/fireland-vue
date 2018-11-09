@@ -9,7 +9,7 @@
                        <template slot="append">eos</template>
                     </el-input>
                      <vue-slider :min="10" 
-                          :max="95" v-model="beilv" :dotSize="10"   :value="beilv" :formatter='format' class="land-bet-slider"></vue-slider>
+                          :max="max" v-model="beilv" :dotSize="10"   :value="beilv" :formatter='format' class="land-bet-slider"></vue-slider>
                     <el-button class="land-betting-btn"  v-on:click="playrecast" type="info">复投</el-button>
                     <span></span>
                     <el-button class="land-betting-btn"  v-on:click="playBetting" type="danger">下注</el-button>
@@ -64,7 +64,7 @@
 
 import { add_gamelog,get_game_log} from '../../../services/get_data_service.js';
 import {CONTRACT_NAME} from '../../../config/config.js'
-import {getQueryString} from '../../../utils/utils.js'
+import {getQueryString,timeRange} from '../../../utils/utils.js'
 import store from '../../../store'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import vueSlider from 'vue-slider-component';
@@ -81,7 +81,7 @@ export default {
           dialogDetail: false,
           amountHolder:'',
           beilv:85,
-          
+          max:70,
           activeName:"first"
       }
     },
@@ -90,9 +90,9 @@ export default {
          return 'EOS 国土无双，我的土地我称雄，邀请好友享受永久分红，专属邀请链接：' + this.getPersonalInviteUrl() 
       }
     },
-    mounted: function() { 
+    mounted: function() {
     
-    },
+   },
     methods: {
        ...mapActions(['buyLand','withdraw','recastLand','sellLand']),
        getToken() {

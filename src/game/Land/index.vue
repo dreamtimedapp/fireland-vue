@@ -48,6 +48,7 @@
        0.7%资金进入LEN池（0.35%增发归用户所有，0.35%增值LEN池），0.2%团队开发资金，0.1%推荐人奖励。
        每天21点按持有土地数量进行分红（分得当前资金池的 1/3 ）。
        用户可向系统卖出自己持有的地块，每块地块系统将向其返还0.5EOS，即扣除一半手续费。
+       为保护土地持有者利益，20:30 至 20:55，最大成功概率为70%，20:55至21:00最大概率为50%
      </div>    
   </div>  
 
@@ -147,7 +148,7 @@ export default {
     },
     getPersonalInviteUrl() {
       if (this.account) {
-         return "http://www.lemonfun.io/#/?ref=" + this.account.name;
+         return "http://www.lemonfun.io/#/game/land?ref=" + this.account.name;
       }
     },
     
