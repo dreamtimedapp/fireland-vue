@@ -54,7 +54,7 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 import store from '../../store'
 const rule = 
              "1.发行量1000万，对标资金蓄池；\n " +
-                "2.token价格由资金蓄池金额和释放量决定：token价格＝资金蓄池eos额÷token总释放量；token的价格将随资金池增大线性增长。token按照游戏投注的9%，其中4.5%用于增发，4.5%用于增值。卖出token，则供应量减少，从而保障长期持有者的利益。\n" +
+                "2.token价格由资金蓄池金额和释放量决定：token价格＝资金蓄池eos额÷token总释放量；token的价格将随资金池增大线性增长。\n" +
                 "3.初始发行价0.001eos一个，团队存入1000eos，意味着token价格最低不低于0.001Eos。\n" +
                 "4.LEN获取增发只能来源于游戏，增发的token归游戏玩家所有(具体请参考游戏规则)；\n" +
                 "5.LEN卖出收取10%手续费，手续费将即时存入资金蓄池（不增发LEN），增值币价。（后期将根据情况进行限时减免手续活动）\n" +
