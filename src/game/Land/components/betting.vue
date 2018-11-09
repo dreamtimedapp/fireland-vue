@@ -81,7 +81,7 @@ export default {
           dialogDetail: false,
           amountHolder:'',
           beilv:85,
-          max:50,
+          max:95,
           activeName:"first"
       }
     },
