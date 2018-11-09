@@ -31,10 +31,12 @@ export const query_manifesto  = async (account) => {
 
 //更新誓言
 export const update_manifesto = async(account,manifesto)=> {
+    debugger
     let data = qs.stringify({
         'player': account,
         "manifesto": manifesto
     })
+    debugger
     return await axios.post('/api/manifesto',data,{headers: { 'Content-Type': 'application/x-www-form-urlencoded' }})
     .then(response => {
        return true

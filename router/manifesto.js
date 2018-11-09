@@ -33,7 +33,7 @@ router.post('/manifesto', (req, res) => {
     console.log(111111111)
     console.log(req.body.player)
     console.log(22222222)
-    Menifesto.create(req.body, (err, menifesto) => {
+    Menifesto.update({"player":req.body.player}, {$set: {menifesto: req.body.menifesto}}, {multi: true}, (err, menifesto) => {
       if (err) {
         res.json(err)
       } else {
