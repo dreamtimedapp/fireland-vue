@@ -107,7 +107,7 @@ export const add_gamelog = async (player,amount,type,beilv)=> {
 
     let data = qs.stringify({
         'player': player,
-        'landID' : landID,
+
         "amount" : amount,
         "type" : type,
         "beilv":beilv
