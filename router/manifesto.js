@@ -30,9 +30,10 @@ router.get('/manifesto/:player',(req,res)=>{
 //添加签到情况
 router.post('/manifesto', (req, res) => {
     //使用Movie model上的create方法储存数据
-    console.log(req.body)
+    console.log(111111111)
     console.log(req.body.player)
-    Menifesto.update({player:player},{manifesto:req.body.menifesto}, (err, menifesto) => {
+    console.log(22222222)
+    Menifesto.update({player:req.body.player},{manifesto:req.body.menifesto}, (err, menifesto) => {
       if (err) {
         res.json(err)
       } else {
