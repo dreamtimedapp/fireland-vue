@@ -3,16 +3,21 @@
 
   <div class="main-container">
   <Header :account="account" v-on:requestId="requestId" date="2019"></Header>
-  <div class="ad_title">赢取LEN，永不折价的TOKEN！
+  <div class="ad_title">赢取LEN，永不折价的TOKEN！每日21点分红！
     <el-button type="text" onstyle="float: right; padding: 3px 0" v-on:click="getinfo" class="land-withdraw-btn" >查看详情</el-button>
   </div>
   <div class="pool-emperor">
     <div class="pool-emperor-title"> 宣言：tp + 简影 + 欢乐谷 + 2019 = 财务自由！</div>
     <div class="pool-emperor-balance">
-     <div class="pool-today-emperor"> 今日地王：{{landInfo.emperor.account}}，拥有国土{{landInfo.emperor.num}}万公里 </div>
-     <!--<div class="pool-manifesto"><span>竞选宣言：</span> tp + 简影 + 欢乐谷 + 2019 = 财务自由！</div>-->
+     <div class="pool-today-emperor"> 当前地王：{{landInfo.emperor.account}}，拥有国土{{landInfo.emperor.num}}万公里 </div>
+     <div class="pool-manifesto"> 地王独享666 LEN奖励(24点快照)</div>
     </div> 
   </div>  
+  
+   <div class="land-account-invite">
+        <span>我的邀请链接：{{getPersonalInviteUrl()}}</span>
+        <el-button  @click="doCopy" onstyle="float: right; padding: 3px 0" type="text"  class="land-withdraw-btn">复制</el-button>
+  </div>
   <div class="pool-box">
     <div class="pool-title"> 当前奖池金额 /  今日每块地分红（21点快照） / 累积分红 </div>
     <div class="pool-balance">
@@ -140,6 +145,12 @@ export default {
         console.info('User canceled to suggestNetwork')
       }
     },
+    getPersonalInviteUrl() {
+      if (this.account) {
+         return "http://www.lemonfun.io/#/?ref=" + this.account.name;
+      }
+    },
+    
     async popLandCick() {
       
     },
@@ -149,7 +160,17 @@ export default {
         name = this.account.name;
       }
       location.href="https://www.lemonfun.io/#/?ref=" + name
-    }
+    },
+     doCopy() {
+        let inviteMessage = 'EOS 国土无双，我的土地我称雄，邀请好友享受永久分红，我的邀请链接：' + this.getPersonalInviteUrl()
+        this.$copyText(inviteMessage).then(function (e) {
+          console.log(e)
+        }, function (e) {
+          alert('Can not copy')
+          console.log(e)
+        })
+        this.dialogVisible = false
+    },
   }
 }
 </script>
@@ -161,6 +182,9 @@ export default {
 }
 .pool-manifesto {
   font-size: 20px;
+}
+.land-account-invite {
+  margin-left: 14px;
 }
 
 .main-body {
