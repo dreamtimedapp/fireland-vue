@@ -10,14 +10,10 @@
     <div class="pool-emperor-title"> 宣言：tp + 简影 + 欢乐谷 + 2019 = 财务自由！</div>
     <div class="pool-emperor-balance">
      <div class="pool-today-emperor"> 当前地王：{{landInfo.emperor.account}}，拥有国土{{landInfo.emperor.num}}万公里 </div>
-     <div class="pool-manifesto"> 地王独享666 LEN奖励(24点快照)</div>
+     <div class="pool-manifesto"> 地王独享666 LEN奖励(21点快照)</div>
     </div> 
   </div>  
-  
-   <div class="land-account-invite">
-        <span>我的邀请链接：{{getPersonalInviteUrl()}}</span>
-        <el-button  @click="doCopy" onstyle="float: right; padding: 3px 0" type="text"  class="land-withdraw-btn">复制</el-button>
-  </div>
+
   <div class="pool-box">
     <div class="pool-title"> 当前奖池金额 /  今日每块地分红（21点快照） / 累积分红 </div>
     <div class="pool-balance">

@@ -13,6 +13,37 @@ export const  get_sign_all = async ()=> {
   });
 }
 
+//获取更新誓言
+
+export const query_manifesto  = async (account) => {
+    let account_name = ""
+    if (account) {
+        account_name = account;
+    }
+    return axios.get('/api/manifesto/'+account_name)
+    .then(response => {
+        return response.data;
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+}
+
+//更新誓言
+export const update_manifesto = async(account,manifesto)=> {
+    let data = qs.stringify({
+        'player': account,
+        "manifesto": manifesto
+    })
+    return await axios.post('/api/manifesto',data,{headers: { 'Content-Type': 'application/x-www-form-urlencoded' }})
+    .then(response => {
+       return true
+    })
+    .catch(function (error) {
+        return false
+    });
+}
+
 export const get_sign_from_account = async (account)=> {
    return axios.get('/api/signs/'+account)
     .then(response => {

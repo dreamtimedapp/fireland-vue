@@ -9,6 +9,7 @@ const index = require('./router/index')
 const signs = require('./router/sign')
 const counter = require('./router/counter')
 const gamelog = require('./router/gamelog')
+const manifesto = require('./router/manifesto')
 const bodyParser = require('body-parser')
 // 引入文件模块
 const fs = require('fs');
@@ -126,6 +127,7 @@ app.use('/api',signs)
 app.use('/api',counter)
 
 app.use('/api',gamelog)
+app.use('/manifesto',manifesto)
 
 app.listen(3000, (req,res) => {
 })

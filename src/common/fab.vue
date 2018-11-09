@@ -125,6 +125,7 @@ export default {
         alert("请登录后再试")
         return;
       }
+      alert("签到送LEN活动已结束")
       let alreadySign = await if_people_sign(this.account.name)
       if (alreadySign) {
         alert("今天已经签到过，请明天再来")
@@ -134,8 +135,8 @@ export default {
       if (sign)  {
           let result = await EOS_Inviter(this.account.name)
           if (!result.is_error) {
-              await EOS_Inviter(this.account.name)
-              alert("领取 LEN 成功")
+              //await EOS_Inviter(this.account.name)
+              //alert("领取 LEN 成功")
           } else {
               alert(JSON.stringify(result))
           }

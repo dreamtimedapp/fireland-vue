@@ -4,6 +4,7 @@ Vue.use(vuex);
 import Eos from 'eosjs'
 import { network } from '../config'
 import {getMax,formatDate} from '../utils/utils'
+import {update_manifesto,query_manifesto} from '../services/get_data_service';
 import { getMyBalancesByContract, getLenTokenInfo,sellLen,
   getGameInfoList,getLandInfo,transfer,getPlayerList,get_touzhu_info,recast,withdraw,sellMyLand,get_fenhong_info} from '../blockchain'
 
@@ -18,6 +19,8 @@ export default new vuex.Store({
         identity: null,
         eos: null,
         account_name:'',
+        
+        manifestoMap:new Map(),
         balance: {
           eos: '0.0000 EOS',
           len: '0.0000 LEN'
@@ -39,6 +42,7 @@ export default new vuex.Store({
           poolBalace:0,
           touzhuRows:[],
           game_balance:0,
+          manifesto:'我的土地我做主',
           blackLandArray:[],
           accTotal:0,
           emperor: {
@@ -170,6 +174,11 @@ export default new vuex.Store({
               if (element.amount > 1000000) {
                 element.amount = 0
               }
+              if (state.manifestoMap.has(element.player)) {
+                element.manifesto = state.manifestoMap.get(element.player);
+              }else {
+                element.manifesto = "天下英雄谁敌手？这是朕的江山！"
+              }
              
               element.amount = element.amount / 10000 + ' EOS'
               element.logtime = new Date(parseInt(element.logtime) * 1000).toLocaleString().replace(/:\d{1,2}$/,' '); 
@@ -290,8 +299,19 @@ export default new vuex.Store({
             }
             commit('setGameBalance',rows,account_name)
        },
-       async getTouzhuInfo({commit,dispatch}) {
+       async getTouzhuInfo({commit,dispatch,state}) {
             let res = await get_touzhu_info()
+           
+            let mani_res = await query_manifesto()
+            let map = new Map();
+            if ( mani_res && mani_res.length > 0) {
+              mani_res.forEach((element,i)=> {
+                if(mani_res.player == state.account_name) {
+                  state.landInfo.manifesto = mani_res[0].manifesto
+                }
+                state.manifestoMap.set(state.account_name,element.manifesto)
+              })
+            }
             if (res.is_error) {
              return;
             }
