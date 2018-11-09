@@ -8,7 +8,7 @@
                     <el-input  class="balance-input"   :placeholder="'最低投注:1 EOS，10 EOS即一次性买10块'"  v-model="amount">
                        <template slot="append">eos</template>
                     </el-input>
-                    <el-input  class="manifesto-input"   :placeholder="'天下英雄谁敌手？朕就是这么任性！'"  v-model="manifesto">
+                    <el-input  class="manifesto-input"   :placeholder="'天下英雄谁敌手？朕就是这么任性！'"  v-model="menifesto">
                        <template slot="prepend">占有宣言</template>
                     </el-input>
                      <vue-slider :min="10" 
@@ -115,6 +115,7 @@ export default {
            return "胜率"+origin+"%,赢:"+ value.toFixed(4) + "的奖励"
        },
        async playBetting() {  
+           debugger
         update_manifesto(this.account.name,this.manifesto);
         add_gamelog(this.account.name,this.amount,0,this.beilv)
         let memo = this.getRefInviteUrl()
