@@ -8,7 +8,7 @@
                     <el-input  class="balance-input"   :placeholder="'最低投注:1 EOS，10 EOS即一次性买10块'"  v-model="amount">
                        <template slot="append">eos</template>
                     </el-input>
-                    <el-input  class="manifesto-input"   :placeholder="'天下英雄谁敌手？朕就是这么任性！'"  v-model="menifesto">
+                    <el-input  class="manifesto-input"   :placeholder="'天下英雄谁敌手？朕就是这么任性！'"  v-model="manifesto">
                        <template slot="prepend">占有宣言</template>
                     </el-input>
                      <vue-slider :min="10" 
