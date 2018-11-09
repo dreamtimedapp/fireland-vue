@@ -7,7 +7,7 @@
     <el-button type="text" onstyle="float: right; padding: 3px 0" v-on:click="getinfo" class="land-withdraw-btn" >查看详情</el-button>
   </div>
   <div class="pool-emperor">
-    <div class="pool-emperor-title"> 宣言：tp + 简影 + 欢乐谷 + 2019 = 财务自由！</div>
+    <div class="pool-emperor-title"> 宣言：{{getManifest}}</div>
     <div class="pool-emperor-balance">
      <div class="pool-today-emperor"> 当前地王：{{landInfo.emperor.account}}，拥有国土{{landInfo.emperor.num}}万公里 </div>
      <div class="pool-manifesto"> 地王独享666 LEN奖励(21点快照)</div>
@@ -111,7 +111,14 @@ export default {
   },
   computed: {
     ...mapState(['identity', 'scatter', 'eos','balance','lenInfo','landInfo','gameInfo']),
-    ...mapGetters(['account'])
+    ...mapGetters(['account']),
+     getManifest() {
+      if (this.landInfo.manifestoMap.has(this.landInfo.emperor.account)) {
+        return this.landInfo.manifestoMap.get(this.landInfo.emperor.account)
+      }else {
+        return "这是朕打下来的江山！"
+      }
+    },
   },
   methods: {
      ...mapActions(['initScatter', 'setIdentity','updateBalance','setGameInfo','setLandInfo','getTouzhuInfo','getGameBalance','recastLand','withdraw']),
@@ -147,7 +154,7 @@ export default {
          return "http://www.lemonfun.io/#/game/land?ref=" + this.account.name;
       }
     },
-    
+   
     async popLandCick() {
       
     },

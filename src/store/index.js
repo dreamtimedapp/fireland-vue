@@ -20,7 +20,7 @@ export default new vuex.Store({
         eos: null,
         account_name:'',
         
-        manifestoMap:new Map(),
+       
         balance: {
           eos: '0.0000 EOS',
           len: '0.0000 LEN'
@@ -44,6 +44,7 @@ export default new vuex.Store({
           game_balance:0,
           manifesto:'我的土地我做主',
           blackLandArray:[],
+          manifestoMap:new Map(),
           accTotal:0,
           emperor: {
             "account":"",
@@ -174,8 +175,8 @@ export default new vuex.Store({
               if (element.amount > 1000000) {
                 element.amount = 0
               }
-              if (state.manifestoMap.has(element.player)) {
-                element.manifesto = state.manifestoMap.get(element.player);
+              if (state.landInfo.manifestoMap.has(element.player)) {
+                element.manifesto = state.landInfo.manifestoMap.get(element.player);
               }else {
                 element.manifesto = "天下英雄谁敌手？这是朕的江山！"
               }
@@ -309,7 +310,7 @@ export default new vuex.Store({
                 if(mani_res.player == state.account_name) {
                   state.landInfo.manifesto = mani_res[0].manifesto
                 }
-                state.manifestoMap.set(state.account_name,element.manifesto)
+                state.landInfo.manifestoMap.set(state.account_name,element.manifesto)
               })
             }
             if (res.is_error) {
