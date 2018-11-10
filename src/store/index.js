@@ -172,7 +172,6 @@ export default new vuex.Store({
           });
         },
         setEmporName(state,manifest) {
-          console.log("3333"+manifest)
           state.landInfo.manifestoEmpor = manifest
         },
         setTouzhuRows(state,data) {
