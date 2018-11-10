@@ -18,9 +18,11 @@ export const manifest_empor = async (account) => {
     if (account) {
         account_name = account;
     }
+    console.log('manifest_mepor:' + account_name)
     return axios.get('/api/manifesto/'+account_name)
     .then(response => {
         debugger
+        console.log('manifest_mepor:' + response.data[0].manifesto)
         return response.data[0].manifesto;
     })
     .catch(err=>{
