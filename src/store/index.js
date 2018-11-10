@@ -301,7 +301,7 @@ export default new vuex.Store({
           }
         },
          //获取玩家的信息
-        async getGameBalance({commit,dispatch},account_name){
+        async getGameBalance({commit,dispatch,state},account_name){
            let res = await getPlayerList()
            if (res.is_error) {
                return;
