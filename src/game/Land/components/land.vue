@@ -24,6 +24,7 @@ import landImg1_m from '../../../assets/land/land-1-m.png';
 import landImg1_b from '../../../assets/land/land-1-b.png';
 import landImg1_b_m from '../../../assets/land/land-1-b-m.png';
 import store from '../../../store'
+import { currentGetters, eos } from '../../../blockchain/store.js'
 
 import { setInterval } from 'timers';
 
@@ -114,6 +115,7 @@ export default {
   },
   methods: {
     initLand: (row, data,account_name)=> {
+      
       row.map((col)=> {
         const colData = data[col.id];
         if (colData) {
@@ -131,7 +133,7 @@ export default {
           col.style.backgroundImage = 'url(' + STATUS_ENUM[col.type].bg + ')';
 
           /* 需要读自己的name */
-          if (colData.owner === account_name) {
+          if (colData.owner === currentGetters().account.name) {
             col.style.backgroundImage = 'url(' + STATUS_ENUM[col.type].bg_m + ')';
           }
         } else {

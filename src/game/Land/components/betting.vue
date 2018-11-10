@@ -70,6 +70,7 @@ import {CONTRACT_NAME} from '../../../config/config.js'
 import {getQueryString,timeRange} from '../../../utils/utils.js'
 import store from '../../../store'
 import { mapState, mapActions, mapGetters } from 'vuex'
+import { currentGetters, eos } from '../../../blockchain/store.js'
 import vueSlider from 'vue-slider-component';
 
 export default {
