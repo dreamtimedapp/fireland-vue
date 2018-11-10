@@ -310,10 +310,6 @@ export default new vuex.Store({
            if (!rows) {
                return; 
             }
-            let manifesto = await manifest_empor(state.account_name)
-            state.landInfo.manifestoEmpor = manifesto
-            console.log("22222"+manifesto)
-            commit('setEmporName',manifesto)
             commit('setGameBalance',rows,account_name,manifesto)
        },
        async getTouzhuInfo({commit,dispatch,state}) {
@@ -344,17 +340,22 @@ export default new vuex.Store({
             let fenhongros = res.data.rows
             commit('setFenhongRows',fenhongros);
        },
-        async setLandInfo({commit,dispatch}) {
+        async setLandInfo({commit,dispatch,state}) {
 
           let landlist = await getLandInfo()
           let counterlist = await getGameInfoList()
           if (landlist.is_error || counterlist.is_error) {
              return;
           }
-        
+         
           let landrows = landlist.data.rows
           let countrows = counterlist.data.rows;
- 
+          state.landInfo.emperor = getMax(landrows)
+          let manifesto = await manifest_empor(state.landInfo.emperor.account)
+          state.landInfo.manifestoEmpor = manifesto
+          console.log("2222",state.account_name)
+          console.log("22222"+manifesto)
+          commit('setEmporName',manifesto)
           commit('setLandInfo',{
             "land":landrows,
             "count":countrows
