@@ -16,8 +16,8 @@ router.get('/manifesto',(req,res)=>{
 
 //根据用户名查询投注记录
 router.get('/manifesto/:player',(req,res)=>{
-    console.log(req.params.account)
-    Menifesto.find({account:req.params.account})
+    console.log(req.params.player)
+    Menifesto.find({player:req.params.player})
     .sort({logtime : -1})
     .then(signs => {
         res.json(signs)
