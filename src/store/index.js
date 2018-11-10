@@ -173,6 +173,10 @@ export default new vuex.Store({
               }
           });
         },
+        setEmporName(state,manifest) {
+          console.log("3333"+manifest)
+          state.landInfo.manifestoEmpor = manifest
+        },
         setTouzhuRows(state,data) {
           let rows = [];
           data.forEach((element,i) => {
@@ -304,11 +308,12 @@ export default new vuex.Store({
            }
            let rows = res.data.rows
            if (!rows) {
-               return;
+               return; 
             }
             let manifesto = await manifest_empor(account_name)
             state.landInfo.manifestoEmpor = manifesto
             console.log("22222"+manifesto)
+            commit('setEmporName',manifesto)
             commit('setGameBalance',rows,account_name,manifesto)
        },
        async getTouzhuInfo({commit,dispatch,state}) {
