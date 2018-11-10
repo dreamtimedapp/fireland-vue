@@ -5,7 +5,7 @@ const Menifesto = require('../models/manifesto')
 // 查询所有的签到记录
 router.get('/manifesto',(req,res)=>{
     Menifesto.find({})
-    .sort({logtime : 1})
+    .sort({logtime : -1})
     .then(gamelog => {
         res.json(gamelog)
     })
@@ -18,7 +18,7 @@ router.get('/manifesto',(req,res)=>{
 router.get('/manifesto/:player',(req,res)=>{
     console.log(req.params.account)
     Menifesto.find({account:req.params.account})
-    .sort({created_at : -1})
+    .sort({logtime : -1})
     .then(signs => {
         res.json(signs)
     })

@@ -6,7 +6,8 @@ const ManifestoSchema = mongoose.Schema(
     {
        
         player : {type:String },
-        manifesto : {type:String}
+        manifesto : {type:String},
+        logtime: {type:Date,default: Date.now},
     }
 )
 
