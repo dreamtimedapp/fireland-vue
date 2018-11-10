@@ -164,6 +164,7 @@ export default new vuex.Store({
         },
          //获取游戏内账户信息
          setGameBalance(state,accountlist,account_name,manifest) { 
+           console.log(manifest)
           state.landInfo.manifestoEmpor = manifest
           accountlist.forEach(element => {
               if (element.player == state.account_name) {
