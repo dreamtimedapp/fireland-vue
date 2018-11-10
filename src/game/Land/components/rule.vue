@@ -18,8 +18,7 @@
                         <span class="table-value"> {{ scope.row.type }}</span>
                     </template>
                  </el-table-column>
-                 <el-table-column prop="manifesto" label="宣言" >
-                  </el-table-column>
+    
         
               </el-table>
           </div>
