@@ -309,7 +309,7 @@ export default {
 }
 .land-intro {
   background-color: #4d5667;
-  height: 300px;
+  height: 400px;
   width: 730px;
   margin-top: 20px;
   border-radius: 15px;
