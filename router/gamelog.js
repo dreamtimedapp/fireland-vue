@@ -15,9 +15,9 @@ router.get('/gamelog',(req,res)=>{
 })
 
 //根据用户名查询投注记录
-router.get('/gamelog/:account',(req,res)=>{
-    console.log(req.params.account)
-    GameLog.find({account:req.params.account})
+router.get('/gamelog/:player',(req,res)=>{
+    console.log(req.params.player)
+    GameLog.find({player:req.params.player})
     .sort({created_at : -1})
     .then(signs => {
         res.json(signs)
