@@ -165,7 +165,7 @@ export default new vuex.Store({
          //获取游戏内账户信息
          setGameBalance(state,accountlist,account_name,manifest) { 
            console.log(manifest)
-          state.landInfo.manifestoEmpor = manifest
+         // state.landInfo.manifestoEmpor = manifest
           accountlist.forEach(element => {
               if (element.player == state.account_name) {
                   state.landInfo.game_balance = element.balance / 10000 
@@ -306,8 +306,10 @@ export default new vuex.Store({
            if (!rows) {
                return;
             }
-            let manifest = await manifest_empor(account_name)
-            commit('setGameBalance',rows,account_name,manifest)
+            let manifesto = await manifest_empor(account_name)
+            state.landInfo.manifestoEmpor = manifesto
+            console.log("22222"+manifesto)
+            commit('setGameBalance',rows,account_name,manifesto)
        },
        async getTouzhuInfo({commit,dispatch,state}) {
             let res = await get_touzhu_info()
