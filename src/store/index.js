@@ -4,7 +4,7 @@ Vue.use(vuex);
 import Eos from 'eosjs'
 import { network } from '../config'
 import {getMax,formatDate} from '../utils/utils'
-import {update_manifesto,query_manifesto,manifest_empor} from '../services/get_data_service';
+import {update_manifesto,query_manifesto,manifest_empor,add_gamelog} from '../services/get_data_service';
 import { getMyBalancesByContract, getLenTokenInfo,sellLen,
   getGameInfoList,getLandInfo,transfer,getPlayerList,get_touzhu_info,recast,withdraw,sellMyLand,get_fenhong_info} from '../blockchain'
 
@@ -251,6 +251,7 @@ export default new vuex.Store({
         },
         async buyLand({commit,dispatch},data) {
           let result = await transfer(data[0],data[1])
+          add_gamelog(this.account.name,data[0],data[1])
           if (result.is_error) {
             alert(JSON.stringify(result.msg))
           } else {
@@ -277,6 +278,7 @@ export default new vuex.Store({
         },
         async recastLand({commit,dispatch},data) {
            let result = await recast(data[0],data[1])
+           add_gamelog(this.account.name,data[0],data[1])
            if (result.is_error) {
               alert(JSON.stringify(result.msg))
            } else{

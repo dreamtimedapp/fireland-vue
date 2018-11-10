@@ -119,7 +119,7 @@ export default {
         if (this.manifesto) {   
           update_manifesto(this.account.name,this.manifesto);
         }
-        add_gamelog(this.account.name,this.amount,0,this.beilv)
+        
         let memo = this.getRefInviteUrl()
         this.buyLand([this.amount,this.beilv]);
        },
