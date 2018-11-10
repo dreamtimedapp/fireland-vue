@@ -116,7 +116,7 @@ export default {
       if (this.landInfo.manifestoMap.has(this.landInfo.emperor.account)) {
         return this.landInfo.manifestoMap.get(this.landInfo.emperor.account)
       }else {
-        return "这是朕打下来的江山！"
+        return "Finsur带你财富自由！！！"
       }
     },
   },
