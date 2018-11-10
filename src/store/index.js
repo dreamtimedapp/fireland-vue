@@ -163,9 +163,7 @@ export default new vuex.Store({
          }
         },
          //获取游戏内账户信息
-         setGameBalance(state,accountlist,account_name,manifest) { 
-         
-         // state.landInfo.manifestoEmpor = manifest
+         setGameBalance(state,accountlist,account_name) { 
           accountlist.forEach(element => {
               if (element.player == state.account_name) {
                   state.landInfo.game_balance = element.balance / 10000 
@@ -310,7 +308,7 @@ export default new vuex.Store({
            if (!rows) {
                return; 
             }
-            commit('setGameBalance',rows,account_name,manifesto)
+            commit('setGameBalance',rows,account_name)
        },
        async getTouzhuInfo({commit,dispatch,state}) {
             let res = await get_touzhu_info()
@@ -353,8 +351,6 @@ export default new vuex.Store({
           state.landInfo.emperor = getMax(landrows)
           let manifesto = await manifest_empor(state.landInfo.emperor.account)
           state.landInfo.manifestoEmpor = manifesto
-          console.log("2222",state.account_name)
-          console.log("22222"+manifesto)
           commit('setEmporName',manifesto)
           commit('setLandInfo',{
             "land":landrows,
