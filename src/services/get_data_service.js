@@ -16,15 +16,19 @@ export const  get_sign_all = async ()=> {
 //获取更新誓言
 
 export const query_manifesto  = async (account) => {
+    debugger
     let account_name = ""
     if (account) {
         account_name = account;
     }
+    debugger
     return axios.get('/api/manifesto/'+account_name)
     .then(response => {
+        debugger
         return response.data;
     })
     .catch(err=>{
+        debugger
         console.log(err);
     })
 }

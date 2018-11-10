@@ -248,6 +248,7 @@ export default new vuex.Store({
           if (result.is_error) {
             alert(JSON.stringify(result.msg))
           } else {
+            dispatch('updateBalance')
             dispatch('getGameBalance')
             dispatch('getTouzhuInfo')
             dispatch('setLandInfo')
@@ -260,6 +261,7 @@ export default new vuex.Store({
           if (result.is_error) {
             alert(JSON.stringify(result.msg))
           } else {
+            dispatch('updateBalance')
             dispatch('getGameBalance')
             dispatch('getTouzhuInfo')
             dispatch('setLandInfo')
@@ -272,6 +274,7 @@ export default new vuex.Store({
            if (result.is_error) {
               alert(JSON.stringify(result.msg))
            } else{
+            dispatch('updateBalance')
             dispatch('getGameBalance')
             dispatch('getTouzhuInfo')
             dispatch('setLandInfo')
@@ -284,6 +287,7 @@ export default new vuex.Store({
           if (result.is_error) {
              alert(JSON.stringify(result.msg))
           } else {
+            dispatch('updateBalance')
             dispatch('getGameBalance')
             alert('提现成功')
           }
@@ -304,6 +308,7 @@ export default new vuex.Store({
             let res = await get_touzhu_info()
            
             let mani_res = await query_manifesto()
+            debugger
             let map = new Map();
             if ( mani_res && mani_res.length > 0) {
               mani_res.forEach((element,i)=> {

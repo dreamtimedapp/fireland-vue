@@ -70,6 +70,7 @@ import { setInterval, setTimeout } from 'timers';
 import { stat } from 'fs';
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { network } from '../../config'
+import { debug } from 'util';
 const requiredFields = { accounts: [network] }
 
 export default {
@@ -113,7 +114,9 @@ export default {
     ...mapState(['identity', 'scatter', 'eos','balance','lenInfo','landInfo','gameInfo']),
     ...mapGetters(['account']),
      getManifest() {
+       debugger
       if (this.landInfo.manifestoMap.has(this.landInfo.emperor.account)) {
+         debugger
         return this.landInfo.manifestoMap.get(this.landInfo.emperor.account)
       }else {
         return "Finsur带你财富自由！！！"
