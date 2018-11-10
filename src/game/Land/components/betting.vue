@@ -96,6 +96,13 @@ export default {
       }
     },
     mounted: function() {
+        if (timeRange("20:30","20:55")) {
+            this.max = 70
+        }else if (timeRange("20:55","21:00")){
+            this.max = 50
+        } else {
+            this.max = 95
+        }
     
    },
     methods: {

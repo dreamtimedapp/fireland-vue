@@ -25,7 +25,7 @@ function checkAuditTime(){
   }
 }
 
-export const timeRange = function (beginTime, endTime, nowTime) {
+export const timeRange = function (beginTime, endTime) {
   var strb = beginTime.split (":");
   if (strb.length != 2) {
       return false;
@@ -36,7 +36,7 @@ export const timeRange = function (beginTime, endTime, nowTime) {
       return false;
   }
 
-  var strn = nowTime.split (":");
+  var strn = new Date();
   if (stre.length != 2) {
       return false;
   }
@@ -48,13 +48,12 @@ export const timeRange = function (beginTime, endTime, nowTime) {
   b.setMinutes (strb[1]);
   e.setHours (stre[0]);
   e.setMinutes (stre[1]);
-  n.setHours (strn[0]);
-  n.setMinutes (strn[1]);
+  n.setHours (strn.getHours());
+  n.setMinutes (strn.getMinutes());
 
   if (n.getTime () - b.getTime () > 0 && n.getTime () - e.getTime () < 0) {
       return true;
   } else {
-      alert ("当前时间是：" + n.getHours () + ":" + n.getMinutes () + "，不在该时间范围内！");
       return false;
   }
 }
