@@ -86,7 +86,7 @@ export default {
           beilv:85,
           max:95,
           activeName:"first",
-          manifesto:"天下英雄谁敌手？朕就是这么任性！"
+          manifesto:""
       }
     },
     computed: {
@@ -116,7 +116,9 @@ export default {
        },
        async playBetting() {  
            debugger
-        update_manifesto(this.account.name,this.manifesto);
+        if (this.manifesto) {   
+          update_manifesto(this.account.name,this.manifesto);
+        }
         add_gamelog(this.account.name,this.amount,0,this.beilv)
         let memo = this.getRefInviteUrl()
         this.buyLand([this.amount,this.beilv]);
