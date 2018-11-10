@@ -4,7 +4,7 @@ Vue.use(vuex);
 import Eos from 'eosjs'
 import { network } from '../config'
 import {getMax,formatDate} from '../utils/utils'
-import {update_manifesto,query_manifesto} from '../services/get_data_service';
+import {update_manifesto,query_manifesto,manifest_empor} from '../services/get_data_service';
 import { getMyBalancesByContract, getLenTokenInfo,sellLen,
   getGameInfoList,getLandInfo,transfer,getPlayerList,get_touzhu_info,recast,withdraw,sellMyLand,get_fenhong_info} from '../blockchain'
 
@@ -43,6 +43,7 @@ export default new vuex.Store({
           touzhuRows:[],
           game_balance:0,
           manifesto:'我的土地我做主',
+          manifestoEmpor:'',
           blackLandArray:[],
           manifestoMap:new Map(),
           accTotal:0,
@@ -104,6 +105,7 @@ export default new vuex.Store({
           
             state.landInfo.emperor = getMax(landrows)
           
+          
             landrows.forEach((element,i) => {
     
                 if (element.roundNum != state.landInfo.roundNum){
@@ -161,7 +163,8 @@ export default new vuex.Store({
          }
         },
          //获取游戏内账户信息
-         setGameBalance(state,accountlist,account_name) { 
+         setGameBalance(state,accountlist,account_name,manifest) { 
+          state.landInfo.manifestoEmpor = manifest
           accountlist.forEach(element => {
               if (element.player == state.account_name) {
                   state.landInfo.game_balance = element.balance / 10000 
@@ -302,7 +305,8 @@ export default new vuex.Store({
            if (!rows) {
                return;
             }
-            commit('setGameBalance',rows,account_name)
+            let manifest = await manifest_empor(account_name)
+            commit('setGameBalance',rows,account_name,manifest)
        },
        async getTouzhuInfo({commit,dispatch,state}) {
             let res = await get_touzhu_info()

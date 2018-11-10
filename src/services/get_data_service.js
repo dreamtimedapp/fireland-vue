@@ -13,6 +13,22 @@ export const  get_sign_all = async ()=> {
   });
 }
 
+export const manifest_empor = async (account) => {
+    let account_name = ""
+    if (account) {
+        account_name = account;
+    }
+    return axios.get('/api/manifesto/'+account_name)
+    .then(response => {
+        debugger
+        return response.data[0].manifesto;
+    })
+    .catch(err=>{
+        debugger
+        console.log(err);
+    })
+}
+
 //获取更新誓言
 
 export const query_manifesto  = async (account) => {
