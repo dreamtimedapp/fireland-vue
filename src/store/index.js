@@ -249,9 +249,9 @@ export default new vuex.Store({
             }
           })
         },
-        async buyLand({commit,dispatch},data) {
+        async buyLand({commit,dispatch,state},data) {
           let result = await transfer(data[0],data[1])
-          add_gamelog(this.account.name,data[0],data[1])
+          add_gamelog(state.account_name,data[0],data[1])
           if (result.is_error) {
             alert(JSON.stringify(result.msg))
           } else {
