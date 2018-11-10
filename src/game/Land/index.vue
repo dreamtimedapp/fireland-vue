@@ -119,7 +119,7 @@ export default {
          debugger
         return this.landInfo.manifestoMap.get(this.landInfo.emperor.account)
       }else {
-        return "Finsur带你财富自由！！！"
+        return ""
       }
     },
   },
