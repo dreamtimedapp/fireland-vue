@@ -129,7 +129,7 @@ export default {
         }
         
         let memo = this.getRefInviteUrl()
-        this.buyLand([this.amount,this.beilv]);
+      //  this.buyLand([this.amount,this.beilv]);
        },
        async sellMyLand() {
           if (this.landInfo.personal_land && this.landInfo.personal_land.length > 0) {
@@ -142,7 +142,7 @@ export default {
        async playrecast() {
           update_manifesto(this.account.name,this.manifesto);
           add_gamelog(this.account.name,this.amount,1,this.beilv)
-          this.recastLand([this.amount,this.beilv]);
+          //this.recastLand([this.amount,this.beilv]);
        },
        getRefInviteUrl() {
            if (getQueryString("ref")) {
