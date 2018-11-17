@@ -98,10 +98,10 @@ function run_cmd(cmd,args,callback) {
 
 
 // 访问静态资源文件 这里是访问所有dist目录下的静态资源文件
-app.use(express.static(path.resolve(__dirname, './dist')))
+app.use(express.static(path.resolve(__dirname, './product')))
 // 因为是单页应用 所有请求都走/dist/index.html
 app.get('/', function(req, res) {
-    const html = fs.readFileSync(path.resolve(__dirname, './dist/index.html'), 'utf-8')
+    const html = fs.readFileSync(path.resolve(__dirname, './product/index.html'), 'utf-8')
     res.send(html)
 })
 
