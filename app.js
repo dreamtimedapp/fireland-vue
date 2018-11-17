@@ -129,5 +129,5 @@ app.use('/api',counter)
 app.use('/api',gamelog)
 app.use('/api',manifesto)
 
-app.listen(3000, (req,res) => {
+app.listen(3030, (req,res) => {
 })
