@@ -15,4 +15,4 @@ RUN npm run-script build
 #Expose the port
 EXPOSE 3030
 
-CMD ["nodemon", "app.js"]
+CMD ["sh", "deploy.sh"]

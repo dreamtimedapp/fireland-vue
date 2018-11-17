@@ -9,9 +9,9 @@ NGINX_DEPLOY_PATH=${PROJECT_PATH}/dist/
 
 cd  ${PROJECT_PATH}
 
-git checkout develop
+git checkout master
 
-git pull origin develop
+git pull origin master
 
 npm install $PROJECT_PATH 
 
@@ -21,6 +21,8 @@ npm run build $BUILD_PATH
 rm -r ${NGINX_DEPLOY_PATH}*
 
 cp -R ${BUILD_PATH}* $NGINX_DEPLOY_PATH
+
+node app.js
 
 
 

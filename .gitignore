@@ -1,5 +1,8 @@
 # Logs
 logs
+
+/product/*
+
 *.log
 
 # Runtime data
