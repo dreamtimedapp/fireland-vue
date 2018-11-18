@@ -6,7 +6,7 @@ ENV HOME=/home/app
 
 WORKDIR $HOME
 
-RUN npm install
+RUN npm install --save
 RUN npm install -g nodemon
 RUN npm install -g pm2
 ADD . ./
